@@ -1,0 +1,70 @@
+# ===============================================================
+#  Zephyr Workspace - .gitignore
+#  Only the benchmark code + dataset are tracked in git.
+#  Zephyr source + modules are fetched by `west update`.
+# ===============================================================
+
+# ---- West-managed repos (reproducible via `west update`) ----
+# These are fetched by: west init + west update.
+# Not stored in git — they're too large and easily recreatable.
+zephyr/
+modules/
+bootloader/
+tools/
+.west/
+.west/**
+
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# ---- Zephyr build artifacts ----
+build/
+**/build/
+
+# ---- Trajectory logs (large, not reproducible) ----
+zephyr-claude/trajectory/
+zephyr-claude/failed_trajectories/
+
+# ---- Benchmark results (regeneratable) ----
+zephyr-claude/results/
+
+# ---- Claude sandbox workspace (scratches) ----
+.zephyr-workspaces/
+.claude_home/
+
+# ---- IDE / Editor ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---- API keys & secrets ----
+.claude/
+**/settings.json
+**/settings.local.json
+
+# ---- OS files ----
+Desktop.ini
+ehthumbs.db
+*.lnk
+
+# ---- CMake generated ----
+CMakeCache.txt
+CMakeFiles/
+cmake-build-*/
+
+# ---- Docker ----
+.docker/
+
+# ---- Node / npm ----
+node_modules/

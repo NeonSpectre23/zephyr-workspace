@@ -1,0 +1,39 @@
+# Zephyr Workspace Conda Environment
+# Usage: conda env create -f environment.yml
+name: zephyr
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - cmake
+  - ninja
+  - git
+  - pip:
+    # Zephyr build system
+    - west==1.5.0
+    - pyelftools
+    - PyYAML
+    - pykwalify
+    - jsonschema
+    - packaging
+    - pyserial
+    - intelhex
+    - pyusb
+    # Code parsing & analysis
+    - tree-sitter==0.25.2
+    - tree-sitter-c==0.24.2
+    # Testing & linting
+    - pytest
+    - coverage
+    - pylint
+    - ruff
+    # Utilities
+    - GitPython
+    - requests
+    - tqdm
+    - click
+    - colorlog
+    - pyGithub
+    - unidiff
+    - regex
