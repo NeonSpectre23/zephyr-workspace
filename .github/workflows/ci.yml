@@ -17,23 +17,67 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: |
-          pip install tree-sitter tree-sitter-c
-
       - name: Verify dataset structure
         run: |
-          echo "Dataset files:"
+          echo "=== Dataset files ==="
+          echo "C tasks:"
           wc -l zephyr-bench/zephyr_tasks.c.jsonl
+          echo "Header tasks:"
           wc -l zephyr-bench/zephyr_tasks.h.jsonl
           echo "Oracles count:"
           ls zephyr-bench/oracles/ | wc -l
-          echo "Python import check:"
+          echo ""
+
+          echo "=== Validate JSONL format ==="
           python3 -c "
-            from tree_sitter import Language, Parser
-            import tree_sitter_c
-            print('tree-sitter OK')
-          "
+import json, sys
+errors = 0
+for fname in ['zephyr-bench/zephyr_tasks.c.jsonl', 'zephyr-bench/zephyr_tasks.h.jsonl']:
+    with open(fname) as f:
+        for i, line in enumerate(f, 1):
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                obj = json.loads(line)
+            except json.JSONDecodeError as e:
+                print(f'  ERROR: {fname}:{i}: {e}')
+                errors += 1
+                continue
+            required = ['task_id', 'sut_function', 'source_path', 'masked_code', 'oracle', 'run_command']
+            missing = [k for k in required if k not in obj]
+            if missing:
+                print(f'  ERROR: {fname}:{i}: missing keys: {missing}')
+                errors += 1
+if errors:
+    sys.exit(1)
+else:
+    print('  All tasks valid!')
+"
+          echo ""
+
+          echo "=== Check oracle files exist ==="
+          python3 -c "
+import json, sys
+from pathlib import Path
+errors = 0
+for fname in ['zephyr-bench/zephyr_tasks.c.jsonl', 'zephyr-bench/zephyr_tasks.h.jsonl']:
+    with open(fname) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            obj = json.loads(line)
+            oracle = Path('zephyr-bench') / obj['oracle']
+            if not oracle.exists():
+                print(f'  MISSING: {obj[\"oracle\"]} (task {obj[\"task_id\"]})')
+                errors += 1
+if errors:
+    print(f'  {errors} oracle(s) missing!')
+    sys.exit(1)
+else:
+    print('  All oracles present!')
+"
 
   lint:
     runs-on: ubuntu-24.04
