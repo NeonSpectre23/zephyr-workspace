@@ -1,0 +1,6 @@
+# ruff configuration for zephyr-claude
+# `from config import *` is an intentional pattern in this project
+[lint.per-file-ignores]
+"zephyr-claude/agent.py" = ["F403", "F405"]
+"zephyr-claude/runner.py" = ["F403", "F405"]
+"zephyr-claude/config.py" = ["F405"]

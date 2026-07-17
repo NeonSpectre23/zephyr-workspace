@@ -11,7 +11,6 @@ tree-sitter C 函数 AST 操作
   对含多字节 UTF-8 的源文件（如 RIOT 中的 ä/å 字符），直接切片会错位。
   _char_offset() 通过 encode/decode 做转换。
 """
-from os import fspath
 from pathlib import Path
 import re
 from typing import Optional

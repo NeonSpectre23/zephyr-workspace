@@ -6,14 +6,19 @@
   python3 inject_test.py --batch 5
 """
 
-import argparse, json, os, re, subprocess, sys
+import argparse
+import json
+import os
+import re
+import subprocess
 from pathlib import Path
+
+from mask import _find_function, _char_offset
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 BENCH_DIR = SCRIPT_DIR.parent / "zephyr-bench"
 ZEPHYR_DIR = SCRIPT_DIR.parent / "zephyr"
 SDK_DIR = Path("/home/huyj/zephyr-sdk-1.0.1")
-from mask import _find_function, _char_offset
 
 
 def load_tasks():

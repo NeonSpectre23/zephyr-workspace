@@ -162,7 +162,7 @@ def run_checks():
         check("tree-sitter (pip package)", False, str(e))
 
     # 4. Claude settings
-    check(f"Claude settings", CLAUDE_SETTINGS_SRC.exists())
+    check("Claude settings", CLAUDE_SETTINGS_SRC.exists())
 
     # 5. Zephyr repo
     expected = ["CMakeLists.txt", "west.yml", "VERSION", "arch", "kernel"]
@@ -171,7 +171,7 @@ def run_checks():
           f"Missing: {missing}")
 
     # 6. Zephyr SDK
-    check(f"Zephyr SDK", ZEPHYR_SDK_DIR.exists(),
+    check("Zephyr SDK", ZEPHYR_SDK_DIR.exists(),
           f"Expected at {ZEPHYR_SDK_DIR}")
 
     # 7. Dataset files

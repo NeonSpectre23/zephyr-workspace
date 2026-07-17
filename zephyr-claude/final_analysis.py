@@ -1,4 +1,4 @@
-import json, re, os, sys
+import json
 from pathlib import Path
 
 BENCH = Path("../zephyr-bench")
@@ -6,7 +6,8 @@ BENCH = Path("../zephyr-bench")
 results = {}
 with open("results/results.jsonl") as f:
     for line in f:
-        if not line.strip(): continue
+        if not line.strip():
+            continue
         r = json.loads(line)
         tid = r["task_id"]
         if tid not in results or not results[tid].get("passed"):
@@ -16,13 +17,15 @@ tasks = {}
 for fn in ["zephyr_tasks.c.jsonl", "zephyr_tasks.h.jsonl"]:
     with open(BENCH / fn) as f:
         for line in f:
-            if not line.strip(): continue
+            if not line.strip():
+                continue
             d = json.loads(line)
             tasks[d["task_id"]] = d
 
 def get_traj(tid):
     p = Path(f"trajectory/task_{tid}.log")
-    if not p.exists(): return "", "", ""
+    if not p.exists():
+        return "", "", ""
     c = p.read_text(errors="replace")
     diff = ""
     verify = ""
@@ -57,14 +60,14 @@ def show_case(tid, title, explanation):
 
     # Step 1: What Claude saw
     masked = t.get("masked_code", "").strip()
-    print(f"\n  [Step 1: Claude saw this prompt]")
+    print("\n  [Step 1: Claude saw this prompt]")
     print(f"  {'─'*60}")
     for line in masked.split("\n"):
         print(f"  | {line}")
 
     # Step 2: What Claude wrote (diff)
     if diff:
-        print(f"\n  [Step 2: Claude wrote this code]")
+        print("\n  [Step 2: Claude wrote this code]")
         print(f"  {'─'*60}")
         # Show only added lines
         for line in diff.split("\n"):
@@ -73,8 +76,8 @@ def show_case(tid, title, explanation):
             elif line.startswith("-") and not line.startswith("---"):
                 print(f"  | {line[:100]}")
     else:
-        print(f"\n  [Step 2: Claude wrote]")
-        print(f"  (diff not captured in trajectory)")
+        print("\n  [Step 2: Claude wrote]")
+        print("  (diff not captured in trajectory)")
 
     # Step 3: What went wrong
     if verify:
@@ -86,20 +89,20 @@ def show_case(tid, title, explanation):
                 "assertion failed"]):
                 errors.append(line.strip()[:150])
         if errors:
-            print(f"\n  [Step 3: Build/Test Errors]")
+            print("\n  [Step 3: Build/Test Errors]")
             print(f"  {'─'*60}")
             for e in errors[:5]:
                 print(f"  > {e}")
         else:
-            print(f"\n  [Step 3: No specific error in log]")
+            print("\n  [Step 3: No specific error in log]")
             last = verify.strip().split("\n")[-3:]
-            for l in last:
-                print(f"  {l.strip()[:120]}")
+            for line2 in last:
+                print(f"  {line2.strip()[:120]}")
 
     # Step 4: Correct answer
     oracle = read_oracle(t.get("oracle", ""))
     if oracle:
-        print(f"\n  [Step 4: Oracle (correct answer)]")
+        print("\n  [Step 4: Oracle (correct answer)]")
         print(f"  {'─'*60}")
         for line in oracle.split("\n")[:12]:
             print(f"  | {line}")
@@ -107,7 +110,7 @@ def show_case(tid, title, explanation):
             print(f"  | ... ({len(oracle.split('\n'))} lines total)")
 
     # Step 5: Why it failed
-    print(f"\n  [Why it failed]")
+    print("\n  [Why it failed]")
     print(f"  {explanation}")
 
 
@@ -182,18 +185,18 @@ show_case("10",
 # 7. FRAMEWORK — timeout
 # ================================================================
 print(f"\n{'='*70}")
-print(f"  FRAMEWORK BUG: timeout (6 cases)")
-print(f"  代表: task 55, 130, 236, 237, 253, 552")
+print("  FRAMEWORK BUG: timeout (6 cases)")
+print("  代表: task 55, 130, 236, 237, 253, 552")
 print(f"{'='*70}")
-print(f"  west build 在 5 分钟超时。一般是该模块依赖太多或设备树太复杂,")
-print(f"  在 native_sim 上编译特别慢。不是 Claude 的问题。")
+print("  west build 在 5 分钟超时。一般是该模块依赖太多或设备树太复杂,")
+print("  在 native_sim 上编译特别慢。不是 Claude 的问题。")
 
 # ================================================================
 # 8. FRAMEWORK — UTF-8 decode
 # ================================================================
 print(f"\n{'='*70}")
-print(f"  FRAMEWORK BUG: UTF-8 decode (5 cases)")
-print(f"  代表: task 77, 86, 88, 91, 92")
+print("  FRAMEWORK BUG: UTF-8 decode (5 cases)")
+print("  代表: task 77, 86, 88, 91, 92")
 print(f"{'='*70}")
-print(f"  ninja/cmark 输出里夹了二进制字符, Python 的 text=True 解析失败。")
-print(f"  纯框架 bug, Claude 的代码不一定有错。")
+print("  ninja/cmark 输出里夹了二进制字符, Python 的 text=True 解析失败。")
+print("  纯框架 bug, Claude 的代码不一定有错。")

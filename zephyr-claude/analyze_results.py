@@ -120,11 +120,11 @@ print(f"Passed: {passed} ({passed/total*100:.1f}%)")
 print(f"Failed: {failed} ({failed/total*100:.1f}%)")
 print(f"Claude completed: {completed}")
 
-print(f"\n=== ERROR CATEGORIES ===")
+print("\n=== ERROR CATEGORIES ===")
 for cat, cnt in cats.most_common():
     print(f"  {cat}: {cnt} ({cnt/failed*100:.1f}%)")
 
-print(f"\n=== RUNTIME ===")
+print("\n=== RUNTIME ===")
 n = len(times)
 print(f"Min: {times[0]:.0f}s")
 print(f"P25: {times[n//4]:.0f}s")
@@ -134,22 +134,22 @@ print(f"P90: {times[n*9//10]:.0f}s")
 print(f"Max: {times[-1]:.0f}s")
 print(f"Total: {sum(times)/3600:.1f}h")
 
-print(f"\n=== BY DIRECTORY ===")
+print("\n=== BY DIRECTORY ===")
 for d in sorted(dir_passed):
     p, t = dir_passed[d]
     print(f"  {d}: {p}/{t} ({p/t*100:.1f}%)")
 
-print(f"\n=== BY FILE TYPE ===")
+print("\n=== BY FILE TYPE ===")
 for ext in sorted(type_passed):
     p, t = type_passed[ext]
     print(f"  .{ext}: {p}/{t} ({p/t*100:.1f}%)")
 
-print(f"\n=== RE-RUN SUMMARY ===")
+print("\n=== RE-RUN SUMMARY ===")
 rerun_passed = sum(1 for tid, r in rerun_map.items() if r["passed"])
 rerun_failed = len(rerun_map) - rerun_passed
 print(f"Re-run unique tasks: {len(rerun_map)}, passed: {rerun_passed}, failed: {rerun_failed}")
 
-print(f"\n=== REMAINING FAILURES AFTER RE-RUNS ===")
+print("\n=== REMAINING FAILURES AFTER RE-RUNS ===")
 remaining = [
     r for r in orig
     if not r["passed"]
@@ -159,7 +159,7 @@ rcats = Counter(r.get("error_category", "unknown") for r in remaining)
 for cat, cnt in rcats.most_common():
     print(f"  {cat}: {cnt}")
 
-print(f"\n=== FAILURE DETAILS BY CATEGORY ===")
+print("\n=== FAILURE DETAILS BY CATEGORY ===")
 for cat in ["compile_error", "test_failure", "test_not_executed", "crash", "illegal_modifications"]:
     details = [d for d in failure_details if d["error_category"] == cat]
     if not details:

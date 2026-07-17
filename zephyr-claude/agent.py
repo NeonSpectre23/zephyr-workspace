@@ -4,7 +4,16 @@ Zephyr-Claude Agent Pipeline — 零复制版。
 Claude 容器挂载 zephyr/ 为只读，仅目标文件可写。
 验证直接在原始源码上跑 west build，用 git reset 恢复。
 """
-import difflib, hashlib, json, os, re, selectors, shutil, subprocess, sys, time
+import difflib
+import hashlib
+import json
+import os
+import re
+import selectors
+import shutil
+import subprocess
+import sys
+import time
 from pathlib import Path
 
 from config import *
@@ -274,7 +283,7 @@ class ClaudeAgent:
                 break
             if time.time() - last_activity > WATCHDOG_TIMEOUT:
                 proc.kill()
-                output_chunks.append(f"\n[WATCHDOG] killed\n")
+                output_chunks.append("\n[WATCHDOG] killed\n")
                 break
             events = sel.select(timeout=1.0)
             for key, _ in events:
