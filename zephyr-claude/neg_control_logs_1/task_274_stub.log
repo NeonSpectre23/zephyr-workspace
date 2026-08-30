@@ -1,0 +1,309 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build
+-- west build: building application
+[1/112] Preparing syscall dependency handling
+
+[2/112] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/112] Generating misc/generated/syscalls_subdirs.trigger
+[4/112] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/112] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/112] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/112] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/112] Generating include/generated/zephyr/driver-validation.h
+[9/112] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/112] Generating ../../include/generated/zephyr/heap_constants.h
+[11/112] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/112] Generating include/generated/zephyr/offsets.h
+[13/112] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/notify.c.obj
+[34/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/112] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/112] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/112] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/112] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/112] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/112] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[47/112] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[48/112] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/112] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/112] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/112] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[52/112] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[53/112] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/112] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/112] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/112] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/112] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/112] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/112] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/112] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[61/112] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[62/112] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[63/112] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[64/112] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[66/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[67/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[68/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[69/112] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[70/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[71/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[72/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[73/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[74/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[75/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[76/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[77/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[78/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[79/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[80/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[81/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[82/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[83/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[84/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[85/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[86/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[87/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[88/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[89/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[90/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[91/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[92/112] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/onoff.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/lib/utils/onoff.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/onoff=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/lib/utils/onoff.c.obj -MF zephyr/CMakeFiles/zephyr.dir/lib/utils/onoff.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/lib/utils/onoff.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:2:24: warning: ‘struct onoff_client’ declared inside parameter list will not be visible outside of this definition or declaration
+    2 |                 struct onoff_client *cli)
+      |                        ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:1:24: warning: ‘struct onoff_manager’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | int onoff_reset(struct onoff_manager *mgr,
+      |                        ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:9:25: warning: ‘struct onoff_client’ declared inside parameter list will not be visible outside of this definition or declaration
+    9 |                  struct onoff_client *cli)
+      |                         ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:8:25: warning: ‘struct onoff_manager’ declared inside parameter list will not be visible outside of this definition or declaration
+    8 | int onoff_cancel(struct onoff_manager *mgr,
+      |                         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c: In function ‘onoff_cancel’:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:11:21: error: ‘NULL’ undeclared (first use in this function)
+   11 |         if ((mgr == NULL) || (cli == NULL)) {
+      |                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int onoff_reset(struct onoff_manager *mgr,
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:11:21: note: each undeclared identifier is reported only once for each function it appears in
+   11 |         if ((mgr == NULL) || (cli == NULL)) {
+      |                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:12:25: error: ‘EINVAL’ undeclared (first use in this function)
+   12 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:15:19: error: ‘EALREADY’ undeclared (first use in this function)
+   15 |         int rv = -EALREADY;
+      |                   ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:16:9: error: unknown type name ‘k_spinlock_key_t’
+   16 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:16:32: warning: implicit declaration of function ‘k_spin_lock’ [-Wimplicit-function-declaration]
+   16 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:16:48: error: invalid use of undefined type ‘struct onoff_manager’
+   16 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:17:9: error: unknown type name ‘uint32_t’
+   17 |         uint32_t state = mgr->flags & ONOFF_STATE_MASK;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int onoff_reset(struct onoff_manager *mgr,
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:17:29: error: invalid use of undefined type ‘struct onoff_manager’
+   17 |         uint32_t state = mgr->flags & ONOFF_STATE_MASK;
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:17:39: error: ‘ONOFF_STATE_MASK’ undeclared (first use in this function)
+   17 |         uint32_t state = mgr->flags & ONOFF_STATE_MASK;
+      |                                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:19:13: warning: implicit declaration of function ‘sys_slist_find_and_remove’ [-Wimplicit-function-declaration]
+   19 |         if (sys_slist_find_and_remove(&mgr->clients, &cli->node)) {
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:19:43: error: invalid use of undefined type ‘struct onoff_manager’
+   19 |         if (sys_slist_find_and_remove(&mgr->clients, &cli->node)) {
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:19:58: error: invalid use of undefined type ‘struct onoff_client’
+   19 |         if (sys_slist_find_and_remove(&mgr->clients, &cli->node)) {
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:20:17: warning: implicit declaration of function ‘__ASSERT_NO_MSG’ [-Wimplicit-function-declaration]
+   20 |                 __ASSERT_NO_MSG((state == ONOFF_STATE_TO_ON)
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:20:43: error: ‘ONOFF_STATE_TO_ON’ undeclared (first use in this function)
+   20 |                 __ASSERT_NO_MSG((state == ONOFF_STATE_TO_ON)
+      |                                           ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:21:46: error: ‘ONOFF_STATE_TO_OFF’ undeclared (first use in this function)
+   21 |                                 || (state == ONOFF_STATE_TO_OFF)
+      |                                              ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:22:46: error: ‘ONOFF_STATE_RESETTING’ undeclared (first use in this function)
+   22 |                                 || (state == ONOFF_STATE_RESETTING));
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:26:9: warning: implicit declaration of function ‘k_spin_unlock’ [-Wimplicit-function-declaration]
+   26 |         k_spin_unlock(&mgr->lock, key);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:26:27: error: invalid use of undefined type ‘struct onoff_manager’
+   26 |         k_spin_unlock(&mgr->lock, key);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:32:35: warning: ‘struct onoff_monitor’ declared inside parameter list will not be visible outside of this definition or declaration
+   32 |                            struct onoff_monitor *mon)
+      |                                   ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:31:35: warning: ‘struct onoff_manager’ declared inside parameter list will not be visible outside of this definition or declaration
+   31 | int onoff_monitor_register(struct onoff_manager *mgr,
+      |                                   ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c: In function ‘onoff_monitor_register’:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:34:21: error: ‘NULL’ undeclared (first use in this function)
+   34 |         if ((mgr == NULL)
+      |                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:34:21: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:36:20: error: invalid use of undefined type ‘struct onoff_monitor’
+   36 |             || (mon->callback == NULL)) {
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:37:25: error: ‘EINVAL’ undeclared (first use in this function)
+   37 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:40:9: error: unknown type name ‘k_spinlock_key_t’
+   40 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:40:48: error: invalid use of undefined type ‘struct onoff_manager’
+   40 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:42:9: warning: implicit declaration of function ‘sys_slist_append’ [-Wimplicit-function-declaration]
+   42 |         sys_slist_append(&mgr->monitors, &mon->node);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:42:30: error: invalid use of undefined type ‘struct onoff_manager’
+   42 |         sys_slist_append(&mgr->monitors, &mon->node);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:42:46: error: invalid use of undefined type ‘struct onoff_monitor’
+   42 |         sys_slist_append(&mgr->monitors, &mon->node);
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:44:27: error: invalid use of undefined type ‘struct onoff_manager’
+   44 |         k_spin_unlock(&mgr->lock, key);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:50:37: warning: ‘struct onoff_monitor’ declared inside parameter list will not be visible outside of this definition or declaration
+   50 |                              struct onoff_monitor *mon)
+      |                                     ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:49:37: warning: ‘struct onoff_manager’ declared inside parameter list will not be visible outside of this definition or declaration
+   49 | int onoff_monitor_unregister(struct onoff_manager *mgr,
+      |                                     ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c: In function ‘onoff_monitor_unregister’:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:52:19: error: ‘EINVAL’ undeclared (first use in this function)
+   52 |         int rv = -EINVAL;
+      |                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:54:21: error: ‘NULL’ undeclared (first use in this function)
+   54 |         if ((mgr == NULL)
+      |                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:54:21: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:59:9: error: unknown type name ‘k_spinlock_key_t’
+   59 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:59:48: error: invalid use of undefined type ‘struct onoff_manager’
+   59 |         k_spinlock_key_t key = k_spin_lock(&mgr->lock);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:61:43: error: invalid use of undefined type ‘struct onoff_manager’
+   61 |         if (sys_slist_find_and_remove(&mgr->monitors, &mon->node)) {
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:61:59: error: invalid use of undefined type ‘struct onoff_monitor’
+   61 |         if (sys_slist_find_and_remove(&mgr->monitors, &mon->node)) {
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:65:27: error: invalid use of undefined type ‘struct onoff_manager’
+   65 |         k_spin_unlock(&mgr->lock, key);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:71:21: error: unknown type name ‘k_spinlock_key_t’
+   71 |                     k_spinlock_key_t *keyp)
+      |                     ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:78:25: error: unknown type name ‘k_spinlock_key_t’
+   78 |                         k_spinlock_key_t key,
+      |                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:81:25: error: unknown type name ‘bool’
+   81 |                         bool on)
+      |                         ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/onoff.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int onoff_reset(struct onoff_manager *mgr,
+[93/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[94/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[95/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[96/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[97/112] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/112] Linking C static library app/libapp.a
+[99/112] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[100/112] Linking C static library zephyr/arch/common/libarch__common.a
+[101/112] Generating linker_zephyr_pre0.cmd
+[102/112] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[103/112] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[104/112] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[105/112] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[106/112] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/onoff/build
+
+=== RC ===
+1

@@ -1,0 +1,700 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build
+-- west build: building application
+[1/121] Preparing syscall dependency handling
+
+[2/121] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/121] Generating misc/generated/syscalls_subdirs.trigger
+[4/121] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/121] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/121] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/121] Generating include/generated/zephyr/driver-validation.h
+[8/121] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/121] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/121] Generating ../../include/generated/zephyr/heap_constants.h
+[11/121] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/121] Generating include/generated/zephyr/offsets.h
+[13/121] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[28/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[29/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/121] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[35/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/device.c.obj
+[42/121] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[44/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[50/121] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/121] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[52/121] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[53/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[60/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[62/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[63/121] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[64/121] Building C object zephyr/drivers/gpio/CMakeFiles/drivers__gpio.dir/gpio_emul.c.obj
+[65/121] Building C object zephyr/drivers/power_domain/CMakeFiles/drivers__power_domain.dir/power_domain_gpio.c.obj
+[66/121] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[67/121] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[68/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[69/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[70/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[71/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[72/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[73/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[74/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[75/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[76/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[77/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[78/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[79/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[80/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[81/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[82/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[83/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[84/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[85/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[86/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[87/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[88/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[89/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[90/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[91/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[92/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[93/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[94/121] Linking C static library app/libapp.a
+[95/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[96/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[97/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[98/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[99/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[100/121] Linking C static library zephyr/arch/common/libarch__common.a
+[101/121] Generating linker_zephyr_pre0.cmd
+[102/121] Generating linker_zephyr_pre1.cmd
+[103/121] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[104/121] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[105/121] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[106/121] Linking C static library zephyr/drivers/gpio/libdrivers__gpio.a
+[107/121] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[108/121] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[109/121] Linking C static library zephyr/drivers/power_domain/libdrivers__power_domain.a
+[110/121] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[111/121] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[112/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/device_runtime.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/pm/device_runtime.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/pm/device_runtime.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/pm/device_runtime.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/pm/device_runtime.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:1:40: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | int pm_device_runtime_get(const struct device *dev)
+      |                                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:8:41: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+    8 | static int put_sync_locked(const struct device *dev)
+      |                                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘put_sync_locked’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:11:39: error: invalid use of undefined type ‘const struct device’
+   11 |         struct pm_device_isr *pm = dev->pm_isr;
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:12:9: error: unknown type name ‘uint32_t’
+   12 |         uint32_t flags = pm->base.flags;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int pm_device_runtime_get(const struct device *dev)
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:12:28: error: invalid use of undefined type ‘struct pm_device_isr’
+   12 |         uint32_t flags = pm->base.flags;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:14:23: warning: implicit declaration of function ‘BIT’ [-Wimplicit-function-declaration]
+   14 |         if (!(flags & BIT(PM_DEVICE_FLAG_RUNTIME_ENABLED))) {
+      |                       ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:14:27: error: ‘PM_DEVICE_FLAG_RUNTIME_ENABLED’ undeclared (first use in this function)
+   14 |         if (!(flags & BIT(PM_DEVICE_FLAG_RUNTIME_ENABLED))) {
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:14:27: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:18:15: error: invalid use of undefined type ‘struct pm_device_isr’
+   18 |         if (pm->base.usage == 0U) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:19:25: error: ‘EALREADY’ undeclared (first use in this function)
+   19 |                 return -EALREADY;
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:22:11: error: invalid use of undefined type ‘struct pm_device_isr’
+   22 |         pm->base.usage--;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:23:15: error: invalid use of undefined type ‘struct pm_device_isr’
+   23 |         if (pm->base.usage == 0U) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:24:25: error: invalid use of undefined type ‘struct pm_device_isr’
+   24 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_SUSPEND);
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:24:47: error: ‘PM_DEVICE_ACTION_SUSPEND’ undeclared (first use in this function)
+   24 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_SUSPEND);
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:26:27: error: invalid use of undefined type ‘struct pm_device_isr’
+   26 |                         pm->base.usage++;
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:29:19: error: invalid use of undefined type ‘struct pm_device_isr’
+   29 |                 pm->base.state = PM_DEVICE_STATE_SUSPENDED;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:29:34: error: ‘PM_DEVICE_STATE_SUSPENDED’ undeclared (first use in this function)
+   29 |                 pm->base.state = PM_DEVICE_STATE_SUSPENDED;
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:31:33: error: ‘PM_DEVICE_FLAG_PD_CLAIMED’ undeclared (first use in this function)
+   31 |                 if (flags & BIT(PM_DEVICE_FLAG_PD_CLAIMED)) {
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:32:55: warning: implicit declaration of function ‘PM_DOMAIN’ [-Wimplicit-function-declaration]
+   32 |                         const struct device *domain = PM_DOMAIN(&pm->base);
+      |                                                       ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:32:68: error: invalid use of undefined type ‘struct pm_device_isr’
+   32 |                         const struct device *domain = PM_DOMAIN(&pm->base);
+      |                                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:34:35: error: invalid use of undefined type ‘const struct device’
+   34 |                         if (domain->pm_base->flags & BIT(PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:34:58: error: ‘PM_DEVICE_FLAG_ISR_SAFE’ undeclared (first use in this function)
+   34 |                         if (domain->pm_base->flags & BIT(PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:36:35: error: invalid use of undefined type ‘struct pm_device_isr’
+   36 |                                 pm->base.flags &= ~BIT(PM_DEVICE_FLAG_PD_CLAIMED);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:38:40: error: ‘EWOULDBLOCK’ undeclared (first use in this function)
+   38 |                                 ret = -EWOULDBLOCK;
+      |                                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:48:40: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+   48 | int pm_device_runtime_put(const struct device *dev)
+      |                                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_put’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:52:16: error: invalid use of undefined type ‘const struct device’
+   52 |         if (dev->pm_base == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:52:29: error: ‘NULL’ undeclared (first use in this function)
+   52 |         if (dev->pm_base == NULL) {
+      |                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int pm_device_runtime_get(const struct device *dev)
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:56:9: warning: implicit declaration of function ‘SYS_PORT_TRACING_FUNC_ENTER’ [-Wimplicit-function-declaration]
+   56 |         SYS_PORT_TRACING_FUNC_ENTER(pm, device_runtime_put, dev);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:56:37: error: ‘pm’ undeclared (first use in this function)
+   56 |         SYS_PORT_TRACING_FUNC_ENTER(pm, device_runtime_put, dev);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:56:41: error: ‘device_runtime_put’ undeclared (first use in this function); did you mean ‘pm_device_runtime_put’?
+   56 |         SYS_PORT_TRACING_FUNC_ENTER(pm, device_runtime_put, dev);
+      |                                         ^~~~~~~~~~~~~~~~~~
+      |                                         pm_device_runtime_put
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:58:13: warning: implicit declaration of function ‘atomic_test_bit’ [-Wimplicit-function-declaration]
+   58 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |             ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:58:33: error: invalid use of undefined type ‘const struct device’
+   58 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:58:51: error: ‘PM_DEVICE_FLAG_ISR_SAFE’ undeclared (first use in this function)
+   58 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:59:52: error: invalid use of undefined type ‘const struct device’
+   59 |                 struct pm_device_isr *pm_sync = dev->pm_isr;
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:60:17: error: unknown type name ‘k_spinlock_key_t’
+   60 |                 k_spinlock_key_t k = k_spin_lock(&pm_sync->lock);
+      |                 ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:60:38: warning: implicit declaration of function ‘k_spin_lock’ [-Wimplicit-function-declaration]
+   60 |                 k_spinlock_key_t k = k_spin_lock(&pm_sync->lock);
+      |                                      ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:60:58: error: invalid use of undefined type ‘struct pm_device_isr’
+   60 |                 k_spinlock_key_t k = k_spin_lock(&pm_sync->lock);
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:62:39: warning: passing argument 1 of ‘put_sync_locked’ from incompatible pointer type [-Wincompatible-pointer-types]
+   62 |                 ret = put_sync_locked(dev);
+      |                                       ^~~
+      |                                       |
+      |                                       const struct device *
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:8:49: note: expected ‘const struct device *’ but argument is of type ‘const struct device *’
+    8 | static int put_sync_locked(const struct device *dev)
+      |                            ~~~~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:64:17: warning: implicit declaration of function ‘k_spin_unlock’ [-Wimplicit-function-declaration]
+   64 |                 k_spin_unlock(&pm_sync->lock, k);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:64:39: error: invalid use of undefined type ‘struct pm_device_isr’
+   64 |                 k_spin_unlock(&pm_sync->lock, k);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:66:23: warning: implicit declaration of function ‘runtime_suspend’ [-Wimplicit-function-declaration]
+   66 |                 ret = runtime_suspend(dev, false, K_NO_WAIT);
+      |                       ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:66:44: error: ‘false’ undeclared (first use in this function)
+   66 |                 ret = runtime_suspend(dev, false, K_NO_WAIT);
+      |                                            ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:1:1: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int pm_device_runtime_get(const struct device *dev)
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:66:51: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+   66 |                 ret = runtime_suspend(dev, false, K_NO_WAIT);
+      |                                                   ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:68:9: warning: implicit declaration of function ‘SYS_PORT_TRACING_FUNC_EXIT’ [-Wimplicit-function-declaration]
+   68 |         SYS_PORT_TRACING_FUNC_EXIT(pm, device_runtime_put, dev, ret);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:73:59: error: unknown type name ‘k_timeout_t’
+   73 | int pm_device_runtime_put_async(const struct device *dev, k_timeout_t delay)
+      |                                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:102:12: error: expected ‘;’ before ‘int’
+  102 | __boot_func
+      |            ^
+      |            ;
+  103 | int pm_device_runtime_auto_enable(const struct device *dev)
+      | ~~~         
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:103:48: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  103 | int pm_device_runtime_auto_enable(const struct device *dev)
+      |                                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_auto_enable’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:105:40: error: invalid use of undefined type ‘const struct device’
+  105 |         struct pm_device_base *pm = dev->pm_base;
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:111:14: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+  111 |         if (!IS_ENABLED(CONFIG_PM_DEVICE_RUNTIME_DEFAULT_ENABLE) &&
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:111:25: error: ‘CONFIG_PM_DEVICE_RUNTIME_DEFAULT_ENABLE’ undeclared (first use in this function); did you mean ‘CONFIG_PM_DEVICE_RUNTIME_USE_SYSTEM_WQ’?
+  111 |         if (!IS_ENABLED(CONFIG_PM_DEVICE_RUNTIME_DEFAULT_ENABLE) &&
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                         CONFIG_PM_DEVICE_RUNTIME_USE_SYSTEM_WQ
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:112:33: error: invalid use of undefined type ‘struct pm_device_base’
+  112 |             !atomic_test_bit(&pm->flags, PM_DEVICE_FLAG_RUNTIME_AUTO)) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:112:42: error: ‘PM_DEVICE_FLAG_RUNTIME_AUTO’ undeclared (first use in this function)
+  112 |             !atomic_test_bit(&pm->flags, PM_DEVICE_FLAG_RUNTIME_AUTO)) {
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:116:16: warning: implicit declaration of function ‘pm_device_runtime_enable’; did you mean ‘pm_device_runtime_auto_enable’? [-Wimplicit-function-declaration]
+  116 |         return pm_device_runtime_enable(dev);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                pm_device_runtime_auto_enable
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:119:45: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  119 | static int runtime_enable_sync(const struct device *dev)
+      |                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘runtime_enable_sync’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:122:39: error: invalid use of undefined type ‘const struct device’
+  122 |         struct pm_device_isr *pm = dev->pm_isr;
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:123:9: error: unknown type name ‘k_spinlock_key_t’
+  123 |         k_spinlock_key_t k = k_spin_lock(&pm->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:123:45: error: invalid use of undefined type ‘struct pm_device_isr’
+  123 |         k_spinlock_key_t k = k_spin_lock(&pm->lock);
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:125:15: error: invalid use of undefined type ‘struct pm_device_isr’
+  125 |         if (pm->base.state == PM_DEVICE_STATE_ACTIVE) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:125:31: error: ‘PM_DEVICE_STATE_ACTIVE’ undeclared (first use in this function)
+  125 |         if (pm->base.state == PM_DEVICE_STATE_ACTIVE) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:126:25: error: invalid use of undefined type ‘struct pm_device_isr’
+  126 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_SUSPEND);
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:126:47: error: ‘PM_DEVICE_ACTION_SUSPEND’ undeclared (first use in this function)
+  126 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_SUSPEND);
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:131:19: error: invalid use of undefined type ‘struct pm_device_isr’
+  131 |                 pm->base.state = PM_DEVICE_STATE_SUSPENDED;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:131:34: error: ‘PM_DEVICE_STATE_SUSPENDED’ undeclared (first use in this function)
+  131 |                 pm->base.state = PM_DEVICE_STATE_SUSPENDED;
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:136:11: error: invalid use of undefined type ‘struct pm_device_isr’
+  136 |         pm->base.flags |= BIT(PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:136:31: error: ‘PM_DEVICE_FLAG_RUNTIME_ENABLED’ undeclared (first use in this function)
+  136 |         pm->base.flags |= BIT(PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:137:11: error: invalid use of undefined type ‘struct pm_device_isr’
+  137 |         pm->base.usage = 0U;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:139:26: error: invalid use of undefined type ‘struct pm_device_isr’
+  139 |         k_spin_unlock(&pm->lock, k);
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:143:43: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  143 | int pm_device_runtime_enable(const struct device *dev)
+      |                                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_enable’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:146:35: error: invalid use of undefined type ‘const struct device’
+  146 |         struct pm_device *pm = dev->pm;
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:148:41: error: ‘device_runtime_enable’ undeclared (first use in this function); did you mean ‘pm_device_runtime_enable’?
+  148 |         SYS_PORT_TRACING_FUNC_ENTER(pm, device_runtime_enable, dev);
+      |                                         ^~~~~~~~~~~~~~~~~~~~~
+      |                                         pm_device_runtime_enable
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:150:19: error: ‘NULL’ undeclared (first use in this function)
+  150 |         if (pm == NULL) {
+      |                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:150:19: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:151:24: error: ‘ENOTSUP’ undeclared (first use in this function)
+  151 |                 ret = -ENOTSUP;
+      |                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:155:32: error: invalid use of undefined type ‘struct pm_device’
+  155 |         if (atomic_test_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED)) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:155:46: error: ‘PM_DEVICE_FLAG_RUNTIME_ENABLED’ undeclared (first use in this function)
+  155 |         if (atomic_test_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED)) {
+      |                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:159:13: warning: implicit declaration of function ‘pm_device_is_busy’ [-Wimplicit-function-declaration]
+  159 |         if (pm_device_is_busy(dev)) {
+      |             ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:160:24: error: ‘EBUSY’ undeclared (first use in this function)
+  160 |                 ret = -EBUSY;
+      |                        ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:164:33: error: invalid use of undefined type ‘const struct device’
+  164 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:164:51: error: ‘PM_DEVICE_FLAG_ISR_SAFE’ undeclared (first use in this function)
+  164 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:165:43: warning: passing argument 1 of ‘runtime_enable_sync’ from incompatible pointer type [-Wincompatible-pointer-types]
+  165 |                 ret = runtime_enable_sync(dev);
+      |                                           ^~~
+      |                                           |
+      |                                           const struct device *
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:119:53: note: expected ‘const struct device *’ but argument is of type ‘const struct device *’
+  119 | static int runtime_enable_sync(const struct device *dev)
+      |                                ~~~~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:169:14: warning: implicit declaration of function ‘k_is_pre_kernel’ [-Wimplicit-function-declaration]
+  169 |         if (!k_is_pre_kernel()) {
+      |              ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:170:23: warning: implicit declaration of function ‘k_sem_take’ [-Wimplicit-function-declaration]
+  170 |                 (void)k_sem_take(&pm->lock, K_FOREVER);
+      |                       ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:170:37: error: invalid use of undefined type ‘struct pm_device’
+  170 |                 (void)k_sem_take(&pm->lock, K_FOREVER);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:170:45: error: ‘K_FOREVER’ undeclared (first use in this function)
+  170 |                 (void)k_sem_take(&pm->lock, K_FOREVER);
+      |                                             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:174:15: error: invalid use of undefined type ‘struct pm_device’
+  174 |         if (pm->dev == NULL) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:175:19: error: invalid use of undefined type ‘struct pm_device’
+  175 |                 pm->dev = dev;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:177:17: warning: implicit declaration of function ‘k_work_init_delayable’ [-Wimplicit-function-declaration]
+  177 |                 k_work_init_delayable(&pm->work, runtime_suspend_work);
+      |                 ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:177:42: error: invalid use of undefined type ‘struct pm_device’
+  177 |                 k_work_init_delayable(&pm->work, runtime_suspend_work);
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:177:50: error: ‘runtime_suspend_work’ undeclared (first use in this function)
+  177 |                 k_work_init_delayable(&pm->work, runtime_suspend_work);
+      |                                                  ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:181:15: error: invalid use of undefined type ‘struct pm_device’
+  181 |         if (pm->base.state == PM_DEVICE_STATE_ACTIVE) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:181:31: error: ‘PM_DEVICE_STATE_ACTIVE’ undeclared (first use in this function)
+  181 |         if (pm->base.state == PM_DEVICE_STATE_ACTIVE) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:182:25: error: invalid use of undefined type ‘struct pm_device’
+  182 |                 ret = pm->base.action_cb(pm->dev, PM_DEVICE_ACTION_SUSPEND);
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:182:44: error: invalid use of undefined type ‘struct pm_device’
+  182 |                 ret = pm->base.action_cb(pm->dev, PM_DEVICE_ACTION_SUSPEND);
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:182:51: error: ‘PM_DEVICE_ACTION_SUSPEND’ undeclared (first use in this function)
+  182 |                 ret = pm->base.action_cb(pm->dev, PM_DEVICE_ACTION_SUSPEND);
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:186:19: error: invalid use of undefined type ‘struct pm_device’
+  186 |                 pm->base.state = PM_DEVICE_STATE_SUSPENDED;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:186:34: error: ‘PM_DEVICE_STATE_SUSPENDED’ undeclared (first use in this function)
+  186 |                 pm->base.state = PM_DEVICE_STATE_SUSPENDED;
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:189:11: error: invalid use of undefined type ‘struct pm_device’
+  189 |         pm->base.usage = 0U;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:191:9: warning: implicit declaration of function ‘atomic_set_bit’ [-Wimplicit-function-declaration]
+  191 |         atomic_set_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:191:27: error: invalid use of undefined type ‘struct pm_device’
+  191 |         atomic_set_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:195:17: warning: implicit declaration of function ‘k_sem_give’ [-Wimplicit-function-declaration]
+  195 |                 k_sem_give(&pm->lock);
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:195:31: error: invalid use of undefined type ‘struct pm_device’
+  195 |                 k_sem_give(&pm->lock);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:203:46: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  203 | static int runtime_disable_sync(const struct device *dev)
+      |                                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘runtime_disable_sync’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:205:39: error: invalid use of undefined type ‘const struct device’
+  205 |         struct pm_device_isr *pm = dev->pm_isr;
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:207:9: error: unknown type name ‘k_spinlock_key_t’
+  207 |         k_spinlock_key_t k = k_spin_lock(&pm->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:207:45: error: invalid use of undefined type ‘struct pm_device_isr’
+  207 |         k_spinlock_key_t k = k_spin_lock(&pm->lock);
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:209:15: error: invalid use of undefined type ‘struct pm_device_isr’
+  209 |         if (pm->base.state == PM_DEVICE_STATE_SUSPENDED) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:209:31: error: ‘PM_DEVICE_STATE_SUSPENDED’ undeclared (first use in this function)
+  209 |         if (pm->base.state == PM_DEVICE_STATE_SUSPENDED) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:210:25: error: invalid use of undefined type ‘struct pm_device_isr’
+  210 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_RESUME);
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:210:47: error: ‘PM_DEVICE_ACTION_RESUME’ undeclared (first use in this function)
+  210 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_RESUME);
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:215:19: error: invalid use of undefined type ‘struct pm_device_isr’
+  215 |                 pm->base.state = PM_DEVICE_STATE_ACTIVE;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:215:34: error: ‘PM_DEVICE_STATE_ACTIVE’ undeclared (first use in this function)
+  215 |                 pm->base.state = PM_DEVICE_STATE_ACTIVE;
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:220:11: error: invalid use of undefined type ‘struct pm_device_isr’
+  220 |         pm->base.flags &= ~BIT(PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:220:32: error: ‘PM_DEVICE_FLAG_RUNTIME_ENABLED’ undeclared (first use in this function)
+  220 |         pm->base.flags &= ~BIT(PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:222:26: error: invalid use of undefined type ‘struct pm_device_isr’
+  222 |         k_spin_unlock(&pm->lock, k);
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:226:44: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  226 | int pm_device_runtime_disable(const struct device *dev)
+      |                                            ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_disable’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:229:35: error: invalid use of undefined type ‘const struct device’
+  229 |         struct pm_device *pm = dev->pm;
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:231:41: error: ‘device_runtime_disable’ undeclared (first use in this function); did you mean ‘pm_device_runtime_disable’?
+  231 |         SYS_PORT_TRACING_FUNC_ENTER(pm, device_runtime_disable, dev);
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~
+      |                                         pm_device_runtime_disable
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:233:19: error: ‘NULL’ undeclared (first use in this function)
+  233 |         if (pm == NULL) {
+      |                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:233:19: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:234:24: error: ‘ENOTSUP’ undeclared (first use in this function)
+  234 |                 ret = -ENOTSUP;
+      |                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:238:33: error: invalid use of undefined type ‘struct pm_device’
+  238 |         if (!atomic_test_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED)) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:238:47: error: ‘PM_DEVICE_FLAG_RUNTIME_ENABLED’ undeclared (first use in this function)
+  238 |         if (!atomic_test_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED)) {
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:242:33: error: invalid use of undefined type ‘const struct device’
+  242 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:242:51: error: ‘PM_DEVICE_FLAG_ISR_SAFE’ undeclared (first use in this function)
+  242 |         if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
+      |                                                   ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:243:44: warning: passing argument 1 of ‘runtime_disable_sync’ from incompatible pointer type [-Wincompatible-pointer-types]
+  243 |                 ret = runtime_disable_sync(dev);
+      |                                            ^~~
+      |                                            |
+      |                                            const struct device *
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:203:54: note: expected ‘const struct device *’ but argument is of type ‘const struct device *’
+  203 | static int runtime_disable_sync(const struct device *dev)
+      |                                 ~~~~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:248:37: error: invalid use of undefined type ‘struct pm_device’
+  248 |                 (void)k_sem_take(&pm->lock, K_FOREVER);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:248:45: error: ‘K_FOREVER’ undeclared (first use in this function)
+  248 |                 (void)k_sem_take(&pm->lock, K_FOREVER);
+      |                                             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:253:24: error: invalid use of undefined type ‘struct pm_device’
+  253 |                 if ((pm->base.state == PM_DEVICE_STATE_SUSPENDING) &&
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:253:40: error: ‘PM_DEVICE_STATE_SUSPENDING’ undeclared (first use in this function)
+  253 |                 if ((pm->base.state == PM_DEVICE_STATE_SUSPENDING) &&
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:254:27: warning: implicit declaration of function ‘k_work_cancel_delayable’ [-Wimplicit-function-declaration]
+  254 |                         ((k_work_cancel_delayable(&pm->work) & K_WORK_RUNNING) == 0)) {
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:254:54: error: invalid use of undefined type ‘struct pm_device’
+  254 |                         ((k_work_cancel_delayable(&pm->work) & K_WORK_RUNNING) == 0)) {
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:254:64: error: ‘K_WORK_RUNNING’ undeclared (first use in this function)
+  254 |                         ((k_work_cancel_delayable(&pm->work) & K_WORK_RUNNING) == 0)) {
+      |                                                                ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:255:27: error: invalid use of undefined type ‘struct pm_device’
+  255 |                         pm->base.state = PM_DEVICE_STATE_ACTIVE;
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:255:42: error: ‘PM_DEVICE_STATE_ACTIVE’ undeclared (first use in this function)
+  255 |                         pm->base.state = PM_DEVICE_STATE_ACTIVE;
+      |                                          ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:260:26: error: invalid use of undefined type ‘struct pm_device’
+  260 |                 while (pm->base.state == PM_DEVICE_STATE_SUSPENDING) {
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:261:25: warning: implicit declaration of function ‘k_event_clear’ [-Wimplicit-function-declaration]
+  261 |                         k_event_clear(&pm->event, EVENT_MASK);
+      |                         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:261:42: error: invalid use of undefined type ‘struct pm_device’
+  261 |                         k_event_clear(&pm->event, EVENT_MASK);
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:261:51: error: ‘EVENT_MASK’ undeclared (first use in this function)
+  261 |                         k_event_clear(&pm->event, EVENT_MASK);
+      |                                                   ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:262:39: error: invalid use of undefined type ‘struct pm_device’
+  262 |                         k_sem_give(&pm->lock);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:264:25: warning: implicit declaration of function ‘k_event_wait’ [-Wimplicit-function-declaration]
+  264 |                         k_event_wait(&pm->event, EVENT_MASK, false, K_FOREVER);
+      |                         ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:264:41: error: invalid use of undefined type ‘struct pm_device’
+  264 |                         k_event_wait(&pm->event, EVENT_MASK, false, K_FOREVER);
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:264:62: error: ‘false’ undeclared (first use in this function)
+  264 |                         k_event_wait(&pm->event, EVENT_MASK, false, K_FOREVER);
+      |                                                              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:264:62: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:266:45: error: invalid use of undefined type ‘struct pm_device’
+  266 |                         (void)k_sem_take(&pm->lock, K_FOREVER);
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:272:15: error: invalid use of undefined type ‘struct pm_device’
+  272 |         if (pm->base.state == PM_DEVICE_STATE_SUSPENDED) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:272:31: error: ‘PM_DEVICE_STATE_SUSPENDED’ undeclared (first use in this function)
+  272 |         if (pm->base.state == PM_DEVICE_STATE_SUSPENDED) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:273:25: error: invalid use of undefined type ‘struct pm_device’
+  273 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_RESUME);
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:273:47: error: ‘PM_DEVICE_ACTION_RESUME’ undeclared (first use in this function)
+  273 |                 ret = pm->base.action_cb(dev, PM_DEVICE_ACTION_RESUME);
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:278:19: error: invalid use of undefined type ‘struct pm_device’
+  278 |                 pm->base.state = PM_DEVICE_STATE_ACTIVE;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:283:9: warning: implicit declaration of function ‘atomic_clear_bit’ [-Wimplicit-function-declaration]
+  283 |         atomic_clear_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:283:29: error: invalid use of undefined type ‘struct pm_device’
+  283 |         atomic_clear_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:287:31: error: invalid use of undefined type ‘struct pm_device’
+  287 |                 k_sem_give(&pm->lock);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:296:1: error: unknown type name ‘bool’
+  296 | bool pm_device_runtime_is_enabled(const struct device *dev)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:296:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:296:48: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  296 | bool pm_device_runtime_is_enabled(const struct device *dev)
+      |                                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_is_enabled’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:298:40: error: invalid use of undefined type ‘const struct device’
+  298 |         struct pm_device_base *pm = dev->pm_base;
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:300:41: error: invalid use of undefined type ‘struct pm_device_base’
+  300 |         return pm && atomic_test_bit(&pm->flags, PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:300:50: error: ‘PM_DEVICE_FLAG_RUNTIME_ENABLED’ undeclared (first use in this function)
+  300 |         return pm && atomic_test_bit(&pm->flags, PM_DEVICE_FLAG_RUNTIME_ENABLED);
+      |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:303:42: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+  303 | int pm_device_runtime_usage(const struct device *dev)
+      |                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_usage’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:305:43: warning: passing argument 1 of ‘pm_device_runtime_is_enabled’ from incompatible pointer type [-Wincompatible-pointer-types]
+  305 |         if (!pm_device_runtime_is_enabled(dev)) {
+      |                                           ^~~
+      |                                           |
+      |                                           const struct device *
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:296:56: note: expected ‘const struct device *’ but argument is of type ‘const struct device *’
+  296 | bool pm_device_runtime_is_enabled(const struct device *dev)
+      |                                   ~~~~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:306:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+  306 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:309:19: error: invalid use of undefined type ‘const struct device’
+  309 |         return dev->pm_base->usage;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_is_enabled’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:301:1: warning: control reaches end of non-void function [-Wreturn-type]
+  301 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c: In function ‘pm_device_runtime_usage’:
+/home/huyj/zephyr-workspace/zephyr/subsys/pm/device_runtime.c:310:1: warning: control reaches end of non-void function [-Wreturn-type]
+  310 | }
+      | ^
+[113/121] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/device_power_domains/build
+
+=== RC ===
+1

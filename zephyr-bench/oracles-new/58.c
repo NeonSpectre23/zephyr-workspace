@@ -1,0 +1,11 @@
+int cnd_timedwait(cnd_t *restrict cond, mtx_t *restrict mtx, const struct timespec *restrict ts)
+{
+	switch (pthread_cond_timedwait(cond, mtx, ts)) {
+	case 0:
+		return thrd_success;
+	case ETIMEDOUT:
+		return thrd_timedout;
+	default:
+		return thrd_error;
+	}
+}

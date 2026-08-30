@@ -1,0 +1,426 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build
+-- west build: building application
+[1/115] Preparing syscall dependency handling
+
+[2/115] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/115] Generating misc/generated/syscalls_subdirs.trigger
+[4/115] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/115] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/115] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/115] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/115] Generating include/generated/zephyr/driver-validation.h
+[9/115] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/115] Generating ../../include/generated/zephyr/heap_constants.h
+[11/115] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/115] Generating include/generated/zephyr/offsets.h
+[13/115] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/115] Building C object CMakeFiles/app.dir/src/zbus_proxy_agent_mock.c.obj
+[15/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[19/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[22/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[23/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[24/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/115] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[33/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[34/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[35/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[36/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/115] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[44/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[50/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[52/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[53/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[61/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[62/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_mock.c.obj
+[63/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/115] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus.c.obj
+[65/115] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/proxy_agent/zbus_proxy_agent.c.obj
+[66/115] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[67/115] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus_iterable_sections.c.obj
+[68/115] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[69/115] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[70/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[71/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[72/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[73/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[74/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[75/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[76/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[77/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[78/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[79/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[80/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[82/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[83/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[84/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[85/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[86/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[87/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[88/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[89/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[90/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[92/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[93/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[94/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[96/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[97/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[98/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[99/115] Linking C static library app/libapp.a
+[100/115] Linking C static library zephyr/arch/common/libarch__common.a
+[101/115] Generating linker_zephyr_pre0.cmd
+[102/115] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[103/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+FAILED: zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR_SUPERVISOR__ -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj -MF zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj.d -o zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj -c /home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:1:53: error: unknown type name ‘size_t’
+    1 | void k_msgq_init(struct k_msgq *msgq, char *buffer, size_t msg_size,
+      |                                                     ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:1:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | void k_msgq_init(struct k_msgq *msgq, char *buffer, size_t msg_size,
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:2:18: error: unknown type name ‘uint32_t’
+    2 |                  uint32_t max_msgs)
+      |                  ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | void k_msgq_init(struct k_msgq *msgq, char *buffer, size_t msg_size,
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:8:51: error: unknown type name ‘size_t’
+    8 | int z_impl_k_msgq_alloc_init(struct k_msgq *msgq, size_t msg_size,
+      |                                                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:8:51: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:9:29: error: unknown type name ‘uint32_t’
+    9 |                             uint32_t max_msgs)
+      |                             ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:9:29: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:45:32: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+   45 | static int msgq_cleanup(struct k_msgq *msgq, void **mem)
+      |                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘msgq_cleanup’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:49:16: error: ‘NULL’ undeclared (first use in this function)
+   49 |         *mem = NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:49:16: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:49:16: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:50:9: warning: implicit declaration of function ‘SYS_PORT_TRACING_OBJ_FUNC_ENTER’ [-Wimplicit-function-declaration]
+   50 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_msgq, cleanup, msgq);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:50:41: error: ‘k_msgq’ undeclared (first use in this function)
+   50 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_msgq, cleanup, msgq);
+      |                                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:50:49: error: ‘cleanup’ undeclared (first use in this function)
+   50 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_msgq, cleanup, msgq);
+      |                                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:52:9: warning: implicit declaration of function ‘CHECKIF’ [-Wimplicit-function-declaration]
+   52 |         CHECKIF(z_waitq_head(&msgq->wait_q) != NULL) {
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:52:17: warning: implicit declaration of function ‘z_waitq_head’ [-Wimplicit-function-declaration]
+   52 |         CHECKIF(z_waitq_head(&msgq->wait_q) != NULL) {
+      |                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:52:35: error: invalid use of undefined type ‘struct k_msgq’
+   52 |         CHECKIF(z_waitq_head(&msgq->wait_q) != NULL) {
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:52:53: error: expected ‘;’ before ‘{’ token
+   52 |         CHECKIF(z_waitq_head(&msgq->wait_q) != NULL) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:67:27: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+   67 | int k_msgq_cleanup(struct k_msgq *msgq)
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘k_msgq_cleanup’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:70:32: warning: passing argument 1 of ‘msgq_cleanup’ from incompatible pointer type [-Wincompatible-pointer-types]
+   70 |         int ret = msgq_cleanup(msgq, &mem);
+      |                                ^~~~
+      |                                |
+      |                                struct k_msgq *
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:45:40: note: expected ‘struct k_msgq *’ but argument is of type ‘struct k_msgq *’
+   45 | static int msgq_cleanup(struct k_msgq *msgq, void **mem)
+      |                         ~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:72:9: warning: implicit declaration of function ‘k_free’ [-Wimplicit-function-declaration]
+   72 |         k_free(mem);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:76:40: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+   76 | int z_msgq_cleanup_sched_locked(struct k_msgq *msgq)
+      |                                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘z_msgq_cleanup_sched_locked’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:79:32: warning: passing argument 1 of ‘msgq_cleanup’ from incompatible pointer type [-Wincompatible-pointer-types]
+   79 |         int ret = msgq_cleanup(msgq, &mem);
+      |                                ^~~~
+      |                                |
+      |                                struct k_msgq *
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:45:40: note: expected ‘struct k_msgq *’ but argument is of type ‘struct k_msgq *’
+   45 | static int msgq_cleanup(struct k_msgq *msgq, void **mem)
+      |                         ~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:81:9: warning: implicit declaration of function ‘k_free_sched_locked’ [-Wimplicit-function-declaration]
+   81 |         k_free_sched_locked(mem);
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:86:25: error: unknown type name ‘k_timeout_t’
+   86 |                         k_timeout_t timeout, bool put_at_back)
+      |                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:86:46: error: unknown type name ‘bool’
+   86 |                         k_timeout_t timeout, bool put_at_back)
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | void k_msgq_init(struct k_msgq *msgq, char *buffer, size_t msg_size,
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:186:62: error: unknown type name ‘k_timeout_t’
+  186 | int z_impl_k_msgq_put(struct k_msgq *msgq, const void *data, k_timeout_t timeout)
+      |                                                              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:191:36: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+  191 | int z_impl_k_msgq_put_front(struct k_msgq *msgq, const void *data)
+      |                                    ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘z_impl_k_msgq_put_front’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:193:16: warning: implicit declaration of function ‘put_msg_in_queue’ [-Wimplicit-function-declaration]
+  193 |         return put_msg_in_queue(msgq, data, K_NO_WAIT, false);
+      |                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:193:45: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  193 |         return put_msg_in_queue(msgq, data, K_NO_WAIT, false);
+      |                                             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:193:56: error: ‘false’ undeclared (first use in this function)
+  193 |         return put_msg_in_queue(msgq, data, K_NO_WAIT, false);
+      |                                                        ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:193:56: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:217:58: warning: ‘struct k_msgq_attrs’ declared inside parameter list will not be visible outside of this definition or declaration
+  217 | void z_impl_k_msgq_get_attrs(struct k_msgq *msgq, struct k_msgq_attrs *attrs)
+      |                                                          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:217:37: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+  217 | void z_impl_k_msgq_get_attrs(struct k_msgq *msgq, struct k_msgq_attrs *attrs)
+      |                                     ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘z_impl_k_msgq_get_attrs’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:219:14: error: invalid use of undefined type ‘struct k_msgq_attrs’
+  219 |         attrs->msg_size = msgq->msg_size;
+      |              ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:219:31: error: invalid use of undefined type ‘struct k_msgq’
+  219 |         attrs->msg_size = msgq->msg_size;
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:220:14: error: invalid use of undefined type ‘struct k_msgq_attrs’
+  220 |         attrs->max_msgs = msgq->max_msgs;
+      |              ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:220:31: error: invalid use of undefined type ‘struct k_msgq’
+  220 |         attrs->max_msgs = msgq->max_msgs;
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:221:14: error: invalid use of undefined type ‘struct k_msgq_attrs’
+  221 |         attrs->used_msgs = msgq->used_msgs;
+      |              ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:221:32: error: invalid use of undefined type ‘struct k_msgq’
+  221 |         attrs->used_msgs = msgq->used_msgs;
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:235:56: error: unknown type name ‘k_timeout_t’
+  235 | int z_impl_k_msgq_get(struct k_msgq *msgq, void *data, k_timeout_t timeout)
+      |                                                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:318:31: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+  318 | int z_impl_k_msgq_peek(struct k_msgq *msgq, void *data)
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘z_impl_k_msgq_peek’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:320:9: error: unknown type name ‘k_spinlock_key_t’
+  320 |         k_spinlock_key_t key;
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:323:15: warning: implicit declaration of function ‘k_spin_lock’ [-Wimplicit-function-declaration]
+  323 |         key = k_spin_lock(&msgq->lock);
+      |               ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:323:32: error: invalid use of undefined type ‘struct k_msgq’
+  323 |         key = k_spin_lock(&msgq->lock);
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:325:17: error: invalid use of undefined type ‘struct k_msgq’
+  325 |         if (msgq->used_msgs > 0U) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:327:23: warning: implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+  327 |                 (void)memcpy((char *)data, msgq->read_ptr, msgq->msg_size);
+      |                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+  +++ |+#include <string.h>
+    1 | void k_msgq_init(struct k_msgq *msgq, char *buffer, size_t msg_size,
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:327:23: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+  327 |                 (void)memcpy((char *)data, msgq->read_ptr, msgq->msg_size);
+      |                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:327:23: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:327:48: error: invalid use of undefined type ‘struct k_msgq’
+  327 |                 (void)memcpy((char *)data, msgq->read_ptr, msgq->msg_size);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:327:64: error: invalid use of undefined type ‘struct k_msgq’
+  327 |                 (void)memcpy((char *)data, msgq->read_ptr, msgq->msg_size);
+      |                                                                ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:331:27: error: ‘ENOMSG’ undeclared (first use in this function)
+  331 |                 result = -ENOMSG;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:334:9: warning: implicit declaration of function ‘SYS_PORT_TRACING_OBJ_FUNC’ [-Wimplicit-function-declaration]
+  334 |         SYS_PORT_TRACING_OBJ_FUNC(k_msgq, peek, msgq, result);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:334:35: error: ‘k_msgq’ undeclared (first use in this function)
+  334 |         SYS_PORT_TRACING_OBJ_FUNC(k_msgq, peek, msgq, result);
+      |                                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:334:43: error: ‘peek’ undeclared (first use in this function)
+  334 |         SYS_PORT_TRACING_OBJ_FUNC(k_msgq, peek, msgq, result);
+      |                                           ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:336:9: warning: implicit declaration of function ‘k_spin_unlock’ [-Wimplicit-function-declaration]
+  336 |         k_spin_unlock(&msgq->lock, key);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:336:28: error: invalid use of undefined type ‘struct k_msgq’
+  336 |         k_spin_unlock(&msgq->lock, key);
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:352:60: error: unknown type name ‘uint32_t’
+  352 | int z_impl_k_msgq_peek_at(struct k_msgq *msgq, void *data, uint32_t idx)
+      |                                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:352:60: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:398:33: warning: ‘struct k_msgq’ declared inside parameter list will not be visible outside of this definition or declaration
+  398 | void z_impl_k_msgq_purge(struct k_msgq *msgq)
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘z_impl_k_msgq_purge’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:400:9: error: unknown type name ‘k_spinlock_key_t’
+  400 |         k_spinlock_key_t key;
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:402:9: error: unknown type name ‘bool’
+  402 |         bool resched = false;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:402:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:402:24: error: ‘false’ undeclared (first use in this function)
+  402 |         bool resched = false;
+      |                        ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:402:24: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:404:32: error: invalid use of undefined type ‘struct k_msgq’
+  404 |         key = k_spin_lock(&msgq->lock);
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:406:35: error: ‘k_msgq’ undeclared (first use in this function)
+  406 |         SYS_PORT_TRACING_OBJ_FUNC(k_msgq, purge, msgq);
+      |                                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:406:43: error: ‘purge’ undeclared (first use in this function)
+  406 |         SYS_PORT_TRACING_OBJ_FUNC(k_msgq, purge, msgq);
+      |                                           ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:409:31: warning: implicit declaration of function ‘z_unpend_first_thread’ [-Wimplicit-function-declaration]
+  409 |         for (pending_thread = z_unpend_first_thread(&msgq->wait_q);
+      |                               ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:409:58: error: invalid use of undefined type ‘struct k_msgq’
+  409 |         for (pending_thread = z_unpend_first_thread(&msgq->wait_q);
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:410:32: error: ‘NULL’ undeclared (first use in this function)
+  410 |              pending_thread != NULL;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:410:32: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:411:58: error: invalid use of undefined type ‘struct k_msgq’
+  411 |              pending_thread = z_unpend_first_thread(&msgq->wait_q)) {
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:412:17: warning: implicit declaration of function ‘arch_thread_return_value_set’ [-Wimplicit-function-declaration]
+  412 |                 arch_thread_return_value_set(pending_thread, -ENOMSG);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:412:63: error: ‘ENOMSG’ undeclared (first use in this function)
+  412 |                 arch_thread_return_value_set(pending_thread, -ENOMSG);
+      |                                                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:413:17: warning: implicit declaration of function ‘z_ready_thread’ [-Wimplicit-function-declaration]
+  413 |                 z_ready_thread(pending_thread);
+      |                 ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:414:27: error: ‘true’ undeclared (first use in this function)
+  414 |                 resched = true;
+      |                           ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:414:27: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:417:13: error: invalid use of undefined type ‘struct k_msgq’
+  417 |         msgq->used_msgs = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:418:13: error: invalid use of undefined type ‘struct k_msgq’
+  418 |         msgq->read_ptr = msgq->write_ptr;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:418:30: error: invalid use of undefined type ‘struct k_msgq’
+  418 |         msgq->read_ptr = msgq->write_ptr;
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:421:17: warning: implicit declaration of function ‘z_reschedule’ [-Wimplicit-function-declaration]
+  421 |                 z_reschedule(&msgq->lock, key);
+      |                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:421:35: error: invalid use of undefined type ‘struct k_msgq’
+  421 |                 z_reschedule(&msgq->lock, key);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:423:36: error: invalid use of undefined type ‘struct k_msgq’
+  423 |                 k_spin_unlock(&msgq->lock, key);
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c: In function ‘z_impl_k_msgq_put_front’:
+/home/huyj/zephyr-workspace/zephyr/kernel/msg_q.c:194:1: warning: control reaches end of non-void function [-Wreturn-type]
+  194 | }
+      | ^
+[104/115] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[105/115] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[106/115] Linking C static library zephyr/subsys/zbus/libsubsys__zbus.a
+[107/115] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[108/115] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[109/115] Linking C static library zephyr/libzephyr.a
+[110/115] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[111/115] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build
+
+=== RC ===
+1

@@ -1,0 +1,697 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build
+-- west build: building application
+[1/119] Preparing syscall dependency handling
+
+[2/119] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/119] Generating misc/generated/syscalls_subdirs.trigger
+[4/119] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/119] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/119] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/119] Generating include/generated/zephyr/driver-validation.h
+[8/119] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/119] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/119] Generating ../../include/generated/zephyr/heap_constants.h
+[11/119] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/119] Generating include/generated/zephyr/offsets.h
+[13/119] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/119] Building C object CMakeFiles/app.dir/src/mode_check.c.obj
+[15/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[19/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[22/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[23/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[24/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[25/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[26/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[27/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/119] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/119] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[39/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/119] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/119] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/119] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/119] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/119] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/119] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[48/119] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/119] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/119] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[51/119] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[52/119] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[53/119] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[54/119] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[55/119] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[56/119] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/119] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/119] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[59/119] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[60/119] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[61/119] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[62/119] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[63/119] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[64/119] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/119] Building C object zephyr/drivers/can/CMakeFiles/drivers__can.dir/can_common.c.obj
+[66/119] Building C object zephyr/drivers/can/CMakeFiles/drivers__can.dir/can_loopback.c.obj
+[67/119] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[68/119] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[69/119] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[70/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[71/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[72/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[73/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[74/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[75/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[76/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[77/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[78/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[79/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[80/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[82/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[83/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[84/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[85/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[86/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[87/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[88/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[89/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[90/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[91/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[92/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[93/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[94/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[96/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[97/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[98/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[99/119] Linking C static library zephyr/arch/common/libarch__common.a
+[100/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[101/119] Linking C static library app/libapp.a
+[102/119] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[103/119] Generating linker_zephyr_pre0.cmd
+[104/119] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[105/119] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[106/119] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[107/119] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[108/119] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[109/119] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[110/119] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[111/119] Building C object zephyr/subsys/canbus/isotp/CMakeFiles/subsys__canbus__isotp.dir/isotp.c.obj
+FAILED: zephyr/subsys/canbus/isotp/CMakeFiles/subsys__canbus__isotp.dir/isotp.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/subsys/canbus/isotp/CMakeFiles/subsys__canbus__isotp.dir/isotp.c.obj -MF zephyr/subsys/canbus/isotp/CMakeFiles/subsys__canbus__isotp.dir/isotp.c.obj.d -o zephyr/subsys/canbus/isotp/CMakeFiles/subsys__canbus__isotp.dir/isotp.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:1:34: warning: ‘struct isotp_send_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | static inline int send_sf(struct isotp_send_ctx *sctx)
+      |                                  ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:7:34: warning: ‘struct isotp_send_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | static inline int send_ff(struct isotp_send_ctx *sctx)
+      |                                  ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: In function ‘send_ff’:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:9:26: error: storage size of ‘frame’ isn’t known
+    9 |         struct can_frame frame;
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:11:9: error: unknown type name ‘size_t’
+   11 |         size_t len = get_send_ctx_data_len(sctx);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:1:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | static inline int send_sf(struct isotp_send_ctx *sctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:11:22: warning: implicit declaration of function ‘get_send_ctx_data_len’ [-Wimplicit-function-declaration]
+   11 |         size_t len = get_send_ctx_data_len(sctx);
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:13:15: error: unknown type name ‘uint8_t’
+   13 |         const uint8_t *data;
+      |               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:15:9: warning: implicit declaration of function ‘prepare_frame’ [-Wimplicit-function-declaration]
+   15 |         prepare_frame(&frame, &sctx->tx_addr);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:15:36: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   15 |         prepare_frame(&frame, &sctx->tx_addr);
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:17:21: warning: implicit declaration of function ‘can_bytes_to_dlc’ [-Wimplicit-function-declaration]
+   17 |         frame.dlc = can_bytes_to_dlc(sctx->tx_addr.dl);
+      |                     ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:17:42: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   17 |         frame.dlc = can_bytes_to_dlc(sctx->tx_addr.dl);
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:19:18: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   19 |         if ((sctx->tx_addr.flags & ISOTP_MSG_EXT_ADDR) != 0) {
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:19:36: error: ‘ISOTP_MSG_EXT_ADDR’ undeclared (first use in this function)
+   19 |         if ((sctx->tx_addr.flags & ISOTP_MSG_EXT_ADDR) != 0) {
+      |                                    ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:19:36: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:20:43: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   20 |                 frame.data[index++] = sctx->tx_addr.ext_addr;
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:24:39: error: ‘ISOTP_PCI_TYPE_FF’ undeclared (first use in this function)
+   24 |                 frame.data[index++] = ISOTP_PCI_TYPE_FF;
+      |                                       ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:38:13: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   38 |         sctx->sn = 1;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:39:16: warning: implicit declaration of function ‘get_send_ctx_data’ [-Wimplicit-function-declaration]
+   39 |         data = get_send_ctx_data(sctx);
+      |                ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:39:14: warning: assignment to ‘const int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   39 |         data = get_send_ctx_data(sctx);
+      |              ^
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:40:9: warning: implicit declaration of function ‘pull_send_ctx_data’ [-Wimplicit-function-declaration]
+   40 |         pull_send_ctx_data(sctx, sctx->tx_addr.dl - index);
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:40:38: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   40 |         pull_send_ctx_data(sctx, sctx->tx_addr.dl - index);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:41:9: warning: implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+   41 |         memcpy(&frame.data[index], data, sctx->tx_addr.dl - index);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+  +++ |+#include <string.h>
+    1 | static inline int send_sf(struct isotp_send_ctx *sctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:41:9: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+   41 |         memcpy(&frame.data[index], data, sctx->tx_addr.dl - index);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:41:9: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:41:46: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   41 |         memcpy(&frame.data[index], data, sctx->tx_addr.dl - index);
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:43:15: warning: implicit declaration of function ‘can_send’ [-Wimplicit-function-declaration]
+   43 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:43:28: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   43 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:43:47: warning: implicit declaration of function ‘K_MSEC’ [-Wimplicit-function-declaration]
+   43 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:43:54: error: ‘ISOTP_A_TIMEOUT_MS’ undeclared (first use in this function)
+   43 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                                                      ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:43:75: error: ‘send_can_tx_cb’ undeclared (first use in this function)
+   43 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                                                                           ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:9:26: warning: unused variable ‘frame’ [-Wunused-variable]
+    9 |         struct can_frame frame;
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:47:34: warning: ‘struct isotp_send_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+   47 | static inline int send_cf(struct isotp_send_ctx *sctx)
+      |                                  ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: In function ‘send_cf’:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:49:26: error: storage size of ‘frame’ isn’t known
+   49 |         struct can_frame frame;
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:54:15: error: unknown type name ‘uint8_t’
+   54 |         const uint8_t *data;
+      |               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:56:36: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   56 |         prepare_frame(&frame, &sctx->tx_addr);
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:58:18: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   58 |         if ((sctx->tx_addr.flags & ISOTP_MSG_EXT_ADDR) != 0) {
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:58:36: error: ‘ISOTP_MSG_EXT_ADDR’ undeclared (first use in this function)
+   58 |         if ((sctx->tx_addr.flags & ISOTP_MSG_EXT_ADDR) != 0) {
+      |                                    ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:59:43: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   59 |                 frame.data[index++] = sctx->tx_addr.ext_addr;
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:63:31: error: ‘ISOTP_PCI_TYPE_CF’ undeclared (first use in this function)
+   63 |         frame.data[index++] = ISOTP_PCI_TYPE_CF | sctx->sn;
+      |                               ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:63:55: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   63 |         frame.data[index++] = ISOTP_PCI_TYPE_CF | sctx->sn;
+      |                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:66:15: warning: implicit declaration of function ‘MIN’ [-Wimplicit-function-declaration]
+   66 |         len = MIN(rem_len, sctx->tx_addr.dl - index);
+      |               ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:66:32: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   66 |         len = MIN(rem_len, sctx->tx_addr.dl - index);
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:68:14: warning: assignment to ‘const int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   68 |         data = get_send_ctx_data(sctx);
+      |              ^
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:69:9: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+   69 |         memcpy(&frame.data[index], data, len);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:69:9: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:71:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   71 |         if (IS_ENABLED(CONFIG_ISOTP_ENABLE_TX_PADDING) ||
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:71:24: error: ‘CONFIG_ISOTP_ENABLE_TX_PADDING’ undeclared (first use in this function); did you mean ‘CONFIG_ISOTP_ENABLE_CONTEXT_BUFFERS’?
+   71 |         if (IS_ENABLED(CONFIG_ISOTP_ENABLE_TX_PADDING) ||
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CONFIG_ISOTP_ENABLE_CONTEXT_BUFFERS
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:72:25: error: ‘CONFIG_CAN_FD_MODE’ undeclared (first use in this function)
+   72 |             (IS_ENABLED(CONFIG_CAN_FD_MODE) && (sctx->tx_addr.flags & ISOTP_MSG_FDF) != 0 &&
+      |                         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:72:53: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   72 |             (IS_ENABLED(CONFIG_CAN_FD_MODE) && (sctx->tx_addr.flags & ISOTP_MSG_FDF) != 0 &&
+      |                                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:72:71: error: ‘ISOTP_MSG_FDF’ undeclared (first use in this function)
+   72 |             (IS_ENABLED(CONFIG_CAN_FD_MODE) && (sctx->tx_addr.flags & ISOTP_MSG_FDF) != 0 &&
+      |                                                                       ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:73:28: error: ‘ISOTP_PADDED_FRAME_DL_MIN’ undeclared (first use in this function)
+   73 |              len + index > ISOTP_PADDED_FRAME_DL_MIN)) {
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:78:25: warning: implicit declaration of function ‘MAX’ [-Wimplicit-function-declaration]
+   78 |                         MAX(ISOTP_PADDED_FRAME_DL_MIN, len + index));
+      |                         ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:79:17: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+   79 |                 memset(&frame.data[index + len], ISOTP_PAD_BYTE,
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:79:17: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:79:17: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:79:17: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:79:50: error: ‘ISOTP_PAD_BYTE’ undeclared (first use in this function)
+   79 |                 memset(&frame.data[index + len], ISOTP_PAD_BYTE,
+      |                                                  ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:80:24: warning: implicit declaration of function ‘can_dlc_to_bytes’ [-Wimplicit-function-declaration]
+   80 |                        can_dlc_to_bytes(frame.dlc) - len - index);
+      |                        ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:85:28: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   85 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:85:54: error: ‘ISOTP_A_TIMEOUT_MS’ undeclared (first use in this function)
+   85 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                                                      ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:85:75: error: ‘send_can_tx_cb’ undeclared (first use in this function)
+   85 |         ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
+      |                                                                           ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:87:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   87 |                 sctx->sn++;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:89:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   89 |                 sctx->bs--;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:90:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+   90 |                 sctx->tx_backlog++;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:49:26: warning: unused variable ‘frame’ [-Wunused-variable]
+   49 |         struct can_frame frame;
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:98:41: warning: ‘struct isotp_send_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+   98 | static inline void free_send_ctx(struct isotp_send_ctx **sctx)
+      |                                         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: In function ‘free_send_ctx’:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:100:20: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  100 |         if ((*sctx)->is_net_buf) {
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:101:17: warning: implicit declaration of function ‘net_buf_unref’ [-Wimplicit-function-declaration]
+  101 |                 net_buf_unref((*sctx)->buf);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:101:38: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  101 |                 net_buf_unref((*sctx)->buf);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:102:24: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  102 |                 (*sctx)->buf = NULL;
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:102:32: error: ‘NULL’ undeclared (first use in this function)
+  102 |                 (*sctx)->buf = NULL;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:102:32: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:105:20: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  105 |         if ((*sctx)->is_ctx_slab) {
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:106:17: warning: implicit declaration of function ‘k_mem_slab_free’ [-Wimplicit-function-declaration]
+  106 |                 k_mem_slab_free(&ctx_slab, (void *)*sctx);
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:106:34: error: ‘ctx_slab’ undeclared (first use in this function)
+  106 |                 k_mem_slab_free(&ctx_slab, (void *)*sctx);
+      |                                  ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:110:57: error: unknown type name ‘k_timeout_t’
+  110 | static int alloc_send_ctx(struct isotp_send_ctx **sctx, k_timeout_t timeout)
+      |                                                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:127:8: error: unknown type name ‘k_timeout_t’
+  127 | static k_timeout_t stmin_to_timeout(uint8_t stmin)
+      |        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:127:37: error: unknown type name ‘uint8_t’
+  127 | static k_timeout_t stmin_to_timeout(uint8_t stmin)
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:1:1: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | static inline int send_sf(struct isotp_send_ctx *sctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:142:39: warning: ‘struct isotp_send_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+  142 | static void send_state_machine(struct isotp_send_ctx *sctx)
+      |                                       ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: In function ‘send_state_machine’:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:146:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  146 |         switch (sctx->state) {
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:148:14: error: ‘ISOTP_TX_SEND_FF’ undeclared (first use in this function)
+  148 |         case ISOTP_TX_SEND_FF:
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:149:25: warning: passing argument 1 of ‘send_ff’ from incompatible pointer type [-Wincompatible-pointer-types]
+  149 |                 send_ff(sctx);
+      |                         ^~~~
+      |                         |
+      |                         struct isotp_send_ctx *
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:7:50: note: expected ‘struct isotp_send_ctx *’ but argument is of type ‘struct isotp_send_ctx *’
+    7 | static inline int send_ff(struct isotp_send_ctx *sctx)
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:150:17: warning: implicit declaration of function ‘k_timer_start’ [-Wimplicit-function-declaration]
+  150 |                 k_timer_start(&sctx->timer, K_MSEC(ISOTP_BS_TIMEOUT_MS), K_NO_WAIT);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:150:36: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  150 |                 k_timer_start(&sctx->timer, K_MSEC(ISOTP_BS_TIMEOUT_MS), K_NO_WAIT);
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:150:52: error: ‘ISOTP_BS_TIMEOUT_MS’ undeclared (first use in this function)
+  150 |                 k_timer_start(&sctx->timer, K_MSEC(ISOTP_BS_TIMEOUT_MS), K_NO_WAIT);
+      |                                                    ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:150:74: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  150 |                 k_timer_start(&sctx->timer, K_MSEC(ISOTP_BS_TIMEOUT_MS), K_NO_WAIT);
+      |                                                                          ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:151:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  151 |                 sctx->state = ISOTP_TX_WAIT_FC;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:151:31: error: ‘ISOTP_TX_WAIT_FC’ undeclared (first use in this function)
+  151 |                 sctx->state = ISOTP_TX_WAIT_FC;
+      |                               ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:152:17: warning: implicit declaration of function ‘LOG_DBG’ [-Wimplicit-function-declaration]
+  152 |                 LOG_DBG("SM send FF");
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:155:14: error: ‘ISOTP_TX_SEND_CF’ undeclared (first use in this function)
+  155 |         case ISOTP_TX_SEND_CF:
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:157:17: warning: implicit declaration of function ‘k_timer_stop’ [-Wimplicit-function-declaration]
+  157 |                 k_timer_stop(&sctx->timer);
+      |                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:157:35: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  157 |                 k_timer_stop(&sctx->timer);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:159:39: warning: passing argument 1 of ‘send_cf’ from incompatible pointer type [-Wincompatible-pointer-types]
+  159 |                         ret = send_cf(sctx);
+      |                                       ^~~~
+      |                                       |
+      |                                       struct isotp_send_ctx *
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:47:50: note: expected ‘struct isotp_send_ctx *’ but argument is of type ‘struct isotp_send_ctx *’
+   47 | static inline int send_cf(struct isotp_send_ctx *sctx)
+      |                           ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:161:37: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  161 |                                 sctx->state = ISOTP_TX_WAIT_BACKLOG;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:161:47: error: ‘ISOTP_TX_WAIT_BACKLOG’ undeclared (first use in this function)
+  161 |                                 sctx->state = ISOTP_TX_WAIT_BACKLOG;
+      |                                               ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:166:33: warning: implicit declaration of function ‘LOG_ERR’ [-Wimplicit-function-declaration]
+  166 |                                 LOG_ERR("Failed to send CF");
+      |                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:167:33: warning: implicit declaration of function ‘send_report_error’ [-Wimplicit-function-declaration]
+  167 |                                 send_report_error(sctx, ret == -EAGAIN ?
+      |                                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:167:65: error: ‘EAGAIN’ undeclared (first use in this function)
+  167 |                                 send_report_error(sctx, ret == -EAGAIN ?
+      |                                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:168:49: error: ‘ISOTP_N_TIMEOUT_A’ undeclared (first use in this function)
+  168 |                                                 ISOTP_N_TIMEOUT_A :
+      |                                                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:169:49: error: ‘ISOTP_N_ERROR’ undeclared (first use in this function)
+  169 |                                                 ISOTP_N_ERROR);
+      |                                                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:173:33: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  173 |                         if (sctx->opts.bs && !sctx->bs) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:173:51: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  173 |                         if (sctx->opts.bs && !sctx->bs) {
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:174:52: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  174 |                                 k_timer_start(&sctx->timer, K_MSEC(ISOTP_BS_TIMEOUT_MS), K_NO_WAIT);
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:175:37: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  175 |                                 sctx->state = ISOTP_TX_WAIT_FC;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:178:40: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  178 |                         } else if (sctx->opts.stmin) {
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:179:37: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  179 |                                 sctx->state = ISOTP_TX_WAIT_ST;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:179:47: error: ‘ISOTP_TX_WAIT_ST’ undeclared (first use in this function)
+  179 |                                 sctx->state = ISOTP_TX_WAIT_ST;
+      |                                               ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:184:25: warning: implicit declaration of function ‘k_sem_take’ [-Wimplicit-function-declaration]
+  184 |                         k_sem_take(&sctx->tx_sem, K_FOREVER);
+      |                         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:184:41: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  184 |                         k_sem_take(&sctx->tx_sem, K_FOREVER);
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:184:51: error: ‘K_FOREVER’ undeclared (first use in this function)
+  184 |                         k_sem_take(&sctx->tx_sem, K_FOREVER);
+      |                                                   ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:190:36: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  190 |                 k_timer_start(&sctx->timer, stmin_to_timeout(sctx->opts.stmin), K_NO_WAIT);
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:190:45: warning: implicit declaration of function ‘stmin_to_timeout’ [-Wimplicit-function-declaration]
+  190 |                 k_timer_start(&sctx->timer, stmin_to_timeout(sctx->opts.stmin), K_NO_WAIT);
+      |                                             ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:190:66: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  190 |                 k_timer_start(&sctx->timer, stmin_to_timeout(sctx->opts.stmin), K_NO_WAIT);
+      |                                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:191:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  191 |                 sctx->state = ISOTP_TX_SEND_CF;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:195:14: error: ‘ISOTP_TX_ERR’ undeclared (first use in this function)
+  195 |         case ISOTP_TX_ERR:
+      |              ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:197:17: error: ‘__fallthrough’ undeclared (first use in this function)
+  197 |                 __fallthrough;
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:198:14: error: ‘ISOTP_TX_SEND_SF’ undeclared (first use in this function)
+  198 |         case ISOTP_TX_SEND_SF:
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:200:14: error: ‘ISOTP_TX_WAIT_FIN’ undeclared (first use in this function)
+  200 |         case ISOTP_TX_WAIT_FIN:
+      |              ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:201:25: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  201 |                 if (sctx->filter_id >= 0) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:202:25: warning: implicit declaration of function ‘can_remove_rx_filter’ [-Wimplicit-function-declaration]
+  202 |                         can_remove_rx_filter(sctx->can_dev, sctx->filter_id);
+      |                         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:202:50: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  202 |                         can_remove_rx_filter(sctx->can_dev, sctx->filter_id);
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:202:65: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  202 |                         can_remove_rx_filter(sctx->can_dev, sctx->filter_id);
+      |                                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:206:35: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  206 |                 k_timer_stop(&sctx->timer);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:208:25: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  208 |                 if (sctx->has_callback) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:209:29: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  209 |                         sctx->fin_cb.cb(sctx->error_nr, sctx->fin_cb.arg);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:209:45: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  209 |                         sctx->fin_cb.cb(sctx->error_nr, sctx->fin_cb.arg);
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:209:61: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  209 |                         sctx->fin_cb.cb(sctx->error_nr, sctx->fin_cb.arg);
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:210:39: warning: passing argument 1 of ‘free_send_ctx’ from incompatible pointer type [-Wincompatible-pointer-types]
+  210 |                         free_send_ctx(&sctx);
+      |                                       ^~~~~
+      |                                       |
+      |                                       struct isotp_send_ctx **
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:98:58: note: expected ‘struct isotp_send_ctx **’ but argument is of type ‘struct isotp_send_ctx **’
+   98 | static inline void free_send_ctx(struct isotp_send_ctx **sctx)
+      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:212:25: warning: implicit declaration of function ‘k_sem_give’ [-Wimplicit-function-declaration]
+  212 |                         k_sem_give(&sctx->fin_sem);
+      |                         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:212:41: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  212 |                         k_sem_give(&sctx->fin_sem);
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:215:21: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  215 |                 sctx->state = ISOTP_TX_STATE_RESET;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:215:31: error: ‘ISOTP_TX_STATE_RESET’ undeclared (first use in this function)
+  215 |                 sctx->state = ISOTP_TX_STATE_RESET;
+      |                               ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:223:38: warning: ‘struct k_work’ declared inside parameter list will not be visible outside of this definition or declaration
+  223 | static void send_work_handler(struct k_work *item)
+      |                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: In function ‘send_work_handler’:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:225:39: warning: implicit declaration of function ‘CONTAINER_OF’ [-Wimplicit-function-declaration]
+  225 |         struct isotp_send_ctx *sctx = CONTAINER_OF(item, struct isotp_send_ctx, work);
+      |                                       ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:225:58: error: expected expression before ‘struct’
+  225 |         struct isotp_send_ctx *sctx = CONTAINER_OF(item, struct isotp_send_ctx, work);
+      |                                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:227:28: warning: passing argument 1 of ‘send_state_machine’ from incompatible pointer type [-Wincompatible-pointer-types]
+  227 |         send_state_machine(sctx);
+      |                            ^~~~
+      |                            |
+      |                            struct isotp_send_ctx *
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:142:55: note: expected ‘struct isotp_send_ctx *’ but argument is of type ‘struct isotp_send_ctx *’
+  142 | static void send_state_machine(struct isotp_send_ctx *sctx)
+      |                                ~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:230:40: warning: ‘struct isotp_send_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+  230 | static inline int add_fc_filter(struct isotp_send_ctx *sctx)
+      |                                        ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: In function ‘add_fc_filter’:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:232:27: error: storage size of ‘filter’ isn’t known
+  232 |         struct can_filter filter;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:233:9: error: unknown type name ‘uint32_t’
+  233 |         uint32_t mask;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:233:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:235:18: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  235 |         if ((sctx->rx_addr.flags & ISOTP_MSG_IDE) != 0) {
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:235:36: error: ‘ISOTP_MSG_IDE’ undeclared (first use in this function)
+  235 |         if ((sctx->rx_addr.flags & ISOTP_MSG_IDE) != 0) {
+      |                                    ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:236:24: error: ‘CAN_EXT_ID_MASK’ undeclared (first use in this function)
+  236 |                 mask = CAN_EXT_ID_MASK;
+      |                        ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:238:24: error: ‘CAN_STD_ID_MASK’ undeclared (first use in this function)
+  238 |                 mask = CAN_STD_ID_MASK;
+      |                        ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:241:9: warning: implicit declaration of function ‘prepare_filter’ [-Wimplicit-function-declaration]
+  241 |         prepare_filter(&filter, &sctx->rx_addr, mask);
+      |         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:241:38: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  241 |         prepare_filter(&filter, &sctx->rx_addr, mask);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:243:13: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  243 |         sctx->filter_id = can_add_rx_filter(sctx->can_dev, send_can_rx_cb, sctx,
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:243:27: warning: implicit declaration of function ‘can_add_rx_filter’; did you mean ‘add_fc_filter’? [-Wimplicit-function-declaration]
+  243 |         sctx->filter_id = can_add_rx_filter(sctx->can_dev, send_can_rx_cb, sctx,
+      |                           ^~~~~~~~~~~~~~~~~
+      |                           add_fc_filter
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:243:49: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  243 |         sctx->filter_id = can_add_rx_filter(sctx->can_dev, send_can_rx_cb, sctx,
+      |                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:243:60: error: ‘send_can_rx_cb’ undeclared (first use in this function)
+  243 |         sctx->filter_id = can_add_rx_filter(sctx->can_dev, send_can_rx_cb, sctx,
+      |                                                            ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:245:17: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  245 |         if (sctx->filter_id < 0) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:246:60: error: invalid use of undefined type ‘struct isotp_send_ctx’
+  246 |                 LOG_ERR("Error adding FC filter [%d]", sctx->filter_id);
+      |                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:247:24: error: ‘ISOTP_NO_FREE_FILTER’ undeclared (first use in this function)
+  247 |                 return ISOTP_NO_FREE_FILTER;
+      |                        ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:232:27: warning: unused variable ‘filter’ [-Wunused-variable]
+  232 |         struct can_filter filter;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:256:17: error: unknown type name ‘isotp_tx_callback_t’
+  256 |                 isotp_tx_callback_t complete_cb, void *cb_arg)
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:357:22: error: unknown type name ‘uint8_t’
+  357 |                const uint8_t *data, size_t len,
+      |                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:357:37: error: unknown type name ‘size_t’
+  357 |                const uint8_t *data, size_t len,
+      |                                     ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:357:37: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:360:16: error: unknown type name ‘isotp_tx_callback_t’
+  360 |                isotp_tx_callback_t complete_cb, void *cb_arg)
+      |                ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:373:30: error: unknown type name ‘uint8_t’
+  373 |                        const uint8_t *data, size_t len,
+      |                              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:373:45: error: unknown type name ‘size_t’
+  373 |                        const uint8_t *data, size_t len,
+      |                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:373:45: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:376:24: error: unknown type name ‘isotp_tx_callback_t’
+  376 |                        isotp_tx_callback_t complete_cb, void *cb_arg,
+      |                        ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:377:24: error: unknown type name ‘k_timeout_t’
+  377 |                        k_timeout_t timeout)
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:400:28: error: unknown type name ‘isotp_tx_callback_t’
+  400 |                            isotp_tx_callback_t complete_cb, void *cb_arg,
+      |                            ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:401:28: error: unknown type name ‘k_timeout_t’
+  401 |                            k_timeout_t timeout)
+      |                            ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:421:26: error: unknown type name ‘uint8_t’
+  421 |                    const uint8_t *data, size_t len,
+      |                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:421:41: error: unknown type name ‘size_t’
+  421 |                    const uint8_t *data, size_t len,
+      |                                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:421:41: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:424:20: error: unknown type name ‘isotp_tx_callback_t’
+  424 |                    isotp_tx_callback_t complete_cb, void *cb_arg,
+      |                    ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:425:20: error: unknown type name ‘k_timeout_t’
+  425 |                    k_timeout_t timeout)
+      |                    ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/canbus/isotp/isotp.c:223:13: warning: ‘send_work_handler’ defined but not used [-Wunused-function]
+  223 | static void send_work_handler(struct k_work *item)
+      |             ^~~~~~~~~~~~~~~~~
+[112/119] Linking C static library zephyr/drivers/can/libdrivers__can.a
+[113/119] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[114/119] Linking C static library zephyr/libzephyr.a
+[115/119] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/conformance/build
+
+=== RC ===
+1

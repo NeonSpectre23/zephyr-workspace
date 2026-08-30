@@ -1,0 +1,763 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build
+-- west build: building application
+[1/113] Preparing syscall dependency handling
+
+[2/113] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/113] Generating misc/generated/syscalls_subdirs.trigger
+[4/113] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/113] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/113] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/113] Generating include/generated/zephyr/driver-validation.h
+[8/113] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/113] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/113] Generating ../../include/generated/zephyr/heap_constants.h
+[11/113] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/113] Generating include/generated/zephyr/offsets.h
+[13/113] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/113] Building C object CMakeFiles/app.dir/src/mock_frontend.c.obj
+[15/113] Building C object CMakeFiles/app.dir/src/mock_backend.c.obj
+[16/113] Building C object CMakeFiles/app.dir/src/test_module.c.obj
+[17/113] Building C object CMakeFiles/app.dir/src/test_module2.c.obj
+[18/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[19/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[20/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[21/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[22/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[23/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[24/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[25/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[26/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[27/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[28/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[29/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[30/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[31/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[32/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[33/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[34/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/113] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[37/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[38/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[39/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[40/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[41/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/113] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[45/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[46/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[47/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[48/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[49/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[50/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[51/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[52/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[53/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[54/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[55/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[56/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[57/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[58/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[59/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[60/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[61/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[62/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[63/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[64/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/113] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[66/113] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[67/113] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[68/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[69/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[70/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[71/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[72/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[73/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[74/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[75/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[76/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[77/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[78/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[79/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[80/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[81/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[82/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[83/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[84/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[85/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[86/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[87/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[88/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[89/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[90/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[91/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[92/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[93/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[94/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[95/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[96/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[97/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/113] Linking C static library app/libapp.a
+[99/113] Generating linker_zephyr_pre0.cmd
+[100/113] Linking C static library zephyr/arch/common/libarch__common.a
+[101/113] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[102/113] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[103/113] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[104/113] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[105/113] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[106/113] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[107/113] Linking C static library zephyr/libzephyr.a
+[108/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+FAILED: zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -U_POSIX_C_SOURCE -D_POSIX_C_SOURCE=200809L -MD -MT zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj -MF zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj.d -o zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_simple_1cpu_after’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:9:9: warning: implicit declaration of function ‘ARG_UNUSED’ [-Wimplicit-function-declaration]
+    9 |         ARG_UNUSED(data);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:10:9: warning: implicit declaration of function ‘z_test_1cpu_stop’ [-Wimplicit-function-declaration]
+   10 |         z_test_1cpu_stop();
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘test_cb’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:17:15: error: unknown type name ‘bool’
+   17 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:17:39: warning: implicit declaration of function ‘FIELD_GET’ [-Wimplicit-function-declaration]
+   17 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |                                       ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:17:49: error: ‘K_USER’ undeclared (first use in this function)
+   17 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:17:49: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:17:61: error: invalid use of undefined type ‘struct ztest_unit_test’
+   17 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:19:14: warning: implicit declaration of function ‘k_is_user_context’ [-Wimplicit-function-declaration]
+   19 |         if (!k_is_user_context()) {
+      |              ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:20:17: warning: implicit declaration of function ‘__ztest_set_test_result’ [-Wimplicit-function-declaration]
+   20 |                 __ztest_set_test_result(ZTEST_RESULT_PENDING);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:20:41: error: ‘ZTEST_RESULT_PENDING’ undeclared (first use in this function)
+   20 |                 __ztest_set_test_result(ZTEST_RESULT_PENDING);
+      |                                         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:21:17: warning: implicit declaration of function ‘run_test_rules’ [-Wimplicit-function-declaration]
+   21 |                 run_test_rules(/*is_before=*/true, test, /*data=*/c);
+      |                 ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:21:46: error: ‘true’ undeclared (first use in this function)
+   21 |                 run_test_rules(/*is_before=*/true, test, /*data=*/c);
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:1:1: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | void ztest_simple_1cpu_before(void *data)
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:22:26: error: invalid use of undefined type ‘struct ztest_suite_node’
+   22 |                 if (suite->before) {
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:23:30: error: invalid use of undefined type ‘struct ztest_suite_node’
+   23 |                         suite->before(/*data=*/c);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:25:21: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   25 |                 if (IS_ENABLED(CONFIG_USERSPACE) && config_user_mode) {
+      |                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:25:32: error: ‘CONFIG_USERSPACE’ undeclared (first use in this function); did you mean ‘CONFIG_TEST_USERSPACE’?
+   25 |                 if (IS_ENABLED(CONFIG_USERSPACE) && config_user_mode) {
+      |                                ^~~~~~~~~~~~~~~~
+      |                                CONFIG_TEST_USERSPACE
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:26:25: warning: implicit declaration of function ‘k_thread_user_mode_enter’ [-Wimplicit-function-declaration]
+   26 |                         k_thread_user_mode_enter(test_cb, a, b, c);
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:29:9: warning: implicit declaration of function ‘run_test_functions’ [-Wimplicit-function-declaration]
+   29 |         run_test_functions(suite, test, c);
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:30:33: error: ‘ZTEST_RESULT_PASS’ undeclared (first use in this function)
+   30 |         __ztest_set_test_result(ZTEST_RESULT_PASS);
+      |                                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:33:60: warning: ‘struct ztest_unit_test’ declared inside parameter list will not be visible outside of this definition or declaration
+   33 | static int run_test(struct ztest_suite_node *suite, struct ztest_unit_test *test, void *data)
+      |                                                            ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:33:28: warning: ‘struct ztest_suite_node’ declared inside parameter list will not be visible outside of this definition or declaration
+   33 | static int run_test(struct ztest_suite_node *suite, struct ztest_unit_test *test, void *data)
+      |                            ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘run_test’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:35:19: error: ‘TC_PASS’ undeclared (first use in this function)
+   35 |         int ret = TC_PASS;
+      |                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:40:9: warning: implicit declaration of function ‘TC_START’ [-Wimplicit-function-declaration]
+   40 |         TC_START(test->name);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:40:22: error: invalid use of undefined type ‘struct ztest_unit_test’
+   40 |         TC_START(test->name);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:42:9: warning: implicit declaration of function ‘__ztest_set_test_phase’ [-Wimplicit-function-declaration]
+   42 |         __ztest_set_test_phase(TEST_PHASE_BEFORE);
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:42:32: error: ‘TEST_PHASE_BEFORE’ undeclared (first use in this function)
+   42 |         __ztest_set_test_phase(TEST_PHASE_BEFORE);
+      |                                ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:48:17: warning: implicit declaration of function ‘get_start_time_cyc’ [-Wimplicit-function-declaration]
+   48 |                 get_start_time_cyc();
+      |                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:49:17: warning: implicit declaration of function ‘k_thread_create’ [-Wimplicit-function-declaration]
+   49 |                 k_thread_create(&ztest_thread, ztest_thread_stack,
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:49:34: error: ‘ztest_thread’ undeclared (first use in this function)
+   49 |                 k_thread_create(&ztest_thread, ztest_thread_stack,
+      |                                  ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:49:48: error: ‘ztest_thread_stack’ undeclared (first use in this function)
+   49 |                 k_thread_create(&ztest_thread, ztest_thread_stack,
+      |                                                ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:50:33: warning: implicit declaration of function ‘K_THREAD_STACK_SIZEOF’ [-Wimplicit-function-declaration]
+   50 |                                 K_THREAD_STACK_SIZEOF(ztest_thread_stack), test_cb, suite, test,
+      |                                 ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:51:69: error: ‘K_INHERIT_PERMS’ undeclared (first use in this function)
+   51 |                                 data, CONFIG_ZTEST_THREAD_PRIORITY, K_INHERIT_PERMS, K_FOREVER);
+      |                                                                     ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:51:86: error: ‘K_FOREVER’ undeclared (first use in this function)
+   51 |                                 data, CONFIG_ZTEST_THREAD_PRIORITY, K_INHERIT_PERMS, K_FOREVER);
+      |                                                                                      ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:53:17: warning: implicit declaration of function ‘k_thread_access_grant’ [-Wimplicit-function-declaration]
+   53 |                 k_thread_access_grant(&ztest_thread, suite, test, suite->stats);
+      |                 ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:53:72: error: invalid use of undefined type ‘struct ztest_suite_node’
+   53 |                 k_thread_access_grant(&ztest_thread, suite, test, suite->stats);
+      |                                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:54:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+   54 |                 if (test->name != NULL) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:54:35: error: ‘NULL’ undeclared (first use in this function)
+   54 |                 if (test->name != NULL) {
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | void ztest_simple_1cpu_before(void *data)
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:55:25: warning: implicit declaration of function ‘k_thread_name_set’ [-Wimplicit-function-declaration]
+   55 |                         k_thread_name_set(&ztest_thread, test->name);
+      |                         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:55:62: error: invalid use of undefined type ‘struct ztest_unit_test’
+   55 |                         k_thread_name_set(&ztest_thread, test->name);
+      |                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:58:21: error: ‘test_result’ undeclared (first use in this function)
+   58 |                 if (test_result != ZTEST_RESULT_SUITE_SKIP &&
+      |                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:58:36: error: ‘ZTEST_RESULT_SUITE_SKIP’ undeclared (first use in this function)
+   58 |                 if (test_result != ZTEST_RESULT_SUITE_SKIP &&
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:59:36: error: ‘ZTEST_RESULT_SUITE_FAIL’ undeclared (first use in this function)
+   59 |                     test_result != ZTEST_RESULT_SUITE_FAIL) {
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:60:25: warning: implicit declaration of function ‘k_thread_start’ [-Wimplicit-function-declaration]
+   60 |                         k_thread_start(&ztest_thread);
+      |                         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:61:25: warning: implicit declaration of function ‘k_thread_join’ [-Wimplicit-function-declaration]
+   61 |                         k_thread_join(&ztest_thread, K_FOREVER);
+      |                         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:65:41: error: ‘ZTEST_RESULT_PENDING’ undeclared (first use in this function)
+   65 |                 __ztest_set_test_result(ZTEST_RESULT_PENDING);
+      |                                         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:67:46: error: ‘true’ undeclared (first use in this function)
+   67 |                 run_test_rules(/*is_before=*/true, test, data);
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:67:46: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:68:26: error: invalid use of undefined type ‘struct ztest_suite_node’
+   68 |                 if (suite->before) {
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:69:30: error: invalid use of undefined type ‘struct ztest_suite_node’
+   69 |                         suite->before(data);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:74:32: error: ‘TEST_PHASE_AFTER’ undeclared (first use in this function)
+   74 |         __ztest_set_test_phase(TEST_PHASE_AFTER);
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:75:18: error: invalid use of undefined type ‘struct ztest_suite_node’
+   75 |         if (suite->after != NULL) {
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:76:22: error: invalid use of undefined type ‘struct ztest_suite_node’
+   76 |                 suite->after(data);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:78:38: error: ‘false’ undeclared (first use in this function)
+   78 |         run_test_rules(/*is_before=*/false, test, data);
+      |                                      ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:78:38: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:80:9: warning: implicit declaration of function ‘get_test_duration_ms’ [-Wimplicit-function-declaration]
+   80 |         get_test_duration_ms();
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:81:13: error: ‘tc_spend_time’ undeclared (first use in this function)
+   81 |         if (tc_spend_time > test->stats->duration_worst_ms) {
+      |             ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:81:33: error: invalid use of undefined type ‘struct ztest_unit_test’
+   81 |         if (tc_spend_time > test->stats->duration_worst_ms) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:82:21: error: invalid use of undefined type ‘struct ztest_unit_test’
+   82 |                 test->stats->duration_worst_ms = tc_spend_time;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:85:32: error: ‘TEST_PHASE_FRAMEWORK’ undeclared (first use in this function)
+   85 |         __ztest_set_test_phase(TEST_PHASE_FRAMEWORK);
+      |                                ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:89:27: error: ‘CONFIG_LOG_PROCESS_THREAD’ undeclared (first use in this function)
+   89 |                IS_ENABLED(CONFIG_LOG_PROCESS_THREAD) && log_data_pending()) {
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:89:57: warning: implicit declaration of function ‘log_data_pending’ [-Wimplicit-function-declaration]
+   89 |                IS_ENABLED(CONFIG_LOG_PROCESS_THREAD) && log_data_pending()) {
+      |                                                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:90:17: warning: implicit declaration of function ‘k_msleep’ [-Wimplicit-function-declaration]
+   90 |                 k_msleep(100);
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:93:28: error: ‘ZTEST_RESULT_FAIL’ undeclared (first use in this function)
+   93 |         if (test_result == ZTEST_RESULT_FAIL || test_result == ZTEST_RESULT_SUITE_FAIL ||
+      |                            ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:94:13: error: ‘failed_expectation’ undeclared (first use in this function)
+   94 |             failed_expectation) {
+      |             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:95:23: error: ‘TC_FAIL’ undeclared (first use in this function)
+   95 |                 ret = TC_FAIL;
+      |                       ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:97:35: error: ‘ZTEST_RESULT_SKIP’ undeclared (first use in this function)
+   97 |         } else if (test_result == ZTEST_RESULT_SKIP || test_result == ZTEST_RESULT_SUITE_SKIP) {
+      |                                   ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:98:23: error: ‘TC_SKIP’ undeclared (first use in this function)
+   98 |                 ret = TC_SKIP;
+      |                       ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:101:28: error: ‘ZTEST_RESULT_PASS’ undeclared (first use in this function)
+  101 |         if (test_result == ZTEST_RESULT_PASS || !FAIL_FAST) {
+      |                            ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:101:50: error: ‘FAIL_FAST’ undeclared (first use in this function)
+  101 |         if (test_result == ZTEST_RESULT_PASS || !FAIL_FAST) {
+      |                                                  ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:102:24: warning: implicit declaration of function ‘cleanup_test’ [-Wimplicit-function-declaration]
+  102 |                 ret |= cleanup_test(test);
+      |                        ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:105:15: warning: implicit declaration of function ‘get_final_test_result’ [-Wimplicit-function-declaration]
+  105 |         ret = get_final_test_result(test, ret);
+      |               ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:106:9: warning: implicit declaration of function ‘Z_TC_END_RESULT’ [-Wimplicit-function-declaration]
+  106 |         Z_TC_END_RESULT(ret, test->name);
+      |         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:106:34: error: invalid use of undefined type ‘struct ztest_unit_test’
+  106 |         Z_TC_END_RESULT(ret, test->name);
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:107:31: error: ‘current_test_failed_assumption’ undeclared (first use in this function)
+  107 |         if (ret == TC_SKIP && current_test_failed_assumption) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:108:17: error: ‘test_status’ undeclared (first use in this function)
+  108 |                 test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:108:31: error: ‘ZTEST_STATUS_HAS_FAILURE’ undeclared (first use in this function)
+  108 |                 test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:114:2: error: #endif without #if
+  114 | #endif /* !KERNEL */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_find_test_suite’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:120:21: error: ‘_ztest_suite_node_list_start’ undeclared (first use in this function)
+  120 |         for (node = _ztest_suite_node_list_start; node < _ztest_suite_node_list_end; ++node) {
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:120:58: error: ‘_ztest_suite_node_list_end’ undeclared (first use in this function)
+  120 |         for (node = _ztest_suite_node_list_start; node < _ztest_suite_node_list_end; ++node) {
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:120:86: error: increment of pointer to an incomplete type ‘struct ztest_suite_node’
+  120 |         for (node = _ztest_suite_node_list_start; node < _ztest_suite_node_list_end; ++node) {
+      |                                                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:121:21: warning: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+  121 |                 if (strcmp(name, node->name) == 0) {
+      |                     ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘strcmp’
+  +++ |+#include <string.h>
+    1 | void ztest_simple_1cpu_before(void *data)
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:121:38: error: invalid use of undefined type ‘struct ztest_suite_node’
+  121 |                 if (strcmp(name, node->name) == 0) {
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:126:16: error: ‘NULL’ undeclared (first use in this function)
+  126 |         return NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:126:16: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_ztest_get_next_test’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:131:49: error: ‘NULL’ undeclared (first use in this function)
+  131 |         struct ztest_unit_test *test = (prev == NULL) ? _ztest_unit_test_list_start : prev + 1;
+      |                                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:131:49: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:131:57: error: ‘_ztest_unit_test_list_start’ undeclared (first use in this function)
+  131 |         struct ztest_unit_test *test = (prev == NULL) ? _ztest_unit_test_list_start : prev + 1;
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:131:92: error: invalid use of undefined type ‘struct ztest_unit_test’
+  131 |         struct ztest_unit_test *test = (prev == NULL) ? _ztest_unit_test_list_start : prev + 1;
+      |                                                                                            ^
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:133:23: error: ‘_ztest_unit_test_list_end’ undeclared (first use in this function)
+  133 |         for (; test < _ztest_unit_test_list_end; ++test) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:133:50: error: increment of pointer to an incomplete type ‘struct ztest_unit_test’
+  133 |         for (; test < _ztest_unit_test_list_end; ++test) {
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:134:39: error: invalid use of undefined type ‘struct ztest_unit_test’
+  134 |                 if (strcmp(suite, test->test_suite_name) == 0) {
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:166:71: error: unknown type name ‘bool’
+  166 | static int z_ztest_run_test_suite_ptr(struct ztest_suite_node *suite, bool shuffle, int suite_iter,
+      |                                                                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:166:71: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:280:46: error: unknown type name ‘bool’
+  280 | int z_ztest_run_test_suite(const char *name, bool shuffle,
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:280:46: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘__ztest_show_suite_summary_oneline’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:299:28: error: ‘TC_PASS’ undeclared (first use in this function)
+  299 |         int suite_result = TC_PASS;
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:301:40: error: ‘NULL’ undeclared (first use in this function)
+  301 |         struct ztest_unit_test *test = NULL;
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:301:40: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:305:52: error: invalid use of undefined type ‘struct ztest_suite_node’
+  305 |         while (((test = z_ztest_get_next_test(suite->name, test)) != NULL)) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:307:48: error: invalid use of undefined type ‘struct ztest_unit_test’
+  307 |                 suite_duration_worst_ms += test->stats->duration_worst_ms;
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:308:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  308 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:308:52: error: invalid use of undefined type ‘struct ztest_unit_test’
+  308 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:310:32: error: invalid use of undefined type ‘struct ztest_unit_test’
+  310 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:310:59: error: invalid use of undefined type ‘struct ztest_unit_test’
+  310 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:318:32: error: ‘TC_SKIP’ undeclared (first use in this function)
+  318 |                 suite_result = TC_SKIP;
+      |                                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:321:54: error: ‘TC_FAIL’ undeclared (first use in this function)
+  321 |                 suite_result = (distinct_fail > 0) ? TC_FAIL : TC_PASS;
+      |                                                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:333:9: warning: implicit declaration of function ‘TC_SUMMARY_PRINT’ [-Wimplicit-function-declaration]
+  333 |         TC_SUMMARY_PRINT("SUITE %s - %3d.%02d%% [%s]: pass = %d, fail = %d, "
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:335:26: warning: implicit declaration of function ‘TC_RESULT_TO_STR’ [-Wimplicit-function-declaration]
+  335 |                          TC_RESULT_TO_STR(suite_result), passrate_major, passrate_minor,
+      |                          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:336:31: error: invalid use of undefined type ‘struct ztest_suite_node’
+  336 |                          suite->name, distinct_pass, distinct_fail, distinct_skip, distinct_total,
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:338:9: warning: implicit declaration of function ‘log_flush’ [-Wimplicit-function-declaration]
+  338 |         log_flush();
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘__ztest_show_suite_summary_verbose’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:343:40: error: ‘NULL’ undeclared (first use in this function)
+  343 |         struct ztest_unit_test *test = NULL;
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:343:40: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:344:25: error: ‘TC_PASS’ undeclared (first use in this function)
+  344 |         int tc_result = TC_PASS;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:351:52: error: invalid use of undefined type ‘struct ztest_suite_node’
+  351 |         while (((test = z_ztest_get_next_test(suite->name, test)) != NULL)) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:352:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  352 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:352:52: error: invalid use of undefined type ‘struct ztest_unit_test’
+  352 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:353:37: error: ‘TC_SKIP’ undeclared (first use in this function)
+  353 |                         tc_result = TC_SKIP;
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:354:32: error: invalid use of undefined type ‘struct ztest_unit_test’
+  354 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:354:59: error: invalid use of undefined type ‘struct ztest_unit_test’
+  354 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:356:32: error: invalid use of undefined type ‘struct ztest_unit_test’
+  356 |                 } else if (test->stats->pass_count == 0) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:357:37: error: ‘TC_FAIL’ undeclared (first use in this function)
+  357 |                         tc_result = TC_FAIL;
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:359:37: error: ‘TC_FLAKY’ undeclared (first use in this function)
+  359 |                         tc_result = TC_FLAKY;
+      |                                     ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:366:66: error: invalid use of undefined type ‘struct ztest_unit_test’
+  366 |                                 TC_RESULT_TO_STR(tc_result), test->test_suite_name, test->name,
+      |                                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:366:89: error: invalid use of undefined type ‘struct ztest_unit_test’
+  366 |                                 TC_RESULT_TO_STR(tc_result), test->test_suite_name, test->name,
+      |                                                                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:367:37: error: invalid use of undefined type ‘struct ztest_unit_test’
+  367 |                                 test->stats->run_count - test->stats->pass_count,
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:367:62: error: invalid use of undefined type ‘struct ztest_unit_test’
+  367 |                                 test->stats->run_count - test->stats->pass_count,
+      |                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:368:37: error: invalid use of undefined type ‘struct ztest_unit_test’
+  368 |                                 test->stats->run_count, test->stats->duration_worst_ms / 1000,
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:368:61: error: invalid use of undefined type ‘struct ztest_unit_test’
+  368 |                                 test->stats->run_count, test->stats->duration_worst_ms / 1000,
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:369:37: error: invalid use of undefined type ‘struct ztest_unit_test’
+  369 |                                 test->stats->duration_worst_ms % 1000);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:372:75: error: invalid use of undefined type ‘struct ztest_unit_test’
+  372 |                                          TC_RESULT_TO_STR(tc_result), test->test_suite_name,
+      |                                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:373:46: error: invalid use of undefined type ‘struct ztest_unit_test’
+  373 |                                          test->name, test->stats->duration_worst_ms / 1000,
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:373:58: error: invalid use of undefined type ‘struct ztest_unit_test’
+  373 |                                          test->name, test->stats->duration_worst_ms / 1000,
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:374:46: error: invalid use of undefined type ‘struct ztest_unit_test’
+  374 |                                          test->stats->duration_worst_ms % 1000);
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘__ztest_show_suite_summary’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:398:45: error: ‘_ztest_suite_node_list_start’ undeclared (first use in this function)
+  398 |         for (struct ztest_suite_node *ptr = _ztest_suite_node_list_start;
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:399:20: error: ‘_ztest_suite_node_list_end’ undeclared (first use in this function)
+  399 |              ptr < _ztest_suite_node_list_end; ++ptr) {
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:399:48: error: increment of pointer to an incomplete type ‘struct ztest_suite_node’
+  399 |              ptr < _ztest_suite_node_list_end; ++ptr) {
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:408:84: error: unknown type name ‘bool’
+  408 | static int __ztest_run_test_suite(struct ztest_suite_node *ptr, const void *state, bool shuffle,
+      |                                                                                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:408:84: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:430:53: error: unknown type name ‘bool’
+  430 | int z_impl_ztest_run_test_suites(const void *state, bool shuffle, int suite_iter, int case_iter)
+      |                                                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:430:53: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:476:42: warning: ‘enum ztest_result’ declared inside parameter list will not be visible outside of this definition or declaration
+  476 | void z_impl___ztest_set_test_result(enum ztest_result new_result)
+      |                                          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:476:55: error: parameter 1 (‘new_result’) has incomplete type
+  476 | void z_impl___ztest_set_test_result(enum ztest_result new_result)
+      |                                     ~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_impl___ztest_set_test_result’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:478:9: error: ‘test_result’ undeclared (first use in this function); did you mean ‘ztest_result’?
+  478 |         test_result = new_result;
+      |         ^~~~~~~~~~~
+      |         ztest_result
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:481:41: warning: ‘enum ztest_phase’ declared inside parameter list will not be visible outside of this definition or declaration
+  481 | void z_impl___ztest_set_test_phase(enum ztest_phase new_phase)
+      |                                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:481:53: error: parameter 1 (‘new_phase’) has incomplete type
+  481 | void z_impl___ztest_set_test_phase(enum ztest_phase new_phase)
+      |                                    ~~~~~~~~~~~~~~~~~^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_impl___ztest_set_test_phase’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:483:9: error: ‘cur_phase’ undeclared (first use in this function); did you mean ‘new_phase’?
+  483 |         cur_phase = new_phase;
+      |         ^~~~~~~~~
+      |         new_phase
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_verify_all_test_suites_ran’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:502:9: error: unknown type name ‘bool’
+  502 |         bool all_tests_run = true;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:502:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:502:30: error: ‘true’ undeclared (first use in this function)
+  502 |         bool all_tests_run = true;
+      |                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:502:30: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:507:30: error: ‘_ztest_suite_node_list_start’ undeclared (first use in this function)
+  507 |                 for (suite = _ztest_suite_node_list_start; suite < _ztest_suite_node_list_end;
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:507:68: error: ‘_ztest_suite_node_list_end’ undeclared (first use in this function)
+  507 |                 for (suite = _ztest_suite_node_list_start; suite < _ztest_suite_node_list_end;
+      |                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:508:22: error: increment of pointer to an incomplete type ‘struct ztest_suite_node’
+  508 |                      ++suite) {
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:509:34: error: invalid use of undefined type ‘struct ztest_suite_node’
+  509 |                         if (suite->stats->run_count < 1) {
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:510:33: warning: implicit declaration of function ‘PRINT_DATA’ [-Wimplicit-function-declaration]
+  510 |                                 PRINT_DATA("ERROR: Test suite '%s' did not run.\n", suite->name);
+      |                                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:510:90: error: invalid use of undefined type ‘struct ztest_suite_node’
+  510 |                                 PRINT_DATA("ERROR: Test suite '%s' did not run.\n", suite->name);
+      |                                                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:511:49: error: ‘false’ undeclared (first use in this function)
+  511 |                                 all_tests_run = false;
+      |                                                 ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:511:49: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:515:29: error: ‘_ztest_unit_test_list_start’ undeclared (first use in this function)
+  515 |                 for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:515:65: error: ‘_ztest_unit_test_list_end’ undeclared (first use in this function)
+  515 |                 for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:515:92: error: increment of pointer to an incomplete type ‘struct ztest_unit_test’
+  515 |                 for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                                                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:516:59: error: invalid use of undefined type ‘struct ztest_unit_test’
+  516 |                         suite = ztest_find_test_suite(test->test_suite_name);
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:517:38: error: ‘NULL’ undeclared (first use in this function)
+  517 |                         if (suite == NULL) {
+      |                                      ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:517:38: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:521:48: error: invalid use of undefined type ‘struct ztest_unit_test’
+  521 |                                            test->name, test->test_suite_name);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:521:60: error: invalid use of undefined type ‘struct ztest_unit_test’
+  521 |                                            test->name, test->test_suite_name);
+      |                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:527:25: error: ‘test_status’ undeclared (first use in this function)
+  527 |                         test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:527:39: error: ‘ZTEST_STATUS_HAS_FAILURE’ undeclared (first use in this function)
+  527 |                         test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:531:84: error: increment of pointer to an incomplete type ‘struct ztest_unit_test’
+  531 |         for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                                                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:532:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  532 |                 if (test->stats->fail_count + test->stats->pass_count + test->stats->skip_count !=
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:532:51: error: invalid use of undefined type ‘struct ztest_unit_test’
+  532 |                 if (test->stats->fail_count + test->stats->pass_count + test->stats->skip_count !=
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:532:77: error: invalid use of undefined type ‘struct ztest_unit_test’
+  532 |                 if (test->stats->fail_count + test->stats->pass_count + test->stats->skip_count !=
+      |                                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:533:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  533 |                     test->stats->run_count) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:534:65: error: invalid use of undefined type ‘struct ztest_unit_test’
+  534 |                         PRINT_DATA("Bad stats for %s.%s\n", test->test_suite_name, test->name);
+      |                                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:534:88: error: invalid use of undefined type ‘struct ztest_unit_test’
+  534 |                         PRINT_DATA("Bad stats for %s.%s\n", test->test_suite_name, test->name);
+      |                                                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:540:39: error: unknown type name ‘bool’
+  540 | void ztest_run_all(const void *state, bool shuffle, int suite_iter, int case_iter)
+      |                                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:540:39: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:545:13: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘test_main’
+  545 | void __weak test_main(void)
+      |             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘main’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:811:9: warning: implicit declaration of function ‘z_init_mock’ [-Wimplicit-function-declaration]
+  811 |         z_init_mock();
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:813:9: warning: implicit declaration of function ‘test_main’ [-Wimplicit-function-declaration]
+  813 |         test_main();
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:817:9: warning: implicit declaration of function ‘end_report’ [-Wimplicit-function-declaration]
+  817 |         end_report();
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:819:9: warning: implicit declaration of function ‘LOG_PANIC’ [-Wimplicit-function-declaration]
+  819 |         LOG_PANIC();
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:820:24: error: ‘CONFIG_ZTEST_RETEST_IF_PASSED’ undeclared (first use in this function); did you mean ‘CONFIG_ZTEST_TEST_DELAY_MS’?
+  820 |         if (IS_ENABLED(CONFIG_ZTEST_RETEST_IF_PASSED)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CONFIG_ZTEST_TEST_DELAY_MS
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:821:32: error: expected ‘;’ before ‘struct’
+  821 |                 static __noinit struct {
+      |                                ^~~~~~~
+      |                                ;
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:822:25: error: unknown type name ‘uint32_t’
+  822 |                         uint32_t magic;
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:823:25: error: unknown type name ‘uint32_t’
+  823 |                         uint32_t boots;
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:825:23: error: unknown type name ‘uint32_t’
+  825 |                 const uint32_t magic = 0x152ac523;
+      |                       ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:832:21: error: ‘test_status’ undeclared (first use in this function)
+  832 |                 if (test_status == 0) {
+      |                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:835:25: warning: implicit declaration of function ‘sys_reboot’ [-Wimplicit-function-declaration]
+  835 |                         sys_reboot(SYS_REBOOT_COLD);
+      |                         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:835:36: error: ‘SYS_REBOOT_COLD’ undeclared (first use in this function)
+  835 |                         sys_reboot(SYS_REBOOT_COLD);
+      |                                    ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_ztest_get_next_test’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:139:1: warning: control reaches end of non-void function [-Wreturn-type]
+  139 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:387:13: warning: ‘__ztest_show_suite_summary’ defined but not used [-Wunused-function]
+  387 | static void __ztest_show_suite_summary(void)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:33:12: warning: ‘run_test’ defined but not used [-Wunused-function]
+   33 | static int run_test(struct ztest_suite_node *suite, struct ztest_unit_test *test, void *data)
+      |            ^~~~~~~~
+[109/113] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: LOG_PROCESS_THREAD_SLEEP_MS (defined at subsys/logging/Kconfig.processing:71) was assigned
+the value '100' but got the value ''. Check these unsatisfied dependencies: LOG_PROCESS_THREAD (=n),
+LOG_MODE_DEFERRED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_PROCESS_THREAD_SLEEP_MS and/or look up
+LOG_PROCESS_THREAD_SLEEP_MS in the menuconfig/guiconfig interface. The Application Development
+Primer, Setting Configuration Values, and Kconfig - Tips and Best Practices sections of the manual
+might be helpful too.
+
+
+warning: LOG_BUFFER_SIZE (defined at subsys/logging/Kconfig.processing:121) was assigned the value
+'768' but got the value ''. Check these unsatisfied dependencies: LOG_MODE_DEFERRED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_BUFFER_SIZE and/or look up
+LOG_BUFFER_SIZE in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+
+warning: LOG_BACKEND_UART (defined at subsys/logging/backends/Kconfig.uart:4) was assigned the value
+'y' but got the value 'n'. Check these unsatisfied dependencies: UART_CONSOLE (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_BACKEND_UART and/or look up
+LOG_BACKEND_UART in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build
+
+=== RC ===
+1

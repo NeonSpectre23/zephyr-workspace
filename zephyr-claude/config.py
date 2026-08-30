@@ -14,8 +14,11 @@ WORKSPACE_ROOT = SCRIPT_DIR.parent
 ZEPHYR_BASE = WORKSPACE_ROOT / "zephyr"
 # zephyr-bench（数据集 + oracle）
 BENCH_ROOT = WORKSPACE_ROOT / "zephyr-bench"
-# Zephyr SDK
-ZEPHYR_SDK_DIR = Path("/home/huyj/zephyr-sdk-1.0.1")
+# Zephyr SDK — 优先读环境变量，回退到 $HOME
+ZEPHYR_SDK_DIR = Path(os.environ.get(
+    "ZEPHYR_SDK_INSTALL_DIR",
+    str(Path.home() / "zephyr-sdk-1.0.1"),
+))
 
 TEST_TIMEOUT = 300              # west build 超时（秒）
 WATCHDOG_TIMEOUT = 8 * 3600     # Claude 保险丝（秒）
@@ -36,6 +39,12 @@ WORKSPACE_BASE = Path(os.environ.get(
 
 # ---- Claude settings ----
 def _default_claude_settings():
+    # benchmark 专用配置最优先：zephyr-claude/settings.json
+    # （不在任何 .claude/ 目录下，交互式 claude 不会读到，互不影响）
+    bench = SCRIPT_DIR / "settings.json"
+    if bench.exists():
+        return str(bench)
+
     home = Path.home()
     if os.name == "posix":
         users_dir = Path("/mnt/c/Users")

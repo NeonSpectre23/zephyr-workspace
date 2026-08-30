@@ -1,0 +1,363 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build
+-- west build: building application
+[1/118] Preparing syscall dependency handling
+
+[2/118] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/118] Generating misc/generated/syscalls_subdirs.trigger
+[4/118] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/118] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/118] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/118] Generating include/generated/zephyr/driver-validation.h
+[8/118] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/118] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/118] Generating ../../include/generated/zephyr/heap_constants.h
+[11/118] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/118] Generating include/generated/zephyr/offsets.h
+[13/118] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[20/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[22/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[23/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[24/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[25/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/118] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_descriptor.c.obj
+[43/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_transfer.c.obj
+[44/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/118] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[46/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[47/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[48/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[51/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[59/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[60/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/118] Building C object zephyr/drivers/usb/device/CMakeFiles/drivers__usb__device.dir/usb_dc_native_posix_adapt.c.obj
+[65/118] Building C object zephyr/drivers/usb/device/CMakeFiles/drivers__usb__device.dir/usb_dc_native_posix.c.obj
+[66/118] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[67/118] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_weak_impl.c.obj
+[68/118] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_native.c.obj
+[69/118] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[70/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[71/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[72/118] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[73/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[74/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[75/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[76/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[77/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[78/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[79/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[80/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[82/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[83/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[84/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[85/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[86/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[87/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[88/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[89/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_device.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_device.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/usb/device -fno-strict-aliasing -Wno-deprecated-declarations -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_device.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_device.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/usb/device/usb_device.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:7:15: error: unknown type name ‘uint8_t’
+    7 | int usb_write(uint8_t ep, const uint8_t *data, uint32_t data_len, uint32_t *bytes_ret)
+      |               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:1:1: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int usb_disable(void)
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:7:33: error: unknown type name ‘uint8_t’
+    7 | int usb_write(uint8_t ep, const uint8_t *data, uint32_t data_len, uint32_t *bytes_ret)
+      |                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:7:48: error: unknown type name ‘uint32_t’
+    7 | int usb_write(uint8_t ep, const uint8_t *data, uint32_t data_len, uint32_t *bytes_ret)
+      |                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:7:48: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:7:67: error: unknown type name ‘uint32_t’
+    7 | int usb_write(uint8_t ep, const uint8_t *data, uint32_t data_len, uint32_t *bytes_ret)
+      |                                                                   ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:7:67: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:14: error: unknown type name ‘uint8_t’
+   24 | int usb_read(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:14: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:26: error: unknown type name ‘uint8_t’
+   24 | int usb_read(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:26: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:41: error: unknown type name ‘uint32_t’
+   24 | int usb_read(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:41: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:64: error: unknown type name ‘uint32_t’
+   24 | int usb_read(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:24:64: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:29:22: error: unknown type name ‘uint8_t’
+   29 | int usb_ep_set_stall(uint8_t ep)
+      |                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:29:22: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:34:24: error: unknown type name ‘uint8_t’
+   34 | int usb_ep_clear_stall(uint8_t ep)
+      |                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:34:24: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:22: error: unknown type name ‘uint8_t’
+   39 | int usb_ep_read_wait(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:22: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:34: error: unknown type name ‘uint8_t’
+   39 | int usb_ep_read_wait(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:34: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:49: error: unknown type name ‘uint32_t’
+   39 | int usb_ep_read_wait(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:49: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:72: error: unknown type name ‘uint32_t’
+   39 | int usb_ep_read_wait(uint8_t ep, uint8_t *data, uint32_t max_data_len, uint32_t *ret_bytes)
+      |                                                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:39:72: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:44:26: error: unknown type name ‘uint8_t’
+   44 | int usb_ep_read_continue(uint8_t ep)
+      |                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:44:26: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:49:1: error: unknown type name ‘bool’
+   49 | bool usb_get_remote_wakeup_status(void)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int usb_disable(void)
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: In function ‘usb_get_remote_wakeup_status’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:51:16: error: ‘usb_dev’ undeclared (first use in this function)
+   51 |         return usb_dev.remote_wakeup;
+      |                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:51:16: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: In function ‘usb_wakeup_request’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:56:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   56 |         if (IS_ENABLED(CONFIG_USB_DEVICE_REMOTE_WAKEUP)) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:56:24: error: ‘CONFIG_USB_DEVICE_REMOTE_WAKEUP’ undeclared (first use in this function); did you mean ‘CONFIG_USB_DEVICE_LOG_LEVEL’?
+   56 |         if (IS_ENABLED(CONFIG_USB_DEVICE_REMOTE_WAKEUP)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CONFIG_USB_DEVICE_LOG_LEVEL
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:58:32: warning: implicit declaration of function ‘usb_dc_wakeup_request’; did you mean ‘usb_wakeup_request’? [-Wimplicit-function-declaration]
+   58 |                         return usb_dc_wakeup_request();
+      |                                ^~~~~~~~~~~~~~~~~~~~~
+      |                                usb_wakeup_request
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:60:25: error: ‘EACCES’ undeclared (first use in this function)
+   60 |                 return -EACCES;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:62:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+   62 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:79:26: error: unknown type name ‘int32_t’
+   79 |                          int32_t *len, uint8_t **data)
+      |                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:79:26: note: ‘int32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:79:40: error: unknown type name ‘uint8_t’
+   79 |                          int32_t *len, uint8_t **data)
+      |                                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:79:40: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:108:27: error: unknown type name ‘int32_t’
+  108 |                           int32_t *len, uint8_t **data)
+      |                           ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:108:27: note: ‘int32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:108:41: error: unknown type name ‘uint8_t’
+  108 |                           int32_t *len, uint8_t **data)
+      |                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:108:41: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:151:27: error: unknown type name ‘int32_t’
+  151 |                           int32_t *len, uint8_t **data)
+      |                           ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:151:27: note: ‘int32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:151:41: error: unknown type name ‘uint8_t’
+  151 |                           int32_t *len, uint8_t **data)
+      |                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:151:41: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: In function ‘composite_setup_ep_cb’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:180:9: warning: implicit declaration of function ‘STRUCT_SECTION_FOREACH’ [-Wimplicit-function-declaration]
+  180 |         STRUCT_SECTION_FOREACH(usb_cfg_data, cfg_data) {
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:180:32: error: ‘usb_cfg_data’ undeclared (first use in this function); did you mean ‘usb_ep_cfg_data’?
+  180 |         STRUCT_SECTION_FOREACH(usb_cfg_data, cfg_data) {
+      |                                ^~~~~~~~~~~~
+      |                                usb_ep_cfg_data
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:180:46: error: ‘cfg_data’ undeclared (first use in this function)
+  180 |         STRUCT_SECTION_FOREACH(usb_cfg_data, cfg_data) {
+      |                                              ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:180:55: error: expected ‘;’ before ‘{’ token
+  180 |         STRUCT_SECTION_FOREACH(usb_cfg_data, cfg_data) {
+      |                                                       ^~
+      |                                                       ;
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:178:33: warning: unused variable ‘ep_data’ [-Wunused-variable]
+  178 |         struct usb_ep_cfg_data *ep_data;
+      |                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:192:1: warning: no return statement in function returning non-void [-Wreturn-type]
+  192 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:194:26: error: unknown type name ‘uint8_t’
+  194 | int usb_set_config(const uint8_t *device_descriptor)
+      |                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: In function ‘usb_set_config’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:197:9: warning: implicit declaration of function ‘usb_register_descriptors’ [-Wimplicit-function-declaration]
+  197 |         usb_register_descriptors(device_descriptor);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:200:9: warning: implicit declaration of function ‘usb_register_request_handler’ [-Wimplicit-function-declaration]
+  200 |         usb_register_request_handler(USB_REQTYPE_TYPE_STANDARD,
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:200:38: error: ‘USB_REQTYPE_TYPE_STANDARD’ undeclared (first use in this function)
+  200 |         usb_register_request_handler(USB_REQTYPE_TYPE_STANDARD,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:201:38: error: ‘usb_handle_standard_request’ undeclared (first use in this function)
+  201 |                                      usb_handle_standard_request);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:204:38: error: ‘USB_REQTYPE_TYPE_CLASS’ undeclared (first use in this function)
+  204 |         usb_register_request_handler(USB_REQTYPE_TYPE_CLASS, class_handler);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:204:62: error: ‘class_handler’ undeclared (first use in this function)
+  204 |         usb_register_request_handler(USB_REQTYPE_TYPE_CLASS, class_handler);
+      |                                                              ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:207:38: error: ‘USB_REQTYPE_TYPE_VENDOR’ undeclared (first use in this function)
+  207 |         usb_register_request_handler(USB_REQTYPE_TYPE_VENDOR, vendor_handler);
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:207:63: error: ‘vendor_handler’ undeclared (first use in this function)
+  207 |         usb_register_request_handler(USB_REQTYPE_TYPE_VENDOR, vendor_handler);
+      |                                                               ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:210:9: warning: implicit declaration of function ‘usb_register_custom_req_handler’ [-Wimplicit-function-declaration]
+  210 |         usb_register_custom_req_handler(custom_handler);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:210:41: error: ‘custom_handler’ undeclared (first use in this function)
+  210 |         usb_register_custom_req_handler(custom_handler);
+      |                                         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:215:16: error: unknown type name ‘usb_dc_status_callback’
+  215 | int usb_enable(usb_dc_status_callback status_cb)
+      |                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: In function ‘usb_get_remote_wakeup_status’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:52:1: warning: control reaches end of non-void function [-Wreturn-type]
+   52 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: In function ‘usb_wakeup_request’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:64:1: warning: control reaches end of non-void function [-Wreturn-type]
+   64 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/device/usb_device.c:176:12: warning: ‘composite_setup_ep_cb’ defined but not used [-Wunused-function]
+  176 | static int composite_setup_ep_cb(void)
+      |            ^~~~~~~~~~~~~~~~~~~~~
+[90/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[91/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[92/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[93/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[94/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[95/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[96/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[97/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[98/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[99/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[100/118] Generating linker_zephyr_pre0.cmd
+[101/118] Linking C static library app/libapp.a
+[102/118] Linking C static library zephyr/arch/common/libarch__common.a
+[103/118] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[104/118] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[105/118] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[106/118] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[107/118] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[108/118] Linking C static library zephyr/drivers/usb/device/libdrivers__usb__device.a
+[109/118] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[110/118] Linking C static library zephyr/drivers/hwinfo/libdrivers__hwinfo.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: Deprecated symbol USB_DEVICE_DRIVER is enabled.
+
+
+warning: Deprecated symbol USB_DEVICE_STACK is enabled.
+
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/subsys/usb/device/CMakeLists.txt:22 (message):
+  CONFIG_USB_DEVICE_VID has default value 0x2FE3.
+
+  This value is only for testing and MUST be configured for USB products.
+
+
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/subsys/usb/device/CMakeLists.txt:28 (message):
+  CONFIG_USB_DEVICE_PID has default value 0x100.
+
+  This value is only for testing and MUST be configured for USB products.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device/build
+
+=== RC ===
+1

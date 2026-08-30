@@ -1,0 +1,1401 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (7.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build
+-- west build: building application
+[1/514] Preparing syscall dependency handling
+
+[2/514] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/514] Generating misc/generated/syscalls_subdirs.trigger
+[4/514] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/514] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/514] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/514] Generating include/generated/zephyr/driver-validation.h
+[8/514] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/514] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/514] Generating ../../include/generated/zephyr/heap_constants.h
+[11/514] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/514] Generating include/generated/zephyr/offsets.h
+[13/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[14/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[15/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[16/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[17/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[18/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[19/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[20/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[21/514] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[22/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[23/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[24/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[25/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[26/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[27/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[28/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[29/514] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[30/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[31/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap_info.c.obj
+[33/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[34/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[35/514] Generating linker_zephyr_pre0.cmd
+[36/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[37/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[38/514] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[39/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[40/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[41/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[42/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[43/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[44/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[45/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[46/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[47/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[48/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[49/514] Linking C static library zephyr/arch/common/libarch__common.a
+[50/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[51/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[52/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[53/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[54/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[55/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[56/514] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[57/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[58/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[59/514] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[60/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[61/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[62/514] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[63/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[64/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_group.c.obj
+[65/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[66/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj.c.obj
+[67/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[68/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_class.c.obj
+[69/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_draw.c.obj
+[70/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_event.c.obj
+[71/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_id_builtin.c.obj
+[72/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_pos.c.obj
+[73/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_property.c.obj
+[74/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_scroll.c.obj
+[75/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[76/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_style.c.obj
+[77/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_style_gen.c.obj
+[78/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_tree.c.obj
+[79/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[80/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_refr.c.obj
+[81/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_observer.c.obj
+[82/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/monkey/lv_monkey.c.obj
+[83/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs_impl.c.obj
+[84/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/sysmon/lv_sysmon.c.obj
+[85/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_display.c.obj
+[86/514] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[87/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_helpers.c.obj
+[88/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_fs.c.obj
+[89/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_indev.c.obj
+[90/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_screenshot_compare.c.obj
+[91/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/vg_lite_tvg/vg_lite_matrix.c.obj
+[92/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_indev_gesture.c.obj
+[93/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[94/514] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[95/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/lv_draw_buf_convert.c.obj
+[96/514] Linking C static library zephyr/libzephyr.a
+[97/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/display/lv_display.c.obj
+[98/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/helium/lv_draw_buf_convert_helium.c.obj
+[99/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/neon/lv_draw_buf_convert_neon.c.obj
+[100/514] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[101/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj
+[102/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj
+[103/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj
+[104/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_buf.c.obj
+[105/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa.c.obj
+[106/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_img.c.obj
+[107/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_fill.c.obj
+[108/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_arc.c.obj
+[109/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve.c.obj
+[110/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_fill.c.obj
+[111/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_image.c.obj
+[112/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_letter.c.obj
+[113/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_line.c.obj
+[114/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_ram_g.c.obj
+[115/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[116/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_triangle.c.obj
+[117/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_eve.c.obj
+[118/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_3d.c.obj
+[119/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_arc.c.obj
+[120/514] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[121/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_blur.c.obj
+[122/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_buf.c.obj
+[123/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw.c.obj
+[124/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_rect.c.obj
+[125/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_label.c.obj
+[126/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_line.c.obj
+[127/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_image.c.obj
+[128/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_mask.c.obj
+[129/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_vector.c.obj
+[130/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_triangle.c.obj
+[131/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_3d.c.obj
+[132/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_image_decoder.c.obj
+[133/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_arc.c.obj
+[134/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_border.c.obj
+[135/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_box_shadow.c.obj
+[136/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg.c.obj
+[137/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_fill.c.obj
+[138/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_grad.c.obj
+[139/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_image.c.obj
+[140/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_label.c.obj
+[141/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_layer.c.obj
+[142/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_line.c.obj
+[143/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_mask_rect.c.obj
+[144/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_triangle.c.obj
+[145/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_vector.c.obj
+[146/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_nanovg_fbo_cache.c.obj
+[147/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_nanovg_image_cache.c.obj
+[148/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_nanovg_utils.c.obj
+[149/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.obj
+[150/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.obj
+[151/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.obj
+[152/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.obj
+[153/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.obj
+[154/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.obj
+[155/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.obj
+[156/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.obj
+[157/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.obj
+[158/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.obj
+[159/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.obj
+[160/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_vector.c.obj
+[161/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.obj
+[162/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.obj
+[163/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.obj
+[164/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.obj
+[165/514] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[166/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.obj
+[167/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.obj
+[168/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.obj
+[169/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.obj
+[170/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.obj
+[171/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.obj
+[172/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.obj
+[173/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.obj
+[174/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.obj
+[175/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.obj
+[176/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.obj
+[177/514] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[178/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/opengles/lv_draw_opengles.c.obj
+[179/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.obj
+[180/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.obj
+[181/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.obj
+[182/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.obj
+[183/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.obj
+[184/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.obj
+[185/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.obj
+[186/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.obj
+[187/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.obj
+[188/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.obj
+[189/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/snapshot/lv_snapshot.c.obj
+[190/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.obj
+[191/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_a8.c.obj
+[192/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.obj
+[193/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.obj
+[194/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888_premultiplied.c.obj
+[195/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.obj
+[196/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.obj
+[197/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.obj
+[198/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.obj
+[199/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/neon/lv_draw_sw_blend_neon_to_rgb565.c.obj
+[200/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565_swapped.c.obj
+[201/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/neon/lv_draw_sw_blend_neon_to_rgb888.c.obj
+[202/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/riscv_v/lv_draw_sw_blend_riscv_v_to_rgb888.c.obj
+[203/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_arc.c.obj
+[204/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_border.c.obj
+[205/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.obj
+[206/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_blur.c.obj
+[207/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw.c.obj
+[208/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_fill.c.obj
+[209/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_grad.c.obj
+[210/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_letter.c.obj
+[211/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_img.c.obj
+[212/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_mask.c.obj
+[213/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_line.c.obj
+[214/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_transform.c.obj
+[215/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[216/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.obj
+[217/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_triangle.c.obj
+[218/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_utils.c.obj
+[219/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.obj
+[220/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.obj
+[221/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_vector.c.obj
+[222/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.obj
+[223/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.obj
+[224/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.obj
+[225/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.obj
+[226/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs_util.c.obj
+[227/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/zephyr_lfs_crc.c.obj
+[228/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.obj
+[229/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.obj
+[230/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.obj
+[231/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.obj
+[232/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.obj
+[233/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.obj
+[234/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_bitmap_font_cache.c.obj
+[235/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.obj
+[236/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.obj
+[237/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.obj
+[238/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.obj
+[239/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.obj
+[240/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.obj
+[241/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.obj
+[242/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.obj
+[243/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/binfont_loader/lv_binfont_loader.c.obj
+[244/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/font_manager/lv_font_manager.c.obj
+[245/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/font_manager/lv_font_manager_recycle.c.obj
+[246/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font.c.obj
+[247/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/fmt_txt/lv_font_fmt_txt.c.obj
+[248/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/imgfont/lv_imgfont.c.obj
+[249/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_14_aligned.c.obj
+[250/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.obj
+[251/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_10.c.obj
+[252/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_12.c.obj
+[253/514] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[254/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_14.c.obj
+[255/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_16.c.obj
+[256/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_18.c.obj
+[257/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_24.c.obj
+[258/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_26.c.obj
+[259/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_28.c.obj
+[260/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_20.c.obj
+[261/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_22.c.obj
+[262/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_28_compressed.c.obj
+[263/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_32.c.obj
+[264/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_34.c.obj
+[265/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_30.c.obj
+[266/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_36.c.obj
+[267/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_42.c.obj
+[268/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_38.c.obj
+[269/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_40.c.obj
+[270/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_44.c.obj
+[271/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_46.c.obj
+[272/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_48.c.obj
+[273/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_8.c.obj
+[274/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_source_han_sans_sc_14_cjk.c.obj
+[275/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_source_han_sans_sc_16_cjk.c.obj
+[276/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_unscii_16.c.obj
+[277/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_unscii_8.c.obj
+[278/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_indev.c.obj
+[279/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_indev_gesture.c.obj
+[280/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_indev_scroll.c.obj
+[281/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_gridnav.c.obj
+[282/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/layouts/flex/lv_flex.c.obj
+[283/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/layouts/grid/lv_grid.c.obj
+[284/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/layouts/lv_layout.c.obj
+[285/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.obj
+[286/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/barcode/code128.c.obj
+[287/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/barcode/lv_barcode.c.obj
+[288/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/bmp/lv_bmp.c.obj
+[289/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype.c.obj
+[290/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.obj
+[291/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype_glyph.c.obj
+[292/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype_image.c.obj
+[293/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype_outline.c.obj
+[294/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_ftsystem.c.obj
+[295/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/frogfs/src/decomp_raw.c.obj
+[296/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/frogfs/src/frogfs.c.obj
+[297/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.obj
+[298/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_frogfs.c.obj
+[299/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[300/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.obj
+[301/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.obj
+[302/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_memfs.c.obj
+[303/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_posix.c.obj
+[304/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_stdio.c.obj
+[305/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_uefi.c.obj
+[306/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_win32.c.obj
+[307/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/FT800-FT813/EVE_commands.c.obj
+[308/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/FT800-FT813/EVE_supplemental.c.obj
+[309/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gif/gif.c.obj
+[310/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gltf/gltf_environment/lv_gltf_ibl_sampler.c.obj
+[311/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gstreamer/lv_gstreamer.c.obj
+[312/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gltf/math/lv_3dmath.c.obj
+[313/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.obj
+[314/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/libpng/lv_libpng.c.obj
+[315/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/libwebp/lv_libwebp.c.obj
+[316/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/lodepng/lodepng.c.obj
+[317/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/lz4/lz4.c.obj
+[318/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/nanovg/nanovg.c.obj
+[319/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/rle/lv_rle.c.obj
+[320/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/lodepng/lv_lodepng.c.obj
+[321/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/qrcode/lv_qrcode.c.obj
+[322/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/qrcode/qrcodegen.c.obj
+[323/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/rlottie/lv_rlottie.c.obj
+[324/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg.c.obj
+[325/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_decoder.c.obj
+[326/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_parser.c.obj
+[327/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_token.c.obj
+[328/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/tjpgd/lv_tjpgd.c.obj
+[329/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/tjpgd/tjpgd.c.obj
+[330/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/lv_vg_lite_hal/lv_vg_lite_hal.c.obj
+[331/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_render.c.obj
+[332/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.obj
+[333/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/lv_vg_lite_hal/vg_lite_os.c.obj
+[334/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLiteKernel/vg_lite_kernel.c.obj
+[335/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite.c.obj
+[336/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_image.c.obj
+[337/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_matrix.c.obj
+[338/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_stroke.c.obj
+[339/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/class/lv_cache_lru_ll.c.obj
+[340/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_path.c.obj
+[341/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/class/lv_cache_lru_rb.c.obj
+[342/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/class/lv_cache_sc_da.c.obj
+[343/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/lv_init.c.obj
+[344/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/instance/lv_image_cache.c.obj
+[345/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/lv_cache.c.obj
+[346/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/instance/lv_image_header_cache.c.obj
+[347/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/lv_cache_entry.c.obj
+[348/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_anim.c.obj
+[349/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_anim_timeline.c.obj
+[350/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_async.c.obj
+[351/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_area.c.obj
+[352/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_array.c.obj
+[353/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_color.c.obj
+[354/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_color_op.c.obj
+[355/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_bidi.c.obj
+[356/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_circle_buf.c.obj
+[357/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_event.c.obj
+[358/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_grad.c.obj
+[359/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_iter.c.obj
+[360/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_fs.c.obj
+[361/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_ll.c.obj
+[362/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_log.c.obj
+[363/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_lru.c.obj
+[364/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_math.c.obj
+[365/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_matrix.c.obj
+[366/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_palette.c.obj
+[367/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_pending.c.obj
+[368/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_profiler_builtin.c.obj
+[369/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_rb.c.obj
+[370/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_style.c.obj
+[371/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_style_gen.c.obj
+[372/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_templ.c.obj
+[373/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_text_ap.c.obj
+[374/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_tree.c.obj
+[375/514] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[376/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_text.c.obj
+[377/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_utils.c.obj
+[378/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/osal/lv_os.c.obj
+[379/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/others/file_explorer/lv_file_explorer.c.obj
+[380/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/lv_timer.c.obj
+[381/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/others/fragment/lv_fragment.c.obj
+[382/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/others/fragment/lv_fragment_manager.c.obj
+[383/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/others/translation/lv_translation.c.obj
+[384/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/stdlib/builtin/lv_tlsf.c.obj
+[385/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/stdlib/clib/lv_string_clib.c.obj
+[386/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/stdlib/clib/lv_sprintf_clib.c.obj
+[387/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/stdlib/lv_mem.c.obj
+[388/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/themes/mono/lv_theme_mono.c.obj
+[389/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/themes/default/lv_theme_default.c.obj
+[390/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/themes/lv_theme.c.obj
+[391/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/themes/simple/lv_theme_simple.c.obj
+[392/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/tick/lv_tick.c.obj
+[393/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/3dtexture/lv_3dtexture.c.obj
+[394/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/animimage/lv_animimage.c.obj
+[395/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/arc/lv_arc.c.obj
+[396/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/button/lv_button.c.obj
+[397/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/arclabel/lv_arclabel.c.obj
+[398/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/bar/lv_bar.c.obj
+[399/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.obj
+[400/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/calendar/lv_calendar.c.obj
+[401/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/calendar/lv_calendar_chinese.c.obj
+[402/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.obj
+[403/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.obj
+[404/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/canvas/lv_canvas.c.obj
+[405/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/checkbox/lv_checkbox.c.obj
+[406/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/imagebutton/lv_imagebutton.c.obj
+[407/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/dropdown/lv_dropdown.c.obj
+[408/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/image/lv_image.c.obj
+[409/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/ime/lv_ime_pinyin.c.obj
+[410/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/led/lv_led.c.obj
+[411/514] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[412/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/chart/lv_chart.c.obj
+[413/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/keyboard/lv_keyboard.c.obj
+[414/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/label/lv_label.c.obj
+[415/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/lottie/lv_lottie.c.obj
+[416/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/line/lv_line.c.obj
+[417/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/list/lv_list.c.obj
+[418/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/menu/lv_menu.c.obj
+[419/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/objx_templ/lv_objx_templ.c.obj
+[420/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/msgbox/lv_msgbox.c.obj
+[421/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_animimage_properties.c.obj
+[422/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_arc_properties.c.obj
+[423/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_bar_properties.c.obj
+[424/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_chart_properties.c.obj
+[425/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_checkbox_properties.c.obj
+[426/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_buttonmatrix_properties.c.obj
+[427/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_dropdown_properties.c.obj
+[428/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_keyboard_properties.c.obj
+[429/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_led_properties.c.obj
+[430/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_image_properties.c.obj
+[431/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_label_properties.c.obj
+[432/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_menu_properties.c.obj
+[433/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_line_properties.c.obj
+[434/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_obj_properties.c.obj
+[435/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_scale_properties.c.obj
+[436/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_slider_properties.c.obj
+[437/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/littlefs_fs.c.obj
+[438/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_roller_properties.c.obj
+[439/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_span_properties.c.obj
+[440/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_spinbox_properties.c.obj
+[441/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_spinner_properties.c.obj
+[442/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_style_properties.c.obj
+[443/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_tabview_properties.c.obj
+[444/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_switch_properties.c.obj
+[445/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_table_properties.c.obj
+[446/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/property/lv_textarea_properties.c.obj
+[447/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/scale/lv_scale.c.obj
+[448/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/slider/lv_slider.c.obj
+[449/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/roller/lv_roller.c.obj
+[450/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/span/lv_span.c.obj
+[451/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/spinbox/lv_spinbox.c.obj
+[452/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj
+[453/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/spinner/lv_spinner.c.obj
+[454/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/switch/lv_switch.c.obj
+[455/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/tabview/lv_tabview.c.obj
+[456/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/table/lv_table.c.obj
+[457/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/textarea/lv_textarea.c.obj
+[458/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/tileview/lv_tileview.c.obj
+[459/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/widgets/win/lv_win.c.obj
+[460/514] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[461/514] Building C object CMakeFiles/app.dir/src/img.c.obj
+[462/514] Linking C static library zephyr/subsys/fs/libsubsys__fs.a
+[463/514] Building C object zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj
+FAILED: zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D__ZEPHYR_SUPERVISOR__ -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj -MF zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj.d -o zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj -c /home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c
+In file included from /home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:13:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:2:39: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+    2 | display_set_pixel_format(const struct device *dev,
+      |                                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:18:56: warning: ‘struct device’ declared inside parameter list will not be visible outside of this definition or declaration
+   18 | static inline int display_set_orientation(const struct device *dev,
+      |                                                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:23:49: error: invalid use of undefined type ‘const struct device’
+   23 |                 (struct display_driver_api *)dev->api;
+      |                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:59:45: error: unknown type name ‘uint32_t’
+   59 |                                             uint32_t event_mask, bool in_isr,
+      |                                             ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | static inline int
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:59:66: error: unknown type name ‘bool’
+   59 |                                             uint32_t event_mask, bool in_isr,
+      |                                                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | static inline int
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:60:45: error: unknown type name ‘uint32_t’
+   60 |                                             uint32_t *out_reg_handle)
+      |                                             ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:60:45: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:82:73: error: unknown type name ‘uint32_t’
+   82 | static inline int display_unregister_event_cb(const struct device *dev, uint32_t reg_handle)
+      |                                                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:82:73: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:22:35: error: field ‘current_pixel_format’ has incomplete type
+   22 |         enum display_pixel_format current_pixel_format;
+      |                                   ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c: In function ‘dummy_display_init’:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:29:43: error: ‘PIXEL_FORMAT_ARGB_8888’ undeclared (first use in this function)
+   29 |         disp_data->current_pixel_format = PIXEL_FORMAT_ARGB_8888;
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:29:43: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:36:45: warning: ‘struct display_buffer_descriptor’ declared inside parameter list will not be visible outside of this definition or declaration
+   36 |                                const struct display_buffer_descriptor *desc,
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/irq_multilevel.h:15,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/devicetree.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:12,
+                 from /home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:14:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c: In function ‘dummy_display_write’:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:41:22: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   41 |         __ASSERT(desc->width <= desc->pitch, "Pitch is smaller than width");
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:122:23: note: in definition of macro ‘__ASSERT’
+  122 |                 if (!(test)) {                                            \
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:41:37: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   41 |         __ASSERT(desc->width <= desc->pitch, "Pitch is smaller than width");
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:122:23: note: in definition of macro ‘__ASSERT’
+  122 |                 if (!(test)) {                                            \
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:42:22: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   42 |         __ASSERT(desc->pitch <= config->width,
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:122:23: note: in definition of macro ‘__ASSERT’
+  122 |                 if (!(test)) {                                            \
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:44:22: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   44 |         __ASSERT(desc->height <= config->height,
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:122:23: note: in definition of macro ‘__ASSERT’
+  122 |                 if (!(test)) {                                            \
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:46:26: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   46 |         __ASSERT(x + desc->pitch <= config->width,
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:122:23: note: in definition of macro ‘__ASSERT’
+  122 |                 if (!(test)) {                                            \
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:48:26: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   48 |         __ASSERT(y + desc->height <= config->height,
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:122:23: note: in definition of macro ‘__ASSERT’
+  122 |                 if (!(test)) {                                            \
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:51:17: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   51 |         if (desc->width > desc->pitch ||
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:51:31: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   51 |         if (desc->width > desc->pitch ||
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:52:21: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   52 |             x + desc->pitch > config->width ||
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:53:21: error: invalid use of undefined type ‘const struct display_buffer_descriptor’
+   53 |             y + desc->height > config->height) {
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:83:24: warning: ‘struct display_capabilities’ declared inside parameter list will not be visible outside of this definition or declaration
+   83 |                 struct display_capabilities *capabilities)
+      |                        ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c: In function ‘dummy_display_get_capabilities’:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:88:40: error: invalid application of ‘sizeof’ to incomplete type ‘struct display_capabilities’
+   88 |         memset(capabilities, 0, sizeof(struct display_capabilities));
+      |                                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:89:21: error: invalid use of undefined type ‘struct display_capabilities’
+   89 |         capabilities->x_resolution = config->width;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:90:21: error: invalid use of undefined type ‘struct display_capabilities’
+   90 |         capabilities->y_resolution = config->height;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:91:21: error: invalid use of undefined type ‘struct display_capabilities’
+   91 |         capabilities->supported_pixel_formats = PIXEL_FORMAT_ARGB_8888 |
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:91:49: error: ‘PIXEL_FORMAT_ARGB_8888’ undeclared (first use in this function)
+   91 |         capabilities->supported_pixel_formats = PIXEL_FORMAT_ARGB_8888 |
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:92:17: error: ‘PIXEL_FORMAT_RGB_888’ undeclared (first use in this function)
+   92 |                 PIXEL_FORMAT_RGB_888 |
+      |                 ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:93:17: error: ‘PIXEL_FORMAT_MONO01’ undeclared (first use in this function)
+   93 |                 PIXEL_FORMAT_MONO01 |
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:94:17: error: ‘PIXEL_FORMAT_MONO10’ undeclared (first use in this function)
+   94 |                 PIXEL_FORMAT_MONO10;
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:95:21: error: invalid use of undefined type ‘struct display_capabilities’
+   95 |         capabilities->current_pixel_format = disp_data->current_pixel_format;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:96:21: error: invalid use of undefined type ‘struct display_capabilities’
+   96 |         capabilities->screen_info = SCREEN_INFO_MONO_VTILED |
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:96:37: error: ‘SCREEN_INFO_MONO_VTILED’ undeclared (first use in this function)
+   96 |         capabilities->screen_info = SCREEN_INFO_MONO_VTILED |
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:97:17: error: ‘SCREEN_INFO_MONO_MSB_FIRST’ undeclared (first use in this function)
+   97 |                 SCREEN_INFO_MONO_MSB_FIRST;
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:101:49: error: parameter 2 (‘pixel_format’) has incomplete type
+  101 |                 const enum display_pixel_format pixel_format)
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain.h:52,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/__assert.h:11:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:189:31: error: invalid application of ‘__alignof__’ to incomplete type ‘struct display_driver_api’
+  189 |         TYPE_SECTION_ITERABLE(struct struct_type, varname, secname, varname)
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:256:52: note: in definition of macro ‘__aligned’
+  256 | #define __aligned(x)    __attribute__((__aligned__(x)))
+      |                                                    ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:43:9: note: in expansion of macro ‘Z_DECL_ALIGN’
+   43 |         Z_DECL_ALIGN(type) varname \
+      |         ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:189:9: note: in expansion of macro ‘TYPE_SECTION_ITERABLE’
+  189 |         TYPE_SECTION_ITERABLE(struct struct_type, varname, secname, varname)
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:217:9: note: in expansion of macro ‘STRUCT_SECTION_ITERABLE_ALTERNATE’
+  217 |         STRUCT_SECTION_ITERABLE_ALTERNATE(struct_type, struct_type, varname)
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:1365:41: note: in expansion of macro ‘STRUCT_SECTION_ITERABLE’
+ 1365 | #define DEVICE_API(_class, _name) const STRUCT_SECTION_ITERABLE(Z_DEVICE_API_TYPE(_class), _name)
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:109:8: note: in expansion of macro ‘DEVICE_API’
+  109 | static DEVICE_API(display, dummy_display_api) = {
+      |        ^~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:98:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:109:19: error: variable ‘dummy_display_api’ has initializer but incomplete type
+  109 | static DEVICE_API(display, dummy_display_api) = {
+      |                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/common.h:227:55: note: in definition of macro ‘Z_DECL_ALIGN’
+  227 | #define Z_DECL_ALIGN(type) __aligned(__alignof(type)) type
+      |                                                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:189:9: note: in expansion of macro ‘TYPE_SECTION_ITERABLE’
+  189 |         TYPE_SECTION_ITERABLE(struct struct_type, varname, secname, varname)
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:217:9: note: in expansion of macro ‘STRUCT_SECTION_ITERABLE_ALTERNATE’
+  217 |         STRUCT_SECTION_ITERABLE_ALTERNATE(struct_type, struct_type, varname)
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:1365:41: note: in expansion of macro ‘STRUCT_SECTION_ITERABLE’
+ 1365 | #define DEVICE_API(_class, _name) const STRUCT_SECTION_ITERABLE(Z_DEVICE_API_TYPE(_class), _name)
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/common.h:170:23: note: in expansion of macro ‘_DO_CONCAT’
+  170 | #define _CONCAT(x, y) _DO_CONCAT(x, y)
+      |                       ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:1355:35: note: in expansion of macro ‘_CONCAT’
+ 1355 | #define Z_DEVICE_API_TYPE(_class) _CONCAT(_class, _driver_api)
+      |                                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:1365:65: note: in expansion of macro ‘Z_DEVICE_API_TYPE’
+ 1365 | #define DEVICE_API(_class, _name) const STRUCT_SECTION_ITERABLE(Z_DEVICE_API_TYPE(_class), _name)
+      |                                                                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:109:8: note: in expansion of macro ‘DEVICE_API’
+  109 | static DEVICE_API(display, dummy_display_api) = {
+      |        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:110:10: error: ‘const struct display_driver_api’ has no member named ‘blanking_on’
+  110 |         .blanking_on = dummy_display_blanking_on,
+      |          ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:110:24: warning: excess elements in struct initializer
+  110 |         .blanking_on = dummy_display_blanking_on,
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:110:24: note: (near initialization for ‘dummy_display_api’)
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:111:10: error: ‘const struct display_driver_api’ has no member named ‘blanking_off’
+  111 |         .blanking_off = dummy_display_blanking_off,
+      |          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:111:25: warning: excess elements in struct initializer
+  111 |         .blanking_off = dummy_display_blanking_off,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:111:25: note: (near initialization for ‘dummy_display_api’)
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:112:10: error: ‘const struct display_driver_api’ has no member named ‘write’
+  112 |         .write = dummy_display_write,
+      |          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:112:18: warning: excess elements in struct initializer
+  112 |         .write = dummy_display_write,
+      |                  ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:112:18: note: (near initialization for ‘dummy_display_api’)
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:113:10: error: ‘const struct display_driver_api’ has no member named ‘set_brightness’
+  113 |         .set_brightness = dummy_display_set_brightness,
+      |          ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:113:27: warning: excess elements in struct initializer
+  113 |         .set_brightness = dummy_display_set_brightness,
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:113:27: note: (near initialization for ‘dummy_display_api’)
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:114:10: error: ‘const struct display_driver_api’ has no member named ‘set_contrast’
+  114 |         .set_contrast = dummy_display_set_contrast,
+      |          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:114:25: warning: excess elements in struct initializer
+  114 |         .set_contrast = dummy_display_set_contrast,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:114:25: note: (near initialization for ‘dummy_display_api’)
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:115:10: error: ‘const struct display_driver_api’ has no member named ‘get_capabilities’
+  115 |         .get_capabilities = dummy_display_get_capabilities,
+      |          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:115:29: warning: excess elements in struct initializer
+  115 |         .get_capabilities = dummy_display_get_capabilities,
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:115:29: note: (near initialization for ‘dummy_display_api’)
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:116:10: error: ‘const struct display_driver_api’ has no member named ‘set_pixel_format’
+  116 |         .set_pixel_format = dummy_display_set_pixel_format,
+      |          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:116:29: warning: excess elements in struct initializer
+  116 |         .set_pixel_format = dummy_display_set_pixel_format,
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:116:29: note: (near initialization for ‘dummy_display_api’)
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:17:
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:109:28: error: storage size of ‘dummy_display_api’ isn’t known
+  109 | static DEVICE_API(display, dummy_display_api) = {
+      |                            ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:43:28: note: in definition of macro ‘TYPE_SECTION_ITERABLE’
+   43 |         Z_DECL_ALIGN(type) varname \
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/iterable_sections.h:217:9: note: in expansion of macro ‘STRUCT_SECTION_ITERABLE_ALTERNATE’
+  217 |         STRUCT_SECTION_ITERABLE_ALTERNATE(struct_type, struct_type, varname)
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/device.h:1365:41: note: in expansion of macro ‘STRUCT_SECTION_ITERABLE’
+ 1365 | #define DEVICE_API(_class, _name) const STRUCT_SECTION_ITERABLE(Z_DEVICE_API_TYPE(_class), _name)
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/drivers/display/display_dummy.c:109:8: note: in expansion of macro ‘DEVICE_API’
+  109 | static DEVICE_API(display, dummy_display_api) = {
+      |        ^~~~~~~~~~
+[464/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[465/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[466/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[467/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[468/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[469/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_mem.c.obj
+[470/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[471/514] Building C object CMakeFiles/app.dir/src/main.c.obj
+FAILED: CMakeFiles/app.dir/src/main.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLFS_CONFIG=zephyr_lfs_config.h -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -I/home/huyj/zephyr-workspace/modules/fs/littlefs -I/home/huyj/zephyr-workspace/zephyr/modules/littlefs -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/main.c.obj -MF CMakeFiles/app.dir/src/main.c.obj.d -o CMakeFiles/app.dir/src/main.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/src/main.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/src/main.c:12:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/src/main.c: In function ‘setup_lvgl’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/src/main.c:114:47: error: ‘PIXEL_FORMAT_ARGB_8888’ undeclared (first use in this function); did you mean ‘LV_COLOR_FORMAT_ARGB8888’?
+  114 |         display_set_pixel_format(display_dev, PIXEL_FORMAT_ARGB_8888);
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~
+      |                                               LV_COLOR_FORMAT_ARGB8888
+/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/src/main.c:114:47: note: each undeclared identifier is reported only once for each function it appears in
+[472/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[473/514] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[474/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_8bit.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_8bit.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_8bit.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_8bit.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_8bit.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_8bit.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_8bit.c:9:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+[475/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_32bit.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_32bit.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_32bit.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_32bit.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_32bit.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_32bit.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_32bit.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+[476/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_24bit.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_24bit.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_24bit.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_24bit.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_24bit.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_24bit.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_24bit.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+[477/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_16bit.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_16bit.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_16bit.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_16bit.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_16bit.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_16bit.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_16bit.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+[478/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl.c:11:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl.c: In function ‘lvgl_init’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl.c:349:17: warning: implicit declaration of function ‘display_get_capabilities’ [-Wimplicit-function-declaration]
+  349 |                 display_get_capabilities(display_dev[i], &p_disp_data->cap);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~
+[479/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_zephyr_osal.c.obj
+[480/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/input/lvgl_common_input.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/input/lvgl_common_input.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/input/lvgl_common_input.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/input/lvgl_common_input.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/input/lvgl_common_input.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/input/lvgl_common_input.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/input/lvgl_common_input.c:12:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+[481/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_fs.c.obj
+[482/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs.c.obj
+[483/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:11:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c: In function ‘set_lvgl_rendering_cb’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:80:14: error: ‘PIXEL_FORMAT_ARGB_8888’ undeclared (first use in this function); did you mean ‘LV_COLOR_FORMAT_ARGB8888’?
+   80 |         case PIXEL_FORMAT_ARGB_8888:
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+      |              LV_COLOR_FORMAT_ARGB8888
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:80:14: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:86:14: error: ‘PIXEL_FORMAT_RGB_888’ undeclared (first use in this function); did you mean ‘LV_COLOR_FORMAT_RGB888’?
+   86 |         case PIXEL_FORMAT_RGB_888:
+      |              ^~~~~~~~~~~~~~~~~~~~
+      |              LV_COLOR_FORMAT_RGB888
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:92:14: error: ‘PIXEL_FORMAT_RGB_565’ undeclared (first use in this function); did you mean ‘LV_COLOR_FORMAT_RGB565’?
+   92 |         case PIXEL_FORMAT_RGB_565:
+      |              ^~~~~~~~~~~~~~~~~~~~
+      |              LV_COLOR_FORMAT_RGB565
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:93:14: error: ‘PIXEL_FORMAT_RGB_565X’ undeclared (first use in this function)
+   93 |         case PIXEL_FORMAT_RGB_565X:
+      |              ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:99:14: error: ‘PIXEL_FORMAT_L_8’ undeclared (first use in this function)
+   99 |         case PIXEL_FORMAT_L_8:
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:105:14: error: ‘PIXEL_FORMAT_AL_88’ undeclared (first use in this function)
+  105 |         case PIXEL_FORMAT_AL_88:
+      |              ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:111:14: error: ‘PIXEL_FORMAT_MONO01’ undeclared (first use in this function)
+  111 |         case PIXEL_FORMAT_MONO01:
+      |              ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:112:14: error: ‘PIXEL_FORMAT_MONO10’ undeclared (first use in this function)
+  112 |         case PIXEL_FORMAT_MONO10:
+      |              ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c: In function ‘lvgl_flush_display’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display.c:147:9: warning: implicit declaration of function ‘display_write’; did you mean ‘lv_display_create’? [-Wimplicit-function-declaration]
+  147 |         display_write(data->display_dev, request->x, request->y, &request->desc, request->buf);
+      |         ^~~~~~~~~~~~~
+      |         lv_display_create
+[484/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_mono.c.obj
+FAILED: modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_mono.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D_POSIX_C_SOURCE=200809L -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_mono.c.obj -MF modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_mono.c.obj.d -o modules/lvgl/CMakeFiles/modules__lvgl.dir/lvgl_display_mono.c.obj -c /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c
+In file included from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:11,
+                 from /home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:37: warning: ‘enum display_pixel_format’ declared inside parameter list will not be visible outside of this definition or declaration
+    3 |                          const enum display_pixel_format pixel_format)
+      |                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:3:58: error: parameter 2 (‘pixel_format’) has incomplete type
+    3 |                          const enum display_pixel_format pixel_format)
+      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:19:54: warning: ‘enum display_orientation’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 |                                           const enum display_orientation
+      |                                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:20:43: error: parameter 2 (‘orientation’) has incomplete type
+   19 |                                           const enum display_orientation
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   20 |                                           orientation)
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_set_orientation’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:25:16: error: invalid use of undefined type ‘struct display_driver_api’
+   25 |         if (api->set_orientation == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:29:19: error: invalid use of undefined type ‘struct display_driver_api’
+   29 |         return api->set_orientation(dev, orientation);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:58:45: error: unknown type name ‘display_event_cb_t’; did you mean ‘lv_event_cb_t’?
+   58 |                                             display_event_cb_t cb, void *user_data,
+      |                                             ^~~~~~~~~~~~~~~~~~
+      |                                             lv_event_cb_t
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: In function ‘display_unregister_event_cb’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:16: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:86:52: error: invalid use of undefined type ‘struct display_driver_api’
+   86 |         if (api->unregister_event_cb == NULL || api->register_event_cb == NULL) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:90:19: error: invalid use of undefined type ‘struct display_driver_api’
+   90 |         return api->unregister_event_cb(dev, reg_handle);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/drivers/display.h:101:2: error: #endif without #if
+  101 | #endif /* ZEPHYR_INCLUDE_DRIVERS_DISPLAY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:20:37: error: field ‘cap’ has incomplete type
+   20 |         struct display_capabilities cap;
+      |                                     ^~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lvgl_display.h:28:42: error: field ‘desc’ has incomplete type
+   28 |         struct display_buffer_descriptor desc;
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c: In function ‘set_px_at_pos’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:23:17: error: invalid use of undefined type ‘const struct display_capabilities’
+   23 |         if (caps->screen_info & SCREEN_INFO_MONO_VTILED) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:23:33: error: ‘SCREEN_INFO_MONO_VTILED’ undeclared (first use in this function)
+   23 |         if (caps->screen_info & SCREEN_INFO_MONO_VTILED) {
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:23:33: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:26:25: error: invalid use of undefined type ‘const struct display_capabilities’
+   26 |                 if (caps->screen_info & SCREEN_INFO_MONO_MSB_FIRST) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:26:41: error: ‘SCREEN_INFO_MONO_MSB_FIRST’ undeclared (first use in this function)
+   26 |                 if (caps->screen_info & SCREEN_INFO_MONO_MSB_FIRST) {
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:34:25: error: invalid use of undefined type ‘const struct display_capabilities’
+   34 |                 if (caps->screen_info & SCREEN_INFO_MONO_MSB_FIRST) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:44:17: error: invalid use of undefined type ‘const struct display_capabilities’
+   44 |         if (caps->current_pixel_format == PIXEL_FORMAT_MONO01) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:44:43: error: ‘PIXEL_FORMAT_MONO01’ undeclared (first use in this function)
+   44 |         if (caps->current_pixel_format == PIXEL_FORMAT_MONO01) {
+      |                                           ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c: In function ‘lvgl_transform_buffer’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:58:35: error: invalid use of undefined type ‘const struct display_capabilities’
+   58 |         uint8_t clear_color = caps->current_pixel_format == PIXEL_FORMAT_MONO01 ? 0x00 : 0xFF;
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:58:61: error: ‘PIXEL_FORMAT_MONO01’ undeclared (first use in this function)
+   58 |         uint8_t clear_color = caps->current_pixel_format == PIXEL_FORMAT_MONO01 ? 0x00 : 0xFF;
+      |                                                             ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c: In function ‘lvgl_flush_cb_mono’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:90:53: error: ‘SCREEN_INFO_EPD’ undeclared (first use in this function)
+   90 |         const bool is_epd = data->cap.screen_info & SCREEN_INFO_EPD;
+      |                                                     ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:102:17: warning: implicit declaration of function ‘display_blanking_on’ [-Wimplicit-function-declaration]
+  102 |                 display_blanking_on(display_dev);
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:106:16: error: variable ‘desc’ has initializer but incomplete type
+  106 |         struct display_buffer_descriptor desc = {
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:107:18: error: ‘struct display_buffer_descriptor’ has no member named ‘buf_size’
+  107 |                 .buf_size = (w * h) / 8U,
+      |                  ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:107:29: warning: excess elements in struct initializer
+  107 |                 .buf_size = (w * h) / 8U,
+      |                             ^
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:107:29: note: (near initialization for ‘desc’)
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:108:18: error: ‘struct display_buffer_descriptor’ has no member named ‘width’
+  108 |                 .width = w,
+      |                  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:108:26: warning: excess elements in struct initializer
+  108 |                 .width = w,
+      |                          ^
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:108:26: note: (near initialization for ‘desc’)
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:109:18: error: ‘struct display_buffer_descriptor’ has no member named ‘pitch’
+  109 |                 .pitch = w,
+      |                  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:109:26: warning: excess elements in struct initializer
+  109 |                 .pitch = w,
+      |                          ^
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:109:26: note: (near initialization for ‘desc’)
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:110:18: error: ‘struct display_buffer_descriptor’ has no member named ‘height’
+  110 |                 .height = h,
+      |                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:110:27: warning: excess elements in struct initializer
+  110 |                 .height = h,
+      |                           ^
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:110:27: note: (near initialization for ‘desc’)
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:111:18: error: ‘struct display_buffer_descriptor’ has no member named ‘frame_incomplete’
+  111 |                 .frame_incomplete = !is_last,
+      |                  ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:111:37: warning: excess elements in struct initializer
+  111 |                 .frame_incomplete = !is_last,
+      |                                     ^
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:111:37: note: (near initialization for ‘desc’)
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:106:42: error: storage size of ‘desc’ isn’t known
+  106 |         struct display_buffer_descriptor desc = {
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:114:9: warning: implicit declaration of function ‘display_write’; did you mean ‘lv_display_create’? [-Wimplicit-function-declaration]
+  114 |         display_write(display_dev, area->x1, area->y1, &desc, (void *)px_map);
+      |         ^~~~~~~~~~~~~
+      |         lv_display_create
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:115:37: error: ‘SCREEN_INFO_DOUBLE_BUFFER’ undeclared (first use in this function)
+  115 |         if (data->cap.screen_info & SCREEN_INFO_DOUBLE_BUFFER) {
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:124:17: warning: implicit declaration of function ‘display_blanking_off’ [-Wimplicit-function-declaration]
+  124 |                 display_blanking_off(display_dev);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:106:42: warning: unused variable ‘desc’ [-Wunused-variable]
+  106 |         struct display_buffer_descriptor desc = {
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c: In function ‘lvgl_rounder_cb_mono’:
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:137:37: error: ‘SCREEN_INFO_X_ALIGNMENT_WIDTH’ undeclared (first use in this function)
+  137 |         if (data->cap.screen_info & SCREEN_INFO_X_ALIGNMENT_WIDTH) {
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/modules/lvgl/lvgl_display_mono.c:143:45: error: ‘SCREEN_INFO_MONO_VTILED’ undeclared (first use in this function)
+  143 |                 if (data->cap.screen_info & SCREEN_INFO_MONO_VTILED) {
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build
+
+=== RC ===
+1

@@ -1,0 +1,590 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/notify
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build
+-- west build: building application
+[1/111] Preparing syscall dependency handling
+
+[2/111] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/111] Generating misc/generated/syscalls_subdirs.trigger
+[4/111] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/111] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/111] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/111] Generating include/generated/zephyr/driver-validation.h
+[8/111] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/111] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/111] Generating ../../include/generated/zephyr/heap_constants.h
+[11/111] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/111] Generating include/generated/zephyr/offsets.h
+[13/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[14/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[15/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[16/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[20/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[22/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[23/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[26/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[28/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[29/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/111] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[35/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[38/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[39/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[40/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[41/111] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[42/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[43/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[44/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[45/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[46/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[49/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[50/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[51/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[52/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[53/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[54/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[55/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[56/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[58/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[59/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[60/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[61/111] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[62/111] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[63/111] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[64/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[65/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[66/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[67/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[68/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[69/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[70/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[71/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[72/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[74/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[75/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[76/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[77/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[78/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[79/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[80/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[81/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[82/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[83/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[84/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[85/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[86/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[87/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[88/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[89/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[90/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[91/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[92/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[93/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[94/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[95/111] Linking C static library zephyr/arch/common/libarch__common.a
+[96/111] Generating linker_zephyr_pre0.cmd
+[97/111] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[98/111] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[99/111] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[100/111] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[101/111] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[102/111] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[103/111] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[104/111] Linking C static library zephyr/kernel/libkernel.a
+[105/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/notify.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/lib/utils/notify.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/notify=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/lib/utils/notify.c.obj -MF zephyr/CMakeFiles/zephyr.dir/lib/utils/notify.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/lib/utils/notify.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c
+In file included from /home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:9:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:1:52: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | static inline void sys_notify_init_spinwait(struct sys_notify *notify)
+      |                                                    ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:26:50: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   26 | static inline void sys_notify_init_signal(struct sys_notify *notify,
+      |                                                  ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: In function ‘sys_notify_init_signal’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:18: error: ‘struct sys_notify’ has no member named ‘method’
+   33 |                 .method = {
+      |                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: error: extra brace group at end of initializer
+   33 |                 .method = {
+      |                           ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: note: (near initialization for ‘(anonymous)’)
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: warning: excess elements in struct initializer
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: note: (near initialization for ‘(anonymous)’)
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:18: error: ‘struct sys_notify’ has no member named ‘flags’
+   36 |                 .flags = SYS_NOTIFY_METHOD_SIGNAL,
+      |                  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: error: ‘SYS_NOTIFY_METHOD_SIGNAL’ undeclared (first use in this function)
+   36 |                 .flags = SYS_NOTIFY_METHOD_SIGNAL,
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: warning: excess elements in struct initializer
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: note: (near initialization for ‘(anonymous)’)
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:32:38: error: invalid use of undefined type ‘struct sys_notify’
+   32 |         *notify = (struct sys_notify){
+      |                                      ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:32:17: error: invalid use of undefined type ‘struct sys_notify’
+   32 |         *notify = (struct sys_notify){
+      |                 ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:56:47: error: unknown type name ‘sys_notify_generic_callback’
+   56 |                                               sys_notify_generic_callback handler)
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:80:58: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   80 | static inline bool sys_notify_uses_callback(const struct sys_notify *notify)
+      |                                                          ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: In function ‘sys_notify_uses_callback’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:84:16: warning: implicit declaration of function ‘sys_notify_get_method’ [-Wimplicit-function-declaration]
+   84 |         return sys_notify_get_method(notify) == SYS_NOTIFY_METHOD_CALLBACK;
+      |                ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:84:49: error: ‘SYS_NOTIFY_METHOD_CALLBACK’ undeclared (first use in this function)
+   84 |         return sys_notify_get_method(notify) == SYS_NOTIFY_METHOD_CALLBACK;
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:93:2: error: #endif without #if
+   93 | #endif /* ZEPHYR_INCLUDE_SYS_NOTIFY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:11:32: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   11 | int sys_notify_validate(struct sys_notify *notify)
+      |                                ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c: In function ‘sys_notify_validate’:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:21:14: error: ‘SYS_NOTIFY_METHOD_SPINWAIT’ undeclared (first use in this function)
+   21 |         case SYS_NOTIFY_METHOD_SPINWAIT:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:23:14: error: ‘SYS_NOTIFY_METHOD_CALLBACK’ undeclared (first use in this function)
+   23 |         case SYS_NOTIFY_METHOD_CALLBACK:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:24:27: error: invalid use of undefined type ‘struct sys_notify’
+   24 |                 if (notify->method.callback == NULL) {
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:29:14: error: ‘SYS_NOTIFY_METHOD_SIGNAL’ undeclared (first use in this function)
+   29 |         case SYS_NOTIFY_METHOD_SIGNAL:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:30:27: error: invalid use of undefined type ‘struct sys_notify’
+   30 |                 if (notify->method.signal == NULL) {
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:42:23: error: invalid use of undefined type ‘struct sys_notify’
+   42 |                 notify->result = 0;
+      |                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:48:1: error: unknown type name ‘sys_notify_generic_callback’
+   48 | sys_notify_generic_callback sys_notify_finalize(struct sys_notify *notify,
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:48:56: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   48 | sys_notify_generic_callback sys_notify_finalize(struct sys_notify *notify,
+      |                                                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c: In function ‘sys_notify_finalize’:
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:52:9: error: unknown type name ‘sys_notify_generic_callback’
+   52 |         sys_notify_generic_callback rv = NULL;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:52:42: warning: initialization of ‘int’ from ‘void *’ makes integer from pointer without a cast [-Wint-conversion]
+   52 |         sys_notify_generic_callback rv = NULL;
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:58:15: error: invalid use of undefined type ‘struct sys_notify’
+   58 |         notify->result = res;
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:60:14: error: ‘SYS_NOTIFY_METHOD_SPINWAIT’ undeclared (first use in this function)
+   60 |         case SYS_NOTIFY_METHOD_SPINWAIT:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:62:14: error: ‘SYS_NOTIFY_METHOD_CALLBACK’ undeclared (first use in this function)
+   62 |         case SYS_NOTIFY_METHOD_CALLBACK:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:63:28: error: invalid use of undefined type ‘struct sys_notify’
+   63 |                 rv = notify->method.callback;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:65:14: error: ‘SYS_NOTIFY_METHOD_SIGNAL’ undeclared (first use in this function)
+   65 |         case SYS_NOTIFY_METHOD_SIGNAL:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:66:29: error: invalid use of undefined type ‘struct sys_notify’
+   66 |                 sig = notify->method.signal;
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:77:15: error: invalid use of undefined type ‘struct sys_notify’
+   77 |         notify->flags = SYS_NOTIFY_METHOD_COMPLETED;
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/utils/notify.c:77:25: error: ‘SYS_NOTIFY_METHOD_COMPLETED’ undeclared (first use in this function)
+   77 |         notify->flags = SYS_NOTIFY_METHOD_COMPLETED;
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+[106/111] Building C object CMakeFiles/app.dir/src/main.c.obj
+FAILED: CMakeFiles/app.dir/src/main.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/notify=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/main.c.obj -MF CMakeFiles/app.dir/src/main.c.obj.d -o CMakeFiles/app.dir/src/main.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:8:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:1:52: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | static inline void sys_notify_init_spinwait(struct sys_notify *notify)
+      |                                                    ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:26:50: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   26 | static inline void sys_notify_init_signal(struct sys_notify *notify,
+      |                                                  ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: In function ‘sys_notify_init_signal’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:18: error: ‘struct sys_notify’ has no member named ‘method’
+   33 |                 .method = {
+      |                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: error: extra brace group at end of initializer
+   33 |                 .method = {
+      |                           ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: note: (near initialization for ‘(anonymous)’)
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: warning: excess elements in struct initializer
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:33:27: note: (near initialization for ‘(anonymous)’)
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:18: error: ‘struct sys_notify’ has no member named ‘flags’
+   36 |                 .flags = SYS_NOTIFY_METHOD_SIGNAL,
+      |                  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: error: ‘SYS_NOTIFY_METHOD_SIGNAL’ undeclared (first use in this function)
+   36 |                 .flags = SYS_NOTIFY_METHOD_SIGNAL,
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: warning: excess elements in struct initializer
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:36:26: note: (near initialization for ‘(anonymous)’)
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:32:38: error: invalid use of undefined type ‘struct sys_notify’
+   32 |         *notify = (struct sys_notify){
+      |                                      ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:32:17: error: invalid use of undefined type ‘struct sys_notify’
+   32 |         *notify = (struct sys_notify){
+      |                 ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:56:47: error: unknown type name ‘sys_notify_generic_callback’
+   56 |                                               sys_notify_generic_callback handler)
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:80:58: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   80 | static inline bool sys_notify_uses_callback(const struct sys_notify *notify)
+      |                                                          ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: In function ‘sys_notify_uses_callback’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:84:16: warning: implicit declaration of function ‘sys_notify_get_method’ [-Wimplicit-function-declaration]
+   84 |         return sys_notify_get_method(notify) == SYS_NOTIFY_METHOD_CALLBACK;
+      |                ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:84:49: error: ‘SYS_NOTIFY_METHOD_CALLBACK’ undeclared (first use in this function)
+   84 |         return sys_notify_get_method(notify) == SYS_NOTIFY_METHOD_CALLBACK;
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/notify.h:93:2: error: #endif without #if
+   93 | #endif /* ZEPHYR_INCLUDE_SYS_NOTIFY_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:10:43: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   10 | static uint32_t get_extflags(const struct sys_notify *anp)
+      |                                           ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘get_extflags’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:12:29: error: invalid use of undefined type ‘const struct sys_notify’
+   12 |         uint32_t flags = anp->flags & SYS_NOTIFY_EXTENSION_MASK;
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:12:39: error: ‘SYS_NOTIFY_EXTENSION_MASK’ undeclared (first use in this function)
+   12 |         uint32_t flags = anp->flags & SYS_NOTIFY_EXTENSION_MASK;
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:14:25: error: ‘SYS_NOTIFY_EXTENSION_POS’ undeclared (first use in this function)
+   14 |         return flags >> SYS_NOTIFY_EXTENSION_POS;
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:17:33: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   17 | static void set_extflags(struct sys_notify *anp,
+      |                                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘set_extflags’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:20:12: error: invalid use of undefined type ‘struct sys_notify’
+   20 |         anp->flags = (anp->flags & ~SYS_NOTIFY_EXTENSION_MASK)
+      |            ^~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:20:26: error: invalid use of undefined type ‘struct sys_notify’
+   20 |         anp->flags = (anp->flags & ~SYS_NOTIFY_EXTENSION_MASK)
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:20:37: error: ‘SYS_NOTIFY_EXTENSION_MASK’ undeclared (first use in this function)
+   20 |         anp->flags = (anp->flags & ~SYS_NOTIFY_EXTENSION_MASK)
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:21:34: error: ‘SYS_NOTIFY_EXTENSION_POS’ undeclared (first use in this function)
+   21 |                      | (flags << SYS_NOTIFY_EXTENSION_POS);
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:24:29: warning: ‘struct sys_notify’ declared inside parameter list will not be visible outside of this definition or declaration
+   24 | static void callback(struct sys_notify *anp,
+      |                             ^~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:7:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘callback’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:27:23: warning: implicit declaration of function ‘sys_notify_fetch_result’ [-Wimplicit-function-declaration]
+   27 |         zassert_equal(sys_notify_fetch_result(anp, resp), 0,
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:27:9: note: in expansion of macro ‘zassert_equal’
+   27 |         zassert_equal(sys_notify_fetch_result(anp, resp), 0,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘sys_notify_api_test_validate’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:33:16: error: variable ‘notify’ has initializer but incomplete type
+   33 |         struct sys_notify notify = {
+      |                ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:34:18: error: ‘struct sys_notify’ has no member named ‘flags’
+   34 |                 .flags = 0,
+      |                  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:34:26: warning: excess elements in struct initializer
+   34 |                 .flags = 0,
+      |                          ^
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:34:26: note: (near initialization for ‘notify’)
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:33:27: error: storage size of ‘notify’ isn’t known
+   33 |         struct sys_notify notify = {
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:37:23: warning: implicit declaration of function ‘sys_notify_validate’; did you mean ‘sys_heap_validate’? [-Wimplicit-function-declaration]
+   37 |         zassert_equal(sys_notify_validate(NULL), -EINVAL,
+      |                       ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:37:9: note: in expansion of macro ‘zassert_equal’
+   37 |         zassert_equal(sys_notify_validate(NULL), -EINVAL,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:33:27: warning: unused variable ‘notify’ [-Wunused-variable]
+   33 |         struct sys_notify notify = {
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘sys_notify_api_test_spinwait’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:49:9: error: unknown type name ‘sys_notify_generic_callback’
+   49 |         sys_notify_generic_callback cb;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:50:27: error: storage size of ‘notify’ isn’t known
+   50 |         struct sys_notify notify;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:66:37: error: ‘SYS_NOTIFY_METHOD_SPINWAIT’ undeclared (first use in this function)
+   66 |         zassert_equal(notify.flags, SYS_NOTIFY_METHOD_SPINWAIT,
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:66:9: note: in expansion of macro ‘zassert_equal’
+   66 |         zassert_equal(notify.flags, SYS_NOTIFY_METHOD_SPINWAIT,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:83:14: warning: implicit declaration of function ‘sys_notify_finalize’ [-Wimplicit-function-declaration]
+   83 |         cb = sys_notify_finalize(&notify, set_res);
+      |              ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:84:28: error: ‘sys_notify_generic_callback’ undeclared (first use in this function); did you mean ‘sys_notify_uses_callback’?
+   84 |         zassert_equal(cb, (sys_notify_generic_callback)NULL,
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:84:9: note: in expansion of macro ‘zassert_equal’
+   84 |         zassert_equal(cb, (sys_notify_generic_callback)NULL,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:50:27: warning: unused variable ‘notify’ [-Wunused-variable]
+   50 |         struct sys_notify notify;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘sys_notify_api_test_signal’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:103:9: error: unknown type name ‘sys_notify_generic_callback’
+  103 |         sys_notify_generic_callback cb;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:104:27: error: storage size of ‘notify’ isn’t known
+  104 |         struct sys_notify notify;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:132:37: error: ‘SYS_NOTIFY_METHOD_SIGNAL’ undeclared (first use in this function)
+  132 |         zassert_equal(notify.flags, SYS_NOTIFY_METHOD_SIGNAL,
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:132:9: note: in expansion of macro ‘zassert_equal’
+  132 |         zassert_equal(notify.flags, SYS_NOTIFY_METHOD_SIGNAL,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:152:28: error: ‘sys_notify_generic_callback’ undeclared (first use in this function); did you mean ‘sys_notify_uses_callback’?
+  152 |         zassert_equal(cb, (sys_notify_generic_callback)NULL,
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:152:9: note: in expansion of macro ‘zassert_equal’
+  152 |         zassert_equal(cb, (sys_notify_generic_callback)NULL,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:104:27: warning: unused variable ‘notify’ [-Wunused-variable]
+  104 |         struct sys_notify notify;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c: In function ‘sys_notify_api_test_callback’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:175:9: error: unknown type name ‘sys_notify_generic_callback’
+  175 |         sys_notify_generic_callback cb;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:176:27: error: storage size of ‘notify’ isn’t known
+  176 |         struct sys_notify notify;
+      |                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:184:9: warning: implicit declaration of function ‘sys_notify_init_callback’; did you mean ‘sys_notify_uses_callback’? [-Wimplicit-function-declaration]
+  184 |         sys_notify_init_callback(&notify, callback);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~
+      |         sys_notify_uses_callback
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:199:37: error: ‘SYS_NOTIFY_METHOD_CALLBACK’ undeclared (first use in this function)
+  199 |         zassert_equal(notify.flags, SYS_NOTIFY_METHOD_CALLBACK,
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:199:9: note: in expansion of macro ‘zassert_equal’
+  199 |         zassert_equal(notify.flags, SYS_NOTIFY_METHOD_CALLBACK,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:202:24: error: ‘sys_notify_generic_callback’ undeclared (first use in this function); did you mean ‘sys_notify_uses_callback’?
+  202 |                       (sys_notify_generic_callback)callback,
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:201:9: note: in expansion of macro ‘zassert_equal’
+  201 |         zassert_equal(notify.method.callback,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:202:52: error: expected ‘)’ before ‘callback’
+  202 |                       (sys_notify_generic_callback)callback,
+      |                                                    ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:201:9: note: in expansion of macro ‘zassert_equal’
+  201 |         zassert_equal(notify.method.callback,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:49: note: to match this ‘(’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                                 ^
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:201:9: note: in expansion of macro ‘zassert_equal’
+  201 |         zassert_equal(notify.method.callback,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:220:56: error: expected ‘)’ before ‘callback’
+  220 |         zassert_equal(cb, (sys_notify_generic_callback)callback,
+      |                                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:220:9: note: in expansion of macro ‘zassert_equal’
+  220 |         zassert_equal(cb, (sys_notify_generic_callback)callback,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:49: note: to match this ‘(’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                                 ^
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:220:9: note: in expansion of macro ‘zassert_equal’
+  220 |         zassert_equal(cb, (sys_notify_generic_callback)callback,
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:226:10: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+  226 |         ((void (*)(struct sys_notify *, int *))cb)(&notify, &res);
+      |          ^
+/home/huyj/zephyr-workspace/zephyr/tests/lib/notify/src/main.c:176:27: warning: unused variable ‘notify’ [-Wunused-variable]
+  176 |         struct sys_notify notify;
+      |                           ^~~~~~
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/notify/build
+
+=== RC ===
+1

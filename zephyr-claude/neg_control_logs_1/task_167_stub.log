@@ -1,0 +1,878 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build
+-- west build: building application
+[1/113] Preparing syscall dependency handling
+
+[2/113] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/113] Generating misc/generated/syscalls_subdirs.trigger
+[4/113] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/113] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/113] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/113] Generating include/generated/zephyr/driver-validation.h
+[8/113] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/113] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/113] Generating ../../include/generated/zephyr/heap_constants.h
+[11/113] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/113] Generating include/generated/zephyr/offsets.h
+[13/113] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/113] Building C object CMakeFiles/app.dir/src/mock_frontend.c.obj
+[15/113] Building C object CMakeFiles/app.dir/src/mock_backend.c.obj
+[16/113] Building C object CMakeFiles/app.dir/src/test_module.c.obj
+[17/113] Building C object CMakeFiles/app.dir/src/test_module2.c.obj
+[18/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[19/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[20/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[23/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[24/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[25/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[26/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[27/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[28/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[29/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[30/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[31/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[32/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[33/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[34/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[35/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[36/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[37/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[38/113] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[39/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[40/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[41/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[42/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[43/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[44/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[45/113] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[46/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[47/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[48/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[49/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[50/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[51/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[52/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[59/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[60/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[61/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[62/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[63/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[64/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/113] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[66/113] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[67/113] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[68/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[69/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[70/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[71/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[72/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[73/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[74/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[75/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[76/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[77/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[78/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[79/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[80/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[81/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[82/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[83/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[84/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[85/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[86/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[87/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[88/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[89/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[90/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[92/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[93/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[94/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[96/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[97/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/113] Linking C static library app/libapp.a
+[99/113] Linking C static library zephyr/arch/common/libarch__common.a
+[100/113] Generating linker_zephyr_pre0.cmd
+[101/113] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[102/113] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[103/113] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[104/113] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[105/113] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[106/113] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[107/113] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[108/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:1:28: error: unknown type name ‘log_timestamp_get_t’
+    1 | int log_set_timestamp_func(log_timestamp_get_t timestamp_getter, uint32_t freq)
+      |                            ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:1:66: error: unknown type name ‘uint32_t’
+    1 | int log_set_timestamp_func(log_timestamp_get_t timestamp_getter, uint32_t freq)
+      |                                                                  ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int log_set_timestamp_func(log_timestamp_get_t timestamp_getter, uint32_t freq)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_impl_log_panic’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:9:13: error: ‘panic_mode’ undeclared (first use in this function)
+    9 |         if (panic_mode) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:9:13: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:16:15: warning: implicit declaration of function ‘z_log_init’ [-Wimplicit-function-declaration]
+   16 |         (void)z_log_init(true, false);
+      |               ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:16:26: error: ‘true’ undeclared (first use in this function)
+   16 |         (void)z_log_init(true, false);
+      |                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:1:1: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int log_set_timestamp_func(log_timestamp_get_t timestamp_getter, uint32_t freq)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:16:32: error: ‘false’ undeclared (first use in this function)
+   16 |         (void)z_log_init(true, false);
+      |                                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:16:32: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:18:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   18 |         if (IS_ENABLED(CONFIG_LOG_FRONTEND)) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:18:24: error: ‘CONFIG_LOG_FRONTEND’ undeclared (first use in this function); did you mean ‘CONFIG_LOG_OUTPUT’?
+   18 |         if (IS_ENABLED(CONFIG_LOG_FRONTEND)) {
+      |                        ^~~~~~~~~~~~~~~~~~~
+      |                        CONFIG_LOG_OUTPUT
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:19:17: warning: implicit declaration of function ‘log_frontend_panic’ [-Wimplicit-function-declaration]
+   19 |                 log_frontend_panic();
+      |                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:20:32: error: ‘CONFIG_LOG_FRONTEND_ONLY’ undeclared (first use in this function)
+   20 |                 if (IS_ENABLED(CONFIG_LOG_FRONTEND_ONLY)) {
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:25:9: warning: implicit declaration of function ‘STRUCT_SECTION_FOREACH’ [-Wimplicit-function-declaration]
+   25 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:25:32: error: ‘log_backend’ undeclared (first use in this function)
+   25 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:25:45: error: ‘backend’ undeclared (first use in this function)
+   25 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:25:53: error: expected ‘;’ before ‘{’ token
+   25 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:21:25: error: label ‘out’ used but not defined
+   21 |                         goto out;
+      |                         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:49:8: error: unknown type name ‘bool’
+   49 | static bool msg_filter_check(struct log_backend const *backend,
+      |        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:50:36: warning: ‘union log_msg_generic’ declared inside parameter list will not be visible outside of this definition or declaration
+   50 |                              union log_msg_generic *msg)
+      |                                    ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:49:37: warning: ‘struct log_backend’ declared inside parameter list will not be visible outside of this definition or declaration
+   49 | static bool msg_filter_check(struct log_backend const *backend,
+      |                                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘msg_filter_check’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:52:14: warning: implicit declaration of function ‘z_log_item_is_msg’ [-Wimplicit-function-declaration]
+   52 |         if (!z_log_item_is_msg(msg)) {
+      |              ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:53:24: error: ‘true’ undeclared (first use in this function)
+   53 |                 return true;
+      |                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:53:24: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:56:25: error: ‘CONFIG_LOG_RUNTIME_FILTERING’ undeclared (first use in this function)
+   56 |         if (!IS_ENABLED(CONFIG_LOG_RUNTIME_FILTERING)) {
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:60:9: error: unknown type name ‘uint32_t’
+   60 |         uint32_t backend_level;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:60:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:61:9: error: unknown type name ‘uint8_t’
+   61 |         uint8_t level;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:61:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:62:9: error: unknown type name ‘uint8_t’
+   62 |         uint8_t domain_id;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:62:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:63:9: error: unknown type name ‘int16_t’
+   63 |         int16_t source_id;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:63:9: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:65:17: warning: implicit declaration of function ‘log_msg_get_level’ [-Wimplicit-function-declaration]
+   65 |         level = log_msg_get_level(&msg->log);
+      |                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:65:39: error: invalid use of undefined type ‘union log_msg_generic’
+   65 |         level = log_msg_get_level(&msg->log);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:66:21: warning: implicit declaration of function ‘log_msg_get_domain’ [-Wimplicit-function-declaration]
+   66 |         domain_id = log_msg_get_domain(&msg->log);
+      |                     ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:66:44: error: invalid use of undefined type ‘union log_msg_generic’
+   66 |         domain_id = log_msg_get_domain(&msg->log);
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:67:21: warning: implicit declaration of function ‘log_msg_get_source_id’ [-Wimplicit-function-declaration]
+   67 |         source_id = log_msg_get_source_id(&msg->log);
+      |                     ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:67:47: error: invalid use of undefined type ‘union log_msg_generic’
+   67 |         source_id = log_msg_get_source_id(&msg->log);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:70:22: error: ‘LOG_LEVEL_NONE’ undeclared (first use in this function)
+   70 |         if (level == LOG_LEVEL_NONE) {
+      |                      ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:74:33: warning: implicit declaration of function ‘log_filter_get’; did you mean ‘msg_filter_check’? [-Wimplicit-function-declaration]
+   74 |                 backend_level = log_filter_get(backend, domain_id, source_id, true);
+      |                                 ^~~~~~~~~~~~~~
+      |                                 msg_filter_check
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:82:31: warning: ‘union log_msg_generic’ declared inside parameter list will not be visible outside of this definition or declaration
+   82 | static void msg_process(union log_msg_generic *msg)
+      |                               ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘msg_process’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:84:32: error: ‘log_backend’ undeclared (first use in this function)
+   84 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:84:45: error: ‘backend’ undeclared (first use in this function)
+   84 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:84:53: error: expected ‘;’ before ‘{’ token
+   84 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘dropped_notify’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:94:9: error: unknown type name ‘uint32_t’
+   94 |         uint32_t dropped = z_log_dropped_read_and_clear();
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:94:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:94:28: warning: implicit declaration of function ‘z_log_dropped_read_and_clear’ [-Wimplicit-function-declaration]
+   94 |         uint32_t dropped = z_log_dropped_read_and_clear();
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:96:32: error: ‘log_backend’ undeclared (first use in this function)
+   96 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:96:45: error: ‘backend’ undeclared (first use in this function)
+   96 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:96:53: error: expected ‘;’ before ‘{’ token
+   96 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:94:18: warning: unused variable ‘dropped’ [-Wunused-variable]
+   94 |         uint32_t dropped = z_log_dropped_read_and_clear();
+      |                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘unordered_notify’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:105:9: error: unknown type name ‘uint32_t’
+  105 |         uint32_t unordered = atomic_set(&unordered_cnt, 0);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:105:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:105:30: warning: implicit declaration of function ‘atomic_set’ [-Wimplicit-function-declaration]
+  105 |         uint32_t unordered = atomic_set(&unordered_cnt, 0);
+      |                              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:105:42: error: ‘unordered_cnt’ undeclared (first use in this function); did you mean ‘unordered’?
+  105 |         uint32_t unordered = atomic_set(&unordered_cnt, 0);
+      |                                          ^~~~~~~~~~~~~
+      |                                          unordered
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:107:9: warning: implicit declaration of function ‘LOG_WRN’ [-Wimplicit-function-declaration]
+  107 |         LOG_WRN("%d unordered messages since last report", unordered);
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_notify_backend_enabled’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:115:24: error: ‘CONFIG_LOG_PROCESS_THREAD’ undeclared (first use in this function)
+  115 |         if (IS_ENABLED(CONFIG_LOG_PROCESS_THREAD) && !backend_attached) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:115:55: error: ‘backend_attached’ undeclared (first use in this function)
+  115 |         if (IS_ENABLED(CONFIG_LOG_PROCESS_THREAD) && !backend_attached) {
+      |                                                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:116:17: warning: implicit declaration of function ‘k_sem_give’ [-Wimplicit-function-declaration]
+  116 |                 k_sem_give(&log_process_thread_sem);
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:116:29: error: ‘log_process_thread_sem’ undeclared (first use in this function)
+  116 |                 k_sem_give(&log_process_thread_sem);
+      |                             ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:119:28: error: ‘true’ undeclared (first use in this function)
+  119 |         backend_attached = true;
+      |                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:119:28: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:122:15: error: unknown type name ‘bool’
+  122 | static inline bool z_log_unordered_pending(void)
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_unordered_pending’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:124:27: error: ‘CONFIG_LOG_MULTIDOMAIN’ undeclared (first use in this function); did you mean ‘CONFIG_LOG_RATELIMIT’?
+  124 |         return IS_ENABLED(CONFIG_LOG_MULTIDOMAIN) && unordered_cnt;
+      |                           ^~~~~~~~~~~~~~~~~~~~~~
+      |                           CONFIG_LOG_RATELIMIT
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:124:54: error: ‘unordered_cnt’ undeclared (first use in this function); did you mean ‘unordered_notify’?
+  124 |         return IS_ENABLED(CONFIG_LOG_MULTIDOMAIN) && unordered_cnt;
+      |                                                      ^~~~~~~~~~~~~
+      |                                                      unordered_notify
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:127:1: error: unknown type name ‘bool’
+  127 | bool z_impl_log_process(void)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:127:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_impl_log_process’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:129:25: error: ‘CONFIG_LOG_MODE_DEFERRED’ undeclared (first use in this function); did you mean ‘CONFIG_LOG_MODE_IMMEDIATE’?
+  129 |         if (!IS_ENABLED(CONFIG_LOG_MODE_DEFERRED)) {
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                         CONFIG_LOG_MODE_IMMEDIATE
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:130:24: error: ‘false’ undeclared (first use in this function)
+  130 |                 return false;
+      |                        ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:130:24: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:133:9: error: unknown type name ‘k_timeout_t’
+  133 |         k_timeout_t backoff = K_NO_WAIT;
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:133:31: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  133 |         k_timeout_t backoff = K_NO_WAIT;
+      |                               ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:136:14: error: ‘backend_attached’ undeclared (first use in this function)
+  136 |         if (!backend_attached) {
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:140:15: warning: implicit declaration of function ‘z_log_msg_claim’ [-Wimplicit-function-declaration]
+  140 |         msg = z_log_msg_claim(&backoff);
+      |               ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:140:13: warning: assignment to ‘union log_msg_generic *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  140 |         msg = z_log_msg_claim(&backoff);
+      |             ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:143:29: warning: passing argument 1 of ‘msg_process’ from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |                 msg_process(msg);
+      |                             ^~~
+      |                             |
+      |                             union log_msg_generic *
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:82:48: note: expected ‘union log_msg_generic *’ but argument is of type ‘union log_msg_generic *’
+   82 | static void msg_process(union log_msg_generic *msg)
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:144:17: warning: implicit declaration of function ‘z_log_msg_free’ [-Wimplicit-function-declaration]
+  144 |                 z_log_msg_free(msg);
+      |                 ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:145:17: warning: implicit declaration of function ‘atomic_dec’ [-Wimplicit-function-declaration]
+  145 |                 atomic_dec(&buffered_cnt);
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:145:29: error: ‘buffered_cnt’ undeclared (first use in this function)
+  145 |                 atomic_dec(&buffered_cnt);
+      |                             ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:146:20: error: ‘CONFIG_LOG_PROCESSING_LATENCY_US’ undeclared (first use in this function)
+  146 |         } else if (CONFIG_LOG_PROCESSING_LATENCY_US > 0 && !K_TIMEOUT_EQ(backoff, K_NO_WAIT)) {
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:146:61: warning: implicit declaration of function ‘K_TIMEOUT_EQ’ [-Wimplicit-function-declaration]
+  146 |         } else if (CONFIG_LOG_PROCESSING_LATENCY_US > 0 && !K_TIMEOUT_EQ(backoff, K_NO_WAIT)) {
+      |                                                             ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:151:17: warning: implicit declaration of function ‘k_timer_start’ [-Wimplicit-function-declaration]
+  151 |                 k_timer_start(&log_process_thread_timer, backoff, K_NO_WAIT);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:151:32: error: ‘log_process_thread_timer’ undeclared (first use in this function)
+  151 |                 k_timer_start(&log_process_thread_timer, backoff, K_NO_WAIT);
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:157:17: error: unknown type name ‘bool’
+  157 |                 bool dropped_pend = z_log_dropped_pending();
+      |                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:157:17: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:157:37: warning: implicit declaration of function ‘z_log_dropped_pending’; did you mean ‘z_log_unordered_pending’? [-Wimplicit-function-declaration]
+  157 |                 bool dropped_pend = z_log_dropped_pending();
+      |                                     ^~~~~~~~~~~~~~~~~~~~~
+      |                                     z_log_unordered_pending
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:158:17: error: unknown type name ‘bool’
+  158 |                 bool unordered_pend = z_log_unordered_pending();
+      |                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:158:17: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:161:21: warning: implicit declaration of function ‘k_uptime_get’ [-Wimplicit-function-declaration]
+  161 |                    (k_uptime_get() - last_failure_report) > CONFIG_LOG_FAILURE_REPORT_PERIOD) {
+      |                     ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:161:38: error: ‘last_failure_report’ undeclared (first use in this function)
+  161 |                    (k_uptime_get() - last_failure_report) > CONFIG_LOG_FAILURE_REPORT_PERIOD) {
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:161:61: error: ‘CONFIG_LOG_FAILURE_REPORT_PERIOD’ undeclared (first use in this function)
+  161 |                    (k_uptime_get() - last_failure_report) > CONFIG_LOG_FAILURE_REPORT_PERIOD) {
+      |                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:174:23: error: ‘NULL’ undeclared (first use in this function)
+  174 |         return msg != NULL && z_log_msg_pending();
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int log_set_timestamp_func(log_timestamp_get_t timestamp_getter, uint32_t freq)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:174:31: warning: implicit declaration of function ‘z_log_msg_pending’ [-Wimplicit-function-declaration]
+  174 |         return msg != NULL && z_log_msg_pending();
+      |                               ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:185:1: error: unknown type name ‘uint32_t’
+  185 | uint32_t z_impl_log_buffered_cnt(void)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:185:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_impl_log_buffered_cnt’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:187:16: error: ‘buffered_cnt’ undeclared (first use in this function)
+  187 |         return buffered_cnt;
+      |                ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:198:20: error: unknown type name ‘bool’
+  198 | void z_log_dropped(bool buffered)
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:198:20: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:211:1: error: unknown type name ‘uint32_t’
+  211 | uint32_t z_log_dropped_read_and_clear(void)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:211:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_dropped_read_and_clear’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:213:28: error: ‘dropped_cnt’ undeclared (first use in this function); did you mean ‘dropped_notify’?
+  213 |         return atomic_set(&dropped_cnt, 0);
+      |                            ^~~~~~~~~~~
+      |                            dropped_notify
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:216:1: error: unknown type name ‘bool’
+  216 | bool z_log_dropped_pending(void)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:216:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_dropped_pending’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:218:16: error: ‘dropped_cnt’ undeclared (first use in this function); did you mean ‘dropped_notify’?
+  218 |         return dropped_cnt > 0;
+      |                ^~~~~~~~~~~
+      |                dropped_notify
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:229:67: error: unknown type name ‘uint32_t’
+  229 | static struct log_msg *msg_alloc(struct mpsc_pbuf_buffer *buffer, uint32_t wlen)
+      |                                                                   ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:229:67: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:242:33: error: unknown type name ‘uint32_t’
+  242 | struct log_msg *z_log_msg_alloc(uint32_t wlen)
+      |                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:242:33: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:247:31: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  247 | static void msg_commit(struct mpsc_pbuf_buffer *buffer, struct log_msg *msg)
+      |                               ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘msg_commit’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:250:9: error: unknown type name ‘bool’
+  250 |         bool lock_acquired = false;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:250:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:250:30: error: ‘false’ undeclared (first use in this function)
+  250 |         bool lock_acquired = false;
+      |                              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:250:30: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:253:17: error: unknown type name ‘k_spinlock_key_t’
+  253 |                 k_spinlock_key_t key;
+      |                 ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:260:32: error: ‘CONFIG_LOG_IMMEDIATE_CLEAN_OUTPUT’ undeclared (first use in this function)
+  260 |                 if (IS_ENABLED(CONFIG_LOG_IMMEDIATE_CLEAN_OUTPUT) &&
+      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:261:21: warning: implicit declaration of function ‘atomic_cas’ [-Wimplicit-function-declaration]
+  261 |                     atomic_cas(&process_lock_owner_cpu, LOG_NO_CPU_OWNER, curr_cpu)) {
+      |                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:261:33: error: ‘process_lock_owner_cpu’ undeclared (first use in this function)
+  261 |                     atomic_cas(&process_lock_owner_cpu, LOG_NO_CPU_OWNER, curr_cpu)) {
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:261:57: error: ‘LOG_NO_CPU_OWNER’ undeclared (first use in this function)
+  261 |                     atomic_cas(&process_lock_owner_cpu, LOG_NO_CPU_OWNER, curr_cpu)) {
+      |                                                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:262:31: warning: implicit declaration of function ‘k_spin_lock’ [-Wimplicit-function-declaration]
+  262 |                         key = k_spin_lock(&process_lock);
+      |                               ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:262:44: error: ‘process_lock’ undeclared (first use in this function)
+  262 |                         key = k_spin_lock(&process_lock);
+      |                                            ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:263:41: error: ‘true’ undeclared (first use in this function)
+  263 |                         lock_acquired = true;
+      |                                         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:263:41: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:266:29: warning: passing argument 1 of ‘msg_process’ from incompatible pointer type [-Wincompatible-pointer-types]
+  266 |                 msg_process(m);
+      |                             ^
+      |                             |
+      |                             union log_msg_generic *
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:82:48: note: expected ‘union log_msg_generic *’ but argument is of type ‘union log_msg_generic *’
+   82 | static void msg_process(union log_msg_generic *msg)
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:270:25: warning: implicit declaration of function ‘k_spin_unlock’ [-Wimplicit-function-declaration]
+  270 |                         k_spin_unlock(&process_lock, key);
+      |                         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:279:9: warning: implicit declaration of function ‘z_log_msg_post_finalize’ [-Wimplicit-function-declaration]
+  279 |         z_log_msg_post_finalize();
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_msg_commit’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:284:12: error: invalid use of undefined type ‘struct log_msg’
+  284 |         msg->hdr.timestamp = timestamp_func();
+      |            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:284:30: warning: implicit declaration of function ‘timestamp_func’ [-Wimplicit-function-declaration]
+  284 |         msg->hdr.timestamp = timestamp_func();
+      |                              ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:285:21: error: ‘log_buffer’ undeclared (first use in this function)
+  285 |         msg_commit(&log_buffer, msg);
+      |                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_msg_local_claim’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:293:16: error: ‘NULL’ undeclared (first use in this function)
+  293 |         return NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:293:16: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:299:47: error: unknown type name ‘k_timeout_t’
+  299 | union log_msg_generic *z_log_msg_claim_oldest(k_timeout_t *backoff)
+      |                                               ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:365:40: error: unknown type name ‘k_timeout_t’
+  365 | union log_msg_generic *z_log_msg_claim(k_timeout_t *backoff)
+      |                                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:379:29: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  379 | static void msg_free(struct mpsc_pbuf_buffer *buffer, const union log_msg_generic *msg)
+      |                             ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:386:6: warning: conflicting types for ‘z_log_msg_free’; have ‘void(union log_msg_generic *)’
+  386 | void z_log_msg_free(union log_msg_generic *msg)
+      |      ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:144:17: note: previous implicit declaration of ‘z_log_msg_free’ with type ‘void(union log_msg_generic *)’
+  144 |                 z_log_msg_free(msg);
+      |                 ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_msg_free’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:388:18: error: ‘curr_log_buffer’ undeclared (first use in this function)
+  388 |         msg_free(curr_log_buffer, msg);
+      |                  ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:391:8: error: unknown type name ‘bool’
+  391 | static bool msg_pending(struct mpsc_pbuf_buffer *buffer)
+      |        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:391:32: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  391 | static bool msg_pending(struct mpsc_pbuf_buffer *buffer)
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘msg_pending’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:396:16: error: ‘false’ undeclared (first use in this function)
+  396 |         return false;
+      |                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:396:16: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:400:1: error: unknown type name ‘bool’
+  400 | bool z_log_msg_pending(void)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:400:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_msg_pending’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:402:9: error: unknown type name ‘size_t’
+  402 |         size_t len;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:402:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:405:9: warning: implicit declaration of function ‘STRUCT_SECTION_COUNT’ [-Wimplicit-function-declaration]
+  405 |         STRUCT_SECTION_COUNT(log_mpsc_pbuf, &len);
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:405:30: error: ‘log_mpsc_pbuf’ undeclared (first use in this function)
+  405 |         STRUCT_SECTION_COUNT(log_mpsc_pbuf, &len);
+      |                              ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:407:25: error: ‘CONFIG_LOG_MULTIDOMAIN’ undeclared (first use in this function); did you mean ‘CONFIG_LOG_RATELIMIT’?
+  407 |         if (!IS_ENABLED(CONFIG_LOG_MULTIDOMAIN) || (len == 1)) {
+      |                         ^~~~~~~~~~~~~~~~~~~~~~
+      |                         CONFIG_LOG_RATELIMIT
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:408:37: error: ‘log_buffer’ undeclared (first use in this function)
+  408 |                 return msg_pending(&log_buffer);
+      |                                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:411:32: error: ‘log_msg_ptr’ undeclared (first use in this function); did you mean ‘log_msg’?
+  411 |         STRUCT_SECTION_FOREACH(log_msg_ptr, msg_ptr) {
+      |                                ^~~~~~~~~~~
+      |                                log_msg
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:411:45: error: ‘msg_ptr’ undeclared (first use in this function)
+  411 |         STRUCT_SECTION_FOREACH(log_msg_ptr, msg_ptr) {
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:411:53: error: expected ‘;’ before ‘{’ token
+  411 |         STRUCT_SECTION_FOREACH(log_msg_ptr, msg_ptr) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:403:13: warning: unused variable ‘i’ [-Wunused-variable]
+  403 |         int i = 0;
+      |             ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:430:71: error: unknown type name ‘size_t’
+  430 | void z_log_msg_enqueue(const struct log_link *link, const void *data, size_t len)
+      |                                                                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:430:71: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_get_tag’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:451:45: error: ‘tag’ undeclared (first use in this function)
+  451 |         return CONFIG_LOG_TAG_MAX_LEN > 0 ? tag : NULL;
+      |                                             ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:451:51: error: ‘NULL’ undeclared (first use in this function)
+  451 |         return CONFIG_LOG_TAG_MAX_LEN > 0 ? tag : NULL;
+      |                                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:451:51: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘log_set_tag’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:474:17: error: ‘ENOTSUP’ undeclared (first use in this function)
+  474 |         return -ENOTSUP;
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:478:23: error: unknown type name ‘uint32_t’
+  478 | int log_mem_get_usage(uint32_t *buf_size, uint32_t *usage)
+      |                       ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:478:23: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:478:43: error: unknown type name ‘uint32_t’
+  478 | int log_mem_get_usage(uint32_t *buf_size, uint32_t *usage)
+      |                                           ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:478:43: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:492:27: error: unknown type name ‘uint32_t’
+  492 | int log_mem_get_max_usage(uint32_t *max)
+      |                           ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:492:27: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:504:42: warning: ‘union log_backend_evt_arg’ declared inside parameter list will not be visible outside of this definition or declaration
+  504 |                                    union log_backend_evt_arg *arg)
+      |                                          ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:503:41: warning: ‘enum log_backend_evt’ declared inside parameter list will not be visible outside of this definition or declaration
+  503 | static void log_backend_notify_all(enum log_backend_evt event,
+      |                                         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:503:57: error: parameter 1 (‘event’) has incomplete type
+  503 | static void log_backend_notify_all(enum log_backend_evt event,
+      |                                    ~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘log_backend_notify_all’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:506:32: error: ‘log_backend’ undeclared (first use in this function); did you mean ‘log_backend_evt’?
+  506 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                ^~~~~~~~~~~
+      |                                log_backend_evt
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:506:45: error: ‘backend’ undeclared (first use in this function)
+  506 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:506:53: error: expected ‘;’ before ‘{’ token
+  506 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:511:55: warning: ‘struct k_timer’ declared inside parameter list will not be visible outside of this definition or declaration
+  511 | static void log_process_thread_timer_expiry_fn(struct k_timer *timer)
+      |                                                       ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘log_process_thread_timer_expiry_fn’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:513:21: error: ‘log_process_thread_sem’ undeclared (first use in this function)
+  513 |         k_sem_give(&log_process_thread_sem);
+      |                     ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘log_process_thread_func’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:518:9: warning: implicit declaration of function ‘__ASSERT_NO_MSG’ [-Wimplicit-function-declaration]
+  518 |         __ASSERT_NO_MSG(log_backend_count_get() > 0);
+      |         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:518:25: warning: implicit declaration of function ‘log_backend_count_get’ [-Wimplicit-function-declaration]
+  518 |         __ASSERT_NO_MSG(log_backend_count_get() > 0);
+      |                         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:519:9: error: unknown type name ‘uint32_t’
+  519 |         uint32_t links_active_mask = 0xFFFFFFFF;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:519:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:520:9: error: unknown type name ‘uint8_t’
+  520 |         uint8_t domain_offset = 0;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:520:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:521:9: error: unknown type name ‘uint32_t’
+  521 |         uint32_t activate_mask = z_log_init(false, false);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:521:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:521:45: error: ‘false’ undeclared (first use in this function)
+  521 |         uint32_t activate_mask = z_log_init(false, false);
+      |                                             ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:521:45: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:526:9: error: unknown type name ‘k_timeout_t’
+  526 |         k_timeout_t timeout = (activate_mask != 0) ? K_MSEC(50) : K_FOREVER;
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:526:54: warning: implicit declaration of function ‘K_MSEC’ [-Wimplicit-function-declaration]
+  526 |         k_timeout_t timeout = (activate_mask != 0) ? K_MSEC(50) : K_FOREVER;
+      |                                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:526:67: error: ‘K_FOREVER’ undeclared (first use in this function)
+  526 |         k_timeout_t timeout = (activate_mask != 0) ? K_MSEC(50) : K_FOREVER;
+      |                                                                   ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:527:9: error: unknown type name ‘bool’
+  527 |         bool processed_any = false;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:527:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:528:9: warning: implicit declaration of function ‘thread_set’ [-Wimplicit-function-declaration]
+  528 |         thread_set(k_current_get());
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:528:20: warning: implicit declaration of function ‘k_current_get’ [-Wimplicit-function-declaration]
+  528 |         thread_set(k_current_get());
+      |                    ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:533:16: error: ‘true’ undeclared (first use in this function)
+  533 |         while (true) {
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:533:16: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:535:41: warning: implicit declaration of function ‘activate_foreach_backend’ [-Wimplicit-function-declaration]
+  535 |                         activate_mask = activate_foreach_backend(activate_mask);
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:545:32: error: ‘CONFIG_LOG_MULTIDOMAIN’ undeclared (first use in this function); did you mean ‘CONFIG_LOG_RATELIMIT’?
+  545 |                 if (IS_ENABLED(CONFIG_LOG_MULTIDOMAIN) && links_active_mask) {
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+      |                                CONFIG_LOG_RATELIMIT
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:547:33: warning: implicit declaration of function ‘z_log_links_activate’ [-Wimplicit-function-declaration]
+  547 |                                 z_log_links_activate(links_active_mask, &domain_offset);
+      |                                 ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:551:21: warning: implicit declaration of function ‘log_process’; did you mean ‘msg_process’? [-Wimplicit-function-declaration]
+  551 |                 if (log_process() == false) {
+      |                     ^~~~~~~~~~~
+      |                     msg_process
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:554:56: error: ‘LOG_BACKEND_EVT_PROCESS_THREAD_DONE’ undeclared (first use in this function)
+  554 |                                 log_backend_notify_all(LOG_BACKEND_EVT_PROCESS_THREAD_DONE, NULL);
+      |                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:554:93: error: ‘NULL’ undeclared (first use in this function)
+  554 |                                 log_backend_notify_all(LOG_BACKEND_EVT_PROCESS_THREAD_DONE, NULL);
+      |                                                                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:554:93: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:556:31: warning: implicit declaration of function ‘k_sem_take’ [-Wimplicit-function-declaration]
+  556 |                         (void)k_sem_take(&log_process_thread_sem, timeout);
+      |                               ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:556:43: error: ‘log_process_thread_sem’ undeclared (first use in this function); did you mean ‘log_process_thread_func’?
+  556 |                         (void)k_sem_take(&log_process_thread_sem, timeout);
+      |                                           ^~~~~~~~~~~~~~~~~~~~~~
+      |                                           log_process_thread_func
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:563:1: warning: data definition has no type or storage class
+  563 | K_KERNEL_STACK_DEFINE(logging_stack, CONFIG_LOG_PROCESS_THREAD_STACK_SIZE);
+      | ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:563:1: error: type defaults to ‘int’ in declaration of ‘K_KERNEL_STACK_DEFINE’ [-Werror=implicit-int]
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:563:1: warning: parameter names (without types) in function declaration
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘enable_logger’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:568:24: error: ‘CONFIG_LOG_PROCESS_THREAD’ undeclared (first use in this function)
+  568 |         if (IS_ENABLED(CONFIG_LOG_PROCESS_THREAD)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:569:17: warning: implicit declaration of function ‘k_timer_init’ [-Wimplicit-function-declaration]
+  569 |                 k_timer_init(&log_process_thread_timer,
+      |                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:569:31: error: ‘log_process_thread_timer’ undeclared (first use in this function); did you mean ‘log_process_thread_func’?
+  569 |                 k_timer_init(&log_process_thread_timer,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                               log_process_thread_func
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:570:69: error: ‘NULL’ undeclared (first use in this function)
+  570 |                                 log_process_thread_timer_expiry_fn, NULL);
+      |                                                                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:570:69: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:572:17: warning: implicit declaration of function ‘k_thread_create’ [-Wimplicit-function-declaration]
+  572 |                 k_thread_create(&logging_thread, logging_stack,
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:572:50: error: ‘logging_stack’ undeclared (first use in this function)
+  572 |                 k_thread_create(&logging_thread, logging_stack,
+      |                                                  ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:573:33: warning: implicit declaration of function ‘K_KERNEL_STACK_SIZEOF’; did you mean ‘K_KERNEL_STACK_DEFINE’? [-Wimplicit-function-declaration]
+  573 |                                 K_KERNEL_STACK_SIZEOF(logging_stack),
+      |                                 ^~~~~~~~~~~~~~~~~~~~~
+      |                                 K_KERNEL_STACK_DEFINE
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:575:33: error: ‘LOG_PROCESS_THREAD_PRIORITY’ undeclared (first use in this function); did you mean ‘CONFIG_ZTEST_THREAD_PRIORITY’?
+  575 |                                 LOG_PROCESS_THREAD_PRIORITY, 0,
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                 CONFIG_ZTEST_THREAD_PRIORITY
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:576:33: warning: implicit declaration of function ‘COND_CODE_1’ [-Wimplicit-function-declaration]
+  576 |                                 COND_CODE_1(CONFIG_LOG_PROCESS_THREAD,
+      |                                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:577:48: error: ‘CONFIG_LOG_PROCESS_THREAD_STARTUP_DELAY_MS’ undeclared (first use in this function)
+  577 |                                         K_MSEC(CONFIG_LOG_PROCESS_THREAD_STARTUP_DELAY_MS),
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:578:41: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  578 |                                         K_NO_WAIT));
+      |                                         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:579:17: warning: implicit declaration of function ‘k_thread_name_set’ [-Wimplicit-function-declaration]
+  579 |                 k_thread_name_set(&logging_thread, "logging");
+      |                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:581:34: error: ‘false’ undeclared (first use in this function)
+  581 |                 (void)z_log_init(false, false);
+      |                                  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:581:34: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:602:37: error: expected ‘)’ before numeric constant
+  602 | SYS_INIT(enable_logger, POST_KERNEL, CONFIG_LOG_CORE_INIT_PRIORITY);
+      |                                     ^
+      |                                     )
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:564:17: error: storage size of ‘logging_thread’ isn’t known
+  564 | struct k_thread logging_thread;
+      |                 ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_impl_log_process’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:175:1: warning: control reaches end of non-void function [-Wreturn-type]
+  175 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_impl_log_buffered_cnt’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:188:1: warning: control reaches end of non-void function [-Wreturn-type]
+  188 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_dropped_read_and_clear’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:214:1: warning: control reaches end of non-void function [-Wreturn-type]
+  214 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_dropped_pending’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:219:1: warning: control reaches end of non-void function [-Wreturn-type]
+  219 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_msg_local_claim’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:296:1: warning: control reaches end of non-void function [-Wreturn-type]
+  296 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_msg_pending’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:428:1: warning: control reaches end of non-void function [-Wreturn-type]
+  428 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘z_log_get_tag’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:452:1: warning: control reaches end of non-void function [-Wreturn-type]
+  452 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: In function ‘log_set_tag’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:476:1: warning: control reaches end of non-void function [-Wreturn-type]
+  476 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:566:12: warning: ‘enable_logger’ defined but not used [-Wunused-function]
+  566 | static int enable_logger(void)
+      |            ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:49:13: warning: ‘msg_filter_check’ defined but not used [-Wunused-function]
+   49 | static bool msg_filter_check(struct log_backend const *backend,
+      |             ^~~~~~~~~~~~~~~~
+cc1: some warnings being treated as errors
+[109/113] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: LOG_PROCESS_THREAD_SLEEP_MS (defined at subsys/logging/Kconfig.processing:71) was assigned
+the value '100' but got the value ''. Check these unsatisfied dependencies: LOG_PROCESS_THREAD (=n),
+LOG_MODE_DEFERRED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_PROCESS_THREAD_SLEEP_MS and/or look up
+LOG_PROCESS_THREAD_SLEEP_MS in the menuconfig/guiconfig interface. The Application Development
+Primer, Setting Configuration Values, and Kconfig - Tips and Best Practices sections of the manual
+might be helpful too.
+
+
+warning: LOG_BUFFER_SIZE (defined at subsys/logging/Kconfig.processing:121) was assigned the value
+'768' but got the value ''. Check these unsatisfied dependencies: LOG_MODE_DEFERRED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_BUFFER_SIZE and/or look up
+LOG_BUFFER_SIZE in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+
+warning: LOG_BACKEND_UART (defined at subsys/logging/backends/Kconfig.uart:4) was assigned the value
+'y' but got the value 'n'. Check these unsatisfied dependencies: UART_CONSOLE (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_BACKEND_UART and/or look up
+LOG_BACKEND_UART in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build
+
+=== RC ===
+1

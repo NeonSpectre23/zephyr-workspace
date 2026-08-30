@@ -261,7 +261,7 @@ class ClaudeAgent:
             "--tmpfs", "/home/agent/.config:size=100m",
             "-w", "/workspace",
             "--entrypoint", "bash", DOCKER_IMAGE,
-            "-c", 'claude --dangerously-skip-permissions -p "$(cat)" 2>&1',
+            "-c", 'claude --dangerously-skip-permissions --disallowedTools "WebSearch,WebFetch" -p "$(cat)" 2>&1',
         ])
 
         print(f"  [Claude] {task['sut_function']} (task {task['task_id']})")
@@ -349,7 +349,7 @@ class ClaudeAgent:
         try:
             print(f"  [VERIFY] {cwd}")
             p = subprocess.run(cmd, shell=True, capture_output=True, text=True,
-                               timeout=TEST_TIMEOUT, cwd=cwd, env=env)
+                               errors="replace", timeout=TEST_TIMEOUT, cwd=cwd, env=env)
         except subprocess.TimeoutExpired:
             target_src.write_text(original)  # 恢复
             return False, "[TIMEOUT]", -1, ERROR_TIMEOUT

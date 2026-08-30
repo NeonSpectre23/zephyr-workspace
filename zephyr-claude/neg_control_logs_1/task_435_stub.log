@@ -1,0 +1,372 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (13.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build
+-- west build: building application
+[1/136] Preparing syscall dependency handling
+
+[2/136] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/136] Generating misc/generated/syscalls_subdirs.trigger
+[4/136] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/136] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/136] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/136] Generating include/generated/zephyr/driver-validation.h
+[8/136] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/136] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/136] Generating ../../include/generated/zephyr/heap_constants.h
+[11/136] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/136] Generating include/generated/zephyr/offsets.h
+[13/136] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+[25/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/136] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/136] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/kernel_shell.c.obj
+[44/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/cycles.c.obj
+[45/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/sleep.c.obj
+[46/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/log-level.c.obj
+[47/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/thread.c.obj
+[48/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/list.c.obj
+[49/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/uptime.c.obj
+[50/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/version.c.obj
+[51/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/stacks.c.obj
+[52/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/suspend.c.obj
+[53/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/resume.c.obj
+[54/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/kill.c.obj
+[55/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/device_service.c.obj
+[56/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/date_service.c.obj
+[57/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/devmem_service.c.obj
+[58/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj
+[59/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_fprintf.c.obj
+[60/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_ops.c.obj
+[61/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_log_backend.c.obj
+[62/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_help.c.obj
+[63/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_cmds.c.obj
+[64/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_history.c.obj
+[65/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_wildcard.c.obj
+[66/136] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[67/136] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[68/136] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[69/136] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[70/136] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[71/136] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[72/136] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[73/136] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[74/136] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[75/136] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[76/136] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[77/136] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[78/136] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[79/136] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[80/136] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[81/136] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[82/136] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[83/136] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[84/136] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[85/136] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[86/136] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[87/136] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[88/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[89/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[90/136] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[91/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[92/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[93/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[94/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[95/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[96/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[97/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[98/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[99/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[100/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[101/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[102/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[103/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[104/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[105/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[106/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[107/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[108/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[109/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[110/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[111/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[112/136] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/shell/modules/kernel_service/thread/.. -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:1:42: error: unknown type name ‘size_t’
+    1 | const struct device *shell_device_lookup(size_t idx,
+      |                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:1:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | const struct device *shell_device_lookup(size_t idx,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:8:46: error: unknown type name ‘size_t’
+    8 | const struct device *shell_device_lookup_all(size_t idx,
+      |                                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:8:46: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:15:52: error: unknown type name ‘size_t’
+   15 | const struct device *shell_device_lookup_non_ready(size_t idx,
+      |                                                    ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:15:52: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_device_get_binding’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:24:36: warning: implicit declaration of function ‘device_get_binding’; did you mean ‘shell_device_get_binding’? [-Wimplicit-function-declaration]
+   24 |         const struct device *dev = device_get_binding(name);
+      |                                    ^~~~~~~~~~~~~~~~~~
+      |                                    shell_device_get_binding
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:24:36: warning: initialization of ‘const struct device *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:26:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   26 |         if (IS_ENABLED(CONFIG_DEVICE_DT_METADATA) && dev == NULL) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:26:61: error: ‘NULL’ undeclared (first use in this function)
+   26 |         if (IS_ENABLED(CONFIG_DEVICE_DT_METADATA) && dev == NULL) {
+      |                                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:26:61: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:26:61: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:27:23: warning: implicit declaration of function ‘device_get_by_dt_nodelabel’ [-Wimplicit-function-declaration]
+   27 |                 dev = device_get_by_dt_nodelabel(name);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:27:21: warning: assignment to ‘const struct device *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   27 |                 dev = device_get_by_dt_nodelabel(name);
+      |                     ^
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:34:15: error: unknown type name ‘bool’
+   34 | static inline bool device_has_nodelabel(const struct device *dev,
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘device_has_nodelabel’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:39:14: warning: implicit declaration of function ‘device_get_dt_nodelabels’; did you mean ‘device_has_nodelabel’? [-Wimplicit-function-declaration]
+   39 |         nl = device_get_dt_nodelabels(dev);
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~
+      |              device_has_nodelabel
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:39:12: warning: assignment to ‘const struct device_dt_nodelabels *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   39 |         nl = device_get_dt_nodelabels(dev);
+      |            ^
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:40:19: error: ‘NULL’ undeclared (first use in this function)
+   40 |         if (nl != NULL) {
+      |                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:40:19: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:41:17: error: unknown type name ‘size_t’
+   41 |                 size_t i;
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:41:17: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:43:35: error: invalid use of undefined type ‘const struct device_dt_nodelabels’
+   43 |                 for (i = 0; i < nl->num_nodelabels; i++) {
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:44:48: error: invalid use of undefined type ‘const struct device_dt_nodelabels’
+   44 |                         const char *dev_nl = nl->nodelabels[i];
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:46:30: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+   46 |                         if ((strlen(dev_nl) == strlen(name)) &&
+      |                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+  +++ |+#include <string.h>
+    1 | const struct device *shell_device_lookup(size_t idx,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:46:30: warning: incompatible implicit declaration of built-in function ‘strlen’ [-Wbuiltin-declaration-mismatch]
+   46 |                         if ((strlen(dev_nl) == strlen(name)) &&
+      |                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:46:30: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:47:30: warning: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+   47 |                             (strcmp(name, dev_nl) == 0)) {
+      |                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:47:30: note: include ‘<string.h>’ or provide a declaration of ‘strcmp’
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:48:40: error: ‘true’ undeclared (first use in this function)
+   48 |                                 return true;
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:1:1: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | const struct device *shell_device_lookup(size_t idx,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:53:16: error: ‘false’ undeclared (first use in this function)
+   53 |         return false;
+      |                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:53:16: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_device_get_binding_all’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:62:9: error: unknown type name ‘size_t’
+   62 |         size_t len = z_device_get_all_static(&dev);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:62:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:62:22: warning: implicit declaration of function ‘z_device_get_all_static’ [-Wimplicit-function-declaration]
+   62 |         size_t len = z_device_get_all_static(&dev);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:63:44: error: invalid use of undefined type ‘struct device’
+   63 |         const struct device *dev_end = dev + len;
+      |                                            ^
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:65:21: error: ‘NULL’ undeclared (first use in this function)
+   65 |         if (name != NULL) {
+      |                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:65:21: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:66:42: error: increment of pointer to an incomplete type ‘const struct device’
+   66 |                 for (; dev < dev_end; dev++) {
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:67:34: error: invalid use of undefined type ‘const struct device’
+   67 |                         if (((dev->name != NULL)
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:68:34: warning: incompatible implicit declaration of built-in function ‘strlen’ [-Wbuiltin-declaration-mismatch]
+   68 |                              && (strlen(dev->name) == strlen(name))
+      |                                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:68:34: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:68:44: error: invalid use of undefined type ‘const struct device’
+   68 |                              && (strlen(dev->name) == strlen(name))
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:69:50: error: invalid use of undefined type ‘const struct device’
+   69 |                              && (strcmp(name, dev->name) == 0))
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_strtol’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:84:9: error: ‘errno’ undeclared (first use in this function)
+   84 |         errno = 0;
+      |         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:1:1: note: ‘errno’ is defined in header ‘<errno.h>’; did you forget to ‘#include <errno.h>’?
+  +++ |+#include <errno.h>
+    1 | const struct device *shell_device_lookup(size_t idx,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:85:15: warning: implicit declaration of function ‘strtol’ [-Wimplicit-function-declaration]
+   85 |         val = strtol(str, &endptr, base);
+      |               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:86:22: error: ‘ERANGE’ undeclared (first use in this function)
+   86 |         if (errno == ERANGE) {
+      |                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:90:25: error: ‘EINVAL’ undeclared (first use in this function)
+   90 |                 *err = -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_strtoul’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:103:25: error: ‘EINVAL’ undeclared (first use in this function)
+  103 |                 *err = -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:107:9: error: ‘errno’ undeclared (first use in this function)
+  107 |         errno = 0;
+      |         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:107:9: note: ‘errno’ is defined in header ‘<errno.h>’; did you forget to ‘#include <errno.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:108:15: warning: implicit declaration of function ‘strtoul’ [-Wimplicit-function-declaration]
+  108 |         val = strtoul(str, &endptr, base);
+      |               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:109:22: error: ‘ERANGE’ undeclared (first use in this function)
+  109 |         if (errno == ERANGE) {
+      |                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_strtoull’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:126:25: error: ‘EINVAL’ undeclared (first use in this function)
+  126 |                 *err = -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:130:9: error: ‘errno’ undeclared (first use in this function)
+  130 |         errno = 0;
+      |         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:130:9: note: ‘errno’ is defined in header ‘<errno.h>’; did you forget to ‘#include <errno.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:131:15: warning: implicit declaration of function ‘strtoull’ [-Wimplicit-function-declaration]
+  131 |         val = strtoull(str, &endptr, base);
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:132:22: error: ‘ERANGE’ undeclared (first use in this function)
+  132 |         if (errno == ERANGE) {
+      |                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:143:1: error: unknown type name ‘bool’
+  143 | bool shell_strtobool(const char *str, int base, int *err)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:143:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_strtobool’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:146:24: error: ‘true’ undeclared (first use in this function)
+  146 |                 return true;
+      |                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:146:24: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:150:24: error: ‘false’ undeclared (first use in this function)
+  150 |                 return false;
+      |                        ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:150:24: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c: In function ‘shell_device_get_binding_all’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell_utils.c:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+[113/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[114/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[115/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread_monitor.c.obj
+[116/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[117/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[118/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[119/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[120/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[121/136] Linking C static library app/libapp.a
+[122/136] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[123/136] Generating linker_zephyr_pre0.cmd
+[124/136] Linking C static library zephyr/arch/common/libarch__common.a
+[125/136] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[126/136] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[127/136] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[128/136] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[129/136] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[130/136] Linking C static library zephyr/drivers/console/libdrivers__console.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: PM (defined at soc/silabs/silabs_s2/xg21/Kconfig.defconfig:10,
+soc/silabs/silabs_s2/xg23/Kconfig.defconfig:10, soc/silabs/silabs_s2/xg24/Kconfig.defconfig:11,
+soc/silabs/silabs_s2/xg26/Kconfig.defconfig:10, soc/silabs/silabs_s2/xg29/Kconfig.defconfig:10,
+soc/renesas/smartbond/da1469x/Kconfig.defconfig:36,
+soc/realtek/ec/rts5912/Kconfig.defconfig.rts5912:10,
+soc/nordic/nrf54h/Kconfig.defconfig.nrf54h20_cpurad:11,
+soc/infineon/cat1b/cyw20829/Kconfig.defconfig:32, subsys/pm/Kconfig:21) was assigned the value 'y'
+but got the value 'n'. Check these unsatisfied dependencies: (SOC_SILABS_XG21 || SOC_SILABS_XG23 ||
+SOC_SILABS_XG24 || SOC_SILABS_XG26 || SOC_SILABS_XG29 || (SOC_SERIES_DA1469X &&
+SOC_FAMILY_RENESAS_SMARTBOND) || (REALTEK_RTS5912_RTMR && SOC_RTS5912 && SOC_SERIES_RTS5912 &&
+SOC_FAMILY_REALTEK_EC) || (SOC_NRF54H20_CPURAD && SOC_SERIES_NRF54H && SOC_FAMILY_NORDIC_NRF) ||
+(SOC_SERIES_CYW20829 && SOC_FAMILY_INFINEON_CAT1B) || (SYS_CLOCK_EXISTS && HAS_PM)) (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PM and/or look up PM in the
+menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration Values,
+and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_device_filter/build
+
+=== RC ===
+1

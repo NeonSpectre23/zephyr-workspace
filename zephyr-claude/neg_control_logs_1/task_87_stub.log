@@ -1,0 +1,446 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.7s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build
+-- west build: building application
+[1/514] Preparing syscall dependency handling
+
+[2/514] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/514] Generating misc/generated/syscalls_subdirs.trigger
+[4/514] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/514] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/514] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/514] Generating include/generated/zephyr/driver-validation.h
+[8/514] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/514] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/514] Generating ../../include/generated/zephyr/heap_constants.h
+[11/514] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/514] Generating include/generated/zephyr/offsets.h
+[13/514] Building C object CMakeFiles/app.dir/src/img.c.obj
+[14/514] Building C object CMakeFiles/app.dir/src/main.c.obj
+[15/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap_info.c.obj
+[18/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[19/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[20/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[21/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[24/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[25/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[27/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[28/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[29/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[30/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[31/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[32/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[33/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[34/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[36/514] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[37/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[38/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[39/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[40/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[44/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[45/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[46/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[47/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[48/514] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[49/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[50/514] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[51/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[52/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[53/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[54/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[55/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[56/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[57/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[58/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[59/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[60/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[61/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[62/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[63/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[64/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[65/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs_impl.c.obj
+[66/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/littlefs_fs.c.obj
+[67/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[68/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[69/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[70/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[71/514] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[72/514] Building C object zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj
+[73/514] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[74/514] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[75/514] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[76/514] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[77/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs.c.obj
+[78/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs_util.c.obj
+[79/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/zephyr_lfs_crc.c.obj
+[80/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_group.c.obj
+[81/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj.c.obj
+[82/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_class.c.obj
+[83/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_draw.c.obj
+[84/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_event.c.obj
+[85/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_id_builtin.c.obj
+[86/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_pos.c.obj
+[87/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_property.c.obj
+[88/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_style_gen.c.obj
+[89/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_tree.c.obj
+[90/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_style.c.obj
+[91/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_scroll.c.obj
+[92/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_refr.c.obj
+[93/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/monkey/lv_monkey.c.obj
+[94/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/sysmon/lv_sysmon.c.obj
+[95/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_display.c.obj
+[96/514] Linking C static library app/libapp.a
+[97/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_fs.c.obj
+[98/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_helpers.c.obj
+[99/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_observer.c.obj
+[100/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_indev.c.obj
+[101/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_indev_gesture.c.obj
+[102/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_screenshot_compare.c.obj
+[103/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/vg_lite_tvg/vg_lite_matrix.c.obj
+[104/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/helium/lv_draw_buf_convert_helium.c.obj
+[105/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/display/lv_display.c.obj
+[106/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/lv_draw_buf_convert.c.obj
+[107/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/neon/lv_draw_buf_convert_neon.c.obj
+[108/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj
+[109/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj
+[110/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa.c.obj
+[111/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj
+[112/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_buf.c.obj
+[113/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_img.c.obj
+[114/514] Generating linker_zephyr_pre0.cmd
+[115/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_fill.c.obj
+[116/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_arc.c.obj
+[117/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve.c.obj
+[118/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_fill.c.obj
+[119/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_image.c.obj
+[120/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj
+FAILED: zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLFS_CONFIG=zephyr_lfs_config.h -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -I/home/huyj/zephyr-workspace/modules/fs/littlefs -I/home/huyj/zephyr-workspace/zephyr/modules/littlefs -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj -MF zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj.d -o zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:1:42: warning: ‘struct fs_dirent’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | int fs_stat(const char *abs_path, struct fs_dirent *entry)
+      |                                          ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:7:45: warning: ‘struct fs_statvfs’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | int fs_statvfs(const char *abs_path, struct fs_statvfs *stat)
+      |                                             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: In function ‘fs_statvfs’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:12:26: error: ‘NULL’ undeclared (first use in this function)
+   12 |         if ((abs_path == NULL) || (abs_path[0] != '/') || (abs_path[1] == '\0')) {
+      |                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int fs_stat(const char *abs_path, struct fs_dirent *entry)
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:12:26: note: each undeclared identifier is reported only once for each function it appears in
+   12 |         if ((abs_path == NULL) || (abs_path[0] != '/') || (abs_path[1] == '\0')) {
+      |                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:13:17: warning: implicit declaration of function ‘LOG_ERR’ [-Wimplicit-function-declaration]
+   13 |                 LOG_ERR("invalid file or dir name!!");
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:14:25: error: ‘EINVAL’ undeclared (first use in this function)
+   14 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:17:14: warning: implicit declaration of function ‘fs_get_mnt_point’ [-Wimplicit-function-declaration]
+   17 |         rc = fs_get_mnt_point(&mp, abs_path, NULL);
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:23:9: warning: implicit declaration of function ‘CHECKIF’ [-Wimplicit-function-declaration]
+   23 |         CHECKIF(mp->fs->statvfs == NULL) {
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:23:19: error: invalid use of undefined type ‘struct fs_mount_t’
+   23 |         CHECKIF(mp->fs->statvfs == NULL) {
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:23:41: error: expected ‘;’ before ‘{’ token
+   23 |         CHECKIF(mp->fs->statvfs == NULL) {
+      |                                         ^~
+      |                                         ;
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:55:21: warning: ‘struct fs_mount_t’ declared inside parameter list will not be visible outside of this definition or declaration
+   55 | int fs_mount(struct fs_mount_t *mp)
+      |                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: In function ‘fs_mount’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:59:9: error: unknown type name ‘sys_dnode_t’
+   59 |         sys_dnode_t *node;
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:60:19: error: ‘EINVAL’ undeclared (first use in this function)
+   60 |         int rc = -EINVAL;
+      |                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:61:9: error: unknown type name ‘size_t’
+   61 |         size_t len = 0;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:61:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:66:20: error: ‘NULL’ undeclared (first use in this function)
+   66 |         if ((mp == NULL) || (mp->mnt_point == NULL)) {
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:66:20: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:66:32: error: invalid use of undefined type ‘struct fs_mount_t’
+   66 |         if ((mp == NULL) || (mp->mnt_point == NULL)) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:71:13: warning: implicit declaration of function ‘sys_dnode_is_linked’ [-Wimplicit-function-declaration]
+   71 |         if (sys_dnode_is_linked(&mp->node)) {
+      |             ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:71:36: error: invalid use of undefined type ‘struct fs_mount_t’
+   71 |         if (sys_dnode_is_linked(&mp->node)) {
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:73:25: error: ‘EBUSY’ undeclared (first use in this function)
+   73 |                 return -EBUSY;
+      |                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:76:15: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+   76 |         len = strlen(mp->mnt_point);
+      |               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+  +++ |+#include <string.h>
+    1 | int fs_stat(const char *abs_path, struct fs_dirent *entry)
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:76:15: warning: incompatible implicit declaration of built-in function ‘strlen’ [-Wbuiltin-declaration-mismatch]
+   76 |         len = strlen(mp->mnt_point);
+      |               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:76:15: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:76:24: error: invalid use of undefined type ‘struct fs_mount_t’
+   76 |         len = strlen(mp->mnt_point);
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:78:30: error: invalid use of undefined type ‘struct fs_mount_t’
+   78 |         if ((len == 0) || (mp->mnt_point[0] != '/')) {
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:83:9: warning: implicit declaration of function ‘k_mutex_lock’ [-Wimplicit-function-declaration]
+   83 |         k_mutex_lock(&mutex, K_FOREVER);
+      |         ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:83:23: error: ‘mutex’ undeclared (first use in this function)
+   83 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                       ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:83:30: error: ‘K_FOREVER’ undeclared (first use in this function)
+   83 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:86:9: warning: implicit declaration of function ‘SYS_DLIST_FOR_EACH_NODE’ [-Wimplicit-function-declaration]
+   86 |         SYS_DLIST_FOR_EACH_NODE(&fs_mnt_list, node) {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:86:34: error: ‘fs_mnt_list’ undeclared (first use in this function)
+   86 |         SYS_DLIST_FOR_EACH_NODE(&fs_mnt_list, node) {
+      |                                  ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:86:52: error: expected ‘;’ before ‘{’ token
+   86 |         SYS_DLIST_FOR_EACH_NODE(&fs_mnt_list, node) {
+      |                                                    ^~
+      |                                                    ;
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:110:23: error: ‘ENOENT’ undeclared (first use in this function)
+  110 |                 rc = -ENOENT;
+      |                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:114:19: error: invalid use of undefined type ‘const struct fs_file_system_t’
+  114 |         CHECKIF(fs->mount == NULL) {
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:114:35: error: expected ‘;’ before ‘{’ token
+  114 |         CHECKIF(fs->mount == NULL) {
+      |                                   ^~
+      |                                   ;
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:132:11: error: invalid use of undefined type ‘struct fs_mount_t’
+  132 |         mp->mountp_len = len;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:133:11: error: invalid use of undefined type ‘struct fs_mount_t’
+  133 |         mp->fs = fs;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:135:9: warning: implicit declaration of function ‘sys_dlist_append’ [-Wimplicit-function-declaration]
+  135 |         sys_dlist_append(&fs_mnt_list, &mp->node);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:135:43: error: invalid use of undefined type ‘struct fs_mount_t’
+  135 |         sys_dlist_append(&fs_mnt_list, &mp->node);
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:136:9: warning: implicit declaration of function ‘LOG_DBG’ [-Wimplicit-function-declaration]
+  136 |         LOG_DBG("fs mounted at %s", mp->mnt_point);
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:136:39: error: invalid use of undefined type ‘struct fs_mount_t’
+  136 |         LOG_DBG("fs mounted at %s", mp->mnt_point);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:139:9: warning: implicit declaration of function ‘k_mutex_unlock’ [-Wimplicit-function-declaration]
+  139 |         k_mutex_unlock(&mutex);
+      |         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:57:28: warning: unused variable ‘itr’ [-Wunused-variable]
+   57 |         struct fs_mount_t *itr;
+      |                            ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:180:23: warning: ‘struct fs_mount_t’ declared inside parameter list will not be visible outside of this definition or declaration
+  180 | int fs_unmount(struct fs_mount_t *mp)
+      |                       ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: In function ‘fs_unmount’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:182:19: error: ‘EINVAL’ undeclared (first use in this function)
+  182 |         int rc = -EINVAL;
+      |                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:184:19: error: ‘NULL’ undeclared (first use in this function)
+  184 |         if (mp == NULL) {
+      |                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:184:19: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:188:23: error: ‘mutex’ undeclared (first use in this function)
+  188 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                       ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:188:30: error: ‘K_FOREVER’ undeclared (first use in this function)
+  188 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:190:37: error: invalid use of undefined type ‘struct fs_mount_t’
+  190 |         if (!sys_dnode_is_linked(&mp->node)) {
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:195:19: error: invalid use of undefined type ‘struct fs_mount_t’
+  195 |         CHECKIF(mp->fs->unmount == NULL) {
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:195:41: error: expected ‘;’ before ‘{’ token
+  195 |         CHECKIF(mp->fs->unmount == NULL) {
+      |                                         ^~
+      |                                         ;
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:208:9: warning: implicit declaration of function ‘sys_dlist_remove’ [-Wimplicit-function-declaration]
+  208 |         sys_dlist_remove(&mp->node);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:208:29: error: invalid use of undefined type ‘struct fs_mount_t’
+  208 |         sys_dlist_remove(&mp->node);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:209:43: error: invalid use of undefined type ‘struct fs_mount_t’
+  209 |         LOG_DBG("fs unmounted from %s", mp->mnt_point);
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: In function ‘fs_readmount’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:218:9: error: unknown type name ‘sys_dnode_t’
+  218 |         sys_dnode_t *node;
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:219:19: error: ‘ENOENT’ undeclared (first use in this function)
+  219 |         int rc = -ENOENT;
+      |                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:221:34: error: ‘NULL’ undeclared (first use in this function)
+  221 |         struct fs_mount_t *itr = NULL;
+      |                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:221:34: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:225:23: error: ‘mutex’ undeclared (first use in this function)
+  225 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                       ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:225:30: error: ‘K_FOREVER’ undeclared (first use in this function)
+  225 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:227:34: error: ‘fs_mnt_list’ undeclared (first use in this function)
+  227 |         SYS_DLIST_FOR_EACH_NODE(&fs_mnt_list, node) {
+      |                                  ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:227:52: error: expected ‘;’ before ‘{’ token
+  227 |         SYS_DLIST_FOR_EACH_NODE(&fs_mnt_list, node) {
+      |                                                    ^~
+      |                                                    ;
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:240:28: error: invalid use of undefined type ‘struct fs_mount_t’
+  240 |                 *name = itr->mnt_point;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:220:13: warning: unused variable ‘cnt’ [-Wunused-variable]
+  220 |         int cnt = 0;
+      |             ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:249:40: warning: ‘struct fs_file_system_t’ declared inside parameter list will not be visible outside of this definition or declaration
+  249 | int fs_register(int type, const struct fs_file_system_t *fs)
+      |                                        ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: In function ‘fs_register’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:253:23: error: ‘mutex’ undeclared (first use in this function)
+  253 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                       ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:253:30: error: ‘K_FOREVER’ undeclared (first use in this function)
+  253 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:255:13: warning: implicit declaration of function ‘fs_type_get’ [-Wimplicit-function-declaration]
+  255 |         if (fs_type_get(type) != NULL) {
+      |             ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:255:34: error: ‘NULL’ undeclared (first use in this function)
+  255 |         if (fs_type_get(type) != NULL) {
+      |                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:255:34: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:256:23: error: ‘EALREADY’ undeclared (first use in this function)
+  256 |                 rc = -EALREADY;
+      |                       ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:258:22: warning: implicit declaration of function ‘registry_add’ [-Wimplicit-function-declaration]
+  258 |                 rc = registry_add(type, fs);
+      |                      ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:269:42: warning: ‘struct fs_file_system_t’ declared inside parameter list will not be visible outside of this definition or declaration
+  269 | int fs_unregister(int type, const struct fs_file_system_t *fs)
+      |                                          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c: In function ‘fs_unregister’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:274:23: error: ‘mutex’ undeclared (first use in this function)
+  274 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                       ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:274:30: error: ‘K_FOREVER’ undeclared (first use in this function)
+  274 |         k_mutex_lock(&mutex, K_FOREVER);
+      |                              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:276:14: warning: implicit declaration of function ‘registry_find’ [-Wimplicit-function-declaration]
+  276 |         ep = registry_find(type);
+      |              ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:276:12: warning: assignment to ‘struct registry_entry *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+  276 |         ep = registry_find(type);
+      |            ^
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:277:20: error: ‘NULL’ undeclared (first use in this function)
+  277 |         if ((ep == NULL) || (ep->fstp != fs)) {
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:277:20: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:277:32: error: invalid use of undefined type ‘struct registry_entry’
+  277 |         if ((ep == NULL) || (ep->fstp != fs)) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:278:23: error: ‘EINVAL’ undeclared (first use in this function)
+  278 |                 rc = -EINVAL;
+      |                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fs.c:280:17: warning: implicit declaration of function ‘registry_clear_entry’ [-Wimplicit-function-declaration]
+  280 |                 registry_clear_entry(ep);
+      |                 ^~~~~~~~~~~~~~~~~~~~
+[121/514] Linking C static library zephyr/arch/common/libarch__common.a
+[122/514] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[123/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_letter.c.obj
+[124/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_line.c.obj
+[125/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_triangle.c.obj
+[126/514] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[127/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_ram_g.c.obj
+[128/514] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[129/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_eve.c.obj
+[130/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_3d.c.obj
+[131/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_blur.c.obj
+[132/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_arc.c.obj
+[133/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_buf.c.obj
+[134/514] Linking C static library zephyr/drivers/display/libdrivers__display.a
+[135/514] Linking C static library modules/littlefs/libmodules__littlefs.a
+[136/514] Linking C static library zephyr/libzephyr.a
+[137/514] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[138/514] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[139/514] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[140/514] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[141/514] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build
+
+=== RC ===
+1

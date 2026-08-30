@@ -1,0 +1,120 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build
+-- west build: building application
+[1/117] Preparing syscall dependency handling
+
+[2/117] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/117] Generating misc/generated/syscalls_subdirs.trigger
+[4/117] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/117] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/117] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/117] Generating include/generated/zephyr/driver-validation.h
+[8/117] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/117] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/117] Generating ../../include/generated/zephyr/heap_constants.h
+[11/117] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+FAILED: zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -fno-lto -MD -MT zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj -MF zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj.d -o zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj -c /home/huyj/zephyr-workspace/zephyr/arch/posix/core/offsets/offsets.c
+In file included from /home/huyj/zephyr-workspace/zephyr/kernel/include/kernel_offsets.h:7,
+                 from /home/huyj/zephyr-workspace/zephyr/arch/posix/core/offsets/offsets.c:29:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/pm/device.h:69:67: error: unknown type name ‘pm_device_action_cb_t’
+   69 | static inline int pm_device_driver_init(const struct device *dev, pm_device_action_cb_t action_cb)
+      |                                                                   ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/pm/device.h:87:69: error: unknown type name ‘pm_device_action_cb_t’
+   87 | static inline int pm_device_driver_deinit(const struct device *dev, pm_device_action_cb_t action_cb)
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/pm/device.h:92:2: error: #endif without #if
+   92 | #endif /* CONFIG_PM_DEVICE */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/pm/device.h:100:2: error: #endif without #if
+  100 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain.h:52,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/kernel_includes.h:23,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/kernel.h:17,
+                 from /home/huyj/zephyr-workspace/zephyr/arch/posix/core/offsets/offsets.c:26:
+/home/huyj/zephyr-workspace/zephyr/kernel/include/kernel_offsets.h: In function ‘_OffsetAbsSyms’:
+/home/huyj/zephyr-workspace/zephyr/kernel/include/kernel_offsets.h:86:18: error: invalid use of undefined type ‘struct pm_device_base’
+   86 |                  offsetof(struct pm_device_base, flags));
+      |                  ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/include/kernel_offsets.h:88:38: error: ‘PM_DEVICE_FLAG_PD’ undeclared (first use in this function)
+   88 | GEN_ABSOLUTE_SYM(_PM_DEVICE_FLAG_PD, PM_DEVICE_FLAG_PD);
+      |                                      ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/include/kernel_offsets.h:88:38: note: each undeclared identifier is reported only once for each function it appears in
+   88 | GEN_ABSOLUTE_SYM(_PM_DEVICE_FLAG_PD, PM_DEVICE_FLAG_PD);
+      |                                      ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: PM (defined at soc/silabs/silabs_s2/xg21/Kconfig.defconfig:10,
+soc/silabs/silabs_s2/xg23/Kconfig.defconfig:10, soc/silabs/silabs_s2/xg24/Kconfig.defconfig:11,
+soc/silabs/silabs_s2/xg26/Kconfig.defconfig:10, soc/silabs/silabs_s2/xg29/Kconfig.defconfig:10,
+soc/renesas/smartbond/da1469x/Kconfig.defconfig:36,
+soc/realtek/ec/rts5912/Kconfig.defconfig.rts5912:10,
+soc/nordic/nrf54h/Kconfig.defconfig.nrf54h20_cpurad:11,
+soc/infineon/cat1b/cyw20829/Kconfig.defconfig:32, subsys/pm/Kconfig:21) was assigned the value 'y'
+but got the value 'n'. Check these unsatisfied dependencies: (SOC_SILABS_XG21 || SOC_SILABS_XG23 ||
+SOC_SILABS_XG24 || SOC_SILABS_XG26 || SOC_SILABS_XG29 || (SOC_SERIES_DA1469X &&
+SOC_FAMILY_RENESAS_SMARTBOND) || (REALTEK_RTS5912_RTMR && SOC_RTS5912 && SOC_SERIES_RTS5912 &&
+SOC_FAMILY_REALTEK_EC) || (SOC_NRF54H20_CPURAD && SOC_SERIES_NRF54H && SOC_FAMILY_NORDIC_NRF) ||
+(SOC_SERIES_CYW20829 && SOC_FAMILY_INFINEON_CAT1B) || (SYS_CLOCK_EXISTS && HAS_PM)) (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_PM and/or look up PM in the
+menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration Values,
+and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: drivers__power_domain
+
+  Excluding target from build.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/power_domain/build
+
+=== RC ===
+1

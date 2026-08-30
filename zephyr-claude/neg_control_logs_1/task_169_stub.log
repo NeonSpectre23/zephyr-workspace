@@ -1,0 +1,507 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build
+-- west build: building application
+[1/109] Preparing syscall dependency handling
+
+[2/109] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/109] Generating misc/generated/syscalls_subdirs.trigger
+[4/109] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/109] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/109] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/109] Generating include/generated/zephyr/driver-validation.h
+[8/109] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/109] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/109] Generating ../../include/generated/zephyr/heap_constants.h
+[11/109] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/109] Generating include/generated/zephyr/offsets.h
+[13/109] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/109] Building C object CMakeFiles/app.dir/src/mock_log_link.c.obj
+[15/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[19/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[24/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[25/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+[27/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[28/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[29/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[30/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[31/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/109] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[37/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[38/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[41/109] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[42/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[43/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[44/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[45/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[46/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[47/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[48/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[51/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[52/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[53/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[54/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[55/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[56/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[57/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[58/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[59/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[60/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[61/109] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[62/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[63/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[65/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[66/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[67/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[68/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[69/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[70/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[71/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[72/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[74/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[75/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[76/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[77/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[78/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[79/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[80/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[81/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[82/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[83/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[84/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[85/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[86/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[87/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[88/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[89/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[90/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[91/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[92/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[93/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[94/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=1024 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:1: error: unknown type name ‘uint32_t’
+    1 | uint32_t log_src_cnt_get(uint32_t domain_id)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | uint32_t log_src_cnt_get(uint32_t domain_id)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:26: error: unknown type name ‘uint32_t’
+    1 | uint32_t log_src_cnt_get(uint32_t domain_id)
+      |                          ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:26: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:12:41: error: unknown type name ‘uint8_t’
+   12 | static const char *link_source_name_get(uint8_t domain_id, uint32_t source_id)
+      |                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:12:41: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:12:60: error: unknown type name ‘uint32_t’
+   12 | static const char *link_source_name_get(uint8_t domain_id, uint32_t source_id)
+      |                                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:12:60: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:43:33: error: unknown type name ‘uint32_t’
+   43 | const char *log_source_name_get(uint32_t domain_id, uint32_t source_id)
+      |                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:43:33: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:43:53: error: unknown type name ‘uint32_t’
+   43 | const char *log_source_name_get(uint32_t domain_id, uint32_t source_id)
+      |                                                     ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:43:53: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:64:41: error: unknown type name ‘uint8_t’
+   64 | static const char *link_domain_name_get(uint8_t domain_id)
+      |                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:64:41: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:91:33: error: unknown type name ‘uint32_t’
+   91 | const char *log_domain_name_get(uint32_t domain_id)
+      |                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:91:33: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:100:8: error: unknown type name ‘uint8_t’
+  100 | static uint8_t link_compiled_level_get(uint8_t domain_id, uint32_t source_id)
+      |        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:100:40: error: unknown type name ‘uint8_t’
+  100 | static uint8_t link_compiled_level_get(uint8_t domain_id, uint32_t source_id)
+      |                                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:100:40: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:100:59: error: unknown type name ‘uint32_t’
+  100 | static uint8_t link_compiled_level_get(uint8_t domain_id, uint32_t source_id)
+      |                                                           ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:100:59: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:112:1: error: unknown type name ‘uint8_t’
+  112 | uint8_t log_compiled_level_get(uint8_t domain_id, uint32_t source_id)
+      | ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:112:1: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:112:32: error: unknown type name ‘uint8_t’
+  112 | uint8_t log_compiled_level_get(uint8_t domain_id, uint32_t source_id)
+      |                                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:112:32: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:112:51: error: unknown type name ‘uint32_t’
+  112 | uint8_t log_compiled_level_get(uint8_t domain_id, uint32_t source_id)
+      |                                                   ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:112:51: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:125:34: error: unknown type name ‘uint8_t’
+  125 | int z_log_link_set_runtime_level(uint8_t domain_id, uint16_t source_id, uint8_t level)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:125:34: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:125:53: error: unknown type name ‘uint16_t’
+  125 | int z_log_link_set_runtime_level(uint8_t domain_id, uint16_t source_id, uint8_t level)
+      |                                                     ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:125:53: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:125:73: error: unknown type name ‘uint8_t’
+  125 | int z_log_link_set_runtime_level(uint8_t domain_id, uint16_t source_id, uint8_t level)
+      |                                                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:125:73: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:135:8: error: unknown type name ‘uint32_t’
+  135 | static uint32_t *get_dynamic_filter(uint8_t domain_id, uint32_t source_id)
+      |        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:135:37: error: unknown type name ‘uint8_t’
+  135 | static uint32_t *get_dynamic_filter(uint8_t domain_id, uint32_t source_id)
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:135:37: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:135:56: error: unknown type name ‘uint32_t’
+  135 | static uint32_t *get_dynamic_filter(uint8_t domain_id, uint32_t source_id)
+      |                                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:135:56: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘z_log_runtime_filters_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:155:29: warning: implicit declaration of function ‘z_log_sources_count’ [-Wimplicit-function-declaration]
+  155 |         for (int i = 0; i < z_log_sources_count(); i++) {
+      |                             ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:156:17: error: unknown type name ‘uint32_t’
+  156 |                 uint32_t *filters = z_log_dynamic_filters_get(i);
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:156:17: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:156:37: warning: implicit declaration of function ‘z_log_dynamic_filters_get’; did you mean ‘z_log_runtime_filters_init’? [-Wimplicit-function-declaration]
+  156 |                 uint32_t *filters = z_log_dynamic_filters_get(i);
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                     z_log_runtime_filters_init
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:156:37: warning: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:157:17: error: unknown type name ‘uint8_t’
+  157 |                 uint8_t level;
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:157:17: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:166:25: warning: implicit declaration of function ‘MAX’ [-Wimplicit-function-declaration]
+  166 |                 level = MAX(level, CONFIG_LOG_OVERRIDE_LEVEL);
+      |                         ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:167:17: warning: implicit declaration of function ‘LOG_FILTER_SLOT_SET’ [-Wimplicit-function-declaration]
+  167 |                 LOG_FILTER_SLOT_SET(filters,
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:168:37: error: ‘LOG_FILTER_AGGR_SLOT_IDX’ undeclared (first use in this function)
+  168 |                                     LOG_FILTER_AGGR_SLOT_IDX,
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:168:37: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘log_source_id_get’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:175:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+  175 |         if (IS_ENABLED(CONFIG_LOG_FMT_SECTION_STRIP)) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:175:24: error: ‘CONFIG_LOG_FMT_SECTION_STRIP’ undeclared (first use in this function)
+  175 |         if (IS_ENABLED(CONFIG_LOG_FMT_SECTION_STRIP)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:179:29: warning: implicit declaration of function ‘log_src_cnt_get’; did you mean ‘log_source_id_get’? [-Wimplicit-function-declaration]
+  179 |         for (int i = 0; i < log_src_cnt_get(Z_LOG_LOCAL_DOMAIN_ID); i++) {
+      |                             ^~~~~~~~~~~~~~~
+      |                             log_source_id_get
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:179:45: error: ‘Z_LOG_LOCAL_DOMAIN_ID’ undeclared (first use in this function)
+  179 |         for (int i = 0; i < log_src_cnt_get(Z_LOG_LOCAL_DOMAIN_ID); i++) {
+      |                                             ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:180:37: warning: implicit declaration of function ‘log_source_name_get’; did you mean ‘log_source_id_get’? [-Wimplicit-function-declaration]
+  180 |                 const char *sname = log_source_name_get(Z_LOG_LOCAL_DOMAIN_ID, i);
+      |                                     ^~~~~~~~~~~~~~~~~~~
+      |                                     log_source_id_get
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:182:31: error: ‘NULL’ undeclared (first use in this function)
+  182 |                 if ((sname != NULL) && (strcmp(sname, name) == 0)) {
+      |                               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | uint32_t log_src_cnt_get(uint32_t domain_id)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:182:41: warning: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+  182 |                 if ((sname != NULL) && (strcmp(sname, name) == 0)) {
+      |                                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘strcmp’
+  +++ |+#include <string.h>
+    1 | uint32_t log_src_cnt_get(uint32_t domain_id)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:189:8: error: unknown type name ‘uint32_t’
+  189 | static uint32_t max_filter_get(uint32_t filters)
+      |        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:189:32: error: unknown type name ‘uint32_t’
+  189 | static uint32_t max_filter_get(uint32_t filters)
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:189:32: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:206:32: error: unknown type name ‘uint8_t’
+  206 | static void set_runtime_filter(uint8_t backend_id, uint8_t domain_id,
+      |                                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:206:32: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:206:52: error: unknown type name ‘uint8_t’
+  206 | static void set_runtime_filter(uint8_t backend_id, uint8_t domain_id,
+      |                                                    ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:206:52: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:207:32: error: unknown type name ‘uint32_t’
+  207 |                                uint32_t source_id, uint32_t level)
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:207:32: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:207:52: error: unknown type name ‘uint32_t’
+  207 |                                uint32_t source_id, uint32_t level)
+      |                                                    ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:207:52: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:8: error: unknown type name ‘uint32_t’
+  229 | static uint32_t filter_get(uint8_t id, uint32_t domain_id, int16_t source_id, bool runtime)
+      |        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:28: error: unknown type name ‘uint8_t’
+  229 | static uint32_t filter_get(uint8_t id, uint32_t domain_id, int16_t source_id, bool runtime)
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:28: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:40: error: unknown type name ‘uint32_t’
+  229 | static uint32_t filter_get(uint8_t id, uint32_t domain_id, int16_t source_id, bool runtime)
+      |                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:40: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:60: error: unknown type name ‘int16_t’
+  229 | static uint32_t filter_get(uint8_t id, uint32_t domain_id, int16_t source_id, bool runtime)
+      |                                                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:60: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:229:79: error: unknown type name ‘bool’
+  229 | static uint32_t filter_get(uint8_t id, uint32_t domain_id, int16_t source_id, bool runtime)
+      |                                                                               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | uint32_t log_src_cnt_get(uint32_t domain_id)
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:1: error: unknown type name ‘uint32_t’
+  245 | uint32_t filter_set(int id, uint32_t domain_id, int16_t source_id, uint32_t level)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:29: error: unknown type name ‘uint32_t’
+  245 | uint32_t filter_set(int id, uint32_t domain_id, int16_t source_id, uint32_t level)
+      |                             ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:29: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:49: error: unknown type name ‘int16_t’
+  245 | uint32_t filter_set(int id, uint32_t domain_id, int16_t source_id, uint32_t level)
+      |                                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:49: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:68: error: unknown type name ‘uint32_t’
+  245 | uint32_t filter_set(int id, uint32_t domain_id, int16_t source_id, uint32_t level)
+      |                                                                    ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:245:68: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:283:1: error: unknown type name ‘uint32_t’
+  283 | uint32_t z_impl_log_filter_set(struct log_backend const *const backend,
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:283:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:284:32: error: unknown type name ‘uint32_t’
+  284 |                                uint32_t domain_id, int16_t source_id,
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:284:32: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:284:52: error: unknown type name ‘int16_t’
+  284 |                                uint32_t domain_id, int16_t source_id,
+      |                                                    ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:284:52: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:285:32: error: unknown type name ‘uint32_t’
+  285 |                                uint32_t level)
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:285:32: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:292:1: error: unknown type name ‘uint32_t’
+  292 | uint32_t z_impl_log_frontend_filter_set(int16_t source_id, uint32_t level)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:292:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:292:41: error: unknown type name ‘int16_t’
+  292 | uint32_t z_impl_log_frontend_filter_set(int16_t source_id, uint32_t level)
+      |                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:292:41: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:292:60: error: unknown type name ‘uint32_t’
+  292 | uint32_t z_impl_log_frontend_filter_set(int16_t source_id, uint32_t level)
+      |                                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:292:60: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:320:29: error: unknown type name ‘uint32_t’
+  320 |                             uint32_t level)
+      |                             ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:320:29: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:335:32: error: unknown type name ‘uint32_t’
+  335 |                                uint32_t level)
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:335:32: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘log_backend_get_by_name’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:357:9: warning: implicit declaration of function ‘STRUCT_SECTION_FOREACH’ [-Wimplicit-function-declaration]
+  357 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:357:32: error: ‘log_backend’ undeclared (first use in this function)
+  357 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:357:45: error: ‘backend’ undeclared (first use in this function); did you mean ‘log_backend’?
+  357 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                             ^~~~~~~
+      |                                             log_backend
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:357:53: error: expected ‘;’ before ‘{’ token
+  357 |         STRUCT_SECTION_FOREACH(log_backend, backend) {
+      |                                                     ^~
+      |                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:368:25: error: unknown type name ‘uint32_t’
+  368 |                         uint32_t level)
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:368:25: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘log_backend_disable’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:379:13: warning: implicit declaration of function ‘log_backend_is_active’; did you mean ‘log_backend_disable’? [-Wimplicit-function-declaration]
+  379 |         if (log_backend_is_active(backend)) {
+      |             ^~~~~~~~~~~~~~~~~~~~~
+      |             log_backend_disable
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:380:17: warning: implicit declaration of function ‘backend_filter_set’ [-Wimplicit-function-declaration]
+  380 |                 backend_filter_set(backend, LOG_LEVEL_NONE);
+      |                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:380:45: error: ‘LOG_LEVEL_NONE’ undeclared (first use in this function)
+  380 |                 backend_filter_set(backend, LOG_LEVEL_NONE);
+      |                                             ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:383:9: warning: implicit declaration of function ‘log_backend_deactivate’; did you mean ‘log_backend_disable’? [-Wimplicit-function-declaration]
+  383 |         log_backend_deactivate(backend);
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         log_backend_disable
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:386:1: error: unknown type name ‘uint32_t’
+  386 | uint32_t log_filter_get(struct log_backend const *const backend,
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:386:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:387:25: error: unknown type name ‘uint32_t’
+  387 |                         uint32_t domain_id, int16_t source_id, bool runtime)
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:387:25: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:387:45: error: unknown type name ‘int16_t’
+  387 |                         uint32_t domain_id, int16_t source_id, bool runtime)
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:387:45: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:387:64: error: unknown type name ‘bool’
+  387 |                         uint32_t domain_id, int16_t source_id, bool runtime)
+      |                                                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:387:64: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:394:1: error: unknown type name ‘uint32_t’
+  394 | uint32_t log_frontend_filter_get(int16_t source_id, bool runtime)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:394:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:394:34: error: unknown type name ‘int16_t’
+  394 | uint32_t log_frontend_filter_get(int16_t source_id, bool runtime)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:394:34: note: ‘int16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:394:53: error: unknown type name ‘bool’
+  394 | uint32_t log_frontend_filter_get(int16_t source_id, bool runtime)
+      |                                                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:394:53: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘z_log_links_initiate’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:407:9: warning: implicit declaration of function ‘cache_init’ [-Wimplicit-function-declaration]
+  407 |         cache_init();
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:409:32: error: ‘log_link’ undeclared (first use in this function)
+  409 |         STRUCT_SECTION_FOREACH(log_link, link) {
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:409:42: error: ‘link’ undeclared (first use in this function)
+  409 |         STRUCT_SECTION_FOREACH(log_link, link) {
+      |                                          ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:409:47: error: expected ‘;’ before ‘{’ token
+  409 |         STRUCT_SECTION_FOREACH(log_link, link) {
+      |                                               ^~
+      |                                               ;
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:405:13: warning: unused variable ‘err’ [-Wunused-variable]
+  405 |         int err;
+      |             ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:422:45: warning: ‘struct log_link’ declared inside parameter list will not be visible outside of this definition or declaration
+  422 | static void backends_link_init(const struct log_link *link)
+      |                                             ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘backends_link_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:424:29: warning: implicit declaration of function ‘log_backend_count_get’ [-Wimplicit-function-declaration]
+  424 |         for (int i = 0; i < log_backend_count_get(); i++) {
+      |                             ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:425:53: warning: implicit declaration of function ‘log_backend_get’; did you mean ‘log_backend_disable’? [-Wimplicit-function-declaration]
+  425 |                 const struct log_backend *backend = log_backend_get(i);
+      |                                                     ^~~~~~~~~~~~~~~
+      |                                                     log_backend_disable
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:425:53: warning: initialization of ‘const struct log_backend *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:432:17: warning: implicit declaration of function ‘link_filter_set’ [-Wimplicit-function-declaration]
+  432 |                 link_filter_set(link, backend, backend->cb->level);
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:432:55: error: invalid use of undefined type ‘const struct log_backend’
+  432 |                 link_filter_set(link, backend, backend->cb->level);
+      |                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:436:1: error: unknown type name ‘uint32_t’
+  436 | uint32_t z_log_links_activate(uint32_t active_mask, uint8_t *offset)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:436:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:436:31: error: unknown type name ‘uint32_t’
+  436 | uint32_t z_log_links_activate(uint32_t active_mask, uint8_t *offset)
+      |                               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:436:31: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:436:53: error: unknown type name ‘uint8_t’
+  436 | uint32_t z_log_links_activate(uint32_t active_mask, uint8_t *offset)
+      |                                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:436:53: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: In function ‘log_backend_get_by_name’:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:364:1: warning: control reaches end of non-void function [-Wreturn-type]
+  364 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:422:13: warning: ‘backends_link_init’ defined but not used [-Wunused-function]
+  422 | static void backends_link_init(const struct log_link *link)
+      |             ^~~~~~~~~~~~~~~~~~
+[95/109] Linking C static library app/libapp.a
+[96/109] Generating linker_zephyr_pre0.cmd
+[97/109] Linking C static library zephyr/arch/common/libarch__common.a
+[98/109] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[99/109] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[100/109] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[101/109] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[102/109] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[103/109] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[104/109] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_links/build
+
+=== RC ===
+1

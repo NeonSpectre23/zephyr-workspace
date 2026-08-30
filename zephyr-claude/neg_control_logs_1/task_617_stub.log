@@ -1,0 +1,1067 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build
+-- west build: building application
+[1/514] Preparing syscall dependency handling
+
+[2/514] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/514] Generating misc/generated/syscalls_subdirs.trigger
+[4/514] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/514] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/514] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/514] Generating include/generated/zephyr/driver-validation.h
+[8/514] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/514] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/514] Generating ../../include/generated/zephyr/heap_constants.h
+[11/514] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/514] Generating include/generated/zephyr/offsets.h
+[13/514] Building C object CMakeFiles/app.dir/src/img.c.obj
+[14/514] Building C object CMakeFiles/app.dir/src/main.c.obj
+[15/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap_info.c.obj
+[18/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[19/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[20/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[21/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[24/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[25/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[26/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[27/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[28/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[29/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[30/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[31/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[32/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[33/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[34/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/514] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[36/514] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[37/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[38/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[39/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[40/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[44/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[45/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[46/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[47/514] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[48/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[49/514] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[50/514] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[51/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[52/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[53/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[54/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[55/514] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[56/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[57/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[58/514] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[59/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[60/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[61/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[62/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[63/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[64/514] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[65/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj
+[66/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs_impl.c.obj
+[67/514] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/littlefs_fs.c.obj
+[68/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[69/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[70/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[71/514] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[72/514] Building C object zephyr/drivers/display/CMakeFiles/drivers__display.dir/display_dummy.c.obj
+[73/514] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[74/514] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[75/514] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[76/514] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[77/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs.c.obj
+[78/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs_util.c.obj
+[79/514] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/zephyr_lfs_crc.c.obj
+[80/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_group.c.obj
+[81/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj.c.obj
+[82/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_class.c.obj
+[83/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_draw.c.obj
+[84/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_event.c.obj
+[85/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_id_builtin.c.obj
+[86/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_property.c.obj
+[87/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_pos.c.obj
+[88/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_scroll.c.obj
+[89/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_style_gen.c.obj
+[90/514] Linking C static library app/libapp.a
+[91/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_style.c.obj
+[92/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_obj_tree.c.obj
+[93/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_observer.c.obj
+[94/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/monkey/lv_monkey.c.obj
+[95/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_display.c.obj
+[96/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/core/lv_refr.c.obj
+[97/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/sysmon/lv_sysmon.c.obj
+[98/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_fs.c.obj
+[99/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_helpers.c.obj
+[100/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_indev.c.obj
+[101/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_indev_gesture.c.obj
+[102/514] Generating linker_zephyr_pre0.cmd
+[103/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/test/lv_test_screenshot_compare.c.obj
+[104/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/debugging/vg_lite_tvg/vg_lite_matrix.c.obj
+[105/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/display/lv_display.c.obj
+[106/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/lv_draw_buf_convert.c.obj
+[107/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/neon/lv_draw_buf_convert_neon.c.obj
+[108/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.obj
+[109/514] Linking C static library zephyr/arch/common/libarch__common.a
+[110/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/convert/helium/lv_draw_buf_convert_helium.c.obj
+[111/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d.c.obj
+[112/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.obj
+[113/514] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[114/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_buf.c.obj
+[115/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa.c.obj
+[116/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_fill.c.obj
+[117/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/espressif/ppa/lv_draw_ppa_img.c.obj
+[118/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve.c.obj
+[119/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_arc.c.obj
+[120/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_fill.c.obj
+[121/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_letter.c.obj
+[122/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_image.c.obj
+[123/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_line.c.obj
+[124/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_triangle.c.obj
+[125/514] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[126/514] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[127/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_eve.c.obj
+[128/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_3d.c.obj
+[129/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/eve/lv_draw_eve_ram_g.c.obj
+[130/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_arc.c.obj
+[131/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_blur.c.obj
+[132/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_buf.c.obj
+[133/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw.c.obj
+[134/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_image.c.obj
+[135/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_line.c.obj
+[136/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_mask.c.obj
+[137/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_rect.c.obj
+[138/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_triangle.c.obj
+[139/514] Linking C static library zephyr/subsys/fs/libsubsys__fs.a
+[140/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_label.c.obj
+[141/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_draw_vector.c.obj
+[142/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/lv_image_decoder.c.obj
+[143/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_3d.c.obj
+[144/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_arc.c.obj
+[145/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_border.c.obj
+[146/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_box_shadow.c.obj
+[147/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg.c.obj
+[148/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_fill.c.obj
+[149/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_grad.c.obj
+[150/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_image.c.obj
+[151/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_label.c.obj
+[152/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_layer.c.obj
+[153/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_line.c.obj
+[154/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_mask_rect.c.obj
+[155/514] Linking C static library zephyr/drivers/display/libdrivers__display.a
+[156/514] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[157/514] Linking C static library modules/littlefs/libmodules__littlefs.a
+[158/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_triangle.c.obj
+[159/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_draw_nanovg_vector.c.obj
+[160/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_nanovg_fbo_cache.c.obj
+[161/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_nanovg_image_cache.c.obj
+[162/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nanovg/lv_nanovg_utils.c.obj
+[163/514] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[164/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.obj
+[165/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.obj
+[166/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.obj
+[167/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.obj
+[168/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.obj
+[169/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.obj
+[170/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.obj
+[171/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.obj
+[172/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.obj
+[173/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.obj
+[174/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.obj
+[175/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_vector.c.obj
+[176/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.obj
+[177/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.obj
+[178/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.obj
+[179/514] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[180/514] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[181/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.obj
+[182/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.obj
+[183/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.obj
+[184/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.obj
+[185/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.obj
+[186/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.obj
+[187/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.obj
+[188/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.obj
+[189/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.obj
+[190/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.obj
+[191/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.obj
+[192/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.obj
+[193/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/opengles/lv_draw_opengles.c.obj
+[194/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.obj
+[195/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.obj
+[196/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.obj
+[197/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.obj
+[198/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.obj
+[199/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.obj
+[200/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.obj
+[201/514] Linking C static library zephyr/libzephyr.a
+[202/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.obj
+[203/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.obj
+[204/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.obj
+[205/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/snapshot/lv_snapshot.c.obj
+[206/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.obj
+[207/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.obj
+[208/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.obj
+[209/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_a8.c.obj
+[210/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.obj
+[211/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888_premultiplied.c.obj
+[212/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.obj
+[213/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.obj
+[214/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565_swapped.c.obj
+[215/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.obj
+[216/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/neon/lv_draw_sw_blend_neon_to_rgb565.c.obj
+[217/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/neon/lv_draw_sw_blend_neon_to_rgb888.c.obj
+[218/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/blend/riscv_v/lv_draw_sw_blend_riscv_v_to_rgb888.c.obj
+[219/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_arc.c.obj
+[220/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_border.c.obj
+[221/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_blur.c.obj
+[222/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.obj
+[223/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw.c.obj
+[224/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_fill.c.obj
+[225/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_grad.c.obj
+[226/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_img.c.obj
+[227/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_letter.c.obj
+[228/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_line.c.obj
+[229/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_mask.c.obj
+[230/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.obj
+[231/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_transform.c.obj
+[232/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_triangle.c.obj
+[233/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_utils.c.obj
+[234/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/sw/lv_draw_sw_vector.c.obj
+[235/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.obj
+[236/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.obj
+[237/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.obj
+[238/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.obj
+[239/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.obj
+[240/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.obj
+[241/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.obj
+[242/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.obj
+[243/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.obj
+[244/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.obj
+[245/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.obj
+[246/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.obj
+[247/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_bitmap_font_cache.c.obj
+[248/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.obj
+[249/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.obj
+[250/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.obj
+[251/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.obj
+[252/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.obj
+[253/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.obj
+[254/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.obj
+[255/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.obj
+[256/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/binfont_loader/lv_binfont_loader.c.obj
+[257/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/font_manager/lv_font_manager.c.obj
+[258/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/font_manager/lv_font_manager_recycle.c.obj
+[259/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/fmt_txt/lv_font_fmt_txt.c.obj
+[260/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/imgfont/lv_imgfont.c.obj
+[261/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font.c.obj
+[262/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.obj
+[263/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_10.c.obj
+[264/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_12.c.obj
+[265/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_14_aligned.c.obj
+[266/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_16.c.obj
+[267/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_20.c.obj
+[268/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_24.c.obj
+[269/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_14.c.obj
+[270/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_18.c.obj
+[271/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_22.c.obj
+[272/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_26.c.obj
+[273/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_28.c.obj
+[274/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_28_compressed.c.obj
+[275/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_30.c.obj
+[276/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_32.c.obj
+[277/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_34.c.obj
+[278/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_36.c.obj
+[279/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_38.c.obj
+[280/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_40.c.obj
+[281/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_42.c.obj
+[282/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_44.c.obj
+[283/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_46.c.obj
+[284/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_48.c.obj
+[285/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_montserrat_8.c.obj
+[286/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_source_han_sans_sc_14_cjk.c.obj
+[287/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_source_han_sans_sc_16_cjk.c.obj
+[288/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_unscii_16.c.obj
+[289/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/font/lv_font_unscii_8.c.obj
+[290/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_indev.c.obj
+[291/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_indev_gesture.c.obj
+[292/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_indev_scroll.c.obj
+[293/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/indev/lv_gridnav.c.obj
+[294/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/layouts/flex/lv_flex.c.obj
+[295/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/layouts/grid/lv_grid.c.obj
+[296/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/layouts/lv_layout.c.obj
+[297/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/barcode/code128.c.obj
+[298/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/barcode/lv_barcode.c.obj
+[299/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.obj
+[300/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/bmp/lv_bmp.c.obj
+[301/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.obj
+[302/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype.c.obj
+[303/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype_glyph.c.obj
+[304/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype_image.c.obj
+[305/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_freetype_outline.c.obj
+[306/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/freetype/lv_ftsystem.c.obj
+[307/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/frogfs/src/decomp_raw.c.obj
+[308/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.obj
+[309/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/frogfs/src/frogfs.c.obj
+[310/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.obj
+[311/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_frogfs.c.obj
+[312/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.obj
+[313/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_memfs.c.obj
+[314/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_posix.c.obj
+[315/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_stdio.c.obj
+[316/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_win32.c.obj
+[317/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/FT800-FT813/EVE_commands.c.obj
+[318/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/FT800-FT813/EVE_supplemental.c.obj
+[319/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gif/gif.c.obj
+[320/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gltf/gltf_environment/lv_gltf_ibl_sampler.c.obj
+[321/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gltf/math/lv_3dmath.c.obj
+[322/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/gstreamer/lv_gstreamer.c.obj
+[323/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/fsdrv/lv_fs_uefi.c.obj
+[324/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.obj
+[325/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/libpng/lv_libpng.c.obj
+[326/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/libwebp/lv_libwebp.c.obj
+[327/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/lodepng/lodepng.c.obj
+[328/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/lodepng/lv_lodepng.c.obj
+[329/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/lz4/lz4.c.obj
+[330/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/nanovg/nanovg.c.obj
+[331/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/qrcode/lv_qrcode.c.obj
+[332/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/rle/lv_rle.c.obj
+[333/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/rlottie/lv_rlottie.c.obj
+[334/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg.c.obj
+[335/514] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+FAILED: zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -DLV_CONF_INCLUDE_SIMPLE=1 -DLV_CONF_PATH=\"/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include/lv_conf.h\" -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src -I/home/huyj/zephyr-workspace/zephyr/modules/lvgl/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -U_POSIX_C_SOURCE -D_POSIX_C_SOURCE=200809L -MD -MT zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj -MF zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj.d -o zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:6:1: warning: data definition has no type or storage class
+    6 | EXPORT_SYMBOL(ztest_test_fail);
+      | ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:6:1: error: type defaults to ‘int’ in declaration of ‘EXPORT_SYMBOL’ [-Werror=implicit-int]
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:6:1: warning: parameter names (without types) in function declaration
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_test_pass’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:10:17: error: ‘cur_phase’ undeclared (first use in this function)
+   10 |         switch (cur_phase) {
+      |                 ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:10:17: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:11:14: error: ‘TEST_PHASE_TEST’ undeclared (first use in this function)
+   11 |         case TEST_PHASE_TEST:
+      |              ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:12:17: warning: implicit declaration of function ‘__ztest_set_test_result’ [-Wimplicit-function-declaration]
+   12 |                 __ztest_set_test_result(ZTEST_RESULT_PASS);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:12:41: error: ‘ZTEST_RESULT_PASS’ undeclared (first use in this function)
+   12 |                 __ztest_set_test_result(ZTEST_RESULT_PASS);
+      |                                         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:13:17: warning: implicit declaration of function ‘test_finalize’ [-Wimplicit-function-declaration]
+   13 |                 test_finalize();
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:16:17: warning: implicit declaration of function ‘PRINT_DATA’ [-Wimplicit-function-declaration]
+   16 |                 PRINT_DATA(" ERROR: cannot pass in test phase '%s()', bailing\n",
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:17:28: warning: implicit declaration of function ‘get_friendly_phase_name’ [-Wimplicit-function-declaration]
+   17 |                            get_friendly_phase_name(cur_phase));
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:18:17: error: ‘test_status’ undeclared (first use in this function)
+   18 |                 test_status = ZTEST_STATUS_CRITICAL_ERROR;
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:18:31: error: ‘ZTEST_STATUS_CRITICAL_ERROR’ undeclared (first use in this function)
+   18 |                 test_status = ZTEST_STATUS_CRITICAL_ERROR;
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:19:34: error: ‘TEST_PHASE_BEFORE’ undeclared (first use in this function)
+   19 |                 if (cur_phase == TEST_PHASE_BEFORE) {
+      |                                  ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:25:1: warning: data definition has no type or storage class
+   25 | EXPORT_SYMBOL(ztest_test_pass);
+      | ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:25:1: error: type defaults to ‘int’ in declaration of ‘EXPORT_SYMBOL’ [-Werror=implicit-int]
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:25:1: warning: parameter names (without types) in function declaration
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_test_skip’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:29:17: error: ‘cur_phase’ undeclared (first use in this function)
+   29 |         switch (cur_phase) {
+      |                 ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:30:14: error: ‘TEST_PHASE_SETUP’ undeclared (first use in this function)
+   30 |         case TEST_PHASE_SETUP:
+      |              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:31:41: error: ‘ZTEST_RESULT_SUITE_SKIP’ undeclared (first use in this function)
+   31 |                 __ztest_set_test_result(ZTEST_RESULT_SUITE_SKIP);
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:33:14: error: ‘TEST_PHASE_BEFORE’ undeclared (first use in this function)
+   33 |         case TEST_PHASE_BEFORE:
+      |              ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:34:14: error: ‘TEST_PHASE_TEST’ undeclared (first use in this function)
+   34 |         case TEST_PHASE_TEST:
+      |              ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:35:41: error: ‘ZTEST_RESULT_SKIP’ undeclared (first use in this function)
+   35 |                 __ztest_set_test_result(ZTEST_RESULT_SKIP);
+      |                                         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:41:17: error: ‘test_status’ undeclared (first use in this function)
+   41 |                 test_status = ZTEST_STATUS_CRITICAL_ERROR;
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:41:31: error: ‘ZTEST_STATUS_CRITICAL_ERROR’ undeclared (first use in this function)
+   41 |                 test_status = ZTEST_STATUS_CRITICAL_ERROR;
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:45:1: warning: data definition has no type or storage class
+   45 | EXPORT_SYMBOL(ztest_test_skip);
+      | ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:45:1: error: type defaults to ‘int’ in declaration of ‘EXPORT_SYMBOL’ [-Werror=implicit-int]
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:45:1: warning: parameter names (without types) in function declaration
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_test_expect_fail’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:49:9: error: ‘failed_expectation’ undeclared (first use in this function)
+   49 |         failed_expectation = true;
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:49:30: error: ‘true’ undeclared (first use in this function)
+   49 |         failed_expectation = true;
+      |                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:1:1: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | void ztest_test_fail(void)
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_simple_1cpu_before’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:54:9: warning: implicit declaration of function ‘ARG_UNUSED’ [-Wimplicit-function-declaration]
+   54 |         ARG_UNUSED(data);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:55:9: warning: implicit declaration of function ‘z_test_1cpu_start’ [-Wimplicit-function-declaration]
+   55 |         z_test_1cpu_start();
+      |         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_simple_1cpu_after’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:61:9: warning: implicit declaration of function ‘z_test_1cpu_stop’ [-Wimplicit-function-declaration]
+   61 |         z_test_1cpu_stop();
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘test_cb’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:68:15: error: unknown type name ‘bool’
+   68 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:68:39: warning: implicit declaration of function ‘FIELD_GET’ [-Wimplicit-function-declaration]
+   68 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |                                       ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:68:49: error: ‘K_USER’ undeclared (first use in this function)
+   68 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:68:61: error: invalid use of undefined type ‘struct ztest_unit_test’
+   68 |         const bool config_user_mode = FIELD_GET(K_USER, test->thread_options) != 0;
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:70:14: warning: implicit declaration of function ‘k_is_user_context’ [-Wimplicit-function-declaration]
+   70 |         if (!k_is_user_context()) {
+      |              ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:71:41: error: ‘ZTEST_RESULT_PENDING’ undeclared (first use in this function)
+   71 |                 __ztest_set_test_result(ZTEST_RESULT_PENDING);
+      |                                         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:72:17: warning: implicit declaration of function ‘run_test_rules’ [-Wimplicit-function-declaration]
+   72 |                 run_test_rules(/*is_before=*/true, test, /*data=*/c);
+      |                 ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:72:46: error: ‘true’ undeclared (first use in this function)
+   72 |                 run_test_rules(/*is_before=*/true, test, /*data=*/c);
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:72:46: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:73:26: error: invalid use of undefined type ‘struct ztest_suite_node’
+   73 |                 if (suite->before) {
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:74:30: error: invalid use of undefined type ‘struct ztest_suite_node’
+   74 |                         suite->before(/*data=*/c);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:76:21: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   76 |                 if (IS_ENABLED(CONFIG_USERSPACE) && config_user_mode) {
+      |                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:76:32: error: ‘CONFIG_USERSPACE’ undeclared (first use in this function); did you mean ‘CONFIG_LV_USE_SCALE’?
+   76 |                 if (IS_ENABLED(CONFIG_USERSPACE) && config_user_mode) {
+      |                                ^~~~~~~~~~~~~~~~
+      |                                CONFIG_LV_USE_SCALE
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:77:25: warning: implicit declaration of function ‘k_thread_user_mode_enter’ [-Wimplicit-function-declaration]
+   77 |                         k_thread_user_mode_enter(test_cb, a, b, c);
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:80:9: warning: implicit declaration of function ‘run_test_functions’ [-Wimplicit-function-declaration]
+   80 |         run_test_functions(suite, test, c);
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:81:33: error: ‘ZTEST_RESULT_PASS’ undeclared (first use in this function)
+   81 |         __ztest_set_test_result(ZTEST_RESULT_PASS);
+      |                                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:84:60: warning: ‘struct ztest_unit_test’ declared inside parameter list will not be visible outside of this definition or declaration
+   84 | static int run_test(struct ztest_suite_node *suite, struct ztest_unit_test *test, void *data)
+      |                                                            ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:84:28: warning: ‘struct ztest_suite_node’ declared inside parameter list will not be visible outside of this definition or declaration
+   84 | static int run_test(struct ztest_suite_node *suite, struct ztest_unit_test *test, void *data)
+      |                            ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘run_test’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:86:19: error: ‘TC_PASS’ undeclared (first use in this function)
+   86 |         int ret = TC_PASS;
+      |                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:91:9: warning: implicit declaration of function ‘TC_START’ [-Wimplicit-function-declaration]
+   91 |         TC_START(test->name);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:91:22: error: invalid use of undefined type ‘struct ztest_unit_test’
+   91 |         TC_START(test->name);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:93:9: warning: implicit declaration of function ‘__ztest_set_test_phase’; did you mean ‘ztest_test_pass’? [-Wimplicit-function-declaration]
+   93 |         __ztest_set_test_phase(TEST_PHASE_BEFORE);
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+      |         ztest_test_pass
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:93:32: error: ‘TEST_PHASE_BEFORE’ undeclared (first use in this function)
+   93 |         __ztest_set_test_phase(TEST_PHASE_BEFORE);
+      |                                ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:99:17: warning: implicit declaration of function ‘get_start_time_cyc’ [-Wimplicit-function-declaration]
+   99 |                 get_start_time_cyc();
+      |                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:100:17: warning: implicit declaration of function ‘k_thread_create’ [-Wimplicit-function-declaration]
+  100 |                 k_thread_create(&ztest_thread, ztest_thread_stack,
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:100:34: error: ‘ztest_thread’ undeclared (first use in this function)
+  100 |                 k_thread_create(&ztest_thread, ztest_thread_stack,
+      |                                  ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:100:48: error: ‘ztest_thread_stack’ undeclared (first use in this function)
+  100 |                 k_thread_create(&ztest_thread, ztest_thread_stack,
+      |                                                ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:101:33: warning: implicit declaration of function ‘K_THREAD_STACK_SIZEOF’ [-Wimplicit-function-declaration]
+  101 |                                 K_THREAD_STACK_SIZEOF(ztest_thread_stack), test_cb, suite, test,
+      |                                 ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:102:69: error: ‘K_INHERIT_PERMS’ undeclared (first use in this function)
+  102 |                                 data, CONFIG_ZTEST_THREAD_PRIORITY, K_INHERIT_PERMS, K_FOREVER);
+      |                                                                     ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:102:86: error: ‘K_FOREVER’ undeclared (first use in this function)
+  102 |                                 data, CONFIG_ZTEST_THREAD_PRIORITY, K_INHERIT_PERMS, K_FOREVER);
+      |                                                                                      ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:104:17: warning: implicit declaration of function ‘k_thread_access_grant’ [-Wimplicit-function-declaration]
+  104 |                 k_thread_access_grant(&ztest_thread, suite, test, suite->stats);
+      |                 ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:104:72: error: invalid use of undefined type ‘struct ztest_suite_node’
+  104 |                 k_thread_access_grant(&ztest_thread, suite, test, suite->stats);
+      |                                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:105:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  105 |                 if (test->name != NULL) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:105:35: error: ‘NULL’ undeclared (first use in this function)
+  105 |                 if (test->name != NULL) {
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | void ztest_test_fail(void)
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:106:25: warning: implicit declaration of function ‘k_thread_name_set’ [-Wimplicit-function-declaration]
+  106 |                         k_thread_name_set(&ztest_thread, test->name);
+      |                         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:106:62: error: invalid use of undefined type ‘struct ztest_unit_test’
+  106 |                         k_thread_name_set(&ztest_thread, test->name);
+      |                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:109:21: error: ‘test_result’ undeclared (first use in this function)
+  109 |                 if (test_result != ZTEST_RESULT_SUITE_SKIP &&
+      |                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:109:36: error: ‘ZTEST_RESULT_SUITE_SKIP’ undeclared (first use in this function)
+  109 |                 if (test_result != ZTEST_RESULT_SUITE_SKIP &&
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:110:36: error: ‘ZTEST_RESULT_SUITE_FAIL’ undeclared (first use in this function)
+  110 |                     test_result != ZTEST_RESULT_SUITE_FAIL) {
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:111:25: warning: implicit declaration of function ‘k_thread_start’ [-Wimplicit-function-declaration]
+  111 |                         k_thread_start(&ztest_thread);
+      |                         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:112:25: warning: implicit declaration of function ‘k_thread_join’ [-Wimplicit-function-declaration]
+  112 |                         k_thread_join(&ztest_thread, K_FOREVER);
+      |                         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:116:41: error: ‘ZTEST_RESULT_PENDING’ undeclared (first use in this function)
+  116 |                 __ztest_set_test_result(ZTEST_RESULT_PENDING);
+      |                                         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:118:46: error: ‘true’ undeclared (first use in this function)
+  118 |                 run_test_rules(/*is_before=*/true, test, data);
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:118:46: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:119:26: error: invalid use of undefined type ‘struct ztest_suite_node’
+  119 |                 if (suite->before) {
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:120:30: error: invalid use of undefined type ‘struct ztest_suite_node’
+  120 |                         suite->before(data);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:125:32: error: ‘TEST_PHASE_AFTER’ undeclared (first use in this function)
+  125 |         __ztest_set_test_phase(TEST_PHASE_AFTER);
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:126:18: error: invalid use of undefined type ‘struct ztest_suite_node’
+  126 |         if (suite->after != NULL) {
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:127:22: error: invalid use of undefined type ‘struct ztest_suite_node’
+  127 |                 suite->after(data);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:129:38: error: ‘false’ undeclared (first use in this function)
+  129 |         run_test_rules(/*is_before=*/false, test, data);
+      |                                      ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:129:38: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:131:9: warning: implicit declaration of function ‘get_test_duration_ms’ [-Wimplicit-function-declaration]
+  131 |         get_test_duration_ms();
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:132:13: error: ‘tc_spend_time’ undeclared (first use in this function)
+  132 |         if (tc_spend_time > test->stats->duration_worst_ms) {
+      |             ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:132:33: error: invalid use of undefined type ‘struct ztest_unit_test’
+  132 |         if (tc_spend_time > test->stats->duration_worst_ms) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:133:21: error: invalid use of undefined type ‘struct ztest_unit_test’
+  133 |                 test->stats->duration_worst_ms = tc_spend_time;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:136:32: error: ‘TEST_PHASE_FRAMEWORK’ undeclared (first use in this function)
+  136 |         __ztest_set_test_phase(TEST_PHASE_FRAMEWORK);
+      |                                ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:140:27: error: ‘CONFIG_LOG_PROCESS_THREAD’ undeclared (first use in this function)
+  140 |                IS_ENABLED(CONFIG_LOG_PROCESS_THREAD) && log_data_pending()) {
+      |                           ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:140:57: warning: implicit declaration of function ‘log_data_pending’ [-Wimplicit-function-declaration]
+  140 |                IS_ENABLED(CONFIG_LOG_PROCESS_THREAD) && log_data_pending()) {
+      |                                                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:141:17: warning: implicit declaration of function ‘k_msleep’ [-Wimplicit-function-declaration]
+  141 |                 k_msleep(100);
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:144:28: error: ‘ZTEST_RESULT_FAIL’ undeclared (first use in this function)
+  144 |         if (test_result == ZTEST_RESULT_FAIL || test_result == ZTEST_RESULT_SUITE_FAIL ||
+      |                            ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:145:13: error: ‘failed_expectation’ undeclared (first use in this function)
+  145 |             failed_expectation) {
+      |             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:146:23: error: ‘TC_FAIL’ undeclared (first use in this function)
+  146 |                 ret = TC_FAIL;
+      |                       ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:148:35: error: ‘ZTEST_RESULT_SKIP’ undeclared (first use in this function)
+  148 |         } else if (test_result == ZTEST_RESULT_SKIP || test_result == ZTEST_RESULT_SUITE_SKIP) {
+      |                                   ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:149:23: error: ‘TC_SKIP’ undeclared (first use in this function)
+  149 |                 ret = TC_SKIP;
+      |                       ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:152:28: error: ‘ZTEST_RESULT_PASS’ undeclared (first use in this function)
+  152 |         if (test_result == ZTEST_RESULT_PASS || !FAIL_FAST) {
+      |                            ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:152:50: error: ‘FAIL_FAST’ undeclared (first use in this function)
+  152 |         if (test_result == ZTEST_RESULT_PASS || !FAIL_FAST) {
+      |                                                  ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:153:24: warning: implicit declaration of function ‘cleanup_test’ [-Wimplicit-function-declaration]
+  153 |                 ret |= cleanup_test(test);
+      |                        ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:156:15: warning: implicit declaration of function ‘get_final_test_result’ [-Wimplicit-function-declaration]
+  156 |         ret = get_final_test_result(test, ret);
+      |               ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:157:9: warning: implicit declaration of function ‘Z_TC_END_RESULT’ [-Wimplicit-function-declaration]
+  157 |         Z_TC_END_RESULT(ret, test->name);
+      |         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:157:34: error: invalid use of undefined type ‘struct ztest_unit_test’
+  157 |         Z_TC_END_RESULT(ret, test->name);
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:158:31: error: ‘current_test_failed_assumption’ undeclared (first use in this function)
+  158 |         if (ret == TC_SKIP && current_test_failed_assumption) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:159:17: error: ‘test_status’ undeclared (first use in this function)
+  159 |                 test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:159:31: error: ‘ZTEST_STATUS_HAS_FAILURE’ undeclared (first use in this function)
+  159 |                 test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:165:2: error: #endif without #if
+  165 | #endif /* !KERNEL */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_find_test_suite’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:171:21: error: ‘_ztest_suite_node_list_start’ undeclared (first use in this function)
+  171 |         for (node = _ztest_suite_node_list_start; node < _ztest_suite_node_list_end; ++node) {
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:171:58: error: ‘_ztest_suite_node_list_end’ undeclared (first use in this function)
+  171 |         for (node = _ztest_suite_node_list_start; node < _ztest_suite_node_list_end; ++node) {
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:171:86: error: increment of pointer to an incomplete type ‘struct ztest_suite_node’
+  171 |         for (node = _ztest_suite_node_list_start; node < _ztest_suite_node_list_end; ++node) {
+      |                                                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:172:21: warning: implicit declaration of function ‘strcmp’ [-Wimplicit-function-declaration]
+  172 |                 if (strcmp(name, node->name) == 0) {
+      |                     ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘strcmp’
+  +++ |+#include <string.h>
+    1 | void ztest_test_fail(void)
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:172:38: error: invalid use of undefined type ‘struct ztest_suite_node’
+  172 |                 if (strcmp(name, node->name) == 0) {
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:177:16: error: ‘NULL’ undeclared (first use in this function)
+  177 |         return NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:177:16: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_ztest_get_next_test’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:182:49: error: ‘NULL’ undeclared (first use in this function)
+  182 |         struct ztest_unit_test *test = (prev == NULL) ? _ztest_unit_test_list_start : prev + 1;
+      |                                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:182:49: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:182:57: error: ‘_ztest_unit_test_list_start’ undeclared (first use in this function)
+  182 |         struct ztest_unit_test *test = (prev == NULL) ? _ztest_unit_test_list_start : prev + 1;
+      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:182:92: error: invalid use of undefined type ‘struct ztest_unit_test’
+  182 |         struct ztest_unit_test *test = (prev == NULL) ? _ztest_unit_test_list_start : prev + 1;
+      |                                                                                            ^
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:184:23: error: ‘_ztest_unit_test_list_end’ undeclared (first use in this function)
+  184 |         for (; test < _ztest_unit_test_list_end; ++test) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:184:50: error: increment of pointer to an incomplete type ‘struct ztest_unit_test’
+  184 |         for (; test < _ztest_unit_test_list_end; ++test) {
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:185:39: error: invalid use of undefined type ‘struct ztest_unit_test’
+  185 |                 if (strcmp(suite, test->test_suite_name) == 0) {
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:217:71: error: unknown type name ‘bool’
+  217 | static int z_ztest_run_test_suite_ptr(struct ztest_suite_node *suite, bool shuffle, int suite_iter,
+      |                                                                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:217:71: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:331:46: error: unknown type name ‘bool’
+  331 | int z_ztest_run_test_suite(const char *name, bool shuffle,
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:331:46: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘__ztest_show_suite_summary_oneline’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:350:28: error: ‘TC_PASS’ undeclared (first use in this function)
+  350 |         int suite_result = TC_PASS;
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:352:40: error: ‘NULL’ undeclared (first use in this function)
+  352 |         struct ztest_unit_test *test = NULL;
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:352:40: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:356:52: error: invalid use of undefined type ‘struct ztest_suite_node’
+  356 |         while (((test = z_ztest_get_next_test(suite->name, test)) != NULL)) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:358:48: error: invalid use of undefined type ‘struct ztest_unit_test’
+  358 |                 suite_duration_worst_ms += test->stats->duration_worst_ms;
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:359:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  359 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:359:52: error: invalid use of undefined type ‘struct ztest_unit_test’
+  359 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:361:32: error: invalid use of undefined type ‘struct ztest_unit_test’
+  361 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:361:59: error: invalid use of undefined type ‘struct ztest_unit_test’
+  361 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:369:32: error: ‘TC_SKIP’ undeclared (first use in this function)
+  369 |                 suite_result = TC_SKIP;
+      |                                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:372:54: error: ‘TC_FAIL’ undeclared (first use in this function)
+  372 |                 suite_result = (distinct_fail > 0) ? TC_FAIL : TC_PASS;
+      |                                                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:384:9: warning: implicit declaration of function ‘TC_SUMMARY_PRINT’ [-Wimplicit-function-declaration]
+  384 |         TC_SUMMARY_PRINT("SUITE %s - %3d.%02d%% [%s]: pass = %d, fail = %d, "
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:386:26: warning: implicit declaration of function ‘TC_RESULT_TO_STR’ [-Wimplicit-function-declaration]
+  386 |                          TC_RESULT_TO_STR(suite_result), passrate_major, passrate_minor,
+      |                          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:387:31: error: invalid use of undefined type ‘struct ztest_suite_node’
+  387 |                          suite->name, distinct_pass, distinct_fail, distinct_skip, distinct_total,
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:389:9: warning: implicit declaration of function ‘log_flush’ [-Wimplicit-function-declaration]
+  389 |         log_flush();
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘__ztest_show_suite_summary_verbose’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:394:40: error: ‘NULL’ undeclared (first use in this function)
+  394 |         struct ztest_unit_test *test = NULL;
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:394:40: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:395:25: error: ‘TC_PASS’ undeclared (first use in this function)
+  395 |         int tc_result = TC_PASS;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:402:52: error: invalid use of undefined type ‘struct ztest_suite_node’
+  402 |         while (((test = z_ztest_get_next_test(suite->name, test)) != NULL)) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:403:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  403 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:403:52: error: invalid use of undefined type ‘struct ztest_unit_test’
+  403 |                 if (test->stats->skip_count == test->stats->run_count) {
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:404:37: error: ‘TC_SKIP’ undeclared (first use in this function)
+  404 |                         tc_result = TC_SKIP;
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:405:32: error: invalid use of undefined type ‘struct ztest_unit_test’
+  405 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:405:59: error: invalid use of undefined type ‘struct ztest_unit_test’
+  405 |                 } else if (test->stats->pass_count == test->stats->run_count) {
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:407:32: error: invalid use of undefined type ‘struct ztest_unit_test’
+  407 |                 } else if (test->stats->pass_count == 0) {
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:408:37: error: ‘TC_FAIL’ undeclared (first use in this function)
+  408 |                         tc_result = TC_FAIL;
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:410:37: error: ‘TC_FLAKY’ undeclared (first use in this function)
+  410 |                         tc_result = TC_FLAKY;
+      |                                     ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:417:66: error: invalid use of undefined type ‘struct ztest_unit_test’
+  417 |                                 TC_RESULT_TO_STR(tc_result), test->test_suite_name, test->name,
+      |                                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:417:89: error: invalid use of undefined type ‘struct ztest_unit_test’
+  417 |                                 TC_RESULT_TO_STR(tc_result), test->test_suite_name, test->name,
+      |                                                                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:418:37: error: invalid use of undefined type ‘struct ztest_unit_test’
+  418 |                                 test->stats->run_count - test->stats->pass_count,
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:418:62: error: invalid use of undefined type ‘struct ztest_unit_test’
+  418 |                                 test->stats->run_count - test->stats->pass_count,
+      |                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:419:37: error: invalid use of undefined type ‘struct ztest_unit_test’
+  419 |                                 test->stats->run_count, test->stats->duration_worst_ms / 1000,
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:419:61: error: invalid use of undefined type ‘struct ztest_unit_test’
+  419 |                                 test->stats->run_count, test->stats->duration_worst_ms / 1000,
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:420:37: error: invalid use of undefined type ‘struct ztest_unit_test’
+  420 |                                 test->stats->duration_worst_ms % 1000);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:423:75: error: invalid use of undefined type ‘struct ztest_unit_test’
+  423 |                                          TC_RESULT_TO_STR(tc_result), test->test_suite_name,
+      |                                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:424:46: error: invalid use of undefined type ‘struct ztest_unit_test’
+  424 |                                          test->name, test->stats->duration_worst_ms / 1000,
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:424:58: error: invalid use of undefined type ‘struct ztest_unit_test’
+  424 |                                          test->name, test->stats->duration_worst_ms / 1000,
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:425:46: error: invalid use of undefined type ‘struct ztest_unit_test’
+  425 |                                          test->stats->duration_worst_ms % 1000);
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘__ztest_show_suite_summary’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:449:45: error: ‘_ztest_suite_node_list_start’ undeclared (first use in this function)
+  449 |         for (struct ztest_suite_node *ptr = _ztest_suite_node_list_start;
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:450:20: error: ‘_ztest_suite_node_list_end’ undeclared (first use in this function)
+  450 |              ptr < _ztest_suite_node_list_end; ++ptr) {
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:450:48: error: increment of pointer to an incomplete type ‘struct ztest_suite_node’
+  450 |              ptr < _ztest_suite_node_list_end; ++ptr) {
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:459:84: error: unknown type name ‘bool’
+  459 | static int __ztest_run_test_suite(struct ztest_suite_node *ptr, const void *state, bool shuffle,
+      |                                                                                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:459:84: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:481:53: error: unknown type name ‘bool’
+  481 | int z_impl_ztest_run_test_suites(const void *state, bool shuffle, int suite_iter, int case_iter)
+      |                                                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:481:53: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:527:42: warning: ‘enum ztest_result’ declared inside parameter list will not be visible outside of this definition or declaration
+  527 | void z_impl___ztest_set_test_result(enum ztest_result new_result)
+      |                                          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:527:55: error: parameter 1 (‘new_result’) has incomplete type
+  527 | void z_impl___ztest_set_test_result(enum ztest_result new_result)
+      |                                     ~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_impl___ztest_set_test_result’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:529:9: error: ‘test_result’ undeclared (first use in this function); did you mean ‘ztest_result’?
+  529 |         test_result = new_result;
+      |         ^~~~~~~~~~~
+      |         ztest_result
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:532:41: warning: ‘enum ztest_phase’ declared inside parameter list will not be visible outside of this definition or declaration
+  532 | void z_impl___ztest_set_test_phase(enum ztest_phase new_phase)
+      |                                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:532:53: error: parameter 1 (‘new_phase’) has incomplete type
+  532 | void z_impl___ztest_set_test_phase(enum ztest_phase new_phase)
+      |                                    ~~~~~~~~~~~~~~~~~^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_impl___ztest_set_test_phase’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:534:9: error: ‘cur_phase’ undeclared (first use in this function); did you mean ‘new_phase’?
+  534 |         cur_phase = new_phase;
+      |         ^~~~~~~~~
+      |         new_phase
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘ztest_verify_all_test_suites_ran’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:553:9: error: unknown type name ‘bool’
+  553 |         bool all_tests_run = true;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:553:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:553:30: error: ‘true’ undeclared (first use in this function)
+  553 |         bool all_tests_run = true;
+      |                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:553:30: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:558:30: error: ‘_ztest_suite_node_list_start’ undeclared (first use in this function)
+  558 |                 for (suite = _ztest_suite_node_list_start; suite < _ztest_suite_node_list_end;
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:558:68: error: ‘_ztest_suite_node_list_end’ undeclared (first use in this function)
+  558 |                 for (suite = _ztest_suite_node_list_start; suite < _ztest_suite_node_list_end;
+      |                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:559:22: error: increment of pointer to an incomplete type ‘struct ztest_suite_node’
+  559 |                      ++suite) {
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:560:34: error: invalid use of undefined type ‘struct ztest_suite_node’
+  560 |                         if (suite->stats->run_count < 1) {
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:561:90: error: invalid use of undefined type ‘struct ztest_suite_node’
+  561 |                                 PRINT_DATA("ERROR: Test suite '%s' did not run.\n", suite->name);
+      |                                                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:562:49: error: ‘false’ undeclared (first use in this function)
+  562 |                                 all_tests_run = false;
+      |                                                 ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:562:49: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:566:29: error: ‘_ztest_unit_test_list_start’ undeclared (first use in this function)
+  566 |                 for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:566:65: error: ‘_ztest_unit_test_list_end’ undeclared (first use in this function)
+  566 |                 for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:566:92: error: increment of pointer to an incomplete type ‘struct ztest_unit_test’
+  566 |                 for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                                                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:567:59: error: invalid use of undefined type ‘struct ztest_unit_test’
+  567 |                         suite = ztest_find_test_suite(test->test_suite_name);
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:568:38: error: ‘NULL’ undeclared (first use in this function)
+  568 |                         if (suite == NULL) {
+      |                                      ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:568:38: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:572:48: error: invalid use of undefined type ‘struct ztest_unit_test’
+  572 |                                            test->name, test->test_suite_name);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:572:60: error: invalid use of undefined type ‘struct ztest_unit_test’
+  572 |                                            test->name, test->test_suite_name);
+      |                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:578:25: error: ‘test_status’ undeclared (first use in this function)
+  578 |                         test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:578:39: error: ‘ZTEST_STATUS_HAS_FAILURE’ undeclared (first use in this function)
+  578 |                         test_status = ZTEST_STATUS_HAS_FAILURE;
+      |                                       ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:582:84: error: increment of pointer to an incomplete type ‘struct ztest_unit_test’
+  582 |         for (test = _ztest_unit_test_list_start; test < _ztest_unit_test_list_end; ++test) {
+      |                                                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:583:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  583 |                 if (test->stats->fail_count + test->stats->pass_count + test->stats->skip_count !=
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:583:51: error: invalid use of undefined type ‘struct ztest_unit_test’
+  583 |                 if (test->stats->fail_count + test->stats->pass_count + test->stats->skip_count !=
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:583:77: error: invalid use of undefined type ‘struct ztest_unit_test’
+  583 |                 if (test->stats->fail_count + test->stats->pass_count + test->stats->skip_count !=
+      |                                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:584:25: error: invalid use of undefined type ‘struct ztest_unit_test’
+  584 |                     test->stats->run_count) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:585:65: error: invalid use of undefined type ‘struct ztest_unit_test’
+  585 |                         PRINT_DATA("Bad stats for %s.%s\n", test->test_suite_name, test->name);
+      |                                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:585:88: error: invalid use of undefined type ‘struct ztest_unit_test’
+  585 |                         PRINT_DATA("Bad stats for %s.%s\n", test->test_suite_name, test->name);
+      |                                                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:591:39: error: unknown type name ‘bool’
+  591 | void ztest_run_all(const void *state, bool shuffle, int suite_iter, int case_iter)
+      |                                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:591:39: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:596:13: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘test_main’
+  596 | void __weak test_main(void)
+      |             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘main’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:862:9: warning: implicit declaration of function ‘z_init_mock’ [-Wimplicit-function-declaration]
+  862 |         z_init_mock();
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:864:9: warning: implicit declaration of function ‘test_main’ [-Wimplicit-function-declaration]
+  864 |         test_main();
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:868:9: warning: implicit declaration of function ‘end_report’ [-Wimplicit-function-declaration]
+  868 |         end_report();
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:870:9: warning: implicit declaration of function ‘LOG_PANIC’ [-Wimplicit-function-declaration]
+  870 |         LOG_PANIC();
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:871:24: error: ‘CONFIG_ZTEST_RETEST_IF_PASSED’ undeclared (first use in this function); did you mean ‘CONFIG_ZTEST_TEST_DELAY_MS’?
+  871 |         if (IS_ENABLED(CONFIG_ZTEST_RETEST_IF_PASSED)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CONFIG_ZTEST_TEST_DELAY_MS
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:872:32: error: expected ‘;’ before ‘struct’
+  872 |                 static __noinit struct {
+      |                                ^~~~~~~
+      |                                ;
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:873:25: error: unknown type name ‘uint32_t’
+  873 |                         uint32_t magic;
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:874:25: error: unknown type name ‘uint32_t’
+  874 |                         uint32_t boots;
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:876:23: error: unknown type name ‘uint32_t’
+  876 |                 const uint32_t magic = 0x152ac523;
+      |                       ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:883:21: error: ‘test_status’ undeclared (first use in this function)
+  883 |                 if (test_status == 0) {
+      |                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:886:25: warning: implicit declaration of function ‘sys_reboot’ [-Wimplicit-function-declaration]
+  886 |                         sys_reboot(SYS_REBOOT_COLD);
+      |                         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:886:36: error: ‘SYS_REBOOT_COLD’ undeclared (first use in this function)
+  886 |                         sys_reboot(SYS_REBOOT_COLD);
+      |                                    ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: In function ‘z_ztest_get_next_test’:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:190:1: warning: control reaches end of non-void function [-Wreturn-type]
+  190 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:438:13: warning: ‘__ztest_show_suite_summary’ defined but not used [-Wunused-function]
+  438 | static void __ztest_show_suite_summary(void)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:84:12: warning: ‘run_test’ defined but not used [-Wunused-function]
+   84 | static int run_test(struct ztest_suite_node *suite, struct ztest_unit_test *test, void *data)
+      |            ^~~~~~~~
+cc1: some warnings being treated as errors
+[336/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/qrcode/qrcodegen.c.obj
+[337/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_decoder.c.obj
+[338/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_parser.c.obj
+[339/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_render.c.obj
+[340/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/svg/lv_svg_token.c.obj
+[341/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.obj
+[342/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/tjpgd/lv_tjpgd.c.obj
+[343/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/tjpgd/tjpgd.c.obj
+[344/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/lv_vg_lite_hal/lv_vg_lite_hal.c.obj
+[345/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/lv_vg_lite_hal/vg_lite_os.c.obj
+[346/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLiteKernel/vg_lite_kernel.c.obj
+[347/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite.c.obj
+[348/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_image.c.obj
+[349/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_matrix.c.obj
+[350/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_path.c.obj
+[351/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_stroke.c.obj
+[352/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/class/lv_cache_lru_ll.c.obj
+[353/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/lv_init.c.obj
+[354/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/class/lv_cache_lru_rb.c.obj
+[355/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/class/lv_cache_sc_da.c.obj
+[356/514] Building C object modules/lvgl/CMakeFiles/modules__lvgl.dir/home/huyj/zephyr-workspace/modules/lib/gui/lvgl/src/misc/cache/instance/lv_image_cache.c.obj
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/gui/lvgl/build
+
+=== RC ===
+1

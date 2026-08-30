@@ -1,0 +1,857 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build
+-- west build: building application
+[1/147] Preparing syscall dependency handling
+
+[2/147] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/147] Generating misc/generated/syscalls_subdirs.trigger
+[4/147] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/147] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/147] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/147] Generating include/generated/zephyr/driver-validation.h
+[8/147] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/147] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/147] Generating ../../include/generated/zephyr/heap_constants.h
+[11/147] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/147] Generating include/generated/zephyr/offsets.h
+[13/147] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/147] Building C object CMakeFiles/app.dir/src/uart_mock.c.obj
+[15/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[20/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[21/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[24/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+[25/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[31/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[32/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[33/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[34/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[36/147] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[37/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[40/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[41/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[42/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[43/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_uart.c.obj
+[44/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[45/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/kernel_shell.c.obj
+[46/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/cycles.c.obj
+[47/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/sleep.c.obj
+[48/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/uptime.c.obj
+[49/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/log-level.c.obj
+[50/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/stacks.c.obj
+[51/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/version.c.obj
+[52/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/thread.c.obj
+[53/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/list.c.obj
+[54/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/suspend.c.obj
+[55/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/resume.c.obj
+[56/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/kill.c.obj
+[57/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/device_service.c.obj
+[58/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/date_service.c.obj
+[59/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/devmem_service.c.obj
+[60/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/backends/shell_dummy.c.obj
+[61/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj
+[62/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_fprintf.c.obj
+[63/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj
+[64/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_ops.c.obj
+[65/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_log_backend.c.obj
+[66/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_help.c.obj
+[67/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_cmds.c.obj
+[68/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_history.c.obj
+[69/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_wildcard.c.obj
+[70/147] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[71/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[72/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[73/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[74/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[75/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[76/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[77/147] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[78/147] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[79/147] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[80/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[81/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[82/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[83/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[84/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[85/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[86/147] Building C object zephyr/subsys/mgmt/ec_host_cmd/backends/CMakeFiles/subsys__mgmt__ec_host_cmd__backends.dir/ec_host_cmd_backend_uart.c.obj
+[87/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[88/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[89/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[90/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_mock.c.obj
+[91/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[92/147] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[93/147] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/uart_console.c.obj
+[94/147] Building C object zephyr/drivers/serial/CMakeFiles/drivers__serial.dir/uart_native_pty.c.obj
+[95/147] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[96/147] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[97/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[98/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[99/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[100/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[101/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[102/147] Linking C static library app/libapp.a
+[103/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[104/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[105/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[106/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[107/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[108/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[109/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[110/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[111/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[112/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[113/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[114/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[115/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[116/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[117/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[118/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[119/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[120/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[121/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[122/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[123/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[124/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread_monitor.c.obj
+[125/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[126/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[127/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[128/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[129/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[130/147] Linking C static library zephyr/arch/common/libarch__common.a
+[131/147] Generating linker_zephyr_pre0.cmd
+[132/147] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[133/147] Linking C static library zephyr/drivers/serial/libdrivers__serial.a
+[134/147] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[135/147] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[136/147] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[137/147] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[138/147] Linking C static library zephyr/subsys/mgmt/ec_host_cmd/backends/libsubsys__mgmt__ec_host_cmd__backends.a
+[139/147] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[140/147] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[141/147] Building C object zephyr/subsys/mgmt/ec_host_cmd/CMakeFiles/subsys__mgmt__ec_host_cmd.dir/ec_host_cmd_handler.c.obj
+FAILED: zephyr/subsys/mgmt/ec_host_cmd/CMakeFiles/subsys__mgmt__ec_host_cmd.dir/ec_host_cmd_handler.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/shell/modules/kernel_service/thread/.. -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/subsys/mgmt/ec_host_cmd/CMakeFiles/subsys__mgmt__ec_host_cmd.dir/ec_host_cmd_handler.c.obj -MF zephyr/subsys/mgmt/ec_host_cmd/CMakeFiles/subsys__mgmt__ec_host_cmd.dir/ec_host_cmd_handler.c.obj.d -o zephyr/subsys/mgmt/ec_host_cmd/CMakeFiles/subsys__mgmt__ec_host_cmd.dir/ec_host_cmd_handler.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:8: error: unknown type name ‘uint8_t’
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+      |        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:35: error: unknown type name ‘uint8_t’
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+      |                                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:64: error: unknown type name ‘uint16_t’
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+      |                                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:54:32: error: unknown type name ‘uint16_t’
+   54 | int ec_host_cmd_add_suppressed(uint16_t cmd_id)
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:1: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:66:8: error: unknown type name ‘bool’
+   66 | static bool ec_host_cmd_is_suppressed(uint16_t cmd_id)
+      |        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:66:39: error: unknown type name ‘uint16_t’
+   66 | static bool ec_host_cmd_is_suppressed(uint16_t cmd_id)
+      |                                       ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:66:39: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_dump_suppressed’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:84:9: error: unknown type name ‘int64_t’
+   84 |         int64_t uptime = k_uptime_get();
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:84:9: note: ‘int64_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:84:26: warning: implicit declaration of function ‘k_uptime_get’ [-Wimplicit-function-declaration]
+   84 |         int64_t uptime = k_uptime_get();
+      |                          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:86:9: warning: implicit declaration of function ‘LOG_PRINTK’; did you mean ‘CONFIG_PRINTK’? [-Wimplicit-function-declaration]
+   86 |         LOG_PRINTK("[%llds HC Suppressed:", uptime / 1000U);
+      |         ^~~~~~~~~~
+      |         CONFIG_PRINTK
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:87:25: error: ‘suppressed_cmds_number’ undeclared (first use in this function)
+   87 |         for (i = 0; i < suppressed_cmds_number; i++) {
+      |                         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:87:25: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:88:40: error: ‘suppressed_cmds’ undeclared (first use in this function)
+   88 |                 LOG_PRINTK(" 0x%x=%d", suppressed_cmds[i], suppressed_cmds_count[i]);
+      |                                        ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:88:60: error: ‘suppressed_cmds_count’ undeclared (first use in this function)
+   88 |                 LOG_PRINTK(" 0x%x=%d", suppressed_cmds[i], suppressed_cmds_count[i]);
+      |                                                            ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:94:9: error: ‘suppressed_cmds_deadline’ undeclared (first use in this function)
+   94 |         suppressed_cmds_deadline = uptime + CONFIG_EC_HOST_CMD_LOG_SUPPRESSED_INTERVAL_SECS * 1000U;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_check_suppressed’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:99:31: error: ‘suppressed_cmds_deadline’ undeclared (first use in this function)
+   99 |         if (k_uptime_get() >= suppressed_cmds_deadline) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:107:45: warning: ‘enum ec_host_cmd_status’ declared inside parameter list will not be visible outside of this definition or declaration
+  107 |                                  const enum ec_host_cmd_status status)
+      |                                             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:106:41: warning: ‘struct ec_host_cmd_tx_buf’ declared inside parameter list will not be visible outside of this definition or declaration
+  106 |                                  struct ec_host_cmd_tx_buf *tx,
+      |                                         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:105:47: warning: ‘struct ec_host_cmd_backend’ declared inside parameter list will not be visible outside of this definition or declaration
+  105 | static void send_status_response(const struct ec_host_cmd_backend *backend,
+      |                                               ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:107:64: error: parameter 3 (‘status’) has incomplete type
+  107 |                                  const enum ec_host_cmd_status status)
+      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘send_status_response’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:109:73: error: invalid use of undefined type ‘struct ec_host_cmd_tx_buf’
+  109 |         struct ec_host_cmd_response_header *const tx_header = (void *)tx->buf;
+      |                                                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:111:18: error: invalid use of undefined type ‘struct ec_host_cmd_response_header’
+  111 |         tx_header->prtcl_ver = 3;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:112:18: error: invalid use of undefined type ‘struct ec_host_cmd_response_header’
+  112 |         tx_header->result = status;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:113:18: error: invalid use of undefined type ‘struct ec_host_cmd_response_header’
+  113 |         tx_header->data_len = 0;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:114:18: error: invalid use of undefined type ‘struct ec_host_cmd_response_header’
+  114 |         tx_header->reserved = 0;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:115:18: error: invalid use of undefined type ‘struct ec_host_cmd_response_header’
+  115 |         tx_header->checksum = 0;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:116:18: error: invalid use of undefined type ‘struct ec_host_cmd_response_header’
+  116 |         tx_header->checksum = cal_checksum((uint8_t *)tx_header, TX_HEADER_SIZE);
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:116:45: error: ‘uint8_t’ undeclared (first use in this function)
+  116 |         tx_header->checksum = cal_checksum((uint8_t *)tx_header, TX_HEADER_SIZE);
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:116:45: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:116:54: error: expected expression before ‘)’ token
+  116 |         tx_header->checksum = cal_checksum((uint8_t *)tx_header, TX_HEADER_SIZE);
+      |                                                      ^
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:116:31: error: too few arguments to function ‘cal_checksum’
+  116 |         tx_header->checksum = cal_checksum((uint8_t *)tx_header, TX_HEADER_SIZE);
+      |                               ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:16: note: declared here
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+      |                ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:118:11: error: invalid use of undefined type ‘struct ec_host_cmd_tx_buf’
+  118 |         tx->len = TX_HEADER_SIZE;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:118:19: error: ‘TX_HEADER_SIZE’ undeclared (first use in this function)
+  118 |         tx->len = TX_HEADER_SIZE;
+      |                   ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:120:16: error: invalid use of undefined type ‘const struct ec_host_cmd_backend’
+  120 |         backend->api->send(backend);
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:49: warning: ‘struct ec_host_cmd_rx_ctx’ declared inside parameter list will not be visible outside of this definition or declaration
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:32: error: return type is an incomplete type
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘verify_rx’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:126:15: error: invalid use of undefined type ‘struct ec_host_cmd_rx_ctx’
+  126 |         if (rx->len < RX_HEADER_SIZE) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:126:23: error: ‘RX_HEADER_SIZE’ undeclared (first use in this function)
+  126 |         if (rx->len < RX_HEADER_SIZE) {
+      |                       ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:127:24: error: ‘EC_HOST_CMD_REQUEST_TRUNCATED’ undeclared (first use in this function)
+  127 |                 return EC_HOST_CMD_REQUEST_TRUNCATED;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:127:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:32: note: declared here
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:131:56: error: invalid use of undefined type ‘struct ec_host_cmd_rx_ctx’
+  131 |                 (struct ec_host_cmd_request_header *)rx->buf;
+      |                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:134:22: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  134 |         if (rx_header->prtcl_ver != 3) {
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:135:24: error: ‘EC_HOST_CMD_INVALID_HEADER’ undeclared (first use in this function)
+  135 |                 return EC_HOST_CMD_INVALID_HEADER;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:135:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:32: note: declared here
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:138:15: error: unknown type name ‘uint16_t’
+  138 |         const uint16_t rx_valid_data_size = rx_header->data_len + RX_HEADER_SIZE;
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:138:54: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  138 |         const uint16_t rx_valid_data_size = rx_header->data_len + RX_HEADER_SIZE;
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:144:15: error: invalid use of undefined type ‘struct ec_host_cmd_rx_ctx’
+  144 |         if (rx->len < rx_valid_data_size) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:145:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+  145 |                 return EC_HOST_CMD_REQUEST_TRUNCATED;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:32: note: declared here
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:149:27: error: ‘uint8_t’ undeclared (first use in this function)
+  149 |         if (cal_checksum((uint8_t *)rx_header, rx_valid_data_size) != 0) {
+      |                           ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:149:27: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:149:36: error: expected expression before ‘)’ token
+  149 |         if (cal_checksum((uint8_t *)rx_header, rx_valid_data_size) != 0) {
+      |                                    ^
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:149:13: error: too few arguments to function ‘cal_checksum’
+  149 |         if (cal_checksum((uint8_t *)rx_header, rx_valid_data_size) != 0) {
+      |             ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:16: note: declared here
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+      |                ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:150:24: error: ‘EC_HOST_CMD_INVALID_CHECKSUM’ undeclared (first use in this function)
+  150 |                 return EC_HOST_CMD_INVALID_CHECKSUM;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:150:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:32: note: declared here
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:153:16: error: ‘EC_HOST_CMD_SUCCESS’ undeclared (first use in this function)
+  153 |         return EC_HOST_CMD_SUCCESS;
+      |                ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:153:16: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:32: note: declared here
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:157:62: warning: ‘struct ec_host_cmd_handler_args’ declared inside parameter list will not be visible outside of this definition or declaration
+  157 |                                                 const struct ec_host_cmd_handler_args *args)
+      |                                                              ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:62: warning: ‘struct ec_host_cmd_handler’ declared inside parameter list will not be visible outside of this definition or declaration
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                                              ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:32: error: return type is an incomplete type
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘validate_handler’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:159:20: error: invalid use of undefined type ‘const struct ec_host_cmd_handler’
+  159 |         if (handler->min_rqt_size > args->input_buf_size) {
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:159:41: error: invalid use of undefined type ‘const struct ec_host_cmd_handler_args’
+  159 |         if (handler->min_rqt_size > args->input_buf_size) {
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:160:24: error: ‘EC_HOST_CMD_REQUEST_TRUNCATED’ undeclared (first use in this function)
+  160 |                 return EC_HOST_CMD_REQUEST_TRUNCATED;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:160:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:32: note: declared here
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:163:20: error: invalid use of undefined type ‘const struct ec_host_cmd_handler’
+  163 |         if (handler->min_rsp_size > args->output_buf_max) {
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:163:41: error: invalid use of undefined type ‘const struct ec_host_cmd_handler_args’
+  163 |         if (handler->min_rsp_size > args->output_buf_max) {
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:164:24: error: ‘EC_HOST_CMD_INVALID_RESPONSE’ undeclared (first use in this function)
+  164 |                 return EC_HOST_CMD_INVALID_RESPONSE;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:164:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:32: note: declared here
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:167:17: error: invalid use of undefined type ‘const struct ec_host_cmd_handler_args’
+  167 |         if (args->version >= NUM_BITS(handler->version_mask) ||
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:167:30: warning: implicit declaration of function ‘NUM_BITS’ [-Wimplicit-function-declaration]
+  167 |         if (args->version >= NUM_BITS(handler->version_mask) ||
+      |                              ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:167:46: error: invalid use of undefined type ‘const struct ec_host_cmd_handler’
+  167 |         if (args->version >= NUM_BITS(handler->version_mask) ||
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:168:22: error: invalid use of undefined type ‘const struct ec_host_cmd_handler’
+  168 |             !(handler->version_mask & BIT(args->version))) {
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:168:39: warning: implicit declaration of function ‘BIT’ [-Wimplicit-function-declaration]
+  168 |             !(handler->version_mask & BIT(args->version))) {
+      |                                       ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:168:47: error: invalid use of undefined type ‘const struct ec_host_cmd_handler_args’
+  168 |             !(handler->version_mask & BIT(args->version))) {
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:169:24: error: ‘EC_HOST_CMD_INVALID_VERSION’ undeclared (first use in this function)
+  169 |                 return EC_HOST_CMD_INVALID_VERSION;
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:169:24: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:32: note: declared here
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:172:16: error: ‘EC_HOST_CMD_SUCCESS’ undeclared (first use in this function)
+  172 |         return EC_HOST_CMD_SUCCESS;
+      |                ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:172:16: warning: ‘return’ with a value, in function returning void [-Wreturn-type]
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:32: note: declared here
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:175:80: error: unknown type name ‘uint16_t’
+  175 | static enum ec_host_cmd_status prepare_response(struct ec_host_cmd_tx_buf *tx, uint16_t len)
+      |                                                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:175:80: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:199:30: error: unknown type name ‘ec_host_cmd_user_cb_t’
+  199 | void ec_host_cmd_set_user_cb(ec_host_cmd_user_cb_t cb, void *user_data)
+      |                              ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:208:44: warning: ‘struct ec_host_cmd_handler_args’ declared inside parameter list will not be visible outside of this definition or declaration
+  208 |                               const struct ec_host_cmd_handler_args *args)
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:207:55: error: parameter 1 (‘status’) has incomplete type
+  207 | int ec_host_cmd_send_response(enum ec_host_cmd_status status,
+      |                               ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_send_response’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:210:35: error: ‘ec_host_cmd’ undeclared (first use in this function)
+  210 |         struct ec_host_cmd *hc = &ec_host_cmd;
+      |                                   ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:211:44: error: invalid use of undefined type ‘struct ec_host_cmd’
+  211 |         struct ec_host_cmd_tx_buf *tx = &hc->tx;
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:213:15: error: invalid use of undefined type ‘struct ec_host_cmd’
+  213 |         if (hc->state != EC_HOST_CMD_STATE_PROCESSING) {
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:213:26: error: ‘EC_HOST_CMD_STATE_PROCESSING’ undeclared (first use in this function)
+  213 |         if (hc->state != EC_HOST_CMD_STATE_PROCESSING) {
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:214:17: warning: implicit declaration of function ‘LOG_ERR’ [-Wimplicit-function-declaration]
+  214 |                 LOG_ERR("Unexpected state while sending");
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:215:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+  215 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:217:11: error: invalid use of undefined type ‘struct ec_host_cmd’
+  217 |         hc->state = EC_HOST_CMD_STATE_SENDING;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:217:21: error: ‘EC_HOST_CMD_STATE_SENDING’ undeclared (first use in this function)
+  217 |         hc->state = EC_HOST_CMD_STATE_SENDING;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:219:23: error: ‘EC_HOST_CMD_SUCCESS’ undeclared (first use in this function)
+  219 |         if (status != EC_HOST_CMD_SUCCESS) {
+      |                       ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:221:75: error: invalid use of undefined type ‘struct ec_host_cmd’
+  221 |                         (const struct ec_host_cmd_request_header *const)hc->rx_ctx.buf;
+      |                                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:223:17: warning: implicit declaration of function ‘LOG_INF’ [-Wimplicit-function-declaration]
+  223 |                 LOG_INF("HC 0x%04x err %d", rx_header->cmd_id, status);
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:223:54: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  223 |                 LOG_INF("HC 0x%04x err %d", rx_header->cmd_id, status);
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:224:40: error: invalid use of undefined type ‘struct ec_host_cmd’
+  224 |                 send_status_response(hc->backend, tx, status);
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:234:18: warning: implicit declaration of function ‘prepare_response’ [-Wimplicit-function-declaration]
+  234 |         status = prepare_response(tx, args->output_buf_size);
+      |                  ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:234:43: error: invalid use of undefined type ‘const struct ec_host_cmd_handler_args’
+  234 |         status = prepare_response(tx, args->output_buf_size);
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:236:40: error: invalid use of undefined type ‘struct ec_host_cmd’
+  236 |                 send_status_response(hc->backend, tx, status);
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:240:18: error: invalid use of undefined type ‘struct ec_host_cmd’
+  240 |         return hc->backend->api->send(hc->backend);
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:240:41: error: invalid use of undefined type ‘struct ec_host_cmd’
+  240 |         return hc->backend->api->send(hc->backend);
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_rx_notify’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:245:35: error: ‘ec_host_cmd’ undeclared (first use in this function)
+  245 |         struct ec_host_cmd *hc = &ec_host_cmd;
+      |                                   ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:246:44: error: invalid use of undefined type ‘struct ec_host_cmd’
+  246 |         struct ec_host_cmd_rx_ctx *rx = &hc->rx_ctx;
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:248:11: error: invalid use of undefined type ‘struct ec_host_cmd’
+  248 |         hc->rx_status = verify_rx(rx);
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:248:35: warning: passing argument 1 of ‘verify_rx’ from incompatible pointer type [-Wincompatible-pointer-types]
+  248 |         hc->rx_status = verify_rx(rx);
+      |                                   ^~
+      |                                   |
+      |                                   struct ec_host_cmd_rx_ctx *
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:123:69: note: expected ‘struct ec_host_cmd_rx_ctx *’ but argument is of type ‘struct ec_host_cmd_rx_ctx *’
+  123 | static enum ec_host_cmd_status verify_rx(struct ec_host_cmd_rx_ctx *rx)
+      |                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:250:16: error: invalid use of undefined type ‘struct ec_host_cmd’
+  250 |         if (!hc->rx_status && hc->user_cb) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:250:33: error: invalid use of undefined type ‘struct ec_host_cmd’
+  250 |         if (!hc->rx_status && hc->user_cb) {
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:251:19: error: invalid use of undefined type ‘struct ec_host_cmd’
+  251 |                 hc->user_cb(rx, hc->user_data);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:251:35: error: invalid use of undefined type ‘struct ec_host_cmd’
+  251 |                 hc->user_cb(rx, hc->user_data);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:254:9: warning: implicit declaration of function ‘k_sem_give’ [-Wimplicit-function-declaration]
+  254 |         k_sem_give(&hc->rx_ready);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:254:23: error: invalid use of undefined type ‘struct ec_host_cmd’
+  254 |         k_sem_give(&hc->rx_ready);
+      |                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:257:43: error: unknown type name ‘uint8_t’
+  257 | static void ec_host_cmd_log_request(const uint8_t *rx_buf)
+      |                                           ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_log_request’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:259:16: error: unknown type name ‘uint16_t’
+  259 |         static uint16_t prev_cmd;
+      |                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:264:13: warning: implicit declaration of function ‘ec_host_cmd_is_suppressed’; did you mean ‘ec_host_cmd_dump_suppressed’? [-Wimplicit-function-declaration]
+  264 |         if (ec_host_cmd_is_suppressed(rx_header->cmd_id)) {
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |             ec_host_cmd_dump_suppressed
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:264:48: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  264 |         if (ec_host_cmd_is_suppressed(rx_header->cmd_id)) {
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:271:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+  271 |         if (IS_ENABLED(CONFIG_EC_HOST_CMD_LOG_DBG_BUFFERS)) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:271:24: error: ‘CONFIG_EC_HOST_CMD_LOG_DBG_BUFFERS’ undeclared (first use in this function); did you mean ‘CONFIG_EC_HOST_CMD_LOG_SUPPRESSED’?
+  271 |         if (IS_ENABLED(CONFIG_EC_HOST_CMD_LOG_DBG_BUFFERS)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        CONFIG_EC_HOST_CMD_LOG_SUPPRESSED
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:272:30: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  272 |                 if (rx_header->data_len) {
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:273:31: error: unknown type name ‘uint8_t’
+  273 |                         const uint8_t *rx_data = rx_buf + RX_HEADER_SIZE;
+      |                               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:273:59: error: ‘RX_HEADER_SIZE’ undeclared (first use in this function)
+  273 |                         const uint8_t *rx_data = rx_buf + RX_HEADER_SIZE;
+      |                                                           ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:280:25: warning: implicit declaration of function ‘snprintf’ [-Wimplicit-function-declaration]
+  280 |                         snprintf(dbg_raw, sizeof(dbg_raw), dbg_fmt, rx_header->cmd_id,
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:1: note: include ‘<stdio.h>’ or provide a declaration of ‘snprintf’
+  +++ |+#include <stdio.h>
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:280:25: warning: incompatible implicit declaration of built-in function ‘snprintf’ [-Wbuiltin-declaration-mismatch]
+  280 |                         snprintf(dbg_raw, sizeof(dbg_raw), dbg_fmt, rx_header->cmd_id,
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:280:25: note: include ‘<stdio.h>’ or provide a declaration of ‘snprintf’
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:280:78: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  280 |                         snprintf(dbg_raw, sizeof(dbg_raw), dbg_fmt, rx_header->cmd_id,
+      |                                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:281:43: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  281 |                                  rx_header->cmd_ver);
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:282:25: warning: implicit declaration of function ‘LOG_HEXDUMP_DBG’ [-Wimplicit-function-declaration]
+  282 |                         LOG_HEXDUMP_DBG(rx_data, rx_header->data_len, dbg_raw);
+      |                         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:282:59: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  282 |                         LOG_HEXDUMP_DBG(rx_data, rx_header->data_len, dbg_raw);
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:292:22: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  292 |         if (rx_header->cmd_id != prev_cmd) {
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:293:37: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  293 |                 prev_cmd = rx_header->cmd_id;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:294:47: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  294 |                 LOG_INF("HC 0x%04x", rx_header->cmd_id);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:296:17: warning: implicit declaration of function ‘LOG_DBG’ [-Wimplicit-function-declaration]
+  296 |                 LOG_DBG("HC 0x%04x", rx_header->cmd_id);
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:296:47: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  296 |                 LOG_DBG("HC 0x%04x", rx_header->cmd_id);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:300:14: error: expected ‘;’ before ‘static’
+  300 | FUNC_NORETURN static void ec_host_cmd_thread(void *hc_handle, void *arg2, void *arg3)
+      |              ^~~~~~~
+      |              ;
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_thread’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:302:9: warning: implicit declaration of function ‘ARG_UNUSED’ [-Wimplicit-function-declaration]
+  302 |         ARG_UNUSED(arg2);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:304:33: error: storage size of ‘status’ isn’t known
+  304 |         enum ec_host_cmd_status status;
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:306:44: error: invalid use of undefined type ‘struct ec_host_cmd’
+  306 |         struct ec_host_cmd_rx_ctx *rx = &hc->rx_ctx;
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:307:44: error: invalid use of undefined type ‘struct ec_host_cmd’
+  307 |         struct ec_host_cmd_tx_buf *tx = &hc->tx;
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:309:78: error: invalid use of undefined type ‘struct ec_host_cmd_rx_ctx’
+  309 |         const struct ec_host_cmd_request_header *const rx_header = (void *)rx->buf;
+      |                                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:311:16: error: variable ‘args’ has initializer but incomplete type
+  311 |         struct ec_host_cmd_handler_args args = {
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:312:18: error: ‘struct ec_host_cmd_handler_args’ has no member named ‘output_buf’
+  312 |                 .output_buf = (uint8_t *)tx->buf + TX_HEADER_SIZE,
+      |                  ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:312:32: error: ‘uint8_t’ undeclared (first use in this function)
+  312 |                 .output_buf = (uint8_t *)tx->buf + TX_HEADER_SIZE,
+      |                                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:312:32: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:312:41: error: expected expression before ‘)’ token
+  312 |                 .output_buf = (uint8_t *)tx->buf + TX_HEADER_SIZE,
+      |                                         ^
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:312:31: warning: excess elements in struct initializer
+  312 |                 .output_buf = (uint8_t *)tx->buf + TX_HEADER_SIZE,
+      |                               ^
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:312:31: note: (near initialization for ‘args’)
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:311:41: error: storage size of ‘args’ isn’t known
+  311 |         struct ec_host_cmd_handler_args args = {
+      |                                         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:317:9: warning: implicit declaration of function ‘__ASSERT’ [-Wimplicit-function-declaration]
+  317 |         __ASSERT(hc->state != EC_HOST_CMD_STATE_DISABLED, "HC backend not initialized");
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:317:20: error: invalid use of undefined type ‘struct ec_host_cmd’
+  317 |         __ASSERT(hc->state != EC_HOST_CMD_STATE_DISABLED, "HC backend not initialized");
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:317:31: error: ‘EC_HOST_CMD_STATE_DISABLED’ undeclared (first use in this function)
+  317 |         __ASSERT(hc->state != EC_HOST_CMD_STATE_DISABLED, "HC backend not initialized");
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:320:19: error: invalid use of undefined type ‘struct ec_host_cmd’
+  320 |                 hc->state = EC_HOST_CMD_STATE_RECEIVING;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:320:29: error: ‘EC_HOST_CMD_STATE_RECEIVING’ undeclared (first use in this function)
+  320 |                 hc->state = EC_HOST_CMD_STATE_RECEIVING;
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:322:17: warning: implicit declaration of function ‘k_sem_take’ [-Wimplicit-function-declaration]
+  322 |                 k_sem_take(&hc->rx_ready, K_FOREVER);
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:322:31: error: invalid use of undefined type ‘struct ec_host_cmd’
+  322 |                 k_sem_take(&hc->rx_ready, K_FOREVER);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:322:43: error: ‘K_FOREVER’ undeclared (first use in this function)
+  322 |                 k_sem_take(&hc->rx_ready, K_FOREVER);
+      |                                           ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:323:19: error: invalid use of undefined type ‘struct ec_host_cmd’
+  323 |                 hc->state = EC_HOST_CMD_STATE_PROCESSING;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:323:29: error: ‘EC_HOST_CMD_STATE_PROCESSING’ undeclared (first use in this function)
+  323 |                 hc->state = EC_HOST_CMD_STATE_PROCESSING;
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:325:43: error: invalid use of undefined type ‘struct ec_host_cmd_rx_ctx’
+  325 |                 ec_host_cmd_log_request(rx->buf);
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:330:23: error: invalid use of undefined type ‘struct ec_host_cmd’
+  330 |                 if (hc->rx_status != EC_HOST_CMD_SUCCESS) {
+      |                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:330:38: error: ‘EC_HOST_CMD_SUCCESS’ undeclared (first use in this function)
+  330 |                 if (hc->rx_status != EC_HOST_CMD_SUCCESS) {
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:331:53: error: invalid use of undefined type ‘struct ec_host_cmd’
+  331 |                         ec_host_cmd_send_response(hc->rx_status, &args);
+      |                                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:335:33: error: ‘NULL’ undeclared (first use in this function)
+  335 |                 found_handler = NULL;
+      |                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:336:17: warning: implicit declaration of function ‘STRUCT_SECTION_FOREACH’ [-Wimplicit-function-declaration]
+  336 |                 STRUCT_SECTION_FOREACH(ec_host_cmd_handler, handler) {
+      |                 ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:336:40: error: ‘ec_host_cmd_handler’ undeclared (first use in this function)
+  336 |                 STRUCT_SECTION_FOREACH(ec_host_cmd_handler, handler) {
+      |                                        ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:336:61: error: ‘handler’ undeclared (first use in this function)
+  336 |                 STRUCT_SECTION_FOREACH(ec_host_cmd_handler, handler) {
+      |                                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:336:69: error: expected ‘;’ before ‘{’ token
+  336 |                 STRUCT_SECTION_FOREACH(ec_host_cmd_handler, handler) {
+      |                                                                     ^~
+      |                                                                     ;
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:350:41: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  350 |                 args.version = rx_header->cmd_ver;
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:351:48: error: invalid use of undefined type ‘const struct ec_host_cmd_request_header’
+  351 |                 args.input_buf_size = rx_header->data_len;
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:352:41: error: invalid use of undefined type ‘struct ec_host_cmd_tx_buf’
+  352 |                 args.output_buf_max = tx->len_max - TX_HEADER_SIZE,
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:352:53: error: ‘TX_HEADER_SIZE’ undeclared (first use in this function)
+  352 |                 args.output_buf_max = tx->len_max - TX_HEADER_SIZE,
+      |                                                     ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:352:67: warning: left-hand operand of comma expression has no effect [-Wunused-value]
+  352 |                 args.output_buf_max = tx->len_max - TX_HEADER_SIZE,
+      |                                                                   ^
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:355:43: warning: passing argument 1 of ‘validate_handler’ from incompatible pointer type [-Wincompatible-pointer-types]
+  355 |                 status = validate_handler(found_handler, &args);
+      |                                           ^~~~~~~~~~~~~
+      |                                           |
+      |                                           const struct ec_host_cmd_handler *
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:156:83: note: expected ‘const struct ec_host_cmd_handler *’ but argument is of type ‘const struct ec_host_cmd_handler *’
+  156 | static enum ec_host_cmd_status validate_handler(const struct ec_host_cmd_handler *handler,
+      |                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:365:17: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+  365 |                 memset(args.output_buf, 0, args.output_buf_max);
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+  +++ |+#include <string.h>
+    1 | static uint8_t cal_checksum(const uint8_t *const buffer, const uint16_t size)
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:365:17: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+  365 |                 memset(args.output_buf, 0, args.output_buf_max);
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:365:17: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:367:39: error: invalid use of undefined type ‘const struct ec_host_cmd_handler’
+  367 |                 status = found_handler->handler(&args);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:311:41: warning: unused variable ‘args’ [-Wunused-variable]
+  311 |         struct ec_host_cmd_handler_args args = {
+      |                                         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:304:33: warning: unused variable ‘status’ [-Wunused-variable]
+  304 |         enum ec_host_cmd_status status;
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:380:29: warning: ‘struct ec_host_cmd_backend’ declared inside parameter list will not be visible outside of this definition or declaration
+  380 | int ec_host_cmd_init(struct ec_host_cmd_backend *backend)
+      |                             ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:382:35: error: ‘ec_host_cmd’ undeclared (first use in this function)
+  382 |         struct ec_host_cmd *hc = &ec_host_cmd;
+      |                                   ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:384:9: error: unknown type name ‘uint8_t’
+  384 |         uint8_t *handler_tx_buf, *handler_rx_buf;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:384:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:385:9: error: unknown type name ‘uint8_t’
+  385 |         uint8_t *handler_tx_buf_end, *handler_rx_buf_end;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:385:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:386:9: error: unknown type name ‘uint8_t’
+  386 |         uint8_t *backend_tx_buf, *backend_rx_buf;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:386:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:388:11: error: invalid use of undefined type ‘struct ec_host_cmd’
+  388 |         hc->backend = backend;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:391:9: warning: implicit declaration of function ‘k_sem_init’ [-Wimplicit-function-declaration]
+  391 |         k_sem_init(&hc->rx_ready, 0, 1);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:391:23: error: invalid use of undefined type ‘struct ec_host_cmd’
+  391 |         k_sem_init(&hc->rx_ready, 0, 1);
+      |                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:397:28: error: invalid use of undefined type ‘struct ec_host_cmd’
+  397 |         handler_tx_buf = hc->tx.buf;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:398:28: error: invalid use of undefined type ‘struct ec_host_cmd’
+  398 |         handler_rx_buf = hc->rx_ctx.buf;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:402:22: error: invalid use of undefined type ‘struct ec_host_cmd_backend’
+  402 |         ret = backend->api->init(backend, &hc->rx_ctx, &hc->tx);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:402:46: error: invalid use of undefined type ‘struct ec_host_cmd’
+  402 |         ret = backend->api->init(backend, &hc->rx_ctx, &hc->tx);
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:402:59: error: invalid use of undefined type ‘struct ec_host_cmd’
+  402 |         ret = backend->api->init(backend, &hc->rx_ctx, &hc->tx);
+      |                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:404:28: error: invalid use of undefined type ‘struct ec_host_cmd’
+  404 |         backend_tx_buf = hc->tx.buf;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:405:28: error: invalid use of undefined type ‘struct ec_host_cmd’
+  405 |         backend_rx_buf = hc->rx_ctx.buf;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:413:25: error: ‘EIO’ undeclared (first use in this function)
+  413 |                 return -EIO;
+      |                         ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:416:11: error: invalid use of undefined type ‘struct ec_host_cmd’
+  416 |         hc->state = EC_HOST_CMD_STATE_RECEIVING;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:416:21: error: ‘EC_HOST_CMD_STATE_RECEIVING’ undeclared (first use in this function)
+  416 |         hc->state = EC_HOST_CMD_STATE_RECEIVING;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:426:17: warning: implicit declaration of function ‘LOG_WRN’ [-Wimplicit-function-declaration]
+  426 |                 LOG_WRN("Host Command handler provided unused buffer");
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:430:9: warning: implicit declaration of function ‘k_thread_create’ [-Wimplicit-function-declaration]
+  430 |         k_thread_create(&hc->thread, hc_stack, CONFIG_EC_HOST_CMD_HANDLER_STACK_SIZE,
+      |         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:430:28: error: invalid use of undefined type ‘struct ec_host_cmd’
+  430 |         k_thread_create(&hc->thread, hc_stack, CONFIG_EC_HOST_CMD_HANDLER_STACK_SIZE,
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:430:38: error: ‘hc_stack’ undeclared (first use in this function)
+  430 |         k_thread_create(&hc->thread, hc_stack, CONFIG_EC_HOST_CMD_HANDLER_STACK_SIZE,
+      |                                      ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:431:57: error: ‘NULL’ undeclared (first use in this function)
+  431 |                         ec_host_cmd_thread, (void *)hc, NULL, NULL, CONFIG_EC_HOST_CMD_HANDLER_PRIO,
+      |                                                         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:431:57: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:432:28: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  432 |                         0, K_NO_WAIT);
+      |                            ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:433:9: warning: implicit declaration of function ‘k_thread_name_set’ [-Wimplicit-function-declaration]
+  433 |         k_thread_name_set(&hc->thread, "ec_host_cmd");
+      |         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:433:30: error: invalid use of undefined type ‘struct ec_host_cmd’
+  433 |         k_thread_name_set(&hc->thread, "ec_host_cmd");
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_get_hc’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:441:17: error: ‘ec_host_cmd’ undeclared (first use in this function)
+  441 |         return &ec_host_cmd;
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_send_response’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:241:1: warning: control reaches end of non-void function [-Wreturn-type]
+  241 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c: In function ‘ec_host_cmd_get_hc’:
+/home/huyj/zephyr-workspace/zephyr/subsys/mgmt/ec_host_cmd/ec_host_cmd_handler.c:442:1: warning: control reaches end of non-void function [-Wreturn-type]
+  442 | }
+      | ^
+[142/147] Linking C static library zephyr/libzephyr.a
+[143/147] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/mgmt/ec_host_cmd/uart/build
+
+=== RC ===
+1

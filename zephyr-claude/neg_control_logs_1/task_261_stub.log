@@ -1,0 +1,1346 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build
+-- west build: building application
+[1/161] Preparing syscall dependency handling
+
+[2/161] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/161] Generating misc/generated/syscalls_subdirs.trigger
+[4/161] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/161] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/161] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/161] Generating include/generated/zephyr/driver-validation.h
+[8/161] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/161] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/161] Generating ../../include/generated/zephyr/heap_constants.h
+[11/161] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/161] Generating include/generated/zephyr/offsets.h
+[13/161] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/161] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/mock/modem_backend_mock.c.obj
+[15/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[18/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[19/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[20/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[21/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[22/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[23/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[24/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[25/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[33/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[34/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/161] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/net/lib/utils/addr_utils.c.obj
+[44/161] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[45/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[46/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[47/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[48/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[51/161] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[52/161] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[53/161] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[54/161] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[55/161] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[56/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[57/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[58/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[59/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[60/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[61/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[62/161] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_entropy_device.c.obj
+[63/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[64/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[65/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[66/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[67/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc4_sw.c.obj
+[68/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc8_sw.c.obj
+[69/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc16_sw.c.obj
+[70/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc7_sw.c.obj
+[71/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc24_sw.c.obj
+[72/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32_sw.c.obj
+[73/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32k_4_2_sw.c.obj
+[74/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32c_sw.c.obj
+[75/161] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_ppp.c.obj
+[76/161] Building C object zephyr/subsys/net/l2/ethernet/CMakeFiles/subsys__net__l2__ethernet.dir/ethernet.c.obj
+[77/161] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_pipe.c.obj
+[78/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/fsm.c.obj
+[79/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/options.c.obj
+[80/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/link.c.obj
+[81/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/ppp_l2.c.obj
+[82/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/lcp.c.obj
+[83/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/network.c.obj
+[84/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/misc.c.obj
+[85/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/ipv6cp.c.obj
+[86/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_core.c.obj
+[87/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_if.c.obj
+[88/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_timeout.c.obj
+[89/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/utils.c.obj
+[90/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_mgmt.c.obj
+[91/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_context.c.obj
+[92/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_tc.c.obj
+[93/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/icmp.c.obj
+[94/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/connection.c.obj
+[95/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/icmpv6.c.obj
+[96/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/nbr.c.obj
+[97/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/ipv6_nbr.c.obj
+[98/161] Linking C static library app/libapp.a
+[99/161] Generating linker_zephyr_pre0.cmd
+[100/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/ipv6.c.obj
+[101/161] Linking C static library zephyr/arch/common/libarch__common.a
+[102/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/ipv6_mld.c.obj
+[103/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/udp.c.obj
+[104/161] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[105/161] Building C object zephyr/drivers/entropy/CMakeFiles/drivers__entropy.dir/fake_entropy_native_sim.c.obj
+[106/161] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[107/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/route.c.obj
+[108/161] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[109/161] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[110/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[111/161] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[112/161] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[113/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[114/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[115/161] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[116/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[117/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[118/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[119/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[120/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[121/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[122/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[123/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[124/161] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[125/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[126/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[127/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[128/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[129/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[130/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[131/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[132/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[133/161] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[134/161] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[135/161] Linking C static library zephyr/subsys/modem/libsubsys__modem.a
+[136/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[137/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[138/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[139/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[140/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[141/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[142/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[143/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[144/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[145/161] Linking C static library zephyr/subsys/crc/libsubsys__crc.a
+[146/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[147/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[148/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[149/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[150/161] Linking C static library zephyr/libzephyr.a
+[151/161] Linking C static library zephyr/subsys/net/l2/ethernet/libsubsys__net__l2__ethernet.a
+[152/161] Linking C static library zephyr/subsys/net/l2/ppp/libsubsys__net__l2__ppp.a
+[153/161] Linking C static library zephyr/drivers/entropy/libdrivers__entropy.a
+[154/161] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[155/161] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[156/161] Linking C static library zephyr/kernel/libkernel.a
+[157/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_pkt.c.obj
+FAILED: zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_pkt.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/. -I/home/huyj/zephyr-workspace/zephyr/subsys/net/lib -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/net/l2 -Wshadow -fno-strict-aliasing -O0 -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_pkt.c.obj -MF zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_pkt.c.obj.d -o zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_pkt.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1:27: warning: ‘struct net_pkt’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | void net_pkt_unref(struct net_pkt *pkt)
+      |                           ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_ref_debug’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:14:9: error: unknown type name ‘atomic_val_t’
+   14 |         atomic_val_t ref;
+      |         ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:17:29: warning: implicit declaration of function ‘atomic_get’ [-Wimplicit-function-declaration]
+   17 |                 ref = pkt ? atomic_get(&pkt->atomic_ref) : 0;
+      |                             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:17:44: error: invalid use of undefined type ‘struct net_pkt’
+   17 |                 ref = pkt ? atomic_get(&pkt->atomic_ref) : 0;
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:20:25: warning: implicit declaration of function ‘NET_ERR’ [-Wimplicit-function-declaration]
+   20 |                         NET_ERR("*** ERROR *** pkt %p (%s():%d)",
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:23:32: error: ‘NULL’ undeclared (first use in this function)
+   23 |                         return NULL;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | void net_pkt_unref(struct net_pkt *pkt)
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:23:32: note: each undeclared identifier is reported only once for each function it appears in
+   23 |                         return NULL;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:25:19: warning: implicit declaration of function ‘atomic_cas’ [-Wimplicit-function-declaration]
+   25 |         } while (!atomic_cas(&pkt->atomic_ref, ref, ref + 1));
+      |                   ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:25:34: error: invalid use of undefined type ‘struct net_pkt’
+   25 |         } while (!atomic_cas(&pkt->atomic_ref, ref, ref + 1));
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:28:9: warning: implicit declaration of function ‘NET_DBG’ [-Wimplicit-function-declaration]
+   28 |         NET_DBG("%s [%d] pkt %p ref %ld (%s():%d)",
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:29:17: warning: implicit declaration of function ‘slab2str’ [-Wimplicit-function-declaration]
+   29 |                 slab2str(pkt->slab), k_mem_slab_num_free_get(pkt->slab),
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:29:29: error: invalid use of undefined type ‘struct net_pkt’
+   29 |                 slab2str(pkt->slab), k_mem_slab_num_free_get(pkt->slab),
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:29:38: warning: implicit declaration of function ‘k_mem_slab_num_free_get’ [-Wimplicit-function-declaration]
+   29 |                 slab2str(pkt->slab), k_mem_slab_num_free_get(pkt->slab),
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:29:65: error: invalid use of undefined type ‘struct net_pkt’
+   29 |                 slab2str(pkt->slab), k_mem_slab_num_free_get(pkt->slab),
+      |                                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_frag_ref_debug’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:48:24: error: ‘NULL’ undeclared (first use in this function)
+   48 |                 return NULL;
+      |                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:48:24: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:53:17: warning: implicit declaration of function ‘pool2str’ [-Wimplicit-function-declaration]
+   53 |                 pool2str(net_buf_pool_get(frag->pool_id)),
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:53:26: warning: implicit declaration of function ‘net_buf_pool_get’ [-Wimplicit-function-declaration]
+   53 |                 pool2str(net_buf_pool_get(frag->pool_id)),
+      |                          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:53:47: error: invalid use of undefined type ‘struct net_buf’
+   53 |                 pool2str(net_buf_pool_get(frag->pool_id)),
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:54:17: warning: implicit declaration of function ‘get_name’ [-Wimplicit-function-declaration]
+   54 |                 get_name(net_buf_pool_get(frag->pool_id)),
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:54:47: error: invalid use of undefined type ‘struct net_buf’
+   54 |                 get_name(net_buf_pool_get(frag->pool_id)),
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:55:17: warning: implicit declaration of function ‘get_frees’ [-Wimplicit-function-declaration]
+   55 |                 get_frees(net_buf_pool_get(frag->pool_id)),
+      |                 ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:55:48: error: invalid use of undefined type ‘struct net_buf’
+   55 |                 get_frees(net_buf_pool_get(frag->pool_id)),
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:56:27: error: invalid use of undefined type ‘struct net_buf’
+   56 |                 frag, frag->ref + 1U, caller, line);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:59:16: warning: implicit declaration of function ‘net_buf_ref’; did you mean ‘net_pkt_unref’? [-Wimplicit-function-declaration]
+   59 |         return net_buf_ref(frag);
+      |                ^~~~~~~~~~~
+      |                net_pkt_unref
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:59:16: warning: returning ‘int’ from a function with return type ‘struct net_buf *’ makes pointer from integer without a cast [-Wint-conversion]
+   59 |         return net_buf_ref(frag);
+      |                ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_frag_unref_debug’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:79:47: error: invalid use of undefined type ‘struct net_buf’
+   79 |                 pool2str(net_buf_pool_get(frag->pool_id)),
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:80:47: error: invalid use of undefined type ‘struct net_buf’
+   80 |                 get_name(net_buf_pool_get(frag->pool_id)),
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:81:48: error: invalid use of undefined type ‘struct net_buf’
+   81 |                 get_frees(net_buf_pool_get(frag->pool_id)),
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:82:27: error: invalid use of undefined type ‘struct net_buf’
+   82 |                 frag, frag->ref - 1U, caller, line);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:85:17: error: invalid use of undefined type ‘struct net_buf’
+   85 |         if (frag->ref == 1U) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:86:17: warning: implicit declaration of function ‘net_pkt_alloc_del’ [-Wimplicit-function-declaration]
+   86 |                 net_pkt_alloc_del(frag, caller, line);
+      |                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:89:9: warning: implicit declaration of function ‘net_buf_unref’; did you mean ‘net_pkt_unref’? [-Wimplicit-function-declaration]
+   89 |         net_buf_unref(frag);
+      |         ^~~~~~~~~~~~~
+      |         net_pkt_unref
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_frag_del_debug’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:105:40: error: invalid use of undefined type ‘struct net_buf’
+  105 |                 pkt, parent, frag, frag->ref, caller, line);
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:108:16: error: invalid use of undefined type ‘struct net_pkt’
+  108 |         if (pkt->frags == frag && !parent) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:111:25: error: invalid use of undefined type ‘struct net_buf’
+  111 |                 if (frag->ref == 1U) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:115:23: warning: implicit declaration of function ‘net_buf_frag_del’ [-Wimplicit-function-declaration]
+  115 |                 tmp = net_buf_frag_del(NULL, frag);
+      |                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:115:40: error: ‘NULL’ undeclared (first use in this function)
+  115 |                 tmp = net_buf_frag_del(NULL, frag);
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:115:40: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:116:20: error: invalid use of undefined type ‘struct net_pkt’
+  116 |                 pkt->frags = tmp;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:121:17: error: invalid use of undefined type ‘struct net_buf’
+  121 |         if (frag->ref == 1U) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:125:16: warning: returning ‘int’ from a function with return type ‘struct net_buf *’ makes pointer from integer without a cast [-Wint-conversion]
+  125 |         return net_buf_frag_del(parent, frag);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_frag_add_debug’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:142:17: error: invalid use of undefined type ‘struct net_pkt’
+  142 |         if (!pkt->frags) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:143:20: error: invalid use of undefined type ‘struct net_pkt’
+  143 |                 pkt->frags = frag;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:147:9: warning: implicit declaration of function ‘net_buf_frag_insert’ [-Wimplicit-function-declaration]
+  147 |         net_buf_frag_insert(net_buf_frag_last(pkt->frags), frag);
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:147:29: warning: implicit declaration of function ‘net_buf_frag_last’ [-Wimplicit-function-declaration]
+  147 |         net_buf_frag_insert(net_buf_frag_last(pkt->frags), frag);
+      |                             ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:147:50: error: invalid use of undefined type ‘struct net_pkt’
+  147 |         net_buf_frag_insert(net_buf_frag_last(pkt->frags), frag);
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_frag_insert_debug’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:161:32: error: invalid type argument of ‘->’ (have ‘int’)
+  161 |         net_buf_frag_last(frag)->frags = pkt->frags;
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:161:45: error: invalid use of undefined type ‘struct net_pkt’
+  161 |         net_buf_frag_last(frag)->frags = pkt->frags;
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:162:12: error: invalid use of undefined type ‘struct net_pkt’
+  162 |         pkt->frags = frag;
+      |            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_compact’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:171:19: error: invalid use of undefined type ‘struct net_pkt’
+  171 |         frag = pkt->frags;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:172:16: error: ‘NULL’ undeclared (first use in this function)
+  172 |         prev = NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:172:16: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:175:25: error: invalid use of undefined type ‘struct net_buf’
+  175 |                 if (frag->frags) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:179:25: error: unknown type name ‘size_t’
+  179 |                         size_t copy_len;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:179:25: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:181:40: error: invalid use of undefined type ‘struct net_buf’
+  181 |                         copy_len = frag->frags->len;
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:182:40: warning: implicit declaration of function ‘net_buf_tailroom’ [-Wimplicit-function-declaration]
+  182 |                         if (copy_len > net_buf_tailroom(frag)) {
+      |                                        ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:25: warning: implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+  186 |                         memcpy(net_buf_tail(frag), frag->frags->data, copy_len);
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+  +++ |+#include <string.h>
+    1 | void net_pkt_unref(struct net_pkt *pkt)
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:25: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+  186 |                         memcpy(net_buf_tail(frag), frag->frags->data, copy_len);
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:25: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:32: warning: implicit declaration of function ‘net_buf_tail’ [-Wimplicit-function-declaration]
+  186 |                         memcpy(net_buf_tail(frag), frag->frags->data, copy_len);
+      |                                ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:56: error: invalid use of undefined type ‘struct net_buf’
+  186 |                         memcpy(net_buf_tail(frag), frag->frags->data, copy_len);
+      |                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:32: warning: passing argument 1 of ‘memcpy’ makes pointer from integer without a cast [-Wint-conversion]
+  186 |                         memcpy(net_buf_tail(frag), frag->frags->data, copy_len);
+      |                                ^~~~~~~~~~~~~~~~~~
+      |                                |
+      |                                int
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:186:32: note: expected ‘void *’ but argument is of type ‘int’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:187:25: warning: implicit declaration of function ‘net_buf_add’ [-Wimplicit-function-declaration]
+  187 |                         net_buf_add(frag, copy_len);
+      |                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:189:25: warning: implicit declaration of function ‘memmove’ [-Wimplicit-function-declaration]
+  189 |                         memmove(frag->frags->data,
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:189:25: note: include ‘<string.h>’ or provide a declaration of ‘memmove’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:189:25: warning: incompatible implicit declaration of built-in function ‘memmove’ [-Wbuiltin-declaration-mismatch]
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:189:25: note: include ‘<string.h>’ or provide a declaration of ‘memmove’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:189:37: error: invalid use of undefined type ‘struct net_buf’
+  189 |                         memmove(frag->frags->data,
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:190:37: error: invalid use of undefined type ‘struct net_buf’
+  190 |                                 frag->frags->data + copy_len,
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:191:37: error: invalid use of undefined type ‘struct net_buf’
+  191 |                                 frag->frags->len - copy_len);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:193:29: error: invalid use of undefined type ‘struct net_buf’
+  193 |                         frag->frags->len -= copy_len;
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:202:33: warning: implicit declaration of function ‘net_pkt_frag_del’; did you mean ‘net_pkt_frag_del_debug’? [-Wimplicit-function-declaration]
+  202 |                                 net_pkt_frag_del(pkt, frag, frag->frags);
+      |                                 ^~~~~~~~~~~~~~~~
+      |                                 net_pkt_frag_del_debug
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:202:65: error: invalid use of undefined type ‘struct net_buf’
+  202 |                                 net_pkt_frag_del(pkt, frag, frag->frags);
+      |                                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:208:34: error: invalid use of undefined type ‘struct net_buf’
+  208 |                         if (!frag->len) {
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:219:28: error: invalid use of undefined type ‘struct net_buf’
+  219 |                 frag = frag->frags;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:225:30: warning: ‘struct net_buf_pool’ declared inside parameter list will not be visible outside of this definition or declaration
+  225 |                       struct net_buf_pool **rx_data,
+      |                              ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:223:30: warning: ‘struct k_mem_slab’ declared inside parameter list will not be visible outside of this definition or declaration
+  223 | void net_pkt_get_info(struct k_mem_slab **rx,
+      |                              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_get_info’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:229:24: error: ‘rx_pkts’ undeclared (first use in this function)
+  229 |                 *rx = &rx_pkts;
+      |                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:233:24: error: ‘tx_pkts’ undeclared (first use in this function)
+  233 |                 *tx = &tx_pkts;
+      |                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:237:29: error: ‘rx_bufs’ undeclared (first use in this function)
+  237 |                 *rx_data = &rx_bufs;
+      |                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:241:29: error: ‘tx_bufs’ undeclared (first use in this function)
+  241 |                 *tx_data = &tx_bufs;
+      |                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:315:41: error: unknown type name ‘size_t’
+  315 |                                         size_t size, size_t headroom,
+      |                                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:315:41: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:315:54: error: unknown type name ‘size_t’
+  315 |                                         size_t size, size_t headroom,
+      |                                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:315:54: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:316:41: error: unknown type name ‘k_timeout_t’
+  316 |                                         k_timeout_t timeout,
+      |                                         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:458:8: error: unknown type name ‘size_t’
+  458 | static size_t pkt_buffer_length(struct net_pkt *pkt,
+      |        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:459:33: error: unknown type name ‘size_t’
+  459 |                                 size_t size,
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:459:33: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:461:33: error: unknown type name ‘size_t’
+  461 |                                 size_t existing)
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:461:33: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:509:8: error: unknown type name ‘size_t’
+  509 | static size_t pkt_estimate_headers_length(struct net_pkt *pkt,
+      |        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:510:43: error: unknown type name ‘net_sa_family_t’
+  510 |                                           net_sa_family_t family,
+      |                                           ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:540:8: error: unknown type name ‘size_t’
+  540 | static size_t pkt_get_max_len(struct net_pkt *pkt)
+      |        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘pkt_get_max_len’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:542:34: error: invalid use of undefined type ‘struct net_pkt’
+  542 |         struct net_buf *buf = pkt->buffer;
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:543:9: error: unknown type name ‘size_t’
+  543 |         size_t size = 0;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:543:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:546:25: warning: implicit declaration of function ‘net_buf_max_len’; did you mean ‘pkt_get_max_len’? [-Wimplicit-function-declaration]
+  546 |                 size += net_buf_max_len(buf);
+      |                         ^~~~~~~~~~~~~~~
+      |                         pkt_get_max_len
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:547:26: error: invalid use of undefined type ‘struct net_buf’
+  547 |                 buf = buf->frags;
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:553:1: error: unknown type name ‘size_t’
+  553 | size_t net_pkt_available_buffer(struct net_pkt *pkt)
+      | ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:553:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_available_buffer’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:559:39: warning: implicit declaration of function ‘net_pkt_get_len’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+  559 |         return pkt_get_max_len(pkt) - net_pkt_get_len(pkt);
+      |                                       ^~~~~~~~~~~~~~~
+      |                                       net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:562:1: error: unknown type name ‘size_t’
+  562 | size_t net_pkt_available_payload_buffer(struct net_pkt *pkt,
+      | ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:562:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:563:46: warning: ‘enum net_ip_protocol’ declared inside parameter list will not be visible outside of this definition or declaration
+  563 |                                         enum net_ip_protocol proto)
+      |                                              ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:563:62: error: parameter 2 (‘proto’) has incomplete type
+  563 |                                         enum net_ip_protocol proto)
+      |                                         ~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_available_payload_buffer’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:565:9: error: unknown type name ‘size_t’
+  565 |         size_t hdr_len = 0;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:565:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:566:9: error: unknown type name ‘size_t’
+  566 |         size_t len;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:566:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:572:19: warning: implicit declaration of function ‘pkt_estimate_headers_length’ [-Wimplicit-function-declaration]
+  572 |         hdr_len = pkt_estimate_headers_length(pkt, net_pkt_family(pkt), proto);
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:572:52: warning: implicit declaration of function ‘net_pkt_family’ [-Wimplicit-function-declaration]
+  572 |         hdr_len = pkt_estimate_headers_length(pkt, net_pkt_family(pkt), proto);
+      |                                                    ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_trim_buffer’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:586:18: error: invalid use of undefined type ‘struct net_pkt’
+  586 |         buf = pkt->buffer;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:590:43: error: invalid use of undefined type ‘struct net_buf’
+  590 |                 struct net_buf *next = buf->frags;
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:592:25: error: invalid use of undefined type ‘struct net_buf’
+  592 |                 if (!buf->len) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:593:39: error: invalid use of undefined type ‘struct net_pkt’
+  593 |                         if (buf == pkt->buffer) {
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:594:36: error: invalid use of undefined type ‘struct net_pkt’
+  594 |                                 pkt->buffer = next;
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:595:47: error: invalid use of undefined type ‘struct net_buf’
+  595 |                         } else if (buf == prev->frags) {
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:596:37: error: invalid use of undefined type ‘struct net_buf’
+  596 |                                 prev->frags = next;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:599:28: error: invalid use of undefined type ‘struct net_buf’
+  599 |                         buf->frags = NULL;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:599:38: error: ‘NULL’ undeclared (first use in this function)
+  599 |                         buf->frags = NULL;
+      |                                      ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:599:38: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:609:46: error: unknown type name ‘size_t’
+  609 | int net_pkt_remove_tail(struct net_pkt *pkt, size_t length)
+      |                                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:609:46: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:641:45: error: unknown type name ‘size_t’
+  641 |                                             size_t size,
+      |                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:641:45: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:642:45: error: unknown type name ‘size_t’
+  642 |                                             size_t reserve,
+      |                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:642:45: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:644:45: error: unknown type name ‘k_timeout_t’
+  644 |                                             k_timeout_t timeout,
+      |                                             ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:727:8: error: unknown type name ‘bool’
+  727 | static bool is_pkt_tx(struct net_pkt *pkt)
+      |        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘is_pkt_tx’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:734:19: error: invalid use of undefined type ‘struct net_pkt’
+  734 |         return pkt->slab == &tx_pkts;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:734:30: error: ‘tx_pkts’ undeclared (first use in this function)
+  734 |         return pkt->slab == &tx_pkts;
+      |                              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:739:32: error: unknown type name ‘size_t’
+  739 |                                size_t size,
+      |                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:739:32: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:741:32: error: unknown type name ‘k_timeout_t’
+  741 |                                k_timeout_t timeout,
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:792:57: error: unknown type name ‘size_t’
+  792 | int net_pkt_alloc_buffer_raw_debug(struct net_pkt *pkt, size_t size,
+      |                                                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:792:57: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:793:36: error: unknown type name ‘k_timeout_t’
+  793 |                                    k_timeout_t timeout, const char *caller,
+      |                                    ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:852:59: error: unknown type name ‘k_timeout_t’
+  852 | static struct net_pkt *pkt_alloc(struct k_mem_slab *slab, k_timeout_t timeout,
+      |                                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:924:37: error: unknown type name ‘k_timeout_t’
+  924 | struct net_pkt *net_pkt_alloc_debug(k_timeout_t timeout,
+      |                                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:939:47: error: unknown type name ‘k_timeout_t’
+  939 |                                               k_timeout_t timeout,
+      |                                               ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:958:40: error: unknown type name ‘k_timeout_t’
+  958 | struct net_pkt *net_pkt_rx_alloc_debug(k_timeout_t timeout,
+      |                                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:974:43: error: unknown type name ‘k_timeout_t’
+  974 |                                           k_timeout_t timeout,
+      |                                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1000:46: error: unknown type name ‘k_timeout_t’
+ 1000 |                                              k_timeout_t timeout,
+      |                                              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1017:49: error: unknown type name ‘k_timeout_t’
+ 1017 |                                                 k_timeout_t timeout,
+      |                                                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1036:23: error: unknown type name ‘size_t’
+ 1036 |                       size_t size,
+      |                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1036:23: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1037:23: error: unknown type name ‘net_sa_family_t’
+ 1037 |                       net_sa_family_t family,
+      |                       ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1039:23: error: unknown type name ‘k_timeout_t’
+ 1039 |                       k_timeout_t timeout,
+      |                       ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1093:49: error: unknown type name ‘size_t’
+ 1093 |                                                 size_t size,
+      |                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1093:49: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1094:49: error: unknown type name ‘net_sa_family_t’
+ 1094 |                                                 net_sa_family_t family,
+      |                                                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1096:49: error: unknown type name ‘k_timeout_t’
+ 1096 |                                                 k_timeout_t timeout,
+      |                                                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1118:52: error: unknown type name ‘size_t’
+ 1118 |                                                    size_t size,
+      |                                                    ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1118:52: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1119:52: error: unknown type name ‘net_sa_family_t’
+ 1119 |                                                    net_sa_family_t family,
+      |                                                    ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1121:52: error: unknown type name ‘k_timeout_t’
+ 1121 |                                                    k_timeout_t timeout,
+      |                                                    ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_append_buffer’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1143:17: error: invalid use of undefined type ‘struct net_pkt’
+ 1143 |         if (!pkt->buffer) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1144:20: error: invalid use of undefined type ‘struct net_pkt’
+ 1144 |                 pkt->buffer = buffer;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1145:17: warning: implicit declaration of function ‘net_pkt_cursor_init’ [-Wimplicit-function-declaration]
+ 1145 |                 net_pkt_cursor_init(pkt);
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1147:58: error: invalid use of undefined type ‘struct net_pkt’
+ 1147 |                 net_buf_frag_insert(net_buf_frag_last(pkt->buffer), buffer);
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1151:6: warning: conflicting types for ‘net_pkt_cursor_init’; have ‘void(struct net_pkt *)’
+ 1151 | void net_pkt_cursor_init(struct net_pkt *pkt)
+      |      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1145:17: note: previous implicit declaration of ‘net_pkt_cursor_init’ with type ‘void(struct net_pkt *)’
+ 1145 |                 net_pkt_cursor_init(pkt);
+      |                 ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_cursor_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1153:12: error: invalid use of undefined type ‘struct net_pkt’
+ 1153 |         pkt->cursor.buf = pkt->buffer;
+      |            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1153:30: error: invalid use of undefined type ‘struct net_pkt’
+ 1153 |         pkt->cursor.buf = pkt->buffer;
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1154:16: error: invalid use of undefined type ‘struct net_pkt’
+ 1154 |         if (pkt->cursor.buf) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1155:20: error: invalid use of undefined type ‘struct net_pkt’
+ 1155 |                 pkt->cursor.pos = pkt->cursor.buf->data;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1155:38: error: invalid use of undefined type ‘struct net_pkt’
+ 1155 |                 pkt->cursor.pos = pkt->cursor.buf->data;
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1157:20: error: invalid use of undefined type ‘struct net_pkt’
+ 1157 |                 pkt->cursor.pos = NULL;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1157:35: error: ‘NULL’ undeclared (first use in this function)
+ 1157 |                 pkt->cursor.pos = NULL;
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1157:35: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1161:50: error: unknown type name ‘bool’
+ 1161 | static void pkt_cursor_jump(struct net_pkt *pkt, bool write)
+      |                                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | void net_pkt_unref(struct net_pkt *pkt)
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1184:53: error: unknown type name ‘bool’
+ 1184 | static void pkt_cursor_advance(struct net_pkt *pkt, bool write)
+      |                                                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1184:53: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1200:31: error: unknown type name ‘size_t’
+ 1200 |                               size_t length, bool write)
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1200:31: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1200:46: error: unknown type name ‘bool’
+ 1200 |                               size_t length, bool write)
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1200:46: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1221:47: error: unknown type name ‘size_t’
+ 1221 |                                   void *data, size_t length,
+      |                                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1221:47: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1222:35: error: unknown type name ‘bool’
+ 1222 |                                   bool copy, bool write)
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1222:35: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1222:46: error: unknown type name ‘bool’
+ 1222 |                                   bool copy, bool write)
+      |                                              ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1222:46: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1281:39: error: unknown type name ‘size_t’
+ 1281 | int net_pkt_skip(struct net_pkt *pkt, size_t skip)
+      |                                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1281:39: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1288:51: error: unknown type name ‘size_t’
+ 1288 | int net_pkt_memset(struct net_pkt *pkt, int byte, size_t amount)
+      |                                                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1288:51: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1295:51: error: unknown type name ‘size_t’
+ 1295 | int net_pkt_read(struct net_pkt *pkt, void *data, size_t length)
+      |                                                   ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1295:51: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1302:44: error: unknown type name ‘uint16_t’
+ 1302 | int net_pkt_read_be16(struct net_pkt *pkt, uint16_t *data)
+      |                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1:1: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | void net_pkt_unref(struct net_pkt *pkt)
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1314:44: error: unknown type name ‘uint16_t’
+ 1314 | int net_pkt_read_le16(struct net_pkt *pkt, uint16_t *data)
+      |                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1314:44: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1326:44: error: unknown type name ‘uint32_t’
+ 1326 | int net_pkt_read_be32(struct net_pkt *pkt, uint32_t *data)
+      |                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1326:44: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1338:44: error: unknown type name ‘uint32_t’
+ 1338 | int net_pkt_read_le32(struct net_pkt *pkt, uint32_t *data)
+      |                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1338:44: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1350:44: error: unknown type name ‘uint64_t’
+ 1350 | int net_pkt_read_be64(struct net_pkt *pkt, uint64_t *data)
+      |                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1350:44: note: ‘uint64_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1362:44: error: unknown type name ‘uint64_t’
+ 1362 | int net_pkt_read_le64(struct net_pkt *pkt, uint64_t *data)
+      |                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1362:44: note: ‘uint64_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1374:58: error: unknown type name ‘size_t’
+ 1374 | int net_pkt_write(struct net_pkt *pkt, const void *data, size_t length)
+      |                                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1374:58: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1387:18: error: unknown type name ‘size_t’
+ 1387 |                  size_t length)
+      |                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1387:18: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘clone_pkt_cb’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1446:9: warning: implicit declaration of function ‘ARG_UNUSED’ [-Wimplicit-function-declaration]
+ 1446 |         ARG_UNUSED(pkt);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘clone_pkt_attributes’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1453:9: warning: implicit declaration of function ‘net_pkt_set_family’ [-Wimplicit-function-declaration]
+ 1453 |         net_pkt_set_family(clone_pkt, net_pkt_family(pkt));
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1454:9: warning: implicit declaration of function ‘net_pkt_set_context’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1454 |         net_pkt_set_context(clone_pkt, net_pkt_context(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1454:40: warning: implicit declaration of function ‘net_pkt_context’; did you mean ‘net_pkt_compact’? [-Wimplicit-function-declaration]
+ 1454 |         net_pkt_set_context(clone_pkt, net_pkt_context(pkt));
+      |                                        ^~~~~~~~~~~~~~~
+      |                                        net_pkt_compact
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1455:9: warning: implicit declaration of function ‘net_pkt_set_ip_hdr_len’ [-Wimplicit-function-declaration]
+ 1455 |         net_pkt_set_ip_hdr_len(clone_pkt, net_pkt_ip_hdr_len(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1455:43: warning: implicit declaration of function ‘net_pkt_ip_hdr_len’ [-Wimplicit-function-declaration]
+ 1455 |         net_pkt_set_ip_hdr_len(clone_pkt, net_pkt_ip_hdr_len(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1456:9: warning: implicit declaration of function ‘net_pkt_set_ip_dscp’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1456 |         net_pkt_set_ip_dscp(clone_pkt, net_pkt_ip_dscp(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1456:40: warning: implicit declaration of function ‘net_pkt_ip_dscp’ [-Wimplicit-function-declaration]
+ 1456 |         net_pkt_set_ip_dscp(clone_pkt, net_pkt_ip_dscp(pkt));
+      |                                        ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1457:9: warning: implicit declaration of function ‘net_pkt_set_ip_ecn’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1457 |         net_pkt_set_ip_ecn(clone_pkt, net_pkt_ip_ecn(pkt));
+      |         ^~~~~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1457:39: warning: implicit declaration of function ‘net_pkt_ip_ecn’ [-Wimplicit-function-declaration]
+ 1457 |         net_pkt_set_ip_ecn(clone_pkt, net_pkt_ip_ecn(pkt));
+      |                                       ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1458:9: warning: implicit declaration of function ‘net_pkt_set_vlan_tag’ [-Wimplicit-function-declaration]
+ 1458 |         net_pkt_set_vlan_tag(clone_pkt, net_pkt_vlan_tag(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1458:41: warning: implicit declaration of function ‘net_pkt_vlan_tag’ [-Wimplicit-function-declaration]
+ 1458 |         net_pkt_set_vlan_tag(clone_pkt, net_pkt_vlan_tag(pkt));
+      |                                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1459:9: warning: implicit declaration of function ‘net_pkt_set_timestamp’ [-Wimplicit-function-declaration]
+ 1459 |         net_pkt_set_timestamp(clone_pkt, net_pkt_timestamp(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1459:42: warning: implicit declaration of function ‘net_pkt_timestamp’ [-Wimplicit-function-declaration]
+ 1459 |         net_pkt_set_timestamp(clone_pkt, net_pkt_timestamp(pkt));
+      |                                          ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1460:9: warning: implicit declaration of function ‘net_pkt_set_priority’ [-Wimplicit-function-declaration]
+ 1460 |         net_pkt_set_priority(clone_pkt, net_pkt_priority(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1460:41: warning: implicit declaration of function ‘net_pkt_priority’; did you mean ‘net_pkt_cursor_init’? [-Wimplicit-function-declaration]
+ 1460 |         net_pkt_set_priority(clone_pkt, net_pkt_priority(pkt));
+      |                                         ^~~~~~~~~~~~~~~~
+      |                                         net_pkt_cursor_init
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1461:9: warning: implicit declaration of function ‘net_pkt_set_orig_iface’ [-Wimplicit-function-declaration]
+ 1461 |         net_pkt_set_orig_iface(clone_pkt, net_pkt_orig_iface(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1461:43: warning: implicit declaration of function ‘net_pkt_orig_iface’ [-Wimplicit-function-declaration]
+ 1461 |         net_pkt_set_orig_iface(clone_pkt, net_pkt_orig_iface(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1462:9: warning: implicit declaration of function ‘net_pkt_set_captured’ [-Wimplicit-function-declaration]
+ 1462 |         net_pkt_set_captured(clone_pkt, net_pkt_is_captured(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1462:41: warning: implicit declaration of function ‘net_pkt_is_captured’ [-Wimplicit-function-declaration]
+ 1462 |         net_pkt_set_captured(clone_pkt, net_pkt_is_captured(pkt));
+      |                                         ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1463:9: warning: implicit declaration of function ‘net_pkt_set_eof’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1463 |         net_pkt_set_eof(clone_pkt, net_pkt_eof(pkt));
+      |         ^~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1463:36: warning: implicit declaration of function ‘net_pkt_eof’; did you mean ‘net_pkt_unref’? [-Wimplicit-function-declaration]
+ 1463 |         net_pkt_set_eof(clone_pkt, net_pkt_eof(pkt));
+      |                                    ^~~~~~~~~~~
+      |                                    net_pkt_unref
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1464:9: warning: implicit declaration of function ‘net_pkt_set_ptp’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1464 |         net_pkt_set_ptp(clone_pkt, net_pkt_is_ptp(pkt));
+      |         ^~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1464:36: warning: implicit declaration of function ‘net_pkt_is_ptp’ [-Wimplicit-function-declaration]
+ 1464 |         net_pkt_set_ptp(clone_pkt, net_pkt_is_ptp(pkt));
+      |                                    ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1465:9: warning: implicit declaration of function ‘net_pkt_set_ppp’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1465 |         net_pkt_set_ppp(clone_pkt, net_pkt_is_ppp(pkt));
+      |         ^~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1465:36: warning: implicit declaration of function ‘net_pkt_is_ppp’ [-Wimplicit-function-declaration]
+ 1465 |         net_pkt_set_ppp(clone_pkt, net_pkt_is_ppp(pkt));
+      |                                    ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1466:9: warning: implicit declaration of function ‘net_pkt_set_lldp’; did you mean ‘net_pkt_get_info’? [-Wimplicit-function-declaration]
+ 1466 |         net_pkt_set_lldp(clone_pkt, net_pkt_is_lldp(pkt));
+      |         ^~~~~~~~~~~~~~~~
+      |         net_pkt_get_info
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1466:37: warning: implicit declaration of function ‘net_pkt_is_lldp’ [-Wimplicit-function-declaration]
+ 1466 |         net_pkt_set_lldp(clone_pkt, net_pkt_is_lldp(pkt));
+      |                                     ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1467:9: warning: implicit declaration of function ‘net_pkt_set_ipv4_acd’ [-Wimplicit-function-declaration]
+ 1467 |         net_pkt_set_ipv4_acd(clone_pkt, net_pkt_ipv4_acd(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1467:41: warning: implicit declaration of function ‘net_pkt_ipv4_acd’ [-Wimplicit-function-declaration]
+ 1467 |         net_pkt_set_ipv4_acd(clone_pkt, net_pkt_ipv4_acd(pkt));
+      |                                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1468:9: warning: implicit declaration of function ‘net_pkt_set_tx_timestamping’ [-Wimplicit-function-declaration]
+ 1468 |         net_pkt_set_tx_timestamping(clone_pkt, net_pkt_is_tx_timestamping(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1468:48: warning: implicit declaration of function ‘net_pkt_is_tx_timestamping’ [-Wimplicit-function-declaration]
+ 1468 |         net_pkt_set_tx_timestamping(clone_pkt, net_pkt_is_tx_timestamping(pkt));
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1469:9: warning: implicit declaration of function ‘net_pkt_set_rx_timestamping’ [-Wimplicit-function-declaration]
+ 1469 |         net_pkt_set_rx_timestamping(clone_pkt, net_pkt_is_rx_timestamping(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1469:48: warning: implicit declaration of function ‘net_pkt_is_rx_timestamping’ [-Wimplicit-function-declaration]
+ 1469 |         net_pkt_set_rx_timestamping(clone_pkt, net_pkt_is_rx_timestamping(pkt));
+      |                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1470:9: warning: implicit declaration of function ‘net_pkt_set_forwarding’ [-Wimplicit-function-declaration]
+ 1470 |         net_pkt_set_forwarding(clone_pkt, net_pkt_forwarding(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1470:43: warning: implicit declaration of function ‘net_pkt_forwarding’ [-Wimplicit-function-declaration]
+ 1470 |         net_pkt_set_forwarding(clone_pkt, net_pkt_forwarding(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1471:9: warning: implicit declaration of function ‘net_pkt_set_chksum_done’ [-Wimplicit-function-declaration]
+ 1471 |         net_pkt_set_chksum_done(clone_pkt, net_pkt_is_chksum_done(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1471:44: warning: implicit declaration of function ‘net_pkt_is_chksum_done’ [-Wimplicit-function-declaration]
+ 1471 |         net_pkt_set_chksum_done(clone_pkt, net_pkt_is_chksum_done(pkt));
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1472:9: warning: implicit declaration of function ‘net_pkt_set_loopback’ [-Wimplicit-function-declaration]
+ 1472 |         net_pkt_set_loopback(pkt, net_pkt_is_loopback(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1472:35: warning: implicit declaration of function ‘net_pkt_is_loopback’; did you mean ‘net_pkt_compact’? [-Wimplicit-function-declaration]
+ 1472 |         net_pkt_set_loopback(pkt, net_pkt_is_loopback(pkt));
+      |                                   ^~~~~~~~~~~~~~~~~~~
+      |                                   net_pkt_compact
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1473:9: warning: implicit declaration of function ‘net_pkt_set_ip_reassembled’ [-Wimplicit-function-declaration]
+ 1473 |         net_pkt_set_ip_reassembled(pkt, net_pkt_is_ip_reassembled(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1473:41: warning: implicit declaration of function ‘net_pkt_is_ip_reassembled’ [-Wimplicit-function-declaration]
+ 1473 |         net_pkt_set_ip_reassembled(pkt, net_pkt_is_ip_reassembled(pkt));
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1474:9: warning: implicit declaration of function ‘net_pkt_set_cooked_mode’ [-Wimplicit-function-declaration]
+ 1474 |         net_pkt_set_cooked_mode(clone_pkt, net_pkt_is_cooked_mode(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1474:44: warning: implicit declaration of function ‘net_pkt_is_cooked_mode’ [-Wimplicit-function-declaration]
+ 1474 |         net_pkt_set_cooked_mode(clone_pkt, net_pkt_is_cooked_mode(pkt));
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1475:9: warning: implicit declaration of function ‘net_pkt_set_ipv4_pmtu’ [-Wimplicit-function-declaration]
+ 1475 |         net_pkt_set_ipv4_pmtu(clone_pkt, net_pkt_ipv4_pmtu(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1475:42: warning: implicit declaration of function ‘net_pkt_ipv4_pmtu’ [-Wimplicit-function-declaration]
+ 1475 |         net_pkt_set_ipv4_pmtu(clone_pkt, net_pkt_ipv4_pmtu(pkt));
+      |                                          ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1476:9: warning: implicit declaration of function ‘net_pkt_set_l2_bridged’ [-Wimplicit-function-declaration]
+ 1476 |         net_pkt_set_l2_bridged(clone_pkt, net_pkt_is_l2_bridged(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1476:43: warning: implicit declaration of function ‘net_pkt_is_l2_bridged’ [-Wimplicit-function-declaration]
+ 1476 |         net_pkt_set_l2_bridged(clone_pkt, net_pkt_is_l2_bridged(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1477:9: warning: implicit declaration of function ‘net_pkt_set_l2_processed’ [-Wimplicit-function-declaration]
+ 1477 |         net_pkt_set_l2_processed(clone_pkt, net_pkt_is_l2_processed(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1477:45: warning: implicit declaration of function ‘net_pkt_is_l2_processed’ [-Wimplicit-function-declaration]
+ 1477 |         net_pkt_set_l2_processed(clone_pkt, net_pkt_is_l2_processed(pkt));
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1478:9: warning: implicit declaration of function ‘net_pkt_set_ll_proto_type’ [-Wimplicit-function-declaration]
+ 1478 |         net_pkt_set_ll_proto_type(clone_pkt, net_pkt_ll_proto_type(pkt));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1478:46: warning: implicit declaration of function ‘net_pkt_ll_proto_type’ [-Wimplicit-function-declaration]
+ 1478 |         net_pkt_set_ll_proto_type(clone_pkt, net_pkt_ll_proto_type(pkt));
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1485:16: error: invalid use of undefined type ‘struct net_pkt’
+ 1485 |         if (pkt->buffer && clone_pkt->buffer) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1485:37: error: invalid use of undefined type ‘struct net_pkt’
+ 1485 |         if (pkt->buffer && clone_pkt->buffer) {
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:17: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+ 1486 |                 memcpy(net_pkt_lladdr_src(clone_pkt), net_pkt_lladdr_src(pkt),
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:17: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:24: warning: implicit declaration of function ‘net_pkt_lladdr_src’ [-Wimplicit-function-declaration]
+ 1486 |                 memcpy(net_pkt_lladdr_src(clone_pkt), net_pkt_lladdr_src(pkt),
+      |                        ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1487:31: error: invalid application of ‘sizeof’ to incomplete type ‘struct net_linkaddr’
+ 1487 |                        sizeof(struct net_linkaddr));
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:24: warning: passing argument 1 of ‘memcpy’ makes pointer from integer without a cast [-Wint-conversion]
+ 1486 |                 memcpy(net_pkt_lladdr_src(clone_pkt), net_pkt_lladdr_src(pkt),
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        |
+      |                        int
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:24: note: expected ‘void *’ but argument is of type ‘int’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:55: warning: passing argument 2 of ‘memcpy’ makes pointer from integer without a cast [-Wint-conversion]
+ 1486 |                 memcpy(net_pkt_lladdr_src(clone_pkt), net_pkt_lladdr_src(pkt),
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                                       |
+      |                                                       int
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1486:55: note: expected ‘const void *’ but argument is of type ‘int’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1488:24: warning: implicit declaration of function ‘net_pkt_lladdr_dst’ [-Wimplicit-function-declaration]
+ 1488 |                 memcpy(net_pkt_lladdr_dst(clone_pkt), net_pkt_lladdr_dst(pkt),
+      |                        ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1489:31: error: invalid application of ‘sizeof’ to incomplete type ‘struct net_linkaddr’
+ 1489 |                        sizeof(struct net_linkaddr));
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1488:24: warning: passing argument 1 of ‘memcpy’ makes pointer from integer without a cast [-Wint-conversion]
+ 1488 |                 memcpy(net_pkt_lladdr_dst(clone_pkt), net_pkt_lladdr_dst(pkt),
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                        |
+      |                        int
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1488:24: note: expected ‘void *’ but argument is of type ‘int’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1488:55: warning: passing argument 2 of ‘memcpy’ makes pointer from integer without a cast [-Wint-conversion]
+ 1488 |                 memcpy(net_pkt_lladdr_dst(clone_pkt), net_pkt_lladdr_dst(pkt),
+      |                                                       ^~~~~~~~~~~~~~~~~~~~~~~
+      |                                                       |
+      |                                                       int
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1488:55: note: expected ‘const void *’ but argument is of type ‘int’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1492:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+ 1492 |         if (IS_ENABLED(CONFIG_NET_IPV4) && net_pkt_family(pkt) == NET_AF_INET) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1492:24: error: ‘CONFIG_NET_IPV4’ undeclared (first use in this function); did you mean ‘CONFIG_NET_IPV6’?
+ 1492 |         if (IS_ENABLED(CONFIG_NET_IPV4) && net_pkt_family(pkt) == NET_AF_INET) {
+      |                        ^~~~~~~~~~~~~~~
+      |                        CONFIG_NET_IPV6
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1492:67: error: ‘NET_AF_INET’ undeclared (first use in this function)
+ 1492 |         if (IS_ENABLED(CONFIG_NET_IPV4) && net_pkt_family(pkt) == NET_AF_INET) {
+      |                                                                   ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1493:17: warning: implicit declaration of function ‘net_pkt_set_ipv4_ttl’ [-Wimplicit-function-declaration]
+ 1493 |                 net_pkt_set_ipv4_ttl(clone_pkt, net_pkt_ipv4_ttl(pkt));
+      |                 ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1493:49: warning: implicit declaration of function ‘net_pkt_ipv4_ttl’ [-Wimplicit-function-declaration]
+ 1493 |                 net_pkt_set_ipv4_ttl(clone_pkt, net_pkt_ipv4_ttl(pkt));
+      |                                                 ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1494:17: warning: implicit declaration of function ‘net_pkt_set_ipv4_opts_len’ [-Wimplicit-function-declaration]
+ 1494 |                 net_pkt_set_ipv4_opts_len(clone_pkt,
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1495:43: warning: implicit declaration of function ‘net_pkt_ipv4_opts_len’ [-Wimplicit-function-declaration]
+ 1495 |                                           net_pkt_ipv4_opts_len(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1497:43: error: ‘NET_AF_INET6’ undeclared (first use in this function)
+ 1497 |                    net_pkt_family(pkt) == NET_AF_INET6) {
+      |                                           ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1498:17: warning: implicit declaration of function ‘net_pkt_set_ipv6_hop_limit’ [-Wimplicit-function-declaration]
+ 1498 |                 net_pkt_set_ipv6_hop_limit(clone_pkt,
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1499:44: warning: implicit declaration of function ‘net_pkt_ipv6_hop_limit’ [-Wimplicit-function-declaration]
+ 1499 |                                            net_pkt_ipv6_hop_limit(pkt));
+      |                                            ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1500:17: warning: implicit declaration of function ‘net_pkt_set_ipv6_ext_len’ [-Wimplicit-function-declaration]
+ 1500 |                 net_pkt_set_ipv6_ext_len(clone_pkt, net_pkt_ipv6_ext_len(pkt));
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1500:53: warning: implicit declaration of function ‘net_pkt_ipv6_ext_len’ [-Wimplicit-function-declaration]
+ 1500 |                 net_pkt_set_ipv6_ext_len(clone_pkt, net_pkt_ipv6_ext_len(pkt));
+      |                                                     ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1501:17: warning: implicit declaration of function ‘net_pkt_set_ipv6_ext_opt_len’ [-Wimplicit-function-declaration]
+ 1501 |                 net_pkt_set_ipv6_ext_opt_len(clone_pkt,
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1502:46: warning: implicit declaration of function ‘net_pkt_ipv6_ext_opt_len’ [-Wimplicit-function-declaration]
+ 1502 |                                              net_pkt_ipv6_ext_opt_len(pkt));
+      |                                              ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1503:17: warning: implicit declaration of function ‘net_pkt_set_ipv6_hdr_prev’ [-Wimplicit-function-declaration]
+ 1503 |                 net_pkt_set_ipv6_hdr_prev(clone_pkt,
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1504:43: warning: implicit declaration of function ‘net_pkt_ipv6_hdr_prev’ [-Wimplicit-function-declaration]
+ 1504 |                                           net_pkt_ipv6_hdr_prev(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1505:17: warning: implicit declaration of function ‘net_pkt_set_ipv6_next_hdr’ [-Wimplicit-function-declaration]
+ 1505 |                 net_pkt_set_ipv6_next_hdr(clone_pkt,
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1506:43: warning: implicit declaration of function ‘net_pkt_ipv6_next_hdr’ [-Wimplicit-function-declaration]
+ 1506 |                                           net_pkt_ipv6_next_hdr(pkt));
+      |                                           ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1514:47: error: unknown type name ‘k_timeout_t’
+ 1514 |                                               k_timeout_t timeout)
+      |                                               ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1567:52: error: unknown type name ‘k_timeout_t’
+ 1567 | struct net_pkt *net_pkt_clone(struct net_pkt *pkt, k_timeout_t timeout)
+      |                                                    ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1572:55: error: unknown type name ‘k_timeout_t’
+ 1572 | struct net_pkt *net_pkt_rx_clone(struct net_pkt *pkt, k_timeout_t timeout)
+      |                                                       ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1577:60: error: unknown type name ‘k_timeout_t’
+ 1577 | struct net_pkt *net_pkt_shallow_clone(struct net_pkt *pkt, k_timeout_t timeout)
+      |                                                            ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1602:1: error: unknown type name ‘size_t’
+ 1602 | size_t net_pkt_remaining_data(struct net_pkt *pkt)
+      | ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1602:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_remaining_data’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1605:9: error: unknown type name ‘size_t’
+ 1605 |         size_t data_length;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1605:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1607:25: error: invalid use of undefined type ‘struct net_pkt’
+ 1607 |         if (!pkt || !pkt->cursor.buf || !pkt->cursor.pos) {
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1607:45: error: invalid use of undefined type ‘struct net_pkt’
+ 1607 |         if (!pkt || !pkt->cursor.buf || !pkt->cursor.pos) {
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1611:18: error: invalid use of undefined type ‘struct net_pkt’
+ 1611 |         buf = pkt->cursor.buf;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1612:26: error: invalid use of undefined type ‘struct net_buf’
+ 1612 |         data_length = buf->len - (pkt->cursor.pos - buf->data);
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1612:38: error: invalid use of undefined type ‘struct net_pkt’
+ 1612 |         data_length = buf->len - (pkt->cursor.pos - buf->data);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1612:56: error: invalid use of undefined type ‘struct net_buf’
+ 1612 |         data_length = buf->len - (pkt->cursor.pos - buf->data);
+      |                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1614:18: error: invalid use of undefined type ‘struct net_buf’
+ 1614 |         buf = buf->frags;
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1616:35: error: invalid use of undefined type ‘struct net_buf’
+ 1616 |                 data_length += buf->len;
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1617:26: error: invalid use of undefined type ‘struct net_buf’
+ 1617 |                 buf = buf->frags;
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1623:48: error: unknown type name ‘size_t’
+ 1623 | int net_pkt_update_length(struct net_pkt *pkt, size_t length)
+      |                                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1623:48: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1639:39: error: unknown type name ‘size_t’
+ 1639 | int net_pkt_pull(struct net_pkt *pkt, size_t length)
+      |                                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1639:39: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1691:1: error: unknown type name ‘uint16_t’
+ 1691 | uint16_t net_pkt_get_current_offset(struct net_pkt *pkt)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1691:1: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_get_current_offset’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1693:34: error: invalid use of undefined type ‘struct net_pkt’
+ 1693 |         struct net_buf *buf = pkt->buffer;
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1694:9: error: unknown type name ‘uint16_t’
+ 1694 |         uint16_t offset;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1694:9: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1696:17: error: invalid use of undefined type ‘struct net_pkt’
+ 1696 |         if (!pkt->cursor.buf || !pkt->cursor.pos) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1696:37: error: invalid use of undefined type ‘struct net_pkt’
+ 1696 |         if (!pkt->cursor.buf || !pkt->cursor.pos) {
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1702:26: error: invalid use of undefined type ‘struct net_pkt’
+ 1702 |         while (buf != pkt->cursor.buf) {
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1703:30: error: invalid use of undefined type ‘struct net_buf’
+ 1703 |                 offset += buf->len;
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1704:26: error: invalid use of undefined type ‘struct net_buf’
+ 1704 |                 buf = buf->frags;
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1707:22: error: invalid use of undefined type ‘struct net_pkt’
+ 1707 |         offset += pkt->cursor.pos - buf->data;
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1707:40: error: invalid use of undefined type ‘struct net_buf’
+ 1707 |         offset += pkt->cursor.pos - buf->data;
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1712:1: error: unknown type name ‘bool’
+ 1712 | bool net_pkt_is_contiguous(struct net_pkt *pkt, size_t size)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1712:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1712:49: error: unknown type name ‘size_t’
+ 1712 | bool net_pkt_is_contiguous(struct net_pkt *pkt, size_t size)
+      |                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1712:49: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1719:1: error: unknown type name ‘size_t’
+ 1719 | size_t net_pkt_get_contiguous_len(struct net_pkt *pkt)
+      | ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1719:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_get_contiguous_len’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1721:9: warning: implicit declaration of function ‘pkt_cursor_advance’ [-Wimplicit-function-declaration]
+ 1721 |         pkt_cursor_advance(pkt, !net_pkt_is_being_overwritten(pkt));
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1721:34: warning: implicit declaration of function ‘net_pkt_is_being_overwritten’ [-Wimplicit-function-declaration]
+ 1721 |         pkt_cursor_advance(pkt, !net_pkt_is_being_overwritten(pkt));
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1723:16: error: invalid use of undefined type ‘struct net_pkt’
+ 1723 |         if (pkt->cursor.buf && pkt->cursor.pos) {
+      |                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1723:35: error: invalid use of undefined type ‘struct net_pkt’
+ 1723 |         if (pkt->cursor.buf && pkt->cursor.pos) {
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1724:17: error: unknown type name ‘size_t’
+ 1724 |                 size_t len;
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1724:17: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1727:28: error: invalid use of undefined type ‘struct net_pkt’
+ 1727 |                         pkt->cursor.buf->len : net_buf_max_len(pkt->cursor.buf);
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1727:67: error: invalid use of undefined type ‘struct net_pkt’
+ 1727 |                         pkt->cursor.buf->len : net_buf_max_len(pkt->cursor.buf);
+      |                                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1728:27: error: invalid use of undefined type ‘struct net_pkt’
+ 1728 |                 len -= pkt->cursor.pos - pkt->cursor.buf->data;
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1728:45: error: invalid use of undefined type ‘struct net_pkt’
+ 1728 |                 len -= pkt->cursor.pos - pkt->cursor.buf->data;
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1737:31: warning: ‘struct net_pkt_data_access’ declared inside parameter list will not be visible outside of this definition or declaration
+ 1737 |                        struct net_pkt_data_access *access)
+      |                               ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_get_data’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1739:24: error: ‘CONFIG_NET_HEADERS_ALWAYS_CONTIGUOUS’ undeclared (first use in this function)
+ 1739 |         if (IS_ENABLED(CONFIG_NET_HEADERS_ALWAYS_CONTIGUOUS)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1740:22: warning: implicit declaration of function ‘net_pkt_is_contiguous’; did you mean ‘net_pkt_get_contiguous_len’? [-Wimplicit-function-declaration]
+ 1740 |                 if (!net_pkt_is_contiguous(pkt, access->size)) {
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+      |                      net_pkt_get_contiguous_len
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1740:55: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1740 |                 if (!net_pkt_is_contiguous(pkt, access->size)) {
+      |                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1741:32: error: ‘NULL’ undeclared (first use in this function)
+ 1741 |                         return NULL;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1741:32: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1744:27: error: invalid use of undefined type ‘struct net_pkt’
+ 1744 |                 return pkt->cursor.pos;
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1746:54: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1746 |                 if (net_pkt_is_contiguous(pkt, access->size)) {
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1747:31: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1747 |                         access->data = pkt->cursor.pos;
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1747:43: error: invalid use of undefined type ‘struct net_pkt’
+ 1747 |                         access->data = pkt->cursor.pos;
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1749:47: error: storage size of ‘backup’ isn’t known
+ 1749 |                         struct net_pkt_cursor backup;
+      |                                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1751:36: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1751 |                         if (!access->data) {
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1757:25: warning: implicit declaration of function ‘net_pkt_cursor_backup’; did you mean ‘net_pkt_cursor_init’? [-Wimplicit-function-declaration]
+ 1757 |                         net_pkt_cursor_backup(pkt, &backup);
+      |                         ^~~~~~~~~~~~~~~~~~~~~
+      |                         net_pkt_cursor_init
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1759:29: warning: implicit declaration of function ‘net_pkt_read’; did you mean ‘net_pkt_unref’? [-Wimplicit-function-declaration]
+ 1759 |                         if (net_pkt_read(pkt, access->data, access->size)) {
+      |                             ^~~~~~~~~~~~
+      |                             net_pkt_unref
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1759:53: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1759 |                         if (net_pkt_read(pkt, access->data, access->size)) {
+      |                                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1759:67: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1759 |                         if (net_pkt_read(pkt, access->data, access->size)) {
+      |                                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1760:33: warning: implicit declaration of function ‘net_pkt_cursor_restore’; did you mean ‘net_pkt_cursor_init’? [-Wimplicit-function-declaration]
+ 1760 |                                 net_pkt_cursor_restore(pkt, &backup);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~
+      |                                 net_pkt_cursor_init
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1749:47: warning: unused variable ‘backup’ [-Wunused-variable]
+ 1749 |                         struct net_pkt_cursor backup;
+      |                                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1767:30: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1767 |                 return access->data;
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1774:29: warning: ‘struct net_pkt_data_access’ declared inside parameter list will not be visible outside of this definition or declaration
+ 1774 |                      struct net_pkt_data_access *access)
+      |                             ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_set_data’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1776:24: error: ‘CONFIG_NET_HEADERS_ALWAYS_CONTIGUOUS’ undeclared (first use in this function)
+ 1776 |         if (IS_ENABLED(CONFIG_NET_HEADERS_ALWAYS_CONTIGUOUS)) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1777:24: warning: implicit declaration of function ‘net_pkt_skip’ [-Wimplicit-function-declaration]
+ 1777 |                 return net_pkt_skip(pkt, access->size);
+      |                        ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1777:48: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1777 |                 return net_pkt_skip(pkt, access->size);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1780:16: warning: implicit declaration of function ‘net_pkt_write’ [-Wimplicit-function-declaration]
+ 1780 |         return net_pkt_write(pkt, access->data, access->size);
+      |                ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1780:41: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1780 |         return net_pkt_write(pkt, access->data, access->size);
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1780:55: error: invalid use of undefined type ‘struct net_pkt_data_access’
+ 1780 |         return net_pkt_write(pkt, access->data, access->size);
+      |                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_tx_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1785:9: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+ 1785 |         memset(pkt, 0, sizeof(struct net_pkt));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1785:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1785:9: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1785:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1785:31: error: invalid application of ‘sizeof’ to incomplete type ‘struct net_pkt’
+ 1785 |         memset(pkt, 0, sizeof(struct net_pkt));
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1787:12: error: invalid use of undefined type ‘struct net_pkt’
+ 1787 |         pkt->atomic_ref = ATOMIC_INIT(1);
+      |            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1787:27: warning: implicit declaration of function ‘ATOMIC_INIT’ [-Wimplicit-function-declaration]
+ 1787 |         pkt->atomic_ref = ATOMIC_INIT(1);
+      |                           ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1788:12: error: invalid use of undefined type ‘struct net_pkt’
+ 1788 |         pkt->slab = &tx_pkts;
+      |            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1788:22: error: ‘tx_pkts’ undeclared (first use in this function)
+ 1788 |         pkt->slab = &tx_pkts;
+      |                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1792:35: error: ‘NET_VLAN_TAG_UNSPEC’ undeclared (first use in this function)
+ 1792 |         net_pkt_set_vlan_tag(pkt, NET_VLAN_TAG_UNSPEC);
+      |                                   ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1801:42: error: ‘rx_pkts’ undeclared (first use in this function)
+ 1801 |                 k_mem_slab_num_free_get(&rx_pkts),
+      |                                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1802:18: error: ‘size_t’ undeclared (first use in this function)
+ 1802 |                 (size_t)(k_mem_slab_num_free_get(&rx_pkts) *
+      |                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1802:18: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1803:33: error: invalid application of ‘sizeof’ to incomplete type ‘struct net_pkt’
+ 1803 |                          sizeof(struct net_pkt)),
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1804:42: error: ‘tx_pkts’ undeclared (first use in this function)
+ 1804 |                 k_mem_slab_num_free_get(&tx_pkts),
+      |                                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1806:33: error: invalid application of ‘sizeof’ to incomplete type ‘struct net_pkt’
+ 1806 |                          sizeof(struct net_pkt)),
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1807:28: error: ‘rx_bufs’ undeclared (first use in this function)
+ 1807 |                 get_frees(&rx_bufs), get_size(&rx_bufs),
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1807:38: warning: implicit declaration of function ‘get_size’ [-Wimplicit-function-declaration]
+ 1807 |                 get_frees(&rx_bufs), get_size(&rx_bufs),
+      |                                      ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1808:28: error: ‘tx_bufs’ undeclared (first use in this function)
+ 1808 |                 get_frees(&tx_bufs), get_size(&tx_bufs));
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘is_pkt_tx’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:735:1: warning: control reaches end of non-void function [-Wreturn-type]
+  735 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_get_data’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1771:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 1771 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: In function ‘net_pkt_set_data’:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1781:1: warning: control reaches end of non-void function [-Wreturn-type]
+ 1781 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:1451:13: warning: ‘clone_pkt_attributes’ defined but not used [-Wunused-function]
+ 1451 | static void clone_pkt_attributes(struct net_pkt *pkt, struct net_pkt *clone_pkt)
+      |             ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/net/ip/net_pkt.c:727:13: warning: ‘is_pkt_tx’ defined but not used [-Wunused-function]
+  727 | static bool is_pkt_tx(struct net_pkt *pkt)
+      |             ^~~~~~~~~
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: subsys__modem__backends
+
+  Excluding target from build.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build
+
+=== RC ===
+1

@@ -1,0 +1,386 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build
+-- west build: building application
+[0/1] Re-running CMake...
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend
+-- CMake version: 3.28.3
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/.config'
+No change to configuration in '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/.config'
+No change to Kconfig header in '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (4.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build
+[1/117] Preparing syscall dependency handling
+
+[2/117] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/117] Generating misc/generated/syscalls_subdirs.trigger
+[4/117] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/117] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/117] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/117] Generating include/generated/zephyr/driver-validation.h
+[8/117] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/117] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/117] Generating ../../include/generated/zephyr/heap_constants.h
+[11/117] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/117] Generating include/generated/zephyr/offsets.h
+[13/117] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/117] Building C object CMakeFiles/app.dir/src/mock_ipc.c.obj
+[15/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[19/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[24/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[29/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/117] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/ipc/ipc_service/ipc_service.c.obj
+[37/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[38/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[40/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[44/117] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[45/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[46/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[47/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[48/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[50/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[52/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[53/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[58/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[59/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[60/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_mock.c.obj
+[64/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/proxy_agent/zbus_proxy_agent.c.obj
+[66/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/proxy_agent/zbus_proxy_agent_ipc.c.obj
+[67/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus_iterable_sections.c.obj
+[68/117] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[69/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus.c.obj
+[70/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[71/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[72/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[73/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[74/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[75/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[76/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[77/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[78/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[79/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[80/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[82/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[83/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[84/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[85/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[86/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[87/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[88/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[89/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[90/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[91/117] Linking C static library app/libapp.a
+[92/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[93/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[94/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[95/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[96/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[97/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[98/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[99/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[100/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[101/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[102/117] Linking C static library zephyr/arch/common/libarch__common.a
+[103/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+FAILED: zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR_SUPERVISOR__ -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj -MF zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj.d -o zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj -c /home/huyj/zephyr-workspace/zephyr/kernel/work.c
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:1:53: error: unknown type name ‘k_timeout_t’
+    1 | int k_work_schedule(struct k_work_delayable *dwork, k_timeout_t delay)
+      |                                                     ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:8:33: error: unknown type name ‘k_timeout_t’
+    8 |                                 k_timeout_t delay)
+      |                                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:31:55: error: unknown type name ‘k_timeout_t’
+   31 | int k_work_reschedule(struct k_work_delayable *dwork, k_timeout_t delay)
+      |                                                       ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:42:36: warning: ‘struct k_work_delayable’ declared inside parameter list will not be visible outside of this definition or declaration
+   42 | int k_work_cancel_delayable(struct k_work_delayable *dwork)
+      |                                    ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c: In function ‘k_work_cancel_delayable’:
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:44:9: warning: implicit declaration of function ‘__ASSERT_NO_MSG’ [-Wimplicit-function-declaration]
+   44 |         __ASSERT_NO_MSG(dwork != NULL);
+      |         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:44:34: error: ‘NULL’ undeclared (first use in this function)
+   44 |         __ASSERT_NO_MSG(dwork != NULL);
+      |                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int k_work_schedule(struct k_work_delayable *dwork, k_timeout_t delay)
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:44:34: note: each undeclared identifier is reported only once for each function it appears in
+   44 |         __ASSERT_NO_MSG(dwork != NULL);
+      |                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:46:9: warning: implicit declaration of function ‘SYS_PORT_TRACING_OBJ_FUNC_ENTER’ [-Wimplicit-function-declaration]
+   46 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, cancel_delayable, dwork);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:46:41: error: ‘k_work’ undeclared (first use in this function); did you mean ‘dwork’?
+   46 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, cancel_delayable, dwork);
+      |                                         ^~~~~~
+      |                                         dwork
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:46:49: error: ‘cancel_delayable’ undeclared (first use in this function)
+   46 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, cancel_delayable, dwork);
+      |                                                 ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:48:9: error: unknown type name ‘k_spinlock_key_t’
+   48 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:48:32: warning: implicit declaration of function ‘k_spin_lock’ [-Wimplicit-function-declaration]
+   48 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |                                ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:48:45: error: ‘lock’ undeclared (first use in this function)
+   48 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:49:19: warning: implicit declaration of function ‘cancel_delayable_async_locked’ [-Wimplicit-function-declaration]
+   49 |         int ret = cancel_delayable_async_locked(dwork);
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:51:9: warning: implicit declaration of function ‘k_spin_unlock’ [-Wimplicit-function-declaration]
+   51 |         k_spin_unlock(&lock, key);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:53:9: warning: implicit declaration of function ‘SYS_PORT_TRACING_OBJ_FUNC_EXIT’ [-Wimplicit-function-declaration]
+   53 |         SYS_PORT_TRACING_OBJ_FUNC_EXIT(k_work, cancel_delayable, dwork, ret);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:58:1: error: unknown type name ‘bool’
+   58 | bool k_work_cancel_delayable_sync(struct k_work_delayable *dwork,
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int k_work_schedule(struct k_work_delayable *dwork, k_timeout_t delay)
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:59:42: warning: ‘struct k_work_sync’ declared inside parameter list will not be visible outside of this definition or declaration
+   59 |                                   struct k_work_sync *sync)
+      |                                          ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:58:42: warning: ‘struct k_work_delayable’ declared inside parameter list will not be visible outside of this definition or declaration
+   58 | bool k_work_cancel_delayable_sync(struct k_work_delayable *dwork,
+      |                                          ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c: In function ‘k_work_cancel_delayable_sync’:
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:61:34: error: ‘NULL’ undeclared (first use in this function)
+   61 |         __ASSERT_NO_MSG(dwork != NULL);
+      |                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:61:34: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:63:26: warning: implicit declaration of function ‘k_is_in_isr’ [-Wimplicit-function-declaration]
+   63 |         __ASSERT_NO_MSG(!k_is_in_isr());
+      |                          ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:68:41: error: ‘k_work’ undeclared (first use in this function); did you mean ‘dwork’?
+   68 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, cancel_delayable_sync, dwork, sync);
+      |                                         ^~~~~~
+      |                                         dwork
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:68:49: error: ‘cancel_delayable_sync’ undeclared (first use in this function); did you mean ‘k_work_cancel_delayable_sync’?
+   68 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, cancel_delayable_sync, dwork, sync);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~
+      |                                                 k_work_cancel_delayable_sync
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:70:51: error: invalid use of undefined type ‘struct k_work_sync’
+   70 |         struct z_work_canceller *canceller = &sync->canceller;
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:71:9: error: unknown type name ‘k_spinlock_key_t’
+   71 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:71:45: error: ‘lock’ undeclared (first use in this function)
+   71 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:72:9: error: unknown type name ‘bool’
+   72 |         bool pending = (work_delayable_busy_get_locked(dwork) != 0U);
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:72:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:72:25: warning: implicit declaration of function ‘work_delayable_busy_get_locked’ [-Wimplicit-function-declaration]
+   72 |         bool pending = (work_delayable_busy_get_locked(dwork) != 0U);
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:73:9: error: unknown type name ‘bool’
+   73 |         bool need_wait = false;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:73:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:73:26: error: ‘false’ undeclared (first use in this function)
+   73 |         bool need_wait = false;
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:73:26: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:77:29: warning: implicit declaration of function ‘cancel_sync_locked’ [-Wimplicit-function-declaration]
+   77 |                 need_wait = cancel_sync_locked(&dwork->work, canceller);
+      |                             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:77:54: error: invalid use of undefined type ‘struct k_work_delayable’
+   77 |                 need_wait = cancel_sync_locked(&dwork->work, canceller);
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:83:17: warning: implicit declaration of function ‘k_sem_take’ [-Wimplicit-function-declaration]
+   83 |                 k_sem_take(&canceller->sem, K_FOREVER);
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:83:38: error: invalid use of undefined type ‘struct z_work_canceller’
+   83 |                 k_sem_take(&canceller->sem, K_FOREVER);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:83:45: error: ‘K_FOREVER’ undeclared (first use in this function)
+   83 |                 k_sem_take(&canceller->sem, K_FOREVER);
+      |                                             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:90:1: error: unknown type name ‘bool’
+   90 | bool k_work_flush_delayable(struct k_work_delayable *dwork,
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:90:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:91:36: warning: ‘struct k_work_sync’ declared inside parameter list will not be visible outside of this definition or declaration
+   91 |                             struct k_work_sync *sync)
+      |                                    ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:90:36: warning: ‘struct k_work_delayable’ declared inside parameter list will not be visible outside of this definition or declaration
+   90 | bool k_work_flush_delayable(struct k_work_delayable *dwork,
+      |                                    ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c: In function ‘k_work_flush_delayable’:
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:93:34: error: ‘NULL’ undeclared (first use in this function)
+   93 |         __ASSERT_NO_MSG(dwork != NULL);
+      |                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:93:34: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:100:41: error: ‘k_work’ undeclared (first use in this function); did you mean ‘dwork’?
+  100 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, flush_delayable, dwork, sync);
+      |                                         ^~~~~~
+      |                                         dwork
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:100:49: error: ‘flush_delayable’ undeclared (first use in this function)
+  100 |         SYS_PORT_TRACING_OBJ_FUNC_ENTER(k_work, flush_delayable, dwork, sync);
+      |                                                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:102:37: error: invalid use of undefined type ‘struct k_work_delayable’
+  102 |         struct k_work *work = &dwork->work;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:103:47: error: invalid use of undefined type ‘struct k_work_sync’
+  103 |         struct z_work_flusher *flusher = &sync->flusher;
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:104:9: error: unknown type name ‘k_spinlock_key_t’
+  104 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:104:45: error: ‘lock’ undeclared (first use in this function)
+  104 |         k_spinlock_key_t key = k_spin_lock(&lock);
+      |                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:107:13: warning: implicit declaration of function ‘work_busy_get_locked’ [-Wimplicit-function-declaration]
+  107 |         if (work_busy_get_locked(work) == 0U) {
+      |             ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:110:86: error: ‘false’ undeclared (first use in this function)
+  110 |                 SYS_PORT_TRACING_OBJ_FUNC_EXIT(k_work, flush_delayable, dwork, sync, false);
+      |                                                                                      ^~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:110:86: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:118:13: warning: implicit declaration of function ‘unschedule_locked’ [-Wimplicit-function-declaration]
+  118 |         if (unschedule_locked(dwork)) {
+      |             ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:119:47: error: invalid use of undefined type ‘struct k_work_delayable’
+  119 |                 struct k_work_q *queue = dwork->queue;
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:121:23: warning: implicit declaration of function ‘submit_to_queue_locked’ [-Wimplicit-function-declaration]
+  121 |                 (void)submit_to_queue_locked(work, &queue);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:125:9: error: unknown type name ‘bool’
+  125 |         bool need_flush = work_flush_locked(work, flusher);
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:125:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:125:27: warning: implicit declaration of function ‘work_flush_locked’ [-Wimplicit-function-declaration]
+  125 |         bool need_flush = work_flush_locked(work, flusher);
+      |                           ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:131:36: error: invalid use of undefined type ‘struct z_work_flusher’
+  131 |                 k_sem_take(&flusher->sem, K_FOREVER);
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:131:43: error: ‘K_FOREVER’ undeclared (first use in this function)
+  131 |                 k_sem_take(&flusher->sem, K_FOREVER);
+      |                                           ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/kernel/work.c:139:2: error: #endif without #if
+  139 | #endif /* CONFIG_SYS_CLOCK_EXISTS */
+      |  ^~~~~
+[104/117] Linking C static library zephyr/subsys/zbus/libsubsys__zbus.a
+[105/117] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[106/117] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[107/117] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[108/117] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[109/117] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[110/117] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[111/117] Linking C static library zephyr/libzephyr.a
+[112/117] Generating linker_zephyr_pre0.cmd
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: drivers__mbox
+
+  Excluding target from build.
+
+
+Loading Zephyr default modules (Zephyr base (cached)).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: drivers__mbox
+
+  Excluding target from build.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/ipc_backend/build
+
+=== RC ===
+1

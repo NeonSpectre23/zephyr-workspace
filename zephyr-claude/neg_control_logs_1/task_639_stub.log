@@ -1,0 +1,228 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (13.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build
+-- west build: building application
+[1/111] Preparing syscall dependency handling
+
+[2/111] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/111] Generating misc/generated/syscalls_subdirs.trigger
+[4/111] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/111] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/111] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/111] Generating include/generated/zephyr/driver-validation.h
+[8/111] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/111] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+FAILED: zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -fno-lto -MD -MT zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj -MF zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj.d -o zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c
+In file included from /home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:33:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:1:48: warning: ‘struct z_heap’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | static inline size_t chunk_header_bytes(struct z_heap *h)
+      |                                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: In function ‘heap_footer_bytes’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:9:16: warning: implicit declaration of function ‘big_heap_bytes’ [-Wimplicit-function-declaration]
+    9 |         return big_heap_bytes(size) ? 8 : 4;
+      |                ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:12:15: error: unknown type name ‘chunksz_t’
+   12 | static inline chunksz_t chunksz(size_t bytes)
+      |               ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: In function ‘chunksz’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:14:25: error: ‘CHUNK_UNIT’ undeclared (first use in this function)
+   14 |         return (bytes + CHUNK_UNIT - 1U) / CHUNK_UNIT;
+      |                         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:14:25: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:24:22: error: unknown type name ‘chunksz_t’
+   24 | static ALWAYS_INLINE chunksz_t bytes_to_chunksz(struct z_heap *h, size_t bytes, size_t extra)
+      |                      ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:24:56: warning: ‘struct z_heap’ declared inside parameter list will not be visible outside of this definition or declaration
+   24 | static ALWAYS_INLINE chunksz_t bytes_to_chunksz(struct z_heap *h, size_t bytes, size_t extra)
+      |                                                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: In function ‘bytes_to_chunksz’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:26:34: error: ‘CHUNK_UNIT’ undeclared (first use in this function)
+   26 |         size_t chunks = (bytes / CHUNK_UNIT) + (extra / CHUNK_UNIT);
+      |                                  ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:28:47: warning: passing argument 1 of ‘chunk_header_bytes’ from incompatible pointer type [-Wincompatible-pointer-types]
+   28 |                            chunk_header_bytes(h) + CHUNK_UNIT - 1U) / CHUNK_UNIT;
+      |                                               ^
+      |                                               |
+      |                                               struct z_heap *
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:1:56: note: expected ‘struct z_heap *’ but argument is of type ‘struct z_heap *’
+    1 | static inline size_t chunk_header_bytes(struct z_heap *h)
+      |                                         ~~~~~~~~~~~~~~~^
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:30:17: error: ‘chunksz_t’ undeclared (first use in this function); did you mean ‘chunksz’?
+   30 |         return (chunksz_t)min(chunks + oddments + CHUNK_TRAILER_SIZE, h->end_chunk);
+      |                 ^~~~~~~~~
+      |                 chunksz
+In file included from /home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:32:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:376:43: error: expected expression before ‘{’ token
+  376 | #define _minmax_unique(op, a, b, ua, ub) ({ \
+      |                                           ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:383:9: note: in expansion of macro ‘_minmax_unique’
+  383 |         _minmax_unique(op, a, b, UTIL_CAT(_value_a_, cnt), UTIL_CAT(_value_b_, cnt))
+      |         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:457:19: note: in expansion of macro ‘_minmax_cnt’
+  457 | #define min(a, b) _minmax_cnt(Z_INTERNAL_MIN, a, b, __COUNTER__)
+      |                   ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:30:27: note: in expansion of macro ‘min’
+   30 |         return (chunksz_t)min(chunks + oddments + CHUNK_TRAILER_SIZE, h->end_chunk);
+      |                           ^~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:27:16: warning: unused variable ‘oddments’ [-Wunused-variable]
+   27 |         size_t oddments = ((bytes % CHUNK_UNIT) + (extra % CHUNK_UNIT) +
+      |                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:26:16: warning: unused variable ‘chunks’ [-Wunused-variable]
+   26 |         size_t chunks = (bytes / CHUNK_UNIT) + (extra / CHUNK_UNIT);
+      |                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:33:15: error: unknown type name ‘chunksz_t’
+   33 | static inline chunksz_t min_chunk_size(struct z_heap *h)
+      |               ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:33:47: warning: ‘struct z_heap’ declared inside parameter list will not be visible outside of this definition or declaration
+   33 | static inline chunksz_t min_chunk_size(struct z_heap *h)
+      |                                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: In function ‘min_chunk_size’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:35:43: warning: passing argument 1 of ‘chunk_header_bytes’ from incompatible pointer type [-Wincompatible-pointer-types]
+   35 |         return chunksz(chunk_header_bytes(h) + 1) + CHUNK_TRAILER_SIZE;
+      |                                           ^
+      |                                           |
+      |                                           struct z_heap *
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:1:56: note: expected ‘struct z_heap *’ but argument is of type ‘struct z_heap *’
+    1 | static inline size_t chunk_header_bytes(struct z_heap *h)
+      |                                         ~~~~~~~~~~~~~~~^
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:35:53: error: ‘CHUNK_TRAILER_SIZE’ undeclared (first use in this function)
+   35 |         return chunksz(chunk_header_bytes(h) + 1) + CHUNK_TRAILER_SIZE;
+      |                                                     ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:47:55: error: unknown type name ‘chunkid_t’
+   47 | static inline bool undersized_chunk(struct z_heap *h, chunkid_t c)
+      |                                                       ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:53:59: error: unknown type name ‘chunkid_t’
+   53 | static inline size_t chunk_usable_bytes(struct z_heap *h, chunkid_t c)
+      |                                                           ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:59:43: warning: ‘struct z_heap’ declared inside parameter list will not be visible outside of this definition or declaration
+   59 | static inline size_t mem_align_gap(struct z_heap *h, void *mem)
+      |                                           ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: In function ‘mem_align_gap’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:61:32: warning: passing argument 1 of ‘chunk_header_bytes’ from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |         if (chunk_header_bytes(h) == CHUNK_UNIT) {
+      |                                ^
+      |                                |
+      |                                struct z_heap *
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:1:56: note: expected ‘struct z_heap *’ but argument is of type ‘struct z_heap *’
+    1 | static inline size_t chunk_header_bytes(struct z_heap *h)
+      |                                         ~~~~~~~~~~~~~~~^
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:61:38: error: ‘CHUNK_UNIT’ undeclared (first use in this function)
+   61 |         if (chunk_header_bytes(h) == CHUNK_UNIT) {
+      |                                      ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:64:53: warning: passing argument 1 of ‘chunk_header_bytes’ from incompatible pointer type [-Wincompatible-pointer-types]
+   64 |         return ((uintptr_t)mem - chunk_header_bytes(h)) & (CHUNK_UNIT - 1);
+      |                                                     ^
+      |                                                     |
+      |                                                     struct z_heap *
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:1:56: note: expected ‘struct z_heap *’ but argument is of type ‘struct z_heap *’
+    1 | static inline size_t chunk_header_bytes(struct z_heap *h)
+      |                                         ~~~~~~~~~~~~~~~^
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:67:48: error: unknown type name ‘chunksz_t’
+   67 | static inline int bucket_idx(struct z_heap *h, chunksz_t sz)
+      |                                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:73:42: warning: ‘struct z_heap’ declared inside parameter list will not be visible outside of this definition or declaration
+   73 | static inline void get_alloc_info(struct z_heap *h, size_t *alloc_bytes,
+      |                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: In function ‘get_alloc_info’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:76:9: error: unknown type name ‘chunkid_t’
+   76 |         chunkid_t c;
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:81:18: warning: implicit declaration of function ‘right_chunk’ [-Wimplicit-function-declaration]
+   81 |         for (c = right_chunk(h, 0); c < h->end_chunk; c = right_chunk(h, c)) {
+      |                  ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:81:42: error: invalid use of undefined type ‘struct z_heap’
+   81 |         for (c = right_chunk(h, 0); c < h->end_chunk; c = right_chunk(h, c)) {
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:82:21: warning: implicit declaration of function ‘chunk_used’; did you mean ‘chunksz’? [-Wimplicit-function-declaration]
+   82 |                 if (chunk_used(h, c)) {
+      |                     ^~~~~~~~~~
+      |                     chunksz
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:83:41: warning: implicit declaration of function ‘chunk_usable_bytes’; did you mean ‘chunk_header_bytes’? [-Wimplicit-function-declaration]
+   83 |                         *alloc_bytes += chunk_usable_bytes(h, c);
+      |                                         ^~~~~~~~~~~~~~~~~~
+      |                                         chunk_header_bytes
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:84:29: warning: implicit declaration of function ‘undersized_chunk’ [-Wimplicit-function-declaration]
+   84 |                 } else if (!undersized_chunk(h, c)) {
+      |                             ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:105:31: warning: ‘struct z_heap’ declared inside parameter list will not be visible outside of this definition or declaration
+  105 | bool z_heap_full_check(struct z_heap *h);
+      |                               ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap.h:114:2: error: #endif without #if
+  114 | #endif /* ZEPHYR_INCLUDE_LIB_OS_HEAP_H_ */
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain.h:52,
+                 from /home/huyj/zephyr-workspace/zephyr/kernel/include/gen_offset.h:79,
+                 from /home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:31:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c: In function ‘_HeapConstantAbsSyms’:
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:62:50: error: invalid application of ‘sizeof’ to incomplete type ‘struct z_heap’
+   62 | GEN_ABSOLUTE_SYM(___z_heap_struct_SIZEOF, sizeof(struct z_heap));
+      |                                                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:65:16: error: invalid application of ‘sizeof’ to incomplete type ‘struct z_heap_bucket’
+   65 |         sizeof(struct z_heap_bucket));
+      |                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:67:47: error: ‘CHUNK_UNIT’ undeclared (first use in this function)
+   67 | GEN_ABSOLUTE_SYM(___z_heap_chunk_unit_SIZEOF, CHUNK_UNIT);
+      |                                               ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/heap/heap_constants.c:74:24: error: ‘CHUNK_TRAILER_SIZE’ undeclared (first use in this function)
+   74 |         (unsigned int)(CHUNK_TRAILER_SIZE * CHUNK_UNIT));
+      |                        ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/toolchain/gcc.h:572:57: note: in definition of macro ‘GEN_ABSOLUTE_SYM’
+  572 |                 "\n\t.type\t" #name ",@object" :  : "n"(value))
+      |                                                         ^~~~~
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/heap_align/build
+
+=== RC ===
+1

@@ -1,0 +1,792 @@
+=== COMMAND ===
+west build -b unit_testing -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host -DM64_MODE=1 && ./build/testbinary
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (30.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build
+-- west build: building application
+[1/7] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[3/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[4/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[5/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[6/7] Building C object CMakeFiles/testbinary.dir/main.c.obj
+FAILED: CMakeFiles/testbinary.dir/main.c.obj 
+/usr/bin/gcc -DZTEST_UNITTEST -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/unittest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/include/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/. -m64 -imacros /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build/zephyr/include/generated/zephyr/autoconf.h -Wall -I /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build/zephyr/include/generated -Wno-format-zero-length -Wshadow -g -gdwarf-4 -MD -MT CMakeFiles/testbinary.dir/main.c.obj -MF CMakeFiles/testbinary.dir/main.c.obj.d -o CMakeFiles/testbinary.dir/main.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:8:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:216:24: warning: implicit declaration of function ‘crc8’; did you mean ‘crc4’? [-Wimplicit-function-declaration]
+  216 |                 return crc8(src, len, poly, seed, reflect);
+      |                        ^~~~
+      |                        crc4
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:223:32: warning: implicit declaration of function ‘crc16_reflect’ [-Wimplicit-function-declaration]
+  223 |                         return crc16_reflect(poly, seed, src, len);
+      |                                ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:225:32: warning: implicit declaration of function ‘crc16’ [-Wimplicit-function-declaration]
+  225 |                         return crc16(poly, seed, src, len);
+      |                                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:230:24: warning: implicit declaration of function ‘crc16_ccitt’; did you mean ‘crc8_ccitt’? [-Wimplicit-function-declaration]
+  230 |                 return crc16_ccitt(seed, src, len);
+      |                        ^~~~~~~~~~~
+      |                        crc8_ccitt
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:232:24: warning: implicit declaration of function ‘crc16_itu_t’ [-Wimplicit-function-declaration]
+  232 |                 return crc16_itu_t(seed, src, len);
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc8_sw.c:9,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:9:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc8_sw.c:47:16: error: conflicting types for ‘crc8’; have ‘uint8_t(const uint8_t *, size_t,  uint8_t,  uint8_t,  _Bool)’ {aka ‘unsigned char(const unsigned char *, long unsigned int,  unsigned char,  unsigned char,  _Bool)’}
+   47 | uint8_t __weak crc8(const uint8_t *src, size_t len, uint8_t polynomial, uint8_t initial_value,
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:216:24: note: previous implicit declaration of ‘crc8’ with type ‘int()’
+  216 |                 return crc8(src, len, poly, seed, reflect);
+      |                        ^~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc16_sw.c:7,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc16_sw.c:9:17: error: conflicting types for ‘crc16’; have ‘uint16_t(uint16_t,  uint16_t,  const uint8_t *, size_t)’ {aka ‘short unsigned int(short unsigned int,  short unsigned int,  const unsigned char *, long unsigned int)’}
+    9 | uint16_t __weak crc16(uint16_t poly, uint16_t seed, const uint8_t *src, size_t len)
+      |                 ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:225:32: note: previous implicit declaration of ‘crc16’ with type ‘int()’
+  225 |                         return crc16(poly, seed, src, len);
+      |                                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc16_sw.c:29:17: error: conflicting types for ‘crc16_reflect’; have ‘uint16_t(uint16_t,  uint16_t,  const uint8_t *, size_t)’ {aka ‘short unsigned int(short unsigned int,  short unsigned int,  const unsigned char *, long unsigned int)’}
+   29 | uint16_t __weak crc16_reflect(uint16_t poly, uint16_t seed, const uint8_t *src, size_t len)
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:223:32: note: previous implicit declaration of ‘crc16_reflect’ with type ‘int()’
+  223 |                         return crc16_reflect(poly, seed, src, len);
+      |                                ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc16_sw.c:49:17: error: conflicting types for ‘crc16_ccitt’; have ‘uint16_t(uint16_t,  const uint8_t *, size_t)’ {aka ‘short unsigned int(short unsigned int,  const unsigned char *, long unsigned int)’}
+   49 | uint16_t __weak crc16_ccitt(uint16_t seed, const uint8_t *src, size_t len)
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:230:24: note: previous implicit declaration of ‘crc16_ccitt’ with type ‘int()’
+  230 |                 return crc16_ccitt(seed, src, len);
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc16_sw.c:63:17: error: conflicting types for ‘crc16_itu_t’; have ‘uint16_t(uint16_t,  const uint8_t *, size_t)’ {aka ‘short unsigned int(short unsigned int,  const unsigned char *, long unsigned int)’}
+   63 | uint16_t __weak crc16_itu_t(uint16_t seed, const uint8_t *src, size_t len)
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:232:24: note: previous implicit declaration of ‘crc16_itu_t’ with type ‘int()’
+  232 |                 return crc16_itu_t(seed, src, len);
+      |                        ^~~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc32_sw.c:7,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:11:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc32c_sw.c:7,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:12:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc7_sw.c:7,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:13:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c:10,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:14:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c: In function ‘crc24_pgp’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c:14:33: error: ‘CRC24_PGP_INITIAL_VALUE’ undeclared (first use in this function)
+   14 |         return crc24_pgp_update(CRC24_PGP_INITIAL_VALUE, data, len) & CRC24_FINAL_VALUE_MASK;
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c:14:71: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+   14 |         return crc24_pgp_update(CRC24_PGP_INITIAL_VALUE, data, len) & CRC24_FINAL_VALUE_MASK;
+      |                                                                       ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c: In function ‘crc24_pgp_update’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c:27:40: error: ‘CRC24_PGP_POLY’ undeclared (first use in this function)
+   27 |                                 crc ^= CRC24_PGP_POLY;
+      |                                        ^~~~~~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc4_sw.c:7,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:15:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc32k_4_2_sw.c:7,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:16:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: error: redefinition of ‘crc16_ansi’
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:1:24: note: previous definition of ‘crc16_ansi’ with type ‘uint16_t(const uint8_t *, size_t)’ {aka ‘short unsigned int(const unsigned char *, long unsigned int)’}
+    1 | static inline uint16_t crc16_ansi(const uint8_t *src, size_t len)
+      |                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:41: warning: ‘enum crc_type’ declared inside parameter list will not be visible outside of this definition or declaration
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:50: error: parameter 1 (‘type’) has incomplete type
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                                    ~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: error: redefinition of ‘crc_by_type’
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:204:24: note: previous definition of ‘crc_by_type’ with type ‘uint32_t()’ {aka ‘unsigned int()’}
+  204 | static inline uint32_t crc_by_type(enum crc_type type, const uint8_t *src, size_t len,
+      |                        ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: In function ‘crc_by_type’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:209:14: error: ‘CRC4’ undeclared (first use in this function)
+  209 |         case CRC4:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:211:14: error: ‘CRC4_TI’ undeclared (first use in this function)
+  211 |         case CRC4_TI:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:213:14: error: ‘CRC7_BE’ undeclared (first use in this function)
+  213 |         case CRC7_BE:
+      |              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:215:14: error: ‘CRC8’ undeclared (first use in this function)
+  215 |         case CRC8:
+      |              ^~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:217:14: error: ‘CRC8_CCITT’ undeclared (first use in this function)
+  217 |         case CRC8_CCITT:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:219:14: error: ‘CRC8_ROHC’ undeclared (first use in this function)
+  219 |         case CRC8_ROHC:
+      |              ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:221:14: error: ‘CRC16’ undeclared (first use in this function)
+  221 |         case CRC16:
+      |              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:227:14: error: ‘CRC16_ANSI’ undeclared (first use in this function)
+  227 |         case CRC16_ANSI:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:229:14: error: ‘CRC16_CCITT’ undeclared (first use in this function)
+  229 |         case CRC16_CCITT:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:231:14: error: ‘CRC16_ITU_T’ undeclared (first use in this function)
+  231 |         case CRC16_ITU_T:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:233:14: error: ‘CRC24_PGP’ undeclared (first use in this function); did you mean ‘crc24_pgp’?
+  233 |         case CRC24_PGP: {
+      |              ^~~~~~~~~
+      |              crc24_pgp
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:237:32: error: ‘CRC24_FINAL_VALUE_MASK’ undeclared (first use in this function)
+  237 |                         crc &= CRC24_FINAL_VALUE_MASK;
+      |                                ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:241:14: error: ‘CRC32_C’ undeclared (first use in this function); did you mean ‘crc32_c’?
+  241 |         case CRC32_C:
+      |              ^~~~~~~
+      |              crc32_c
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:243:14: error: ‘CRC32_IEEE’ undeclared (first use in this function)
+  243 |         case CRC32_IEEE:
+      |              ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:245:14: error: ‘CRC32_K_4_2’ undeclared (first use in this function)
+  245 |         case CRC32_K_4_2:
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/crc.h:263:2: error: #endif without #if
+  263 | #endif
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:7:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c: In function ‘crc_test_crc24_pgp’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:88:40: error: ‘CRC24_PGP_INITIAL_VALUE’ undeclared (first use in this function)
+   88 |         zassert_equal(crc24_pgp_update(CRC24_PGP_INITIAL_VALUE, test2, 3), 0x0009DF67);
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:88:9: note: in expansion of macro ‘zassert_equal’
+   88 |         zassert_equal(crc24_pgp_update(CRC24_PGP_INITIAL_VALUE, test2, 3), 0x0009DF67);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c: In function ‘crc_test_crc8_ccitt’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:233:34: error: ‘CRC8_CCITT_INITIAL_VALUE’ undeclared (first use in this function)
+  233 |         zassert_equal(crc8_ccitt(CRC8_CCITT_INITIAL_VALUE, test0, sizeof(test0)), 0xF3);
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:233:9: note: in expansion of macro ‘zassert_equal’
+  233 |         zassert_equal(crc8_ccitt(CRC8_CCITT_INITIAL_VALUE, test0, sizeof(test0)), 0xF3);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c: In function ‘crc_test_crc8_rohc’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:247:33: error: ‘CRC8_ROHC_INITIAL_VALUE’ undeclared (first use in this function)
+  247 |         zassert_equal(crc8_rohc(CRC8_ROHC_INITIAL_VALUE, test0, sizeof(test0)), 0xcf);
+      |                                 ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/main.c:247:9: note: in expansion of macro ‘zassert_equal’
+  247 |         zassert_equal(crc8_rohc(CRC8_ROHC_INITIAL_VALUE, test0, sizeof(test0)), 0xcf);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c: In function ‘crc24_pgp’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/crc/../../../subsys/crc/crc24_sw.c:15:1: warning: control reaches end of non-void function [-Wreturn-type]
+   15 | }
+      | ^
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr module(s) (Zephyr base): unittest
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/unit/crc/build
+
+=== RC ===
+1

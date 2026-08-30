@@ -1,0 +1,840 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/boards/native_sim_64.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/prj.conf'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/boards/native_sim_64.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (14.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build
+-- west build: building application
+[1/144] Preparing syscall dependency handling
+
+[2/144] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/144] Generating misc/generated/syscalls_subdirs.trigger
+[4/144] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/144] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/144] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/144] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/144] Generating include/generated/zephyr/driver-validation.h
+[9/144] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/144] Generating ../../include/generated/zephyr/heap_constants.h
+[11/144] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/144] Generating include/generated/zephyr/offsets.h
+[13/144] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/144] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[36/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[38/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[39/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/144] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[47/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[48/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/144] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[50/144] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[51/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[60/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_device.c.obj
+[65/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_desc.c.obj
+[66/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_ch9.c.obj
+[67/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_core.c.obj
+[68/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_init.c.obj
+[69/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_config.c.obj
+[70/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_class.c.obj
+[71/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_interface.c.obj
+[72/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_endpoint.c.obj
+[73/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_msg.c.obj
+[74/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/class/loopback.c.obj
+[75/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_class.c.obj
+[76/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_core.c.obj
+[77/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_api.c.obj
+[78/144] Building C object zephyr/drivers/usb/udc/CMakeFiles/drivers__usb__udc.dir/udc_common.c.obj
+[79/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_ch9.c.obj
+[80/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_desc.c.obj
+[81/144] Building C object zephyr/drivers/usb/udc/CMakeFiles/drivers__usb__udc.dir/udc_virtual.c.obj
+[82/144] Building C object zephyr/drivers/usb/uhc/CMakeFiles/drivers__usb__uhc.dir/uhc_common.c.obj
+[83/144] Building C object zephyr/drivers/usb/uhc/CMakeFiles/drivers__usb__uhc.dir/uhc_virtual.c.obj
+[84/144] Building C object zephyr/drivers/usb/common/buf/CMakeFiles/drivers__usb__common__buf.dir/usb_buf.c.obj
+[85/144] Building C object zephyr/drivers/usb/uvb/CMakeFiles/drivers__usb__uvb.dir/uvb.c.obj
+[86/144] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[87/144] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_weak_impl.c.obj
+[88/144] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_native.c.obj
+[89/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[90/144] Linking C static library app/libapp.a
+[91/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[92/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[93/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[94/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[95/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[96/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[97/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[98/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[99/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[100/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[101/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[102/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[103/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[104/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[105/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[106/144] Linking C static library zephyr/arch/common/libarch__common.a
+[107/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[108/144] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[109/144] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[110/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[111/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[112/144] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[113/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[114/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[115/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[116/144] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[117/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[118/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[119/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[120/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[121/144] Generating linker_zephyr_pre0.cmd
+[122/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[123/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[124/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[125/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[126/144] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[127/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[128/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[129/144] Linking C static library zephyr/drivers/usb/udc/libdrivers__usb__udc.a
+[130/144] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[131/144] Linking C static library zephyr/libzephyr.a
+[132/144] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[133/144] Linking C static library zephyr/drivers/usb/uvb/libdrivers__usb__uvb.a
+[134/144] Linking C static library zephyr/drivers/usb/uhc/libdrivers__usb__uhc.a
+[135/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj
+FAILED: zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=4096 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/usb/host -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj -MF zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj.d -o zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:1:47: warning: ‘struct usbh_context’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | struct usb_device *usbh_device_get_any(struct usbh_context *const uhs_ctx)
+      |                                               ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_get_any’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:3:16: error: ‘NULL’ undeclared (first use in this function)
+    3 |         return NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | struct usb_device *usbh_device_get_any(struct usbh_context *const uhs_ctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:3:16: note: each undeclared identifier is reported only once for each function it appears in
+    3 |         return NULL;
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:7:78: error: unknown type name ‘uint8_t’
+    7 | struct usb_device *usbh_device_get(struct usbh_context *const uhs_ctx, const uint8_t addr)
+      |                                                                              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:7:43: warning: ‘struct usbh_context’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | struct usb_device *usbh_device_get(struct usbh_context *const uhs_ctx, const uint8_t addr)
+      |                                           ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_get’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:11:9: warning: implicit declaration of function ‘SYS_DLIST_FOR_EACH_CONTAINER’ [-Wimplicit-function-declaration]
+   11 |         SYS_DLIST_FOR_EACH_CONTAINER(&uhs_ctx->udevs, udev, node) {
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:11:46: error: invalid use of undefined type ‘struct usbh_context’
+   11 |         SYS_DLIST_FOR_EACH_CONTAINER(&uhs_ctx->udevs, udev, node) {
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:11:61: error: ‘node’ undeclared (first use in this function)
+   11 |         SYS_DLIST_FOR_EACH_CONTAINER(&uhs_ctx->udevs, udev, node) {
+      |                                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:11:66: error: expected ‘;’ before ‘{’ token
+   11 |         SYS_DLIST_FOR_EACH_CONTAINER(&uhs_ctx->udevs, udev, node) {
+      |                                                                  ^~
+      |                                                                  ;
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘validate_device_mps0’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:22:15: error: unknown type name ‘uint8_t’
+   22 |         const uint8_t mps0 = udev->dev_desc.bMaxPacketSize0;
+      |               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:22:34: error: invalid use of undefined type ‘const struct usb_device’
+   22 |         const uint8_t mps0 = udev->dev_desc.bMaxPacketSize0;
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:24:17: error: invalid use of undefined type ‘const struct usb_device’
+   24 |         if (udev->speed == USB_SPEED_SPEED_SS || udev->speed == USB_SPEED_SPEED_LS) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:24:28: error: ‘USB_SPEED_SPEED_SS’ undeclared (first use in this function)
+   24 |         if (udev->speed == USB_SPEED_SPEED_SS || udev->speed == USB_SPEED_SPEED_LS) {
+      |                            ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:24:54: error: invalid use of undefined type ‘const struct usb_device’
+   24 |         if (udev->speed == USB_SPEED_SPEED_SS || udev->speed == USB_SPEED_SPEED_LS) {
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:24:65: error: ‘USB_SPEED_SPEED_LS’ undeclared (first use in this function)
+   24 |         if (udev->speed == USB_SPEED_SPEED_SS || udev->speed == USB_SPEED_SPEED_LS) {
+      |                                                                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:25:17: warning: implicit declaration of function ‘LOG_ERR’ [-Wimplicit-function-declaration]
+   25 |                 LOG_ERR("USB device speed not supported");
+      |                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:26:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+   26 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:29:17: error: invalid use of undefined type ‘const struct usb_device’
+   29 |         if (udev->speed == USB_SPEED_SPEED_HS) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:29:28: error: ‘USB_SPEED_SPEED_HS’ undeclared (first use in this function)
+   29 |         if (udev->speed == USB_SPEED_SPEED_HS) {
+      |                            ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:32:33: error: ‘EINVAL’ undeclared (first use in this function)
+   32 |                         return -EINVAL;
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:36:17: error: invalid use of undefined type ‘const struct usb_device’
+   36 |         if (udev->speed == USB_SPEED_SPEED_FS) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:36:28: error: ‘USB_SPEED_SPEED_FS’ undeclared (first use in this function)
+   36 |         if (udev->speed == USB_SPEED_SPEED_FS) {
+      |                            ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:46:64: error: unknown type name ‘uint8_t’
+   46 | static int alloc_device_address(struct usb_device *const udev, uint8_t *const addr)
+      |                                                                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:1:1: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | struct usb_device *usbh_device_get_any(struct usbh_context *const uhs_ctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:74:38: error: unknown type name ‘uint8_t’
+   74 |                                const uint8_t ep, void *const ptr)
+      |                                      ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘assign_ep_desc_ptr’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:76:9: error: unknown type name ‘uint8_t’
+   76 |         uint8_t idx = USB_EP_GET_IDX(ep) & 0xF;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:76:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:76:23: warning: implicit declaration of function ‘USB_EP_GET_IDX’ [-Wimplicit-function-declaration]
+   76 |         uint8_t idx = USB_EP_GET_IDX(ep) & 0xF;
+      |                       ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:78:13: warning: implicit declaration of function ‘USB_EP_DIR_IS_IN’ [-Wimplicit-function-declaration]
+   78 |         if (USB_EP_DIR_IS_IN(ep)) {
+      |             ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:79:21: error: invalid use of undefined type ‘struct usb_device’
+   79 |                 udev->ep_in[idx].desc = ptr;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:81:21: error: invalid use of undefined type ‘struct usb_device’
+   81 |                 udev->ep_out[idx].desc = ptr;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:86:52: error: unknown type name ‘uint8_t’
+   86 |                         const enum ep_op op, const uint8_t ep,
+      |                                                    ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:87:32: warning: ‘struct usb_ep_descriptor’ declared inside parameter list will not be visible outside of this definition or declaration
+   87 |                         struct usb_ep_descriptor *const ep_desc)
+      |                                ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘handle_ep_op’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:93:32: error: ‘NULL’ undeclared (first use in this function)
+   93 |                 if (ep_desc == NULL) {
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:93:32: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:94:33: error: ‘ENOTSUP’ undeclared (first use in this function)
+   94 |                         return -ENOTSUP;
+      |                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:97:49: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+   97 |                 assign_ep_desc_ptr(udev, ep_desc->bEndpointAddress, ep_desc);
+      |                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:109:42: error: unknown type name ‘uint8_t’
+  109 |                                    const uint8_t iface, const uint8_t alt)
+      |                                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:109:63: error: unknown type name ‘uint8_t’
+  109 |                                    const uint8_t iface, const uint8_t alt)
+      |                                                               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘device_interface_modify’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:111:51: error: invalid use of undefined type ‘struct usb_device’
+  111 |         struct usb_cfg_descriptor *cfg_desc = udev->cfg_desc;
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:112:45: error: ‘NULL’ undeclared (first use in this function)
+  112 |         struct usb_if_descriptor *if_desc = NULL;
+      |                                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:112:45: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:115:9: error: unknown type name ‘bool’
+  115 |         bool found_iface = false;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | struct usb_device *usbh_device_get_any(struct usbh_context *const uhs_ctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:115:28: error: ‘false’ undeclared (first use in this function)
+  115 |         bool found_iface = false;
+      |                            ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:115:28: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:119:19: error: invalid use of undefined type ‘struct usb_device’
+  119 |         dhp = udev->ifaces[iface].dhp;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:120:30: error: ‘uint8_t’ undeclared (first use in this function)
+  120 |         desc_end = (void *)((uint8_t *)udev->cfg_desc + cfg_desc->wTotalLength);
+      |                              ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:120:30: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:120:39: error: expected expression before ‘)’ token
+  120 |         desc_end = (void *)((uint8_t *)udev->cfg_desc + cfg_desc->wTotalLength);
+      |                                       ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:123:24: error: invalid use of undefined type ‘struct usb_desc_header’
+  123 |                 if (dhp->bDescriptorType == USB_DESC_INTERFACE) {
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:123:45: error: ‘USB_DESC_INTERFACE’ undeclared (first use in this function)
+  123 |                 if (dhp->bDescriptorType == USB_DESC_INTERFACE) {
+      |                                             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:130:36: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  130 |                         if (if_desc->bInterfaceNumber == iface &&
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:131:36: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  131 |                             if_desc->bAlternateSetting == alt) {
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:132:47: error: ‘true’ undeclared (first use in this function)
+  132 |                                 found_iface = true;
+      |                                               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:132:47: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:133:33: warning: implicit declaration of function ‘LOG_DBG’ [-Wimplicit-function-declaration]
+  133 |                                 LOG_DBG("Found interface %u alternate %u", iface, alt);
+      |                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:134:44: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  134 |                                 if (if_desc->bNumEndpoints == 0) {
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:141:24: error: invalid use of undefined type ‘struct usb_desc_header’
+  141 |                 if (dhp->bDescriptorType == USB_DESC_ENDPOINT && found_iface) {
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:141:45: error: ‘USB_DESC_ENDPOINT’ undeclared (first use in this function)
+  141 |                 if (dhp->bDescriptorType == USB_DESC_ENDPOINT && found_iface) {
+      |                                             ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:143:61: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  143 |                         err = handle_ep_op(udev, op, ep_desc->bEndpointAddress, ep_desc);
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:143:81: warning: passing argument 4 of ‘handle_ep_op’ from incompatible pointer type [-Wincompatible-pointer-types]
+  143 |                         err = handle_ep_op(udev, op, ep_desc->bEndpointAddress, ep_desc);
+      |                                                                                 ^~~~~~~
+      |                                                                                 |
+      |                                                                                 struct usb_ep_descriptor *
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:87:57: note: expected ‘struct usb_ep_descriptor * const’ but argument is of type ‘struct usb_ep_descriptor *’
+   87 |                         struct usb_ep_descriptor *const ep_desc)
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:148:25: warning: implicit declaration of function ‘LOG_INF’ [-Wimplicit-function-declaration]
+  148 |                         LOG_INF("Modify interface %u ep 0x%02x by op %u",
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:149:47: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  149 |                                 iface, ep_desc->bEndpointAddress, op);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:152:42: error: expected expression before ‘)’ token
+  152 |                 dhp = (void *)((uint8_t *)dhp + dhp->bLength);
+      |                                          ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:156:35: error: ‘ENODATA’ undeclared (first use in this function)
+  156 |         return found_iface ? 0 : -ENODATA;
+      |                                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:111:36: warning: unused variable ‘cfg_desc’ [-Wunused-variable]
+  111 |         struct usb_cfg_descriptor *cfg_desc = udev->cfg_desc;
+      |                                    ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:160:37: error: unknown type name ‘uint8_t’
+  160 |                               const uint8_t iface, const uint8_t alt,
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:160:58: error: unknown type name ‘uint8_t’
+  160 |                               const uint8_t iface, const uint8_t alt,
+      |                                                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:161:37: error: unknown type name ‘bool’
+  161 |                               const bool dry)
+      |                                     ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_interface_set’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:163:9: error: unknown type name ‘uint8_t’
+  163 |         uint8_t cur_alt;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:163:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:166:21: error: ‘UHC_INTERFACES_MAX’ undeclared (first use in this function)
+  166 |         if (iface > UHC_INTERFACES_MAX) {
+      |                     ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:168:25: error: ‘EINVAL’ undeclared (first use in this function)
+  168 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:171:15: warning: implicit declaration of function ‘k_mutex_lock’ [-Wimplicit-function-declaration]
+  171 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |               ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:171:33: error: invalid use of undefined type ‘struct usb_device’
+  171 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:171:42: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  171 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |                                          ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:178:23: warning: implicit declaration of function ‘usbh_req_set_alt’ [-Wimplicit-function-declaration]
+  178 |                 err = usbh_req_set_alt(udev, iface, alt);
+      |                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:185:23: error: invalid use of undefined type ‘struct usb_device’
+  185 |         cur_alt = udev->ifaces[iface].alternate;
+      |                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:213:13: error: invalid use of undefined type ‘struct usb_device’
+  213 |         udev->ifaces[iface].alternate = alt;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:216:9: warning: implicit declaration of function ‘k_mutex_unlock’ [-Wimplicit-function-declaration]
+  216 |         k_mutex_unlock(&udev->mutex);
+      |         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:216:29: error: invalid use of undefined type ‘struct usb_device’
+  216 |         k_mutex_unlock(&udev->mutex);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘parse_configuration_descriptor’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:223:51: error: invalid use of undefined type ‘struct usb_device’
+  223 |         struct usb_cfg_descriptor *cfg_desc = udev->cfg_desc;
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:224:50: error: ‘NULL’ undeclared (first use in this function)
+  224 |         struct usb_association_descriptor *iad = NULL;
+      |                                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:224:50: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:228:9: error: unknown type name ‘uint8_t’
+  228 |         uint8_t tmp_nif = 0;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:228:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:231:25: error: ‘uint8_t’ undeclared (first use in this function)
+  231 |         dhp = (void *)((uint8_t *)udev->cfg_desc + cfg_desc->bLength);
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:231:25: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:231:34: error: expected expression before ‘)’ token
+  231 |         dhp = (void *)((uint8_t *)udev->cfg_desc + cfg_desc->bLength);
+      |                                  ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:232:39: error: expected expression before ‘)’ token
+  232 |         desc_end = (void *)((uint8_t *)udev->cfg_desc + cfg_desc->wTotalLength);
+      |                                       ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:235:31: error: expected expression before ‘)’ token
+  235 |                 if ((uint8_t *)dhp + sizeof(struct usb_desc_header) > (uint8_t *)desc_end ||
+      |                               ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:238:67: error: invalid use of undefined type ‘struct usb_desc_header’
+  238 |                         LOG_ERR("Invalid descriptor size %d.", dhp->bLength);
+      |                                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:239:33: error: ‘EINVAL’ undeclared (first use in this function)
+  239 |                         return -EINVAL;
+      |                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:242:24: error: invalid use of undefined type ‘struct usb_desc_header’
+  242 |                 if (dhp->bDescriptorType == USB_DESC_INTERFACE_ASSOC) {
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:242:45: error: ‘USB_DESC_INTERFACE_ASSOC’ undeclared (first use in this function)
+  242 |                 if (dhp->bDescriptorType == USB_DESC_INTERFACE_ASSOC) {
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:244:58: error: invalid use of undefined type ‘struct usb_association_descriptor’
+  244 |                         LOG_DBG("bFirstInterface %u", iad->bFirstInterface);
+      |                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:247:24: error: invalid use of undefined type ‘struct usb_desc_header’
+  247 |                 if (dhp->bDescriptorType == USB_DESC_INTERFACE) {
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:247:45: error: ‘USB_DESC_INTERFACE’ undeclared (first use in this function)
+  247 |                 if (dhp->bDescriptorType == USB_DESC_INTERFACE) {
+      |                                             ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:250:40: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  250 |                                 if_desc->bInterfaceNumber, if_desc->bAlternateSetting);
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:250:67: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  250 |                                 if_desc->bInterfaceNumber, if_desc->bAlternateSetting);
+      |                                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:252:36: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  252 |                         if (if_desc->bAlternateSetting == 0) {
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:253:48: error: ‘UHC_INTERFACES_MAX’ undeclared (first use in this function)
+  253 |                                 if (tmp_nif >= UHC_INTERFACES_MAX) {
+      |                                                ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:258:37: error: invalid use of undefined type ‘struct usb_device’
+  258 |                                 udev->ifaces[tmp_nif].dhp = dhp;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:260:40: error: invalid use of undefined type ‘struct usb_association_descriptor’
+  260 |                                     iad->bFirstInterface == if_desc->bInterfaceNumber) {
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:260:68: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  260 |                                     iad->bFirstInterface == if_desc->bInterfaceNumber) {
+      |                                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:261:45: error: invalid use of undefined type ‘struct usb_device’
+  261 |                                         udev->ifaces[tmp_nif].iad = iad;
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:268:24: error: invalid use of undefined type ‘struct usb_desc_header’
+  268 |                 if (dhp->bDescriptorType == USB_DESC_ENDPOINT) {
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:268:45: error: ‘USB_DESC_ENDPOINT’ undeclared (first use in this function)
+  268 |                 if (dhp->bDescriptorType == USB_DESC_ENDPOINT) {
+      |                                             ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:271:32: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  271 |                         ep_desc->wMaxPacketSize = sys_le16_to_cpu(ep_desc->wMaxPacketSize);
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:271:51: warning: implicit declaration of function ‘sys_le16_to_cpu’ [-Wimplicit-function-declaration]
+  271 |                         ep_desc->wMaxPacketSize = sys_le16_to_cpu(ep_desc->wMaxPacketSize);
+      |                                                   ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:271:74: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  271 |                         ep_desc->wMaxPacketSize = sys_le16_to_cpu(ep_desc->wMaxPacketSize);
+      |                                                                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:273:40: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  273 |                                 ep_desc->bEndpointAddress, ep_desc->wMaxPacketSize);
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:273:67: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  273 |                                 ep_desc->bEndpointAddress, ep_desc->wMaxPacketSize);
+      |                                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:275:55: error: invalid use of undefined type ‘struct usb_if_descriptor’
+  275 |                         if (if_desc != NULL && if_desc->bAlternateSetting == 0) {
+      |                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:276:65: error: invalid use of undefined type ‘struct usb_ep_descriptor’
+  276 |                                 assign_ep_desc_ptr(udev, ep_desc->bEndpointAddress, ep_desc);
+      |                                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:280:42: error: expected expression before ‘)’ token
+  280 |                 dhp = (void *)((uint8_t *)dhp + dhp->bLength);
+      |                                          ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:283:21: error: invalid use of undefined type ‘struct usb_cfg_descriptor’
+  283 |         if (cfg_desc->bNumInterfaces != tmp_nif) {
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘reset_configuration’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:294:9: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+  294 |         memset(udev->ep_in, 0, sizeof(udev->ep_in));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+  +++ |+#include <string.h>
+    1 | struct usb_device *usbh_device_get_any(struct usbh_context *const uhs_ctx)
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:294:9: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+  294 |         memset(udev->ep_in, 0, sizeof(udev->ep_in));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:294:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:294:20: error: invalid use of undefined type ‘struct usb_device’
+  294 |         memset(udev->ep_in, 0, sizeof(udev->ep_in));
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:294:43: error: invalid use of undefined type ‘struct usb_device’
+  294 |         memset(udev->ep_in, 0, sizeof(udev->ep_in));
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:295:20: error: invalid use of undefined type ‘struct usb_device’
+  295 |         memset(udev->ep_out, 0, sizeof(udev->ep_out));
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:295:44: error: invalid use of undefined type ‘struct usb_device’
+  295 |         memset(udev->ep_out, 0, sizeof(udev->ep_out));
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:298:20: error: invalid use of undefined type ‘struct usb_device’
+  298 |         memset(udev->ifaces, 0, sizeof(udev->ifaces));
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:298:44: error: invalid use of undefined type ‘struct usb_device’
+  298 |         memset(udev->ifaces, 0, sizeof(udev->ifaces));
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:300:13: error: invalid use of undefined type ‘struct usb_device’
+  300 |         udev->actual_cfg = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:301:13: error: invalid use of undefined type ‘struct usb_device’
+  301 |         udev->state = USB_STATE_ADDRESSED;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:301:23: error: ‘USB_STATE_ADDRESSED’ undeclared (first use in this function)
+  301 |         udev->state = USB_STATE_ADDRESSED;
+      |                       ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:304:72: error: unknown type name ‘uint8_t’
+  304 | int usbh_device_set_configuration(struct usb_device *const udev, const uint8_t num)
+      |                                                                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_set_configuration’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:306:35: error: storage size of ‘cfg_desc’ isn’t known
+  306 |         struct usb_cfg_descriptor cfg_desc;
+      |                                   ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:307:9: error: unknown type name ‘uint8_t’
+  307 |         uint8_t idx;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:307:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:310:33: error: invalid use of undefined type ‘struct usb_device’
+  310 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:310:42: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  310 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |                                          ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:316:17: error: invalid use of undefined type ‘struct usb_device’
+  316 |         if (udev->actual_cfg == num) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:323:23: warning: implicit declaration of function ‘usbh_req_set_cfg’ [-Wimplicit-function-declaration]
+  323 |                 err = usbh_req_set_cfg(udev, num);
+      |                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:333:15: warning: implicit declaration of function ‘usbh_req_desc_cfg’ [-Wimplicit-function-declaration]
+  333 |         err = usbh_req_desc_cfg(udev, idx, sizeof(cfg_desc), &cfg_desc);
+      |               ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:339:41: error: ‘USB_DESC_CONFIGURATION’ undeclared (first use in this function)
+  339 |         if (cfg_desc.bDescriptorType != USB_DESC_CONFIGURATION) {
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:341:24: error: ‘EINVAL’ undeclared (first use in this function)
+  341 |                 err = -EINVAL;
+      |                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:351:40: error: ‘UHC_INTERFACES_MAX’ undeclared (first use in this function)
+  351 |         if (cfg_desc.bNumInterfaces >= UHC_INTERFACES_MAX) {
+      |                                        ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:357:13: error: invalid use of undefined type ‘struct usb_device’
+  357 |         udev->cfg_desc = k_heap_alloc(&usb_device_heap,
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:357:26: warning: implicit declaration of function ‘k_heap_alloc’ [-Wimplicit-function-declaration]
+  357 |         udev->cfg_desc = k_heap_alloc(&usb_device_heap,
+      |                          ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:357:40: error: ‘usb_device_heap’ undeclared (first use in this function); did you mean ‘usbh_device_get’?
+  357 |         udev->cfg_desc = k_heap_alloc(&usb_device_heap,
+      |                                        ^~~~~~~~~~~~~~~
+      |                                        usbh_device_get
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:358:70: error: invalid application of ‘sizeof’ to incomplete type ‘struct usb_desc_header’
+  358 |                                       cfg_desc.wTotalLength + sizeof(struct usb_desc_header),
+      |                                                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:360:17: error: invalid use of undefined type ‘struct usb_device’
+  360 |         if (udev->cfg_desc == NULL) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:360:31: error: ‘NULL’ undeclared (first use in this function)
+  360 |         if (udev->cfg_desc == NULL) {
+      |                               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:360:31: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:362:24: error: ‘ENOMEM’ undeclared (first use in this function)
+  362 |                 err = -ENOMEM;
+      |                        ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:372:9: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+  372 |         memset(udev->cfg_desc, 0, cfg_desc.wTotalLength + sizeof(struct usb_desc_header));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:372:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:372:20: error: invalid use of undefined type ‘struct usb_device’
+  372 |         memset(udev->cfg_desc, 0, cfg_desc.wTotalLength + sizeof(struct usb_desc_header));
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:372:66: error: invalid application of ‘sizeof’ to incomplete type ‘struct usb_desc_header’
+  372 |         memset(udev->cfg_desc, 0, cfg_desc.wTotalLength + sizeof(struct usb_desc_header));
+      |                                                                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:373:17: error: invalid use of undefined type ‘struct usb_device’
+  373 |         if (udev->state == USB_STATE_CONFIGURED) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:373:28: error: ‘USB_STATE_CONFIGURED’ undeclared (first use in this function)
+  373 |         if (udev->state == USB_STATE_CONFIGURED) {
+      |                            ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:377:71: error: invalid use of undefined type ‘struct usb_device’
+  377 |         err = usbh_req_desc_cfg(udev, idx, cfg_desc.wTotalLength, udev->cfg_desc);
+      |                                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:381:17: warning: implicit declaration of function ‘k_heap_free’ [-Wimplicit-function-declaration]
+  381 |                 k_heap_free(&usb_device_heap, udev->cfg_desc);
+      |                 ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:381:51: error: invalid use of undefined type ‘struct usb_device’
+  381 |                 k_heap_free(&usb_device_heap, udev->cfg_desc);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:385:13: warning: implicit declaration of function ‘memcmp’ [-Wimplicit-function-declaration]
+  385 |         if (memcmp(udev->cfg_desc, &cfg_desc, sizeof(cfg_desc))) {
+      |             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:385:13: note: include ‘<string.h>’ or provide a declaration of ‘memcmp’
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:385:24: error: invalid use of undefined type ‘struct usb_device’
+  385 |         if (memcmp(udev->cfg_desc, &cfg_desc, sizeof(cfg_desc))) {
+      |                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:387:51: error: invalid use of undefined type ‘struct usb_device’
+  387 |                 k_heap_free(&usb_device_heap, udev->cfg_desc);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:396:51: error: invalid use of undefined type ‘struct usb_device’
+  396 |                 k_heap_free(&usb_device_heap, udev->cfg_desc);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:400:13: error: invalid use of undefined type ‘struct usb_device’
+  400 |         udev->actual_cfg = num;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:401:13: error: invalid use of undefined type ‘struct usb_device’
+  401 |         udev->state = USB_STATE_CONFIGURED;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:404:29: error: invalid use of undefined type ‘struct usb_device’
+  404 |         k_mutex_unlock(&udev->mutex);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:306:35: warning: unused variable ‘cfg_desc’ [-Wunused-variable]
+  306 |         struct usb_cfg_descriptor cfg_desc;
+      |                                   ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:409:66: error: unknown type name ‘uint8_t’
+  409 | int usbh_device_set_address(struct usb_device *const udev, const uint8_t new_addr)
+      |                                                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_set_address’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:413:15: warning: implicit declaration of function ‘usbh_req_set_address’; did you mean ‘usbh_device_set_address’? [-Wimplicit-function-declaration]
+  413 |         err = usbh_req_set_address(udev, new_addr);
+      |               ^~~~~~~~~~~~~~~~~~~~
+      |               usbh_device_set_address
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:419:13: error: invalid use of undefined type ‘struct usb_device’
+  419 |         udev->addr = new_addr;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:422:21: error: invalid use of undefined type ‘struct usb_device’
+  422 |                 udev->state = USB_STATE_DEFAULT;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:422:31: error: ‘USB_STATE_DEFAULT’ undeclared (first use in this function)
+  422 |                 udev->state = USB_STATE_DEFAULT;
+      |                               ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:424:21: error: invalid use of undefined type ‘struct usb_device’
+  424 |                 udev->state = USB_STATE_ADDRESSED;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:424:31: error: ‘USB_STATE_ADDRESSED’ undeclared (first use in this function)
+  424 |                 udev->state = USB_STATE_ADDRESSED;
+      |                               ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:430:48: warning: ‘struct usbh_context’ declared inside parameter list will not be visible outside of this definition or declaration
+  430 | struct usb_device *usbh_device_get_root(struct usbh_context *const ctx)
+      |                                                ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_get_root’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:432:19: error: invalid use of undefined type ‘struct usbh_context’
+  432 |         return ctx->root;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:435:33: warning: ‘struct usbh_context’ declared inside parameter list will not be visible outside of this definition or declaration
+  435 | void usbh_device_connect(struct usbh_context *const ctx,
+      |                                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_connect’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:442:13: error: invalid use of undefined type ‘struct usb_device’
+  442 |         udev->state = USB_STATE_DEFAULT;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:442:23: error: ‘USB_STATE_DEFAULT’ undeclared (first use in this function)
+  442 |         udev->state = USB_STATE_DEFAULT;
+      |                       ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:444:15: warning: implicit declaration of function ‘usbh_device_init’; did you mean ‘usbh_device_get’? [-Wimplicit-function-declaration]
+  444 |         err = usbh_device_init(udev);
+      |               ^~~~~~~~~~~~~~~~
+      |               usbh_device_get
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:447:17: warning: implicit declaration of function ‘usbh_device_free’; did you mean ‘usbh_device_get’? [-Wimplicit-function-declaration]
+  447 |                 usbh_device_free(udev);
+      |                 ^~~~~~~~~~~~~~~~
+      |                 usbh_device_get
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:451:9: warning: implicit declaration of function ‘usbh_class_probe_device’ [-Wimplicit-function-declaration]
+  451 |         usbh_class_probe_device(udev);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:454:36: warning: ‘struct usbh_context’ declared inside parameter list will not be visible outside of this definition or declaration
+  454 | void usbh_device_disconnect(struct usbh_context *ctx, struct usb_device *udev)
+      |                                    ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_disconnect’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:456:9: warning: implicit declaration of function ‘usbh_class_remove_all’ [-Wimplicit-function-declaration]
+  456 |         usbh_class_remove_all(udev);
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:465:50: error: invalid use of undefined type ‘struct usb_device’
+  465 |         struct usbh_context *const uhs_ctx = udev->ctx;
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:466:9: error: unknown type name ‘uint8_t’
+  466 |         uint8_t new_addr;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:466:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:469:17: error: invalid use of undefined type ‘struct usb_device’
+  469 |         if (udev->state != USB_STATE_DEFAULT) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:469:28: error: ‘USB_STATE_DEFAULT’ undeclared (first use in this function)
+  469 |         if (udev->state != USB_STATE_DEFAULT) {
+      |                            ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:471:25: error: ‘EALREADY’ undeclared (first use in this function)
+  471 |                 return -EALREADY;
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:474:33: error: invalid use of undefined type ‘struct usb_device’
+  474 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:474:42: error: ‘K_NO_WAIT’ undeclared (first use in this function)
+  474 |         err = k_mutex_lock(&udev->mutex, K_NO_WAIT);
+      |                                          ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:480:13: warning: implicit declaration of function ‘usbh_device_is_root’; did you mean ‘usbh_device_get_root’? [-Wimplicit-function-declaration]
+  480 |         if (usbh_device_is_root(uhs_ctx, udev)) {
+      |             ^~~~~~~~~~~~~~~~~~~
+      |             usbh_device_get_root
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:481:23: warning: implicit declaration of function ‘uhc_bus_reset’ [-Wimplicit-function-declaration]
+  481 |                 err = uhc_bus_reset(uhs_ctx->dev);
+      |                       ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:481:44: error: invalid use of undefined type ‘struct usbh_context’
+  481 |                 err = uhc_bus_reset(uhs_ctx->dev);
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:492:13: error: invalid use of undefined type ‘struct usb_device’
+  492 |         udev->dev_desc.bMaxPacketSize0 = 8;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:493:15: warning: implicit declaration of function ‘usbh_req_desc_dev’ [-Wimplicit-function-declaration]
+  493 |         err = usbh_req_desc_dev(udev, 8, &udev->dev_desc);
+      |               ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:493:47: error: invalid use of undefined type ‘struct usb_device’
+  493 |         err = usbh_req_desc_dev(udev, 8, &udev->dev_desc);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:504:50: error: invalid use of undefined type ‘struct usb_device’
+  504 |         err = usbh_req_desc_dev(udev, sizeof(udev->dev_desc), &udev->dev_desc);
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:504:68: error: invalid use of undefined type ‘struct usb_device’
+  504 |         err = usbh_req_desc_dev(udev, sizeof(udev->dev_desc), &udev->dev_desc);
+      |                                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:510:18: error: invalid use of undefined type ‘struct usb_device’
+  510 |         if (!udev->dev_desc.bNumConfigurations) {
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:512:29: error: invalid use of undefined type ‘struct usb_device’
+  512 |                         udev->dev_desc.bNumConfigurations);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:516:15: warning: implicit declaration of function ‘alloc_device_address’ [-Wimplicit-function-declaration]
+  516 |         err = alloc_device_address(udev, &new_addr);
+      |               ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:527:60: error: invalid use of undefined type ‘struct usb_device’
+  527 |         LOG_INF("New device with address %u state %u", udev->addr, udev->state);
+      |                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:527:72: error: invalid use of undefined type ‘struct usb_device’
+  527 |         LOG_INF("New device with address %u state %u", udev->addr, udev->state);
+      |                                                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:531:79: error: invalid use of undefined type ‘struct usb_device’
+  531 |                 LOG_ERR("Failed to configure new device with address %u", udev->addr);
+      |                                                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:535:29: error: invalid use of undefined type ‘struct usb_device’
+  535 |         k_mutex_unlock(&udev->mutex);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_get_any’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:4:1: warning: control reaches end of non-void function [-Wreturn-type]
+    4 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_get’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:18:1: warning: control reaches end of non-void function [-Wreturn-type]
+   18 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘device_interface_modify’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:157:1: warning: control reaches end of non-void function [-Wreturn-type]
+  157 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c: In function ‘usbh_device_get_root’:
+/home/huyj/zephyr-workspace/zephyr/subsys/usb/host/usbh_device.c:433:1: warning: control reaches end of non-void function [-Wreturn-type]
+  433 | }
+      | ^
+[136/144] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[137/144] Linking C static library zephyr/drivers/hwinfo/libdrivers__hwinfo.a
+[138/144] Linking C static library zephyr/drivers/usb/common/buf/libdrivers__usb__common__buf.a
+[139/144] Linking C static library zephyr/subsys/usb/device_next/libsubsys__usb__device_next.a
+[140/144] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build
+
+=== RC ===
+1

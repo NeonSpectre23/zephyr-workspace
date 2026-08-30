@@ -1,0 +1,804 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build
+-- west build: building application
+[1/117] Preparing syscall dependency handling
+
+[2/117] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/117] Generating misc/generated/syscalls_subdirs.trigger
+[4/117] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/117] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/117] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/117] Generating include/generated/zephyr/driver-validation.h
+[8/117] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/117] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/117] Generating ../../include/generated/zephyr/heap_constants.h
+[11/117] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/117] Generating include/generated/zephyr/offsets.h
+[13/117] Building C object CMakeFiles/app.dir/src/concurrent.c.obj
+[14/117] Building C object CMakeFiles/app.dir/src/main.c.obj
+[15/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[19/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[23/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[24/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/117] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[35/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[36/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/117] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[44/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[53/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/117] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_timer.c.obj
+[60/117] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_test_csprng.c.obj
+[61/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[62/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[63/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[64/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztress.c.obj
+[65/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[66/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[67/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[68/117] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[69/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[70/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[71/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[72/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[73/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[74/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[75/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[76/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[77/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[78/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[79/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[80/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[81/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[82/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[83/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[84/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[85/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[86/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[87/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[88/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[89/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[90/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[91/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[92/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[93/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread_monitor.c.obj
+[94/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[96/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[97/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/usage.c.obj
+[98/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[99/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj -MF zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:2:34: warning: ‘struct mpsc_pbuf_buffer_config’ declared inside parameter list will not be visible outside of this definition or declaration
+    2 |                     const struct mpsc_pbuf_buffer_config *cfg)
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:1:28: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | void mpsc_pbuf_init(struct mpsc_pbuf_buffer *buffer,
+      |                            ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:17:15: error: unknown type name ‘bool’
+   17 | static inline bool free_space(struct mpsc_pbuf_buffer *buffer, uint32_t *res)
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:17:64: error: unknown type name ‘uint32_t’
+   17 | static inline bool free_space(struct mpsc_pbuf_buffer *buffer, uint32_t *res)
+      |                                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | void mpsc_pbuf_init(struct mpsc_pbuf_buffer *buffer,
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:42:15: error: unknown type name ‘bool’
+   42 | static inline bool available(struct mpsc_pbuf_buffer *buffer, uint32_t *res)
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:42:63: error: unknown type name ‘uint32_t’
+   42 | static inline bool available(struct mpsc_pbuf_buffer *buffer, uint32_t *res)
+      |                                                               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:42:63: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:54:15: error: unknown type name ‘uint32_t’
+   54 | static inline uint32_t get_usage(struct mpsc_pbuf_buffer *buffer)
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:54:41: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+   54 | static inline uint32_t get_usage(struct mpsc_pbuf_buffer *buffer)
+      |                                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘get_usage’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:56:9: error: unknown type name ‘uint32_t’
+   56 |         uint32_t f;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:56:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:58:13: warning: implicit declaration of function ‘free_space’ [-Wimplicit-function-declaration]
+   58 |         if (free_space(buffer, &f)) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:59:29: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+   59 |                 f += (buffer->rd_idx - 1);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:62:22: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+   62 |         return buffer->size - 1 - f;
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:65:50: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+   65 | static inline void max_utilization_update(struct mpsc_pbuf_buffer *buffer)
+      |                                                  ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘max_utilization_update’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:67:21: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+   67 |         if (!(buffer->flags & MPSC_PBUF_MAX_UTILIZATION)) {
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:67:31: error: ‘MPSC_PBUF_MAX_UTILIZATION’ undeclared (first use in this function)
+   67 |         if (!(buffer->flags & MPSC_PBUF_MAX_UTILIZATION)) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:67:31: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:71:15: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+   71 |         buffer->max_usage = max(buffer->max_usage, get_usage(buffer));
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:71:29: warning: implicit declaration of function ‘max’ [-Wimplicit-function-declaration]
+   71 |         buffer->max_usage = max(buffer->max_usage, get_usage(buffer));
+      |                             ^~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:71:39: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+   71 |         buffer->max_usage = max(buffer->max_usage, get_usage(buffer));
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:71:62: warning: passing argument 1 of ‘get_usage’ from incompatible pointer type [-Wincompatible-pointer-types]
+   71 |         buffer->max_usage = max(buffer->max_usage, get_usage(buffer));
+      |                                                              ^~~~~~
+      |                                                              |
+      |                                                              struct mpsc_pbuf_buffer *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:54:59: note: expected ‘struct mpsc_pbuf_buffer *’ but argument is of type ‘struct mpsc_pbuf_buffer *’
+   54 | static inline uint32_t get_usage(struct mpsc_pbuf_buffer *buffer)
+      |                                  ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:74:15: error: unknown type name ‘bool’
+   74 | static inline bool is_valid(union mpsc_pbuf_generic *item)
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:74:35: warning: ‘union mpsc_pbuf_generic’ declared inside parameter list will not be visible outside of this definition or declaration
+   74 | static inline bool is_valid(union mpsc_pbuf_generic *item)
+      |                                   ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘is_valid’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:76:20: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+   76 |         return item->hdr.valid;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:79:15: error: unknown type name ‘bool’
+   79 | static inline bool is_invalid(union mpsc_pbuf_generic *item)
+      |               ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:79:37: warning: ‘union mpsc_pbuf_generic’ declared inside parameter list will not be visible outside of this definition or declaration
+   79 | static inline bool is_invalid(union mpsc_pbuf_generic *item)
+      |                                     ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘is_invalid’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:81:21: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+   81 |         return !item->hdr.valid && !item->hdr.busy;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:81:41: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+   81 |         return !item->hdr.valid && !item->hdr.busy;
+      |                                         ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:84:15: error: unknown type name ‘uint32_t’
+   84 | static inline uint32_t idx_inc(struct mpsc_pbuf_buffer *buffer,
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:85:33: error: unknown type name ‘uint32_t’
+   85 |                                 uint32_t idx, int32_t val)
+      |                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:85:33: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:85:47: error: unknown type name ‘int32_t’
+   85 |                                 uint32_t idx, int32_t val)
+      |                                               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:85:47: note: ‘int32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:96:15: error: unknown type name ‘uint32_t’
+   96 | static inline uint32_t get_skip(union mpsc_pbuf_generic *item)
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:96:39: warning: ‘union mpsc_pbuf_generic’ declared inside parameter list will not be visible outside of this definition or declaration
+   96 | static inline uint32_t get_skip(union mpsc_pbuf_generic *item)
+      |                                       ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘get_skip’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:98:17: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+   98 |         if (item->hdr.busy && !item->hdr.valid) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:98:36: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+   98 |         if (item->hdr.busy && !item->hdr.valid) {
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:99:28: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+   99 |                 return item->skip.len;
+      |                            ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:106:21: error: expected ‘;’ before ‘void’
+  106 | static ALWAYS_INLINE void tmp_wr_idx_inc(struct mpsc_pbuf_buffer *buffer, int32_t wlen)
+      |                     ^~~~~
+      |                     ;
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:106:75: error: unknown type name ‘int32_t’
+  106 | static ALWAYS_INLINE void tmp_wr_idx_inc(struct mpsc_pbuf_buffer *buffer, int32_t wlen)
+      |                                                                           ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:106:75: note: ‘int32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:114:57: error: unknown type name ‘int32_t’
+  114 | static void rd_idx_inc(struct mpsc_pbuf_buffer *buffer, int32_t wlen)
+      |                                                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:114:57: note: ‘int32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:120:60: error: unknown type name ‘uint32_t’
+  120 | static void add_skip_item(struct mpsc_pbuf_buffer *buffer, uint32_t wlen)
+      |                                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:120:60: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:131:8: error: unknown type name ‘bool’
+  131 | static bool drop_item_locked(struct mpsc_pbuf_buffer *buffer,
+      |        ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:132:30: error: unknown type name ‘uint32_t’
+  132 |                              uint32_t free_wlen,
+      |                              ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:132:30: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:134:30: error: unknown type name ‘uint32_t’
+  134 |                              uint32_t *tmp_wr_idx_shift)
+      |                              ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:134:30: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:223:30: error: unknown type name ‘uint32_t’
+  223 |                              uint32_t prev_tmp_wr_idx,
+      |                              ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:223:30: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:224:30: error: unknown type name ‘uint32_t’
+  224 |                              uint32_t tmp_wr_idx_shift)
+      |                              ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:224:30: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:252:37: warning: ‘union mpsc_pbuf_generic’ declared inside parameter list will not be visible outside of this definition or declaration
+  252 |                         const union mpsc_pbuf_generic item)
+      |                                     ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:251:32: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  251 | void mpsc_pbuf_put_word(struct mpsc_pbuf_buffer *buffer,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:252:55: error: parameter 2 (‘item’) has incomplete type
+  252 |                         const union mpsc_pbuf_generic item)
+      |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_put_word’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:254:9: error: unknown type name ‘bool’
+  254 |         bool cont;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | void mpsc_pbuf_init(struct mpsc_pbuf_buffer *buffer,
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:255:9: error: unknown type name ‘uint32_t’
+  255 |         uint32_t free_wlen;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:255:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:256:9: error: unknown type name ‘k_spinlock_key_t’
+  256 |         k_spinlock_key_t key;
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:257:49: error: ‘NULL’ undeclared (first use in this function)
+  257 |         union mpsc_pbuf_generic *dropped_item = NULL;
+      |                                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | void mpsc_pbuf_init(struct mpsc_pbuf_buffer *buffer,
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:258:9: error: unknown type name ‘uint32_t’
+  258 |         uint32_t tmp_wr_idx_shift = 0;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:258:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:259:9: error: unknown type name ‘uint32_t’
+  259 |         uint32_t tmp_wr_idx_val = 0;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:259:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:262:23: warning: implicit declaration of function ‘k_spin_lock’ [-Wimplicit-function-declaration]
+  262 |                 key = k_spin_lock(&buffer->lock);
+      |                       ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:262:42: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  262 |                 key = k_spin_lock(&buffer->lock);
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:265:25: warning: implicit declaration of function ‘post_drop_action’ [-Wimplicit-function-declaration]
+  265 |                         post_drop_action(buffer, tmp_wr_idx_val, tmp_wr_idx_shift);
+      |                         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:271:17: warning: implicit declaration of function ‘MPSC_PBUF_DBG’ [-Wimplicit-function-declaration]
+  271 |                 MPSC_PBUF_DBG(buffer, "put_word (%d free space)", (int)free_wlen);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:274:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  274 |                         buffer->buf[buffer->tmp_wr_idx] = item.raw;
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:274:43: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  274 |                         buffer->buf[buffer->tmp_wr_idx] = item.raw;
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:275:25: warning: implicit declaration of function ‘tmp_wr_idx_inc’ [-Wimplicit-function-declaration]
+  275 |                         tmp_wr_idx_inc(buffer, 1);
+      |                         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:276:32: error: ‘false’ undeclared (first use in this function)
+  276 |                         cont = false;
+      |                                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:276:32: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:277:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  277 |                         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, 1);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:277:42: warning: implicit declaration of function ‘idx_inc’ [-Wimplicit-function-declaration]
+  277 |                         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, 1);
+      |                                          ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:277:64: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  277 |                         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, 1);
+      |                                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:278:48: warning: passing argument 1 of ‘max_utilization_update’ from incompatible pointer type [-Wincompatible-pointer-types]
+  278 |                         max_utilization_update(buffer);
+      |                                                ^~~~~~
+      |                                                |
+      |                                                struct mpsc_pbuf_buffer *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:65:68: note: expected ‘struct mpsc_pbuf_buffer *’ but argument is of type ‘struct mpsc_pbuf_buffer *’
+   65 | static inline void max_utilization_update(struct mpsc_pbuf_buffer *buffer)
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:280:48: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  280 |                         tmp_wr_idx_val = buffer->tmp_wr_idx;
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:281:32: warning: implicit declaration of function ‘drop_item_locked’ [-Wimplicit-function-declaration]
+  281 |                         cont = drop_item_locked(buffer, free_wlen,
+      |                                ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:285:17: warning: implicit declaration of function ‘k_spin_unlock’ [-Wimplicit-function-declaration]
+  285 |                 k_spin_unlock(&buffer->lock, key);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:285:38: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  285 |                 k_spin_unlock(&buffer->lock, key);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:289:35: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  289 |                         if (buffer->notify_drop) {
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:290:39: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  290 |                                 buffer->notify_drop(buffer, dropped_item);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:298:42: error: unknown type name ‘size_t’
+  298 |                                          size_t wlen, k_timeout_t timeout)
+      |                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:298:42: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:298:55: error: unknown type name ‘k_timeout_t’
+  298 |                                          size_t wlen, k_timeout_t timeout)
+      |                                                       ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:371:30: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  371 | void mpsc_pbuf_commit(struct mpsc_pbuf_buffer *buffer,
+      |                              ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_commit’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:374:9: error: unknown type name ‘uint32_t’
+  374 |         uint32_t wlen = buffer->get_wlen(item);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:374:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:374:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  374 |         uint32_t wlen = buffer->get_wlen(item);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:376:9: error: unknown type name ‘k_spinlock_key_t’
+  376 |         k_spinlock_key_t key = k_spin_lock(&buffer->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:376:51: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  376 |         k_spinlock_key_t key = k_spin_lock(&buffer->lock);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:378:13: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+  378 |         item->hdr.valid = 1;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:379:15: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  379 |         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, wlen);
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:379:48: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  379 |         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, wlen);
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:380:32: warning: passing argument 1 of ‘max_utilization_update’ from incompatible pointer type [-Wincompatible-pointer-types]
+  380 |         max_utilization_update(buffer);
+      |                                ^~~~~~
+      |                                |
+      |                                struct mpsc_pbuf_buffer *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:65:68: note: expected ‘struct mpsc_pbuf_buffer *’ but argument is of type ‘struct mpsc_pbuf_buffer *’
+   65 | static inline void max_utilization_update(struct mpsc_pbuf_buffer *buffer)
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:381:30: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  381 |         k_spin_unlock(&buffer->lock, key);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:385:36: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  385 | void mpsc_pbuf_put_word_ext(struct mpsc_pbuf_buffer *buffer,
+      |                                    ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:386:59: error: parameter 2 (‘item’) has incomplete type
+  386 |                             const union mpsc_pbuf_generic item,
+      |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_put_word_ext’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:389:22: error: unknown type name ‘size_t’
+  389 |         static const size_t l =
+      |                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:390:56: error: ‘uint32_t’ undeclared (first use in this function)
+  390 |                 (sizeof(item) + sizeof(data)) / sizeof(uint32_t);
+      |                                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:390:56: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:391:49: error: ‘NULL’ undeclared (first use in this function)
+  391 |         union mpsc_pbuf_generic *dropped_item = NULL;
+      |                                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:391:49: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:392:9: error: unknown type name ‘bool’
+  392 |         bool cont;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:392:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:393:17: error: expected ‘;’ before ‘tmp_wr_idx_shift’
+  393 |         uint32_t tmp_wr_idx_shift = 0;
+      |                 ^~~~~~~~~~~~~~~~~
+      |                 ;
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:394:17: error: expected ‘;’ before ‘tmp_wr_idx_val’
+  394 |         uint32_t tmp_wr_idx_val = 0;
+      |                 ^~~~~~~~~~~~~~~
+      |                 ;
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:397:17: error: unknown type name ‘k_spinlock_key_t’
+  397 |                 k_spinlock_key_t key;
+      |                 ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:398:25: error: expected ‘;’ before ‘free_wlen’
+  398 |                 uint32_t free_wlen;
+      |                         ^~~~~~~~~~
+      |                         ;
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:399:17: error: unknown type name ‘bool’
+  399 |                 bool wrap;
+      |                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:399:17: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:401:42: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  401 |                 key = k_spin_lock(&buffer->lock);
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:403:21: error: ‘tmp_wr_idx_shift’ undeclared (first use in this function)
+  403 |                 if (tmp_wr_idx_shift) {
+      |                     ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:404:50: error: ‘tmp_wr_idx_val’ undeclared (first use in this function)
+  404 |                         post_drop_action(buffer, tmp_wr_idx_val, tmp_wr_idx_shift);
+      |                                                  ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:408:44: error: ‘free_wlen’ undeclared (first use in this function)
+  408 |                 wrap = free_space(buffer, &free_wlen);
+      |                                            ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:411:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  411 |                         buffer->buf[buffer->tmp_wr_idx] = item.raw;
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:411:43: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  411 |                         buffer->buf[buffer->tmp_wr_idx] = item.raw;
+      |                                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:413:49: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  413 |                                 (void **)&buffer->buf[buffer->tmp_wr_idx + 1];
+      |                                                 ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:413:61: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  413 |                                 (void **)&buffer->buf[buffer->tmp_wr_idx + 1];
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:417:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  417 |                         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, l);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:417:64: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  417 |                         buffer->wr_idx = idx_inc(buffer, buffer->wr_idx, l);
+      |                                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:418:32: error: ‘false’ undeclared (first use in this function)
+  418 |                         cont = false;
+      |                                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:418:32: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:419:48: warning: passing argument 1 of ‘max_utilization_update’ from incompatible pointer type [-Wincompatible-pointer-types]
+  419 |                         max_utilization_update(buffer);
+      |                                                ^~~~~~
+      |                                                |
+      |                                                struct mpsc_pbuf_buffer *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:65:68: note: expected ‘struct mpsc_pbuf_buffer *’ but argument is of type ‘struct mpsc_pbuf_buffer *’
+   65 | static inline void max_utilization_update(struct mpsc_pbuf_buffer *buffer)
+      |                                           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:421:25: warning: implicit declaration of function ‘add_skip_item’ [-Wimplicit-function-declaration]
+  421 |                         add_skip_item(buffer, free_wlen);
+      |                         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:422:32: error: ‘true’ undeclared (first use in this function)
+  422 |                         cont = true;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:422:32: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:424:48: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  424 |                         tmp_wr_idx_val = buffer->tmp_wr_idx;
+      |                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:429:38: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  429 |                 k_spin_unlock(&buffer->lock, key);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:433:35: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  433 |                         if (buffer->notify_drop) {
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:434:39: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  434 |                                 buffer->notify_drop(buffer, dropped_item);
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:441:64: error: unknown type name ‘uint32_t’
+  441 | void mpsc_pbuf_put_data(struct mpsc_pbuf_buffer *buffer, const uint32_t *data,
+      |                                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:442:25: error: unknown type name ‘size_t’
+  442 |                         size_t wlen)
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:442:25: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:492:55: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  492 | const union mpsc_pbuf_generic *mpsc_pbuf_claim(struct mpsc_pbuf_buffer *buffer)
+      |                                                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_claim’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:495:9: error: unknown type name ‘bool’
+  495 |         bool cont;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:495:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:496:9: error: unknown type name ‘bool’
+  496 |         bool need_post = false;
+      |         ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:496:9: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:496:26: error: ‘false’ undeclared (first use in this function)
+  496 |         bool need_post = false;
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:496:26: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:499:17: error: unknown type name ‘uint32_t’
+  499 |                 uint32_t a;
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:499:17: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:500:17: error: unknown type name ‘k_spinlock_key_t’
+  500 |                 k_spinlock_key_t key;
+      |                 ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:503:42: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  503 |                 key = k_spin_lock(&buffer->lock);
+      |                                          ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:504:23: warning: implicit declaration of function ‘available’ [-Wimplicit-function-declaration]
+  504 |                 (void)available(buffer, &a);
+      |                       ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:506:32: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  506 |                         &buffer->buf[buffer->tmp_rd_idx];
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:506:44: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  506 |                         &buffer->buf[buffer->tmp_rd_idx];
+      |                                            ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:508:38: warning: passing argument 1 of ‘is_invalid’ from incompatible pointer type [-Wincompatible-pointer-types]
+  508 |                 if (!a || is_invalid(item)) {
+      |                                      ^~~~
+      |                                      |
+      |                                      union mpsc_pbuf_generic *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:79:56: note: expected ‘union mpsc_pbuf_generic *’ but argument is of type ‘union mpsc_pbuf_generic *’
+   79 | static inline bool is_invalid(union mpsc_pbuf_generic *item)
+      |                               ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:510:32: error: ‘NULL’ undeclared (first use in this function)
+  510 |                         item = NULL;
+      |                                ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:510:32: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:512:25: error: unknown type name ‘uint32_t’
+  512 |                         uint32_t skip = get_skip(item);
+      |                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:512:25: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:512:50: warning: passing argument 1 of ‘get_skip’ from incompatible pointer type [-Wincompatible-pointer-types]
+  512 |                         uint32_t skip = get_skip(item);
+      |                                                  ^~~~
+      |                                                  |
+      |                                                  union mpsc_pbuf_generic *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:96:58: note: expected ‘union mpsc_pbuf_generic *’ but argument is of type ‘union mpsc_pbuf_generic *’
+   96 | static inline uint32_t get_skip(union mpsc_pbuf_generic *item)
+      |                                 ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:514:47: warning: passing argument 1 of ‘is_valid’ from incompatible pointer type [-Wincompatible-pointer-types]
+  514 |                         if (skip || !is_valid(item)) {
+      |                                               ^~~~
+      |                                               |
+      |                                               union mpsc_pbuf_generic *
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:74:54: note: expected ‘union mpsc_pbuf_generic *’ but argument is of type ‘union mpsc_pbuf_generic *’
+   74 | static inline bool is_valid(union mpsc_pbuf_generic *item)
+      |                             ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:515:33: error: unknown type name ‘uint32_t’
+  515 |                                 uint32_t inc =
+      |                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:515:33: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:516:61: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  516 |                                         skip ? skip : buffer->get_wlen(item);
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:518:39: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  518 |                                 buffer->tmp_rd_idx =
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:519:61: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  519 |                                       idx_inc(buffer, buffer->tmp_rd_idx, inc);
+      |                                                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:520:33: warning: implicit declaration of function ‘rd_idx_inc’ [-Wimplicit-function-declaration]
+  520 |                                 rd_idx_inc(buffer, inc);
+      |                                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:521:40: error: ‘true’ undeclared (first use in this function)
+  521 |                                 cont = true;
+      |                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:521:40: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:524:37: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+  524 |                                 item->hdr.busy = 1;
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:525:39: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  525 |                                 buffer->tmp_rd_idx =
+      |                                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:526:63: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  526 |                                         idx_inc(buffer, buffer->tmp_rd_idx,
+      |                                                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:527:55: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  527 |                                                 buffer->get_wlen(item));
+      |                                                       ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:534:38: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  534 |                 k_spin_unlock(&buffer->lock, key);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:537:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+  537 |         if (IS_ENABLED(CONFIG_MULTITHREADING) && need_post && item == NULL) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:538:17: warning: implicit declaration of function ‘k_sem_give’ [-Wimplicit-function-declaration]
+  538 |                 k_sem_give(&buffer->sem);
+      |                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:538:35: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  538 |                 k_sem_give(&buffer->sem);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:544:28: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  544 | void mpsc_pbuf_free(struct mpsc_pbuf_buffer *buffer,
+      |                            ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_free’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:547:9: error: unknown type name ‘uint32_t’
+  547 |         uint32_t wlen = buffer->get_wlen(item);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:547:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:547:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  547 |         uint32_t wlen = buffer->get_wlen(item);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:548:9: error: unknown type name ‘k_spinlock_key_t’
+  548 |         k_spinlock_key_t key = k_spin_lock(&buffer->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:548:51: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  548 |         k_spinlock_key_t key = k_spin_lock(&buffer->lock);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:551:14: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+  551 |         witem->hdr.valid = 0;
+      |              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:552:21: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  552 |         if (!(buffer->flags & MPSC_PBUF_MODE_OVERWRITE) ||
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:552:31: error: ‘MPSC_PBUF_MODE_OVERWRITE’ undeclared (first use in this function)
+  552 |         if (!(buffer->flags & MPSC_PBUF_MODE_OVERWRITE) ||
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:553:20: error: ‘uint32_t’ undeclared (first use in this function)
+  553 |                  ((uint32_t *)item == &buffer->buf[buffer->rd_idx])) {
+      |                    ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:553:20: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:553:30: error: expected expression before ‘)’ token
+  553 |                  ((uint32_t *)item == &buffer->buf[buffer->rd_idx])) {
+      |                              ^
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:554:22: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+  554 |                 witem->hdr.busy = 0;
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:555:27: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  555 |                 if (buffer->rd_idx == buffer->tmp_rd_idx) {
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:555:45: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  555 |                 if (buffer->rd_idx == buffer->tmp_rd_idx) {
+      |                                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:563:31: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  563 |                         buffer->tmp_rd_idx = idx_inc(buffer, buffer->tmp_rd_idx, wlen);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:563:68: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  563 |                         buffer->tmp_rd_idx = idx_inc(buffer, buffer->tmp_rd_idx, wlen);
+      |                                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:568:22: error: invalid use of undefined type ‘union mpsc_pbuf_generic’
+  568 |                 witem->skip.len = wlen;
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:572:30: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  572 |         k_spin_unlock(&buffer->lock, key);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:574:35: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  574 |                 k_sem_give(&buffer->sem);
+      |                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:578:1: error: unknown type name ‘bool’
+  578 | bool mpsc_pbuf_is_pending(struct mpsc_pbuf_buffer *buffer)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:578:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:578:34: warning: ‘struct mpsc_pbuf_buffer’ declared inside parameter list will not be visible outside of this definition or declaration
+  578 | bool mpsc_pbuf_is_pending(struct mpsc_pbuf_buffer *buffer)
+      |                                  ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_is_pending’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:580:9: error: unknown type name ‘uint32_t’
+  580 |         uint32_t a;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:580:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:581:9: error: unknown type name ‘k_spinlock_key_t’
+  581 |         k_spinlock_key_t key = k_spin_lock(&buffer->lock);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:581:51: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  581 |         k_spinlock_key_t key = k_spin_lock(&buffer->lock);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:584:30: error: invalid use of undefined type ‘struct mpsc_pbuf_buffer’
+  584 |         k_spin_unlock(&buffer->lock, key);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:586:20: error: ‘true’ undeclared (first use in this function)
+  586 |         return a ? true : false;
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:586:20: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:586:27: error: ‘false’ undeclared (first use in this function)
+  586 |         return a ? true : false;
+      |                           ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:586:27: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:590:32: error: unknown type name ‘uint32_t’
+  590 |                                uint32_t *size, uint32_t *now)
+      |                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:590:32: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:590:48: error: unknown type name ‘uint32_t’
+  590 |                                uint32_t *size, uint32_t *now)
+      |                                                ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:590:48: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:601:68: error: unknown type name ‘uint32_t’
+  601 | int mpsc_pbuf_get_max_utilization(struct mpsc_pbuf_buffer *buffer, uint32_t *max)
+      |                                                                    ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:601:68: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘is_invalid’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+   82 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘is_valid’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c: In function ‘mpsc_pbuf_is_pending’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/mpsc_pbuf.c:587:1: warning: control reaches end of non-void function [-Wreturn-type]
+  587 | }
+      | ^
+[100/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[101/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[102/117] Linking C static library app/libapp.a
+[103/117] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[104/117] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[105/117] Generating linker_zephyr_pre0.cmd
+[106/117] Linking C static library zephyr/arch/common/libarch__common.a
+[107/117] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[108/117] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[109/117] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[110/117] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[111/117] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/subsys/random/CMakeLists.txt:12 (message):
+  
+
+      Warning: CONFIG_TIMER_RANDOM_GENERATOR and CONFIG_TEST_CSPRNG_GENERATOR are
+      not truly random generators. This capability is not secure and it is
+      provided for testing purposes only. Use it carefully.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/mpsc_pbuf/build
+
+=== RC ===
+1

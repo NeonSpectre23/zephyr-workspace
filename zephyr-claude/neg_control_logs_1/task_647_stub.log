@@ -1,0 +1,598 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (5.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build
+-- west build: building application
+[1/143] Preparing syscall dependency handling
+
+[2/143] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/143] Generating misc/generated/syscalls_subdirs.trigger
+[4/143] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/143] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/143] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/143] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/143] Generating include/generated/zephyr/driver-validation.h
+[9/143] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/143] Generating ../../include/generated/zephyr/heap_constants.h
+[11/143] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/143] Generating include/generated/zephyr/offsets.h
+[13/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[14/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[15/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[16/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[18/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[19/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[21/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[22/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[23/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[25/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[26/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[28/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[31/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/143] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/143] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[35/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[38/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[39/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[41/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[42/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[43/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[44/143] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[45/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[46/143] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[47/143] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[48/143] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[49/143] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[50/143] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[51/143] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[52/143] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[53/143] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[54/143] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[55/143] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[56/143] Generating linker_zephyr_pre0.cmd
+[57/143] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[58/143] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[59/143] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[60/143] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[61/143] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[62/143] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[63/143] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[64/143] Linking C static library zephyr/arch/common/libarch__common.a
+[65/143] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[66/143] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[67/143] Building C object CMakeFiles/app.dir/src/fcb_test_append.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_append.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_append.c.obj -MF CMakeFiles/app.dir/src/fcb_test_append.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_append.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[68/143] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[69/143] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[70/143] Building C object CMakeFiles/app.dir/src/fcb_test_empty_walk.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_empty_walk.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_empty_walk.c.obj -MF CMakeFiles/app.dir/src/fcb_test_empty_walk.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_empty_walk.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_empty_walk.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_empty_walk.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[71/143] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[72/143] Building C object CMakeFiles/app.dir/src/fcb_test_append_fill.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_append_fill.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_append_fill.c.obj -MF CMakeFiles/app.dir/src/fcb_test_append_fill.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_append_fill.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_fill.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_fill.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[73/143] Building C object CMakeFiles/app.dir/src/fcb_test_last_of_n.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_last_of_n.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_last_of_n.c.obj -MF CMakeFiles/app.dir/src/fcb_test_last_of_n.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_last_of_n.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_last_of_n.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_last_of_n.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[74/143] Building C object CMakeFiles/app.dir/src/fcb_test_reset.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_reset.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_reset.c.obj -MF CMakeFiles/app.dir/src/fcb_test_reset.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_reset.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_reset.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_reset.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[75/143] Building C object CMakeFiles/app.dir/src/fcb_test_init.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_init.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_init.c.obj -MF CMakeFiles/app.dir/src/fcb_test_init.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_init.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_init.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_init.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[76/143] Building C object CMakeFiles/app.dir/src/fcb_test_multiple_scratch.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_multiple_scratch.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_multiple_scratch.c.obj -MF CMakeFiles/app.dir/src/fcb_test_multiple_scratch.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_multiple_scratch.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_multiple_scratch.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_multiple_scratch.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[77/143] Building C object CMakeFiles/app.dir/src/fcb_test_crc_disabled_after_enabled.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_crc_disabled_after_enabled.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_crc_disabled_after_enabled.c.obj -MF CMakeFiles/app.dir/src/fcb_test_crc_disabled_after_enabled.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_crc_disabled_after_enabled.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_crc_disabled_after_enabled.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_crc_disabled_after_enabled.c:7:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[78/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_getnext.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_getnext.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_getnext.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_getnext.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_getnext.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c:11:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c: In function ‘fcb_getnext_in_sector’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c:23:49: error: ‘FCB_CRC_SZ’ undeclared (first use in this function)
+   23 |                           fcb_len_in_flash(fcb, FCB_CRC_SZ);
+      |                                                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c:23:49: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c: In function ‘fcb_getnext_nolock’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c:58:65: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   58 |                 loc->fe_elem_off = fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area));
+      |                                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_getnext.c:92:73: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   92 |                         loc->fe_elem_off = fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area));
+      |                                                                         ^~~~~~
+[79/143] Building C object CMakeFiles/app.dir/src/main.c.obj
+FAILED: CMakeFiles/app.dir/src/main.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/main.c.obj -MF CMakeFiles/app.dir/src/main.c.obj.d -o CMakeFiles/app.dir/src/main.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/main.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/main.c:11:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[80/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_rotate.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_rotate.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_rotate.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_rotate.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_rotate.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_rotate.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_rotate.c:9:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_rotate.c: In function ‘fcb_rotate’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_rotate.c:38:74: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   38 |                 fcb->f_active.fe_elem_off = fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area));
+      |                                                                          ^~~~~~
+[81/143] Building C object CMakeFiles/app.dir/src/fcb_test_len.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_len.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_len.c.obj -MF CMakeFiles/app.dir/src/fcb_test_len.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_len.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_len.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_len.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_len.c: In function ‘fcb_test_with_2sectors_set_test_fcb_len’:
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_len.c:22:22: warning: implicit declaration of function ‘fcb_put_len’; did you mean ‘fcb_get_align’? [-Wimplicit-function-declaration]
+   22 |                 rc = fcb_put_len(&fcb, buf, len);
+      |                      ^~~~~~~~~~~
+      |                      fcb_get_align
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_len.c:25:23: warning: implicit declaration of function ‘fcb_get_len’; did you mean ‘fcb_get_align’? [-Wimplicit-function-declaration]
+   25 |                 rc2 = fcb_get_len(&fcb, buf, &len2);
+      |                       ^~~~~~~~~~~
+      |                       fcb_get_align
+[82/143] Building C object CMakeFiles/app.dir/src/fcb_test_append_too_big.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_append_too_big.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_append_too_big.c.obj -MF CMakeFiles/app.dir/src/fcb_test_append_too_big.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_append_too_big.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/atomic.h:18,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/kernel_includes.h:25,
+                 from /home/huyj/zephyr-workspace/zephyr/include/zephyr/kernel.h:17,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:40,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:13:
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c: In function ‘fcb_test_with_2sectors_set_test_fcb_append_too_big’:
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:38:61: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   38 |                              + fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area))
+      |                                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:374:33: note: in definition of macro ‘Z_INTERNAL_MIN’
+  374 | #define Z_INTERNAL_MIN(a, b) (((a) < (b)) ? (a) : (b))
+      |                                 ^
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:37:23: note: in expansion of macro ‘MIN’
+   37 |                 len = MIN(FCB_MAX_LEN
+      |                       ^~~
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:39:54: error: ‘FCB_CRC_SZ’ undeclared (first use in this function)
+   39 |                              + fcb_len_in_flash(fcb, FCB_CRC_SZ)
+      |                                                      ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:374:33: note: in definition of macro ‘Z_INTERNAL_MIN’
+  374 | #define Z_INTERNAL_MIN(a, b) (((a) < (b)) ? (a) : (b))
+      |                                 ^
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:37:23: note: in expansion of macro ‘MIN’
+   37 |                 len = MIN(FCB_MAX_LEN
+      |                       ^~~
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:39:54: note: each undeclared identifier is reported only once for each function it appears in
+   39 |                              + fcb_len_in_flash(fcb, FCB_CRC_SZ)
+      |                                                      ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:374:33: note: in definition of macro ‘Z_INTERNAL_MIN’
+  374 | #define Z_INTERNAL_MIN(a, b) (((a) < (b)) ? (a) : (b))
+      |                                 ^
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:37:23: note: in expansion of macro ‘MIN’
+   37 |                 len = MIN(FCB_MAX_LEN
+      |                       ^~~
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:38:61: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   38 |                              + fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area))
+      |                                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/util.h:374:46: note: in definition of macro ‘Z_INTERNAL_MIN’
+  374 | #define Z_INTERNAL_MIN(a, b) (((a) < (b)) ? (a) : (b))
+      |                                              ^
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:37:23: note: in expansion of macro ‘MIN’
+   37 |                 len = MIN(FCB_MAX_LEN
+      |                       ^~~
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:53:54: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   53 |                 len -=  fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area));
+      |                                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_append_too_big.c:58:57: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   58 |                 overhead = fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area))
+      |                                                         ^~~~~~
+[83/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_elem_info.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_elem_info.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_elem_info.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_elem_info.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_elem_info.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c:11:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c: In function ‘fcb_elem_crc8’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c:22:25: error: ‘FCB_TMP_BUF_SZ’ undeclared (first use in this function)
+   22 |         uint8_t tmp_str[FCB_TMP_BUF_SZ];
+      |                         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c:22:25: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c:40:15: warning: implicit declaration of function ‘fcb_get_len’; did you mean ‘fcb_get_align’? [-Wimplicit-function-declaration]
+   40 |         cnt = fcb_get_len(_fcb, tmp_str, &len);
+      |               ^~~~~~~~~~~
+      |               fcb_get_align
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_elem_info.c:22:17: warning: unused variable ‘tmp_str’ [-Wunused-variable]
+   22 |         uint8_t tmp_str[FCB_TMP_BUF_SZ];
+      |                 ^~~~~~~
+[84/143] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[85/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_walk.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_walk.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_walk.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_walk.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_walk.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_walk.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_walk.c:9:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[86/143] Building C object CMakeFiles/app.dir/src/fcb_test_rotate.c.obj
+FAILED: CMakeFiles/app.dir/src/fcb_test_rotate.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/fcb_test_rotate.c.obj -MF CMakeFiles/app.dir/src/fcb_test_rotate.c.obj.d -o CMakeFiles/app.dir/src/fcb_test_rotate.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_rotate.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test.h:16,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/src/fcb_test_rotate.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+[87/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_append.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_append.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_append.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_append.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb_append.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:12:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c: In function ‘fcb_append_to_scratch’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:54:66: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   54 |         fcb->f_active.fe_elem_off = fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area));
+      |                                                                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c: In function ‘fcb_append’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:71:15: warning: implicit declaration of function ‘fcb_put_len’; did you mean ‘fcb_get_align’? [-Wimplicit-function-declaration]
+   71 |         cnt = fcb_put_len(fcb, tmp_str, len);
+      |               ^~~~~~~~~~~
+      |               fcb_get_align
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:76:66: error: ‘FCB_CRC_SZ’ undeclared (first use in this function)
+   76 |         len = fcb_len_in_flash(fcb, len) + fcb_len_in_flash(fcb, FCB_CRC_SZ);
+      |                                                                  ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:76:66: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:88:54: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   88 |                         fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area)) + len + cnt)) {
+      |                                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_append.c:97:74: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+   97 |                 fcb->f_active.fe_elem_off = fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area));
+      |                                                                          ^~~~~~
+[88/143] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/fs/fcb/fcb.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:8:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:1:54: error: unknown type name ‘uint16_t’
+    1 | static inline int fcb_len_in_flash(struct fcb *fcbp, uint16_t len)
+      |                                                      ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:1:1: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | static inline int fcb_len_in_flash(struct fcb *fcbp, uint16_t len)
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:7:54: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | const struct flash_area *fcb_open_flash(const struct fcb *fcbp);
+      |                                                      ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:8:1: error: unknown type name ‘uint8_t’
+    8 | uint8_t fcb_get_align(const struct fcb *fcbp);
+      | ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:8:1: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:8:36: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+    8 | uint8_t fcb_get_align(const struct fcb *fcbp);
+      |                                    ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:9:59: warning: ‘struct flash_sector’ declared inside parameter list will not be visible outside of this definition or declaration
+    9 | int fcb_erase_sector(const struct fcb *fcbp, const struct flash_sector *sector);
+      |                                                           ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:9:35: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+    9 | int fcb_erase_sector(const struct fcb *fcbp, const struct flash_sector *sector);
+      |                                   ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:11:52: warning: ‘struct fcb_entry’ declared inside parameter list will not be visible outside of this definition or declaration
+   11 | int fcb_getnext_in_sector(struct fcb *fcbp, struct fcb_entry *loc);
+      |                                                    ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:11:34: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+   11 | int fcb_getnext_in_sector(struct fcb *fcbp, struct fcb_entry *loc);
+      |                                  ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:12:48: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+   12 | struct flash_sector *fcb_getnext_sector(struct fcb *fcbp, struct flash_sector *sector);
+      |                                                ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:13:49: warning: ‘struct fcb_entry’ declared inside parameter list will not be visible outside of this definition or declaration
+   13 | int fcb_getnext_nolock(struct fcb *fcbp, struct fcb_entry *loc);
+      |                                                 ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:13:31: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+   13 | int fcb_getnext_nolock(struct fcb *fcbp, struct fcb_entry *loc);
+      |                               ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:15:44: warning: ‘struct fcb_entry’ declared inside parameter list will not be visible outside of this definition or declaration
+   15 | int fcb_elem_info(struct fcb *fcbp, struct fcb_entry *loc);
+      |                                            ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:15:26: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+   15 | int fcb_elem_info(struct fcb *fcbp, struct fcb_entry *loc);
+      |                          ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:16:65: error: unknown type name ‘uint8_t’
+   16 | int fcb_elem_endmarker(struct fcb *fcbp, struct fcb_entry *loc, uint8_t *crc8p);
+      |                                                                 ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:16:65: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:18:72: error: unknown type name ‘uint16_t’
+   18 | int fcb_sector_hdr_init(struct fcb *fcbp, struct flash_sector *sector, uint16_t id);
+      |                                                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:18:72: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:32: warning: ‘struct fcb’ declared inside parameter list will not be visible outside of this definition or declaration
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                                ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:25:2: error: #endif without #if
+   25 | #endif /* __FCB_PRIV_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:19:9: error: conflicting types for ‘fcb_get_align’; have ‘uint8_t(const struct fcb *)’ {aka ‘unsigned char(const struct fcb *)’}
+   19 | uint8_t fcb_get_align(const struct fcb *fcbp)
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:8:9: note: previous declaration of ‘fcb_get_align’ with type ‘int(const struct fcb *)’
+    8 | uint8_t fcb_get_align(const struct fcb *fcbp);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:76:5: error: conflicting types for ‘fcb_erase_sector’; have ‘int(const struct fcb *, const struct flash_sector *)’
+   76 | int fcb_erase_sector(const struct fcb *fcbp, const struct flash_sector *sector)
+      |     ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:9:5: note: previous declaration of ‘fcb_erase_sector’ with type ‘int(const struct fcb *, const struct flash_sector *)’
+    9 | int fcb_erase_sector(const struct fcb *fcbp, const struct flash_sector *sector);
+      |     ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: In function ‘fcb_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:100:30: error: storage size of ‘fda’ isn’t known
+  100 |         struct fcb_disk_area fda;
+      |                              ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:123:42: warning: passing argument 1 of ‘fcb_sector_hdr_read’ from incompatible pointer type [-Wincompatible-pointer-types]
+  123 |                 rc = fcb_sector_hdr_read(fcbp, sector, &fda);
+      |                                          ^~~~
+      |                                          |
+      |                                          struct fcb *
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:37: note: expected ‘struct fcb *’ but argument is of type ‘struct fcb *’
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |                         ~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:135:21: warning: implicit declaration of function ‘FCB_ID_GT’ [-Wimplicit-function-declaration]
+  135 |                 if (FCB_ID_GT(fda.fd_id, newest)) {
+      |                     ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:148:22: warning: implicit declaration of function ‘fcb_sector_hdr_init’; did you mean ‘fcb_sector_hdr_read’? [-Wimplicit-function-declaration]
+  148 |                 rc = fcb_sector_hdr_init(fcbp, oldest_sector, 0);
+      |                      ^~~~~~~~~~~~~~~~~~~
+      |                      fcb_sector_hdr_read
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:157:38: warning: implicit declaration of function ‘fcb_len_in_flash’; did you mean ‘fcb_open_flash’? [-Wimplicit-function-declaration]
+  157 |         fcbp->f_active.fe_elem_off = fcb_len_in_flash(fcbp, sizeof(struct fcb_disk_area));
+      |                                      ^~~~~~~~~~~~~~~~
+      |                                      fcb_open_flash
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:157:68: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+  157 |         fcbp->f_active.fe_elem_off = fcb_len_in_flash(fcbp, sizeof(struct fcb_disk_area));
+      |                                                                    ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:161:44: warning: passing argument 1 of ‘fcb_getnext_in_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+  161 |                 rc = fcb_getnext_in_sector(fcbp, &fcbp->f_active);
+      |                                            ^~~~
+      |                                            |
+      |                                            struct fcb *
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:11:39: note: expected ‘struct fcb *’ but argument is of type ‘struct fcb *’
+   11 | int fcb_getnext_in_sector(struct fcb *fcbp, struct fcb_entry *loc);
+      |                           ~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:161:50: warning: passing argument 2 of ‘fcb_getnext_in_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+  161 |                 rc = fcb_getnext_in_sector(fcbp, &fcbp->f_active);
+      |                                                  ^~~~~~~~~~~~~~~
+      |                                                  |
+      |                                                  struct fcb_entry *
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:11:63: note: expected ‘struct fcb_entry *’ but argument is of type ‘struct fcb_entry *’
+   11 | int fcb_getnext_in_sector(struct fcb *fcbp, struct fcb_entry *loc);
+      |                                             ~~~~~~~~~~~~~~~~~~^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:100:30: warning: unused variable ‘fda’ [-Wunused-variable]
+  100 |         struct fcb_disk_area fda;
+      |                              ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: In function ‘fcb_free_sector_cnt’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:181:41: warning: passing argument 1 of ‘fcb_getnext_sector’ from incompatible pointer type [-Wincompatible-pointer-types]
+  181 |                 fa = fcb_getnext_sector(fcbp, fa);
+      |                                         ^~~~
+      |                                         |
+      |                                         struct fcb *
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:12:53: note: expected ‘struct fcb *’ but argument is of type ‘struct fcb *’
+   12 | struct flash_sector *fcb_getnext_sector(struct fcb *fcbp, struct flash_sector *sector);
+      |                                         ~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: In function ‘fcb_is_empty’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:192:77: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+  192 |                 fcbp->f_active.fe_elem_off == fcb_len_in_flash(fcbp, sizeof(struct fcb_disk_area)));
+      |                                                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:255:5: error: conflicting types for ‘fcb_sector_hdr_init’; have ‘int(struct fcb *, struct flash_sector *, uint16_t)’ {aka ‘int(struct fcb *, struct flash_sector *, short unsigned int)’}
+  255 | int fcb_sector_hdr_init(struct fcb *fcbp, struct flash_sector *sector, uint16_t id)
+      |     ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:256:1: note: an argument type that has a default promotion cannot match an empty parameter name list declaration
+  256 | {
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:148:22: note: previous implicit declaration of ‘fcb_sector_hdr_init’ with type ‘int()’
+  148 |                 rc = fcb_sector_hdr_init(fcbp, oldest_sector, 0);
+      |                      ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: In function ‘fcb_sector_hdr_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:257:30: error: storage size of ‘fda’ isn’t known
+  257 |         struct fcb_disk_area fda;
+      |                              ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:260:24: warning: implicit declaration of function ‘fcb_flash_magic’; did you mean ‘fcb_flash_write’? [-Wimplicit-function-declaration]
+  260 |         fda.fd_magic = fcb_flash_magic(fcbp);
+      |                        ^~~~~~~~~~~~~~~
+      |                        fcb_flash_write
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:257:30: warning: unused variable ‘fda’ [-Wunused-variable]
+  257 |         struct fcb_disk_area fda;
+      |                              ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:278:79: warning: ‘struct fcb_disk_area’ declared inside parameter list will not be visible outside of this definition or declaration
+  278 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap)
+      |                                                                               ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:278:5: error: conflicting types for ‘fcb_sector_hdr_read’; have ‘int(struct fcb *, struct flash_sector *, struct fcb_disk_area *)’
+  278 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap)
+      |     ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb_priv.h:19:5: note: previous declaration of ‘fcb_sector_hdr_read’ with type ‘int(struct fcb *, struct flash_sector *, struct fcb_disk_area *)’
+   19 | int fcb_sector_hdr_read(struct fcb *fcbp, struct flash_sector *sector, struct fcb_disk_area *fdap);
+      |     ^~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: In function ‘fcb_sector_hdr_read’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:280:30: error: storage size of ‘fda’ isn’t known
+  280 |         struct fcb_disk_area fda;
+      |                              ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:286:58: error: invalid application of ‘sizeof’ to incomplete type ‘struct fcb_disk_area’
+  286 |         rc = fcb_flash_read(fcbp, sector, 0, fdap, sizeof(*fdap));
+      |                                                          ^
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:290:17: error: invalid use of undefined type ‘struct fcb_disk_area’
+  290 |         if (fdap->fd_magic == MK32(fcbp->f_erase_value)) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:290:31: warning: implicit declaration of function ‘MK32’ [-Wimplicit-function-declaration]
+  290 |         if (fdap->fd_magic == MK32(fcbp->f_erase_value)) {
+      |                               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:293:17: error: invalid use of undefined type ‘struct fcb_disk_area’
+  293 |         if (fdap->fd_magic != fcb_flash_magic(fcbp)) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:280:30: warning: unused variable ‘fda’ [-Wunused-variable]
+  280 |         struct fcb_disk_area fda;
+      |                              ^~~
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c: In function ‘fcb_is_empty’:
+/home/huyj/zephyr-workspace/zephyr/subsys/fs/fcb/fcb.c:193:1: warning: control reaches end of non-void function [-Wreturn-type]
+  193 | }
+      | ^
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: STDOUT_CONSOLE (defined at lib/libc/Kconfig:169) was assigned the value 'y' but got the
+value 'n'. Check these unsatisfied dependencies: (!(NATIVE_LIBRARY && EXTERNAL_LIBC)) (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_STDOUT_CONSOLE and/or look up
+STDOUT_CONSOLE in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/fcb/build
+
+=== RC ===
+1

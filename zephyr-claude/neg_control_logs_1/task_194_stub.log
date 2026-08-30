@@ -1,0 +1,526 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build
+-- west build: building application
+[1/114] Preparing syscall dependency handling
+
+[2/114] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/114] Generating misc/generated/syscalls_subdirs.trigger
+[4/114] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/114] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/114] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/114] Generating include/generated/zephyr/driver-validation.h
+[8/114] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/114] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/114] Generating ../../include/generated/zephyr/heap_constants.h
+[11/114] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/114] Generating include/generated/zephyr/offsets.h
+[13/114] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/114] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/mock/modem_backend_mock.c.obj
+[15/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[20/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[21/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[22/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[23/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[24/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[25/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[27/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/114] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/114] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[39/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/114] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/114] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/114] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/114] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[46/114] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[47/114] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[48/114] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[49/114] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[50/114] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[51/114] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/114] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[53/114] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/114] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/114] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/114] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/114] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/114] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/114] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/114] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[61/114] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/114] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[63/114] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_pipe.c.obj
+[64/114] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[65/114] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[66/114] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[67/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[68/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[69/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[70/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[71/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[72/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[73/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[74/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[75/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[76/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[77/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[78/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[79/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[80/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[81/114] Linking C static library app/libapp.a
+[82/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[83/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[84/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[85/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[86/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[87/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[88/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[89/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[90/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[92/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[93/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[94/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[96/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[97/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[98/114] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[99/114] Linking C static library zephyr/arch/common/libarch__common.a
+[100/114] Generating linker_zephyr_pre0.cmd
+[101/114] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_chat.c.obj
+FAILED: zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_chat.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -O0 -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_chat.c.obj -MF zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_chat.c.obj.d -o zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_chat.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:71: warning: ‘struct modem_chat_script’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+      |                                                                       ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:40: warning: ‘struct modem_chat’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+      |                                        ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:7:65: warning: ‘struct modem_chat_script’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | int modem_chat_run_script(struct modem_chat *chat, const struct modem_chat_script *script)
+      |                                                                 ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:7:34: warning: ‘struct modem_chat’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | int modem_chat_run_script(struct modem_chat *chat, const struct modem_chat_script *script)
+      |                                  ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_run_script’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:11:43: warning: passing argument 1 of ‘modem_chat_run_script_async’ from incompatible pointer type [-Wincompatible-pointer-types]
+   11 |         ret = modem_chat_run_script_async(chat, script);
+      |                                           ^~~~
+      |                                           |
+      |                                           struct modem_chat *
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:52: note: expected ‘struct modem_chat *’ but argument is of type ‘struct modem_chat *’
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+      |                                 ~~~~~~~~~~~~~~~~~~~^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:11:49: warning: passing argument 2 of ‘modem_chat_run_script_async’ from incompatible pointer type [-Wincompatible-pointer-types]
+   11 |         ret = modem_chat_run_script_async(chat, script);
+      |                                                 ^~~~~~
+      |                                                 |
+      |                                                 const struct modem_chat_script *
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:90: note: expected ‘const struct modem_chat_script *’ but argument is of type ‘const struct modem_chat_script *’
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+      |                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:16:15: warning: implicit declaration of function ‘k_sem_take’ [-Wimplicit-function-declaration]
+   16 |         ret = k_sem_take(&chat->script_stopped_sem, K_FOREVER);
+      |               ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:16:31: error: invalid use of undefined type ‘struct modem_chat’
+   16 |         ret = k_sem_take(&chat->script_stopped_sem, K_FOREVER);
+      |                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:16:53: error: ‘K_FOREVER’ undeclared (first use in this function)
+   16 |         ret = k_sem_take(&chat->script_stopped_sem, K_FOREVER);
+      |                                                     ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:16:53: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:21:21: error: invalid use of undefined type ‘struct modem_chat’
+   21 |         return (chat->script_result == MODEM_CHAT_SCRIPT_RESULT_SUCCESS) ? 0 : -EAGAIN;
+      |                     ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:21:40: error: ‘MODEM_CHAT_SCRIPT_RESULT_SUCCESS’ undeclared (first use in this function)
+   21 |         return (chat->script_result == MODEM_CHAT_SCRIPT_RESULT_SUCCESS) ? 0 : -EAGAIN;
+      |                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:21:81: error: ‘EAGAIN’ undeclared (first use in this function)
+   21 |         return (chat->script_result == MODEM_CHAT_SCRIPT_RESULT_SUCCESS) ? 0 : -EAGAIN;
+      |                                                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:24:37: warning: ‘struct modem_chat’ declared inside parameter list will not be visible outside of this definition or declaration
+   24 | void modem_chat_script_abort(struct modem_chat *chat)
+      |                                     ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_script_abort’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:26:9: warning: implicit declaration of function ‘modem_work_submit’ [-Wimplicit-function-declaration]
+   26 |         modem_work_submit(&chat->script_abort_work);
+      |         ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:26:32: error: invalid use of undefined type ‘struct modem_chat’
+   26 |         modem_work_submit(&chat->script_abort_work);
+      |                                ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:29:32: warning: ‘struct modem_chat’ declared inside parameter list will not be visible outside of this definition or declaration
+   29 | void modem_chat_release(struct modem_chat *chat)
+      |                                ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_release’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:31:28: error: storage size of ‘sync’ isn’t known
+   31 |         struct k_work_sync sync;
+      |                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:33:17: error: invalid use of undefined type ‘struct modem_chat’
+   33 |         if (chat->pipe) {
+      |                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:34:17: warning: implicit declaration of function ‘modem_pipe_release’; did you mean ‘modem_chat_release’? [-Wimplicit-function-declaration]
+   34 |                 modem_pipe_release(chat->pipe);
+      |                 ^~~~~~~~~~~~~~~~~~
+      |                 modem_chat_release
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:34:40: error: invalid use of undefined type ‘struct modem_chat’
+   34 |                 modem_pipe_release(chat->pipe);
+      |                                        ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:37:9: warning: implicit declaration of function ‘k_work_cancel_sync’ [-Wimplicit-function-declaration]
+   37 |         k_work_cancel_sync(&chat->script_run_work, &sync);
+      |         ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:37:33: error: invalid use of undefined type ‘struct modem_chat’
+   37 |         k_work_cancel_sync(&chat->script_run_work, &sync);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:38:33: error: invalid use of undefined type ‘struct modem_chat’
+   38 |         k_work_cancel_sync(&chat->script_abort_work, &sync);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:39:33: error: invalid use of undefined type ‘struct modem_chat’
+   39 |         k_work_cancel_sync(&chat->receive_work, &sync);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:40:33: error: invalid use of undefined type ‘struct modem_chat’
+   40 |         k_work_cancel_sync(&chat->script_send_work, &sync);
+      |                                 ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:42:13: error: invalid use of undefined type ‘struct modem_chat’
+   42 |         chat->pipe = NULL;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:42:22: error: ‘NULL’ undeclared (first use in this function)
+   42 |         chat->pipe = NULL;
+      |                      ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:43:13: error: invalid use of undefined type ‘struct modem_chat’
+   43 |         chat->receive_buf_len = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:44:13: error: invalid use of undefined type ‘struct modem_chat’
+   44 |         chat->work_buf_len = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:45:13: error: invalid use of undefined type ‘struct modem_chat’
+   45 |         chat->argc = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:46:13: error: invalid use of undefined type ‘struct modem_chat’
+   46 |         chat->script = NULL;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:47:13: error: invalid use of undefined type ‘struct modem_chat’
+   47 |         chat->script_chat_it = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:48:9: warning: implicit declaration of function ‘atomic_set’ [-Wimplicit-function-declaration]
+   48 |         atomic_set(&chat->script_state, 0);
+      |         ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:48:25: error: invalid use of undefined type ‘struct modem_chat’
+   48 |         atomic_set(&chat->script_state, 0);
+      |                         ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:49:13: error: invalid use of undefined type ‘struct modem_chat’
+   49 |         chat->script_result = MODEM_CHAT_SCRIPT_RESULT_ABORT;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:49:31: error: ‘MODEM_CHAT_SCRIPT_RESULT_ABORT’ undeclared (first use in this function)
+   49 |         chat->script_result = MODEM_CHAT_SCRIPT_RESULT_ABORT;
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:50:9: warning: implicit declaration of function ‘k_sem_reset’ [-Wimplicit-function-declaration]
+   50 |         k_sem_reset(&chat->script_stopped_sem);
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:50:26: error: invalid use of undefined type ‘struct modem_chat’
+   50 |         k_sem_reset(&chat->script_stopped_sem);
+      |                          ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:51:13: error: invalid use of undefined type ‘struct modem_chat’
+   51 |         chat->script_send_state = MODEM_CHAT_SCRIPT_SEND_STATE_IDLE;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:51:35: error: ‘MODEM_CHAT_SCRIPT_SEND_STATE_IDLE’ undeclared (first use in this function)
+   51 |         chat->script_send_state = MODEM_CHAT_SCRIPT_SEND_STATE_IDLE;
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:52:13: error: invalid use of undefined type ‘struct modem_chat’
+   52 |         chat->script_send_pos = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:53:13: error: invalid use of undefined type ‘struct modem_chat’
+   53 |         chat->parse_match = NULL;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:54:13: error: invalid use of undefined type ‘struct modem_chat’
+   54 |         chat->parse_match_len = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:55:13: error: invalid use of undefined type ‘struct modem_chat’
+   55 |         chat->parse_arg_len = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:56:13: error: invalid use of undefined type ‘struct modem_chat’
+   56 |         chat->matches[MODEM_CHAT_MATCHES_INDEX_ABORT] = NULL;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:56:23: error: ‘MODEM_CHAT_MATCHES_INDEX_ABORT’ undeclared (first use in this function)
+   56 |         chat->matches[MODEM_CHAT_MATCHES_INDEX_ABORT] = NULL;
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:57:13: error: invalid use of undefined type ‘struct modem_chat’
+   57 |         chat->matches_size[MODEM_CHAT_MATCHES_INDEX_ABORT] = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:58:13: error: invalid use of undefined type ‘struct modem_chat’
+   58 |         chat->matches[MODEM_CHAT_MATCHES_INDEX_RESPONSE] = NULL;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:58:23: error: ‘MODEM_CHAT_MATCHES_INDEX_RESPONSE’ undeclared (first use in this function)
+   58 |         chat->matches[MODEM_CHAT_MATCHES_INDEX_RESPONSE] = NULL;
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:59:13: error: invalid use of undefined type ‘struct modem_chat’
+   59 |         chat->matches_size[MODEM_CHAT_MATCHES_INDEX_RESPONSE] = 0;
+      |             ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:31:28: warning: unused variable ‘sync’ [-Wunused-variable]
+   31 |         struct k_work_sync sync;
+      |                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:62:35: warning: ‘struct modem_chat_match’ declared inside parameter list will not be visible outside of this definition or declaration
+   62 | void modem_chat_match_init(struct modem_chat_match *chat_match)
+      |                                   ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_match_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:64:9: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+   64 |         memset(chat_match, 0, sizeof(struct modem_chat_match));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+  +++ |+#include <string.h>
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:64:9: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+   64 |         memset(chat_match, 0, sizeof(struct modem_chat_match));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:64:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:64:38: error: invalid application of ‘sizeof’ to incomplete type ‘struct modem_chat_match’
+   64 |         memset(chat_match, 0, sizeof(struct modem_chat_match));
+      |                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:67:39: warning: ‘struct modem_chat_match’ declared inside parameter list will not be visible outside of this definition or declaration
+   67 | int modem_chat_match_set_match(struct modem_chat_match *chat_match, const char *match)
+      |                                       ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_match_set_match’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:69:9: error: unknown type name ‘size_t’
+   69 |         size_t size;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:69:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:71:16: warning: implicit declaration of function ‘strnlen’ [-Wimplicit-function-declaration]
+   71 |         size = strnlen(match, UINT8_MAX + 1);
+      |                ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:71:31: error: ‘UINT8_MAX’ undeclared (first use in this function)
+   71 |         size = strnlen(match, UINT8_MAX + 1);
+      |                               ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:1: note: ‘UINT8_MAX’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:74:25: error: ‘ENOMEM’ undeclared (first use in this function)
+   74 |                 return -ENOMEM;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:77:19: error: invalid use of undefined type ‘struct modem_chat_match’
+   77 |         chat_match->match = match;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:78:19: error: invalid use of undefined type ‘struct modem_chat_match’
+   78 |         chat_match->match_size = (uint8_t)size;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:78:35: error: ‘uint8_t’ undeclared (first use in this function)
+   78 |         chat_match->match_size = (uint8_t)size;
+      |                                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:78:35: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:78:43: error: expected ‘;’ before ‘size’
+   78 |         chat_match->match_size = (uint8_t)size;
+      |                                           ^~~~
+      |                                           ;
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:82:44: warning: ‘struct modem_chat_match’ declared inside parameter list will not be visible outside of this definition or declaration
+   82 | int modem_chat_match_set_separators(struct modem_chat_match *chat_match, const char *separators)
+      |                                            ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_match_set_separators’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:84:9: error: unknown type name ‘size_t’
+   84 |         size_t size;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:84:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:86:36: error: ‘UINT8_MAX’ undeclared (first use in this function)
+   86 |         size = strnlen(separators, UINT8_MAX + 1);
+      |                                    ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:86:36: note: ‘UINT8_MAX’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:89:25: error: ‘ENOMEM’ undeclared (first use in this function)
+   89 |                 return -ENOMEM;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:92:19: error: invalid use of undefined type ‘struct modem_chat_match’
+   92 |         chat_match->separators = separators;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:93:19: error: invalid use of undefined type ‘struct modem_chat_match’
+   93 |         chat_match->separators_size = (uint8_t)size;
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:93:40: error: ‘uint8_t’ undeclared (first use in this function)
+   93 |         chat_match->separators_size = (uint8_t)size;
+      |                                        ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:93:40: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:93:48: error: expected ‘;’ before ‘size’
+   93 |         chat_match->separators_size = (uint8_t)size;
+      |                                                ^~~~
+      |                                                ;
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:98:36: error: unknown type name ‘modem_chat_match_callback’
+   98 |                                    modem_chat_match_callback callback)
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:103:67: error: unknown type name ‘bool’
+  103 | void modem_chat_match_set_partial(struct modem_chat_match *match, bool partial)
+      |                                                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int modem_chat_run_script_async(struct modem_chat *chat, const struct modem_chat_script *script)
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:108:72: error: unknown type name ‘bool’
+  108 | void modem_chat_match_enable_wildcards(struct modem_chat_match *match, bool enable)
+      |                                                                        ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:108:72: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:113:41: warning: ‘struct modem_chat_script_chat’ declared inside parameter list will not be visible outside of this definition or declaration
+  113 | void modem_chat_script_chat_init(struct modem_chat_script_chat *script_chat)
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_script_chat_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:115:9: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+  115 |         memset(script_chat, 0, sizeof(struct modem_chat_script_chat));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:115:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:115:39: error: invalid application of ‘sizeof’ to incomplete type ‘struct modem_chat_script_chat’
+  115 |         memset(script_chat, 0, sizeof(struct modem_chat_script_chat));
+      |                                       ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:118:47: warning: ‘struct modem_chat_script_chat’ declared inside parameter list will not be visible outside of this definition or declaration
+  118 | int modem_chat_script_chat_set_request(struct modem_chat_script_chat *script_chat,
+      |                                               ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_script_chat_set_request’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:121:9: error: unknown type name ‘size_t’
+  121 |         size_t size;
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:121:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:123:33: error: ‘UINT16_MAX’ undeclared (first use in this function)
+  123 |         size = strnlen(request, UINT16_MAX + 1);
+      |                                 ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:123:33: note: ‘UINT16_MAX’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:126:25: error: ‘ENOMEM’ undeclared (first use in this function)
+  126 |                 return -ENOMEM;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:129:20: error: invalid use of undefined type ‘struct modem_chat_script_chat’
+  129 |         script_chat->request = request;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:130:20: error: invalid use of undefined type ‘struct modem_chat_script_chat’
+  130 |         script_chat->request_size = (uint16_t)size;
+      |                    ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:130:38: error: ‘uint16_t’ undeclared (first use in this function)
+  130 |         script_chat->request_size = (uint16_t)size;
+      |                                      ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:130:38: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:130:47: error: expected ‘;’ before ‘size’
+  130 |         script_chat->request_size = (uint16_t)size;
+      |                                               ^~~~
+      |                                               ;
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:136:49: error: unknown type name ‘uint16_t’
+  136 |                                                 uint16_t response_matches_size)
+      |                                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:136:49: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:148:41: error: unknown type name ‘uint16_t’
+  148 |                                         uint16_t timeout)
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:148:41: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:153:36: warning: ‘struct modem_chat_script’ declared inside parameter list will not be visible outside of this definition or declaration
+  153 | void modem_chat_script_init(struct modem_chat_script *script)
+      |                                    ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_script_init’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:155:9: warning: incompatible implicit declaration of built-in function ‘memset’ [-Wbuiltin-declaration-mismatch]
+  155 |         memset(script, 0, sizeof(struct modem_chat_script));
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:155:9: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:155:34: error: invalid application of ‘sizeof’ to incomplete type ‘struct modem_chat_script’
+  155 |         memset(script, 0, sizeof(struct modem_chat_script));
+      |                                  ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:156:15: error: invalid use of undefined type ‘struct modem_chat_script’
+  156 |         script->name = "";
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:159:40: warning: ‘struct modem_chat_script’ declared inside parameter list will not be visible outside of this definition or declaration
+  159 | void modem_chat_script_set_name(struct modem_chat_script *script, const char *name)
+      |                                        ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_script_set_name’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:161:15: error: invalid use of undefined type ‘struct modem_chat_script’
+  161 |         script->name = name;
+      |               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:166:40: error: unknown type name ‘uint16_t’
+  166 |                                        uint16_t script_chats_size)
+      |                                        ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:166:40: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:179:41: error: unknown type name ‘uint16_t’
+  179 |                                         uint16_t abort_matches_size)
+      |                                         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:179:41: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:191:37: error: unknown type name ‘modem_chat_script_callback’
+  191 |                                     modem_chat_script_callback callback)
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:196:70: error: unknown type name ‘uint32_t’
+  196 | void modem_chat_script_set_timeout(struct modem_chat_script *script, uint32_t timeout_s)
+      |                                                                      ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:196:70: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c: In function ‘modem_chat_run_script’:
+/home/huyj/zephyr-workspace/zephyr/subsys/modem/modem_chat.c:22:1: warning: control reaches end of non-void function [-Wreturn-type]
+   22 | }
+      | ^
+[102/114] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[103/114] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[104/114] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[105/114] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[106/114] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[107/114] Linking C static library zephyr/libzephyr.a
+[108/114] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[109/114] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[110/114] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: subsys__modem__backends
+
+  Excluding target from build.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_chat/build
+
+=== RC ===
+1

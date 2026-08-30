@@ -1,0 +1,609 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build
+-- west build: building application
+[1/144] Preparing syscall dependency handling
+
+[2/144] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/144] Generating misc/generated/syscalls_subdirs.trigger
+[4/144] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/144] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/144] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/144] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/144] Generating include/generated/zephyr/driver-validation.h
+[9/144] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/144] Generating ../../include/generated/zephyr/heap_constants.h
+[11/144] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/144] Generating include/generated/zephyr/offsets.h
+[13/144] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[20/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[22/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[23/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[24/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+[26/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/144] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/kernel_shell.c.obj
+[44/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/cycles.c.obj
+[45/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/sleep.c.obj
+[46/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/uptime.c.obj
+[47/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/version.c.obj
+[48/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/log-level.c.obj
+[49/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/thread.c.obj
+[50/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/list.c.obj
+[51/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/stacks.c.obj
+[52/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/suspend.c.obj
+[53/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/resume.c.obj
+[54/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/kernel_service/thread/kill.c.obj
+[55/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/device_service.c.obj
+[56/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/date_service.c.obj
+[57/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/modules/devmem_service.c.obj
+[58/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/backends/shell_uart.c.obj
+[59/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_fprintf.c.obj
+[60/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_utils.c.obj
+[61/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_ops.c.obj
+[62/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_log_backend.c.obj
+[63/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_help.c.obj
+[64/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_cmds.c.obj
+[65/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_history.c.obj
+[66/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell_wildcard.c.obj
+[67/144] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[68/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[69/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[70/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[71/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[72/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[73/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[74/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[75/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[76/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[77/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[78/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[79/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[80/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[81/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[82/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[83/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[84/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[85/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[86/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[87/144] Building C object zephyr/subsys/emul/CMakeFiles/subsys__emul.dir/emul.c.obj
+[88/144] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/uart_console.c.obj
+[89/144] Building C object zephyr/drivers/serial/CMakeFiles/drivers__serial.dir/uart_shell.c.obj
+[90/144] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[91/144] Building C object zephyr/drivers/serial/CMakeFiles/drivers__serial.dir/uart_emul.c.obj
+[92/144] Building C object zephyr/drivers/serial/CMakeFiles/drivers__serial.dir/uart_native_pty.c.obj
+[93/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[94/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[95/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[96/144] Linking C static library app/libapp.a
+[97/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[98/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[99/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[100/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[101/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[102/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[103/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[104/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[105/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[106/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[107/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[108/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[109/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[110/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[111/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[112/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[113/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[114/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[115/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[116/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[117/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[118/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[119/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread_monitor.c.obj
+[120/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[121/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[122/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[123/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[124/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[125/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[126/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[127/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[128/144] Generating linker_zephyr_pre0.cmd
+[129/144] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[130/144] Linking C static library zephyr/arch/common/libarch__common.a
+[131/144] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[132/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -I/home/huyj/zephyr-workspace/zephyr/subsys/shell/modules/kernel_service/thread/.. -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/shell/shell.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:3:16: error: unknown type name ‘bool’
+    3 |                bool log_backend, uint32_t init_log_level)
+      |                ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:1:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+  +++ |+#include <stdbool.h>
+    1 | int shell_init(const struct shell *sh, const void *transport_config,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:3:34: error: unknown type name ‘uint32_t’
+    3 |                bool log_backend, uint32_t init_log_level)
+      |                                  ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:1:1: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int shell_init(const struct shell *sh, const void *transport_config,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:9:43: error: unknown type name ‘shell_uninit_cb_t’
+    9 | void shell_uninit(const struct shell *sh, shell_uninit_cb_t cb)
+      |                                           ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:28:30: warning: ‘struct shell’ declared inside parameter list will not be visible outside of this definition or declaration
+   28 | int shell_start(const struct shell *sh)
+      |                              ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_start’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:30:9: warning: implicit declaration of function ‘__ASSERT_NO_MSG’ [-Wimplicit-function-declaration]
+   30 |         __ASSERT_NO_MSG(sh);
+      |         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:31:27: error: invalid use of undefined type ‘const struct shell’
+   31 |         __ASSERT_NO_MSG(sh->ctx && sh->iface && sh->default_prompt);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:31:38: error: invalid use of undefined type ‘const struct shell’
+   31 |         __ASSERT_NO_MSG(sh->ctx && sh->iface && sh->default_prompt);
+      |                                      ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:31:51: error: invalid use of undefined type ‘const struct shell’
+   31 |         __ASSERT_NO_MSG(sh->ctx && sh->iface && sh->default_prompt);
+      |                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:33:13: warning: implicit declaration of function ‘state_get’ [-Wimplicit-function-declaration]
+   33 |         if (state_get(sh) != SHELL_STATE_INITIALIZED) {
+      |             ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:33:30: error: ‘SHELL_STATE_INITIALIZED’ undeclared (first use in this function)
+   33 |         if (state_get(sh) != SHELL_STATE_INITIALIZED) {
+      |                              ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:33:30: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:34:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+   34 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:37:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   37 |         if (IS_ENABLED(CONFIG_SHELL_LOG_BACKEND) && z_flag_handle_log_get(sh)
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:37:53: warning: implicit declaration of function ‘z_flag_handle_log_get’ [-Wimplicit-function-declaration]
+   37 |         if (IS_ENABLED(CONFIG_SHELL_LOG_BACKEND) && z_flag_handle_log_get(sh)
+      |                                                     ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:38:17: warning: implicit declaration of function ‘z_flag_obscure_get’ [-Wimplicit-function-declaration]
+   38 |             && !z_flag_obscure_get(sh)) {
+      |                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:39:17: warning: implicit declaration of function ‘z_shell_log_backend_enable’ [-Wimplicit-function-declaration]
+   39 |                 z_shell_log_backend_enable(sh->log_backend, (void *)sh, sh->ctx->log_level);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:39:46: error: invalid use of undefined type ‘const struct shell’
+   39 |                 z_shell_log_backend_enable(sh->log_backend, (void *)sh, sh->ctx->log_level);
+      |                                              ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:39:75: error: invalid use of undefined type ‘const struct shell’
+   39 |                 z_shell_log_backend_enable(sh->log_backend, (void *)sh, sh->ctx->log_level);
+      |                                                                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:42:14: warning: implicit declaration of function ‘z_shell_trylock’ [-Wimplicit-function-declaration]
+   42 |         if (!z_shell_trylock(sh, SHELL_TX_MTX_TIMEOUT)) {
+      |              ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:42:34: error: ‘SHELL_TX_MTX_TIMEOUT’ undeclared (first use in this function)
+   42 |         if (!z_shell_trylock(sh, SHELL_TX_MTX_TIMEOUT)) {
+      |                                  ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:43:25: error: ‘EBUSY’ undeclared (first use in this function)
+   43 |                 return -EBUSY;
+      |                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:47:17: warning: implicit declaration of function ‘z_shell_vt100_color_set’ [-Wimplicit-function-declaration]
+   47 |                 z_shell_vt100_color_set(sh, SHELL_NORMAL);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:47:45: error: ‘SHELL_NORMAL’ undeclared (first use in this function)
+   47 |                 z_shell_vt100_color_set(sh, SHELL_NORMAL);
+      |                                             ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:56:9: warning: implicit declaration of function ‘z_shell_backend_rx_buffer_flush’ [-Wimplicit-function-declaration]
+   56 |         z_shell_backend_rx_buffer_flush(sh);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:61:9: warning: implicit declaration of function ‘z_cursor_next_line_move’ [-Wimplicit-function-declaration]
+   61 |         z_cursor_next_line_move(sh);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:62:9: warning: implicit declaration of function ‘state_set’ [-Wimplicit-function-declaration]
+   62 |         state_set(sh, SHELL_STATE_ACTIVE);
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:62:23: error: ‘SHELL_STATE_ACTIVE’ undeclared (first use in this function)
+   62 |         state_set(sh, SHELL_STATE_ACTIVE);
+      |                       ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:64:9: warning: implicit declaration of function ‘z_shell_unlock’ [-Wimplicit-function-declaration]
+   64 |         z_shell_unlock(sh);
+      |         ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:69:29: warning: ‘struct shell’ declared inside parameter list will not be visible outside of this definition or declaration
+   69 | int shell_stop(const struct shell *sh)
+      |                             ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_stop’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:72:27: error: invalid use of undefined type ‘const struct shell’
+   72 |         __ASSERT_NO_MSG(sh->ctx);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:74:14: error: variable ‘state’ has initializer but incomplete type
+   74 |         enum shell_state state = state_get(sh);
+      |              ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:74:26: error: storage size of ‘state’ isn’t known
+   74 |         enum shell_state state = state_get(sh);
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:76:23: error: ‘SHELL_STATE_INITIALIZED’ undeclared (first use in this function)
+   76 |         if ((state == SHELL_STATE_INITIALIZED) ||
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:77:23: error: ‘SHELL_STATE_UNINITIALIZED’ undeclared (first use in this function)
+   77 |             (state == SHELL_STATE_UNINITIALIZED)) {
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:78:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+   78 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:84:17: warning: implicit declaration of function ‘z_shell_log_backend_disable’ [-Wimplicit-function-declaration]
+   84 |                 z_shell_log_backend_disable(sh->log_backend);
+      |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:84:47: error: invalid use of undefined type ‘const struct shell’
+   84 |                 z_shell_log_backend_disable(sh->log_backend);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:74:26: warning: unused variable ‘state’ [-Wunused-variable]
+   74 |         enum shell_state state = state_get(sh);
+      |                          ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:90:33: warning: ‘struct shell’ declared inside parameter list will not be visible outside of this definition or declaration
+   90 | void shell_process(const struct shell *sh)
+      |                                 ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_process’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:93:27: error: invalid use of undefined type ‘const struct shell’
+   93 |         __ASSERT_NO_MSG(sh->ctx);
+      |                           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:96:9: warning: implicit declaration of function ‘z_flag_processing_set’ [-Wimplicit-function-declaration]
+   96 |         z_flag_processing_set(sh, true);
+      |         ^~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:96:35: error: ‘true’ undeclared (first use in this function)
+   96 |         z_flag_processing_set(sh, true);
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:96:35: note: ‘true’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:98:19: error: invalid use of undefined type ‘const struct shell’
+   98 |         switch (sh->ctx->state) {
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:99:14: error: ‘SHELL_STATE_UNINITIALIZED’ undeclared (first use in this function)
+   99 |         case SHELL_STATE_UNINITIALIZED:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:100:14: error: ‘SHELL_STATE_INITIALIZED’ undeclared (first use in this function)
+  100 |         case SHELL_STATE_INITIALIZED:
+      |              ^~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:104:14: error: ‘SHELL_STATE_ACTIVE’ undeclared (first use in this function)
+  104 |         case SHELL_STATE_ACTIVE:
+      |              ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:105:17: warning: implicit declaration of function ‘state_collect’ [-Wimplicit-function-declaration]
+  105 |                 state_collect(sh);
+      |                 ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:112:35: error: ‘false’ undeclared (first use in this function)
+  112 |         z_flag_processing_set(sh, false);
+      |                                   ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:112:35: note: ‘false’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_backend_get_by_name’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:117:9: warning: implicit declaration of function ‘STRUCT_SECTION_FOREACH’ [-Wimplicit-function-declaration]
+  117 |         STRUCT_SECTION_FOREACH(shell, backend) {
+      |         ^~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:117:32: error: ‘shell’ undeclared (first use in this function)
+  117 |         STRUCT_SECTION_FOREACH(shell, backend) {
+      |                                ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:117:39: error: ‘backend’ undeclared (first use in this function)
+  117 |         STRUCT_SECTION_FOREACH(shell, backend) {
+      |                                       ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:117:47: error: expected ‘;’ before ‘{’ token
+  117 |         STRUCT_SECTION_FOREACH(shell, backend) {
+      |                                               ^~
+      |                                               ;
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:130:37: error: unknown type name ‘va_list’
+  130 |                    const char *fmt, va_list args)
+      |                                     ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:1:1: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+  +++ |+#include <stdarg.h>
+    1 | int shell_init(const struct shell *sh, const void *transport_config,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:170:54: warning: ‘enum shell_vt100_color’ declared inside parameter list will not be visible outside of this definition or declaration
+  170 | void shell_fprintf_impl(const struct shell *sh, enum shell_vt100_color color,
+      |                                                      ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:170:72: error: parameter 2 (‘color’) has incomplete type
+  170 | void shell_fprintf_impl(const struct shell *sh, enum shell_vt100_color color,
+      |                                                 ~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_fprintf_impl’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:173:9: error: unknown type name ‘va_list’
+  173 |         va_list args;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:173:9: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:175:9: warning: implicit declaration of function ‘va_start’ [-Wimplicit-function-declaration]
+  175 |         va_start(args, fmt);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:176:9: warning: implicit declaration of function ‘shell_vfprintf’; did you mean ‘shell_fprintf_impl’? [-Wimplicit-function-declaration]
+  176 |         shell_vfprintf(sh, color, fmt, args);
+      |         ^~~~~~~~~~~~~~
+      |         shell_fprintf_impl
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:177:9: warning: implicit declaration of function ‘va_end’ [-Wimplicit-function-declaration]
+  177 |         va_end(args);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_fprintf_info’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:182:9: error: unknown type name ‘va_list’
+  182 |         va_list args;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:182:9: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:185:28: error: ‘SHELL_INFO’ undeclared (first use in this function)
+  185 |         shell_vfprintf(sh, SHELL_INFO, fmt, args);
+      |                            ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_fprintf_normal’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:191:9: error: unknown type name ‘va_list’
+  191 |         va_list args;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:191:9: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:194:28: error: ‘SHELL_NORMAL’ undeclared (first use in this function)
+  194 |         shell_vfprintf(sh, SHELL_NORMAL, fmt, args);
+      |                            ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_fprintf_warn’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:200:9: error: unknown type name ‘va_list’
+  200 |         va_list args;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:200:9: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:203:28: error: ‘SHELL_WARNING’ undeclared (first use in this function)
+  203 |         shell_vfprintf(sh, SHELL_WARNING, fmt, args);
+      |                            ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_fprintf_error’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:209:9: error: unknown type name ‘va_list’
+  209 |         va_list args;
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:209:9: note: ‘va_list’ is defined in header ‘<stdarg.h>’; did you forget to ‘#include <stdarg.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:212:28: error: ‘SHELL_ERROR’ undeclared (first use in this function)
+  212 |         shell_vfprintf(sh, SHELL_ERROR, fmt, args);
+      |                            ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:217:31: error: unknown type name ‘uint8_t’
+  217 |                         const uint8_t *data, size_t len)
+      |                               ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:217:46: error: unknown type name ‘size_t’
+  217 |                         const uint8_t *data, size_t len)
+      |                                              ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:1:1: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int shell_init(const struct shell *sh, const void *transport_config,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:258:50: error: unknown type name ‘uint8_t’
+  258 | void shell_hexdump(const struct shell *sh, const uint8_t *data, size_t len)
+      |                                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:258:65: error: unknown type name ‘size_t’
+  258 | void shell_hexdump(const struct shell *sh, const uint8_t *data, size_t len)
+      |                                                                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:258:65: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_prompt_change’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:280:23: error: ‘NULL’ undeclared (first use in this function)
+  280 |         if (prompt == NULL) {
+      |                       ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:280:23: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:281:25: error: ‘EINVAL’ undeclared (first use in this function)
+  281 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:284:9: error: unknown type name ‘size_t’
+  284 |         size_t prompt_length = z_shell_strlen(prompt);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:284:9: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:284:32: warning: implicit declaration of function ‘z_shell_strlen’ [-Wimplicit-function-declaration]
+  284 |         size_t prompt_length = z_shell_strlen(prompt);
+      |                                ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:286:34: error: ‘SHELL_TX_MTX_TIMEOUT’ undeclared (first use in this function)
+  286 |         if (!z_shell_trylock(sh, SHELL_TX_MTX_TIMEOUT)) {
+      |                                  ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:287:25: error: ‘EBUSY’ undeclared (first use in this function)
+  287 |                 return -EBUSY;
+      |                         ^~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:295:9: warning: implicit declaration of function ‘strcpy’ [-Wimplicit-function-declaration]
+  295 |         strcpy(sh->ctx->prompt, prompt);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘strcpy’
+  +++ |+#include <string.h>
+    1 | int shell_init(const struct shell *sh, const void *transport_config,
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:295:9: warning: incompatible implicit declaration of built-in function ‘strcpy’ [-Wbuiltin-declaration-mismatch]
+  295 |         strcpy(sh->ctx->prompt, prompt);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:295:9: note: include ‘<string.h>’ or provide a declaration of ‘strcpy’
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:295:18: error: invalid use of undefined type ‘const struct shell’
+  295 |         strcpy(sh->ctx->prompt, prompt);
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:297:11: error: invalid use of undefined type ‘const struct shell’
+  297 |         sh->ctx->vt100_ctx.cons.name_len = prompt_length;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_help’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:309:34: error: ‘SHELL_TX_MTX_TIMEOUT’ undeclared (first use in this function)
+  309 |         if (!z_shell_trylock(sh, SHELL_TX_MTX_TIMEOUT)) {
+      |                                  ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:312:9: warning: implicit declaration of function ‘shell_internal_help_print’ [-Wimplicit-function-declaration]
+  312 |         shell_internal_help_print(sh);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_execute_cmd’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:318:9: error: unknown type name ‘uint16_t’
+  318 |         uint16_t cmd_len = z_shell_strlen(cmd);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:318:9: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:321:20: error: ‘NULL’ undeclared (first use in this function)
+  321 |         if (cmd == NULL) {
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:321:20: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:322:25: error: ‘ENOEXEC’ undeclared (first use in this function)
+  322 |                 return -ENOEXEC;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:326:25: error: ‘ENOMEM’ undeclared (first use in this function)
+  326 |                 return -ENOMEM;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:333:25: error: ‘EINVAL’ undeclared (first use in this function)
+  333 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:337:9: warning: implicit declaration of function ‘__ASSERT’ [-Wimplicit-function-declaration]
+  337 |         __ASSERT(!z_flag_cmd_ctx_get(sh), "Function cannot be called"
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:337:19: warning: implicit declaration of function ‘z_flag_cmd_ctx_get’ [-Wimplicit-function-declaration]
+  337 |         __ASSERT(!z_flag_cmd_ctx_get(sh), "Function cannot be called"
+      |                   ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:340:9: warning: incompatible implicit declaration of built-in function ‘strcpy’ [-Wbuiltin-declaration-mismatch]
+  340 |         strcpy(sh->ctx->cmd_buff, cmd);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:340:9: note: include ‘<string.h>’ or provide a declaration of ‘strcpy’
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:340:18: error: invalid use of undefined type ‘const struct shell’
+  340 |         strcpy(sh->ctx->cmd_buff, cmd);
+      |                  ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:341:11: error: invalid use of undefined type ‘const struct shell’
+  341 |         sh->ctx->cmd_buff_len = cmd_len;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:342:11: error: invalid use of undefined type ‘const struct shell’
+  342 |         sh->ctx->cmd_buff_pos = cmd_len;
+      |           ^~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:344:34: error: ‘SHELL_TX_MTX_TIMEOUT’ undeclared (first use in this function)
+  344 |         if (!z_shell_trylock(sh, SHELL_TX_MTX_TIMEOUT)) {
+      |                                  ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:347:19: warning: implicit declaration of function ‘execute’ [-Wimplicit-function-declaration]
+  347 |         ret_val = execute(sh);
+      |                   ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:350:9: warning: implicit declaration of function ‘cmd_buffer_clear’ [-Wimplicit-function-declaration]
+  350 |         cmd_buffer_clear(sh);
+      |         ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:355:51: error: unknown type name ‘bool’
+  355 | int shell_insert_mode_set(const struct shell *sh, bool val)
+      |                                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:355:51: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:364:50: error: unknown type name ‘bool’
+  364 | int shell_use_colors_set(const struct shell *sh, bool val)
+      |                                                  ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:364:50: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:373:49: error: unknown type name ‘bool’
+  373 | int shell_use_vt100_set(const struct shell *sh, bool val)
+      |                                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:373:49: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_get_return_value’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:384:19: error: ‘NULL’ undeclared (first use in this function)
+  384 |         if (sh == NULL) {
+      |                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:384:19: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:385:25: error: ‘EINVAL’ undeclared (first use in this function)
+  385 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:388:16: warning: implicit declaration of function ‘z_shell_get_return_value’; did you mean ‘shell_get_return_value’? [-Wimplicit-function-declaration]
+  388 |         return z_shell_get_return_value(sh);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                shell_get_return_value
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:391:44: error: unknown type name ‘bool’
+  391 | int shell_echo_set(const struct shell *sh, bool val)
+      |                                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:391:44: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:400:47: error: unknown type name ‘bool’
+  400 | int shell_obscure_set(const struct shell *sh, bool val)
+      |                                               ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:400:47: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:409:51: error: unknown type name ‘bool’
+  409 | int shell_mode_delete_set(const struct shell *sh, bool val)
+      |                                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:409:51: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:418:47: error: unknown type name ‘shell_bypass_cb_t’
+  418 | void shell_set_bypass(const struct shell *sh, shell_bypass_cb_t bypass, void *user_data)
+      |                                               ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:430:1: error: unknown type name ‘bool’
+  430 | bool shell_ready(const struct shell *sh)
+      | ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:430:1: note: ‘bool’ is defined in header ‘<stdbool.h>’; did you forget to ‘#include <stdbool.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_ready’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:434:33: error: ‘SHELL_STATE_ACTIVE’ undeclared (first use in this function)
+  434 |         return state_get(sh) == SHELL_STATE_ACTIVE;
+      |                                 ^~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:437:44: error: unknown type name ‘uint8_t’
+  437 | int shell_readline(const struct shell *sh, uint8_t *buf, size_t len, k_timeout_t timeout)
+      |                                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:437:44: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:437:58: error: unknown type name ‘size_t’
+  437 | int shell_readline(const struct shell *sh, uint8_t *buf, size_t len, k_timeout_t timeout)
+      |                                                          ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:437:58: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:437:70: error: unknown type name ‘k_timeout_t’
+  437 | int shell_readline(const struct shell *sh, uint8_t *buf, size_t len, k_timeout_t timeout)
+      |                                                                      ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:499:45: error: unknown type name ‘size_t’
+  499 | static int cmd_help(const struct shell *sh, size_t argc, char **argv)
+      |                                             ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:499:45: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:546:35: error: expected ‘)’ before string constant
+  546 | SHELL_CMD_ARG_REGISTER(help, NULL, "Prints the help message.", cmd_help, 1, 0);
+      |                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                   )
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_backend_get_by_name’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:124:1: warning: control reaches end of non-void function [-Wreturn-type]
+  124 | }
+      | ^
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c: In function ‘shell_ready’:
+/home/huyj/zephyr-workspace/zephyr/subsys/shell/shell.c:435:1: warning: control reaches end of non-void function [-Wreturn-type]
+  435 | }
+      | ^
+[133/144] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[134/144] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[135/144] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[136/144] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[137/144] Linking C static library zephyr/subsys/emul/libsubsys__emul.a
+[138/144] Linking C static library zephyr/drivers/serial/libdrivers__serial.a
+[139/144] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[140/144] Linking C static library zephyr/kernel/libkernel.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: LOG (defined at soc/nxp/imxrt/imxrt5xx/Kconfig.defconfig:102, subsys/logging/Kconfig:6) was
+assigned the value 'n' but got the value 'y'. See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG and/or look up LOG in the
+menuconfig/guiconfig interface. The Application Development Primer, Setting Configuration Values,
+and Kconfig - Tips and Best Practices sections of the manual might be helpful too.
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/shell/shell_backend_uart/build
+
+=== RC ===
+1

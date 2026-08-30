@@ -1,0 +1,316 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build
+-- west build: building application
+[1/116] Preparing syscall dependency handling
+
+[2/116] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/116] Generating misc/generated/syscalls_subdirs.trigger
+[4/116] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/116] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/116] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/116] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/116] Generating include/generated/zephyr/driver-validation.h
+[9/116] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/116] Generating ../../include/generated/zephyr/heap_constants.h
+[11/116] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/116] Generating include/generated/zephyr/offsets.h
+[13/116] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[24/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/116] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/116] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/116] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/116] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[44/116] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[45/116] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[46/116] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/116] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/116] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/116] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/116] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/116] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/116] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/116] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/116] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/116] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[56/116] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[57/116] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[58/116] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_timer.c.obj
+[59/116] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_test_csprng.c.obj
+[60/116] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/116] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[62/116] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[63/116] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/116] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[65/116] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztress.c.obj
+[66/116] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[67/116] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[68/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[69/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[70/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[71/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[72/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[73/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[74/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[75/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[76/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[77/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[78/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[79/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[80/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[81/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[82/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[83/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[84/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[85/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[86/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[87/116] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/spsc_pbuf.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/lib/os/spsc_pbuf.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/lib/os/spsc_pbuf.c.obj -MF zephyr/CMakeFiles/zephyr.dir/lib/os/spsc_pbuf.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/lib/os/spsc_pbuf.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:1:60: error: unknown type name ‘uint16_t’
+    1 | int spsc_pbuf_write(struct spsc_pbuf *pb, const char *buf, uint16_t len)
+      |                                                            ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:1:1: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int spsc_pbuf_write(struct spsc_pbuf *pb, const char *buf, uint16_t len)
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:7:1: error: unknown type name ‘uint16_t’
+    7 | uint16_t spsc_pbuf_claim(struct spsc_pbuf *pb, char **buf)
+      | ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:7:1: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:7:33: warning: ‘struct spsc_pbuf’ declared inside parameter list will not be visible outside of this definition or declaration
+    7 | uint16_t spsc_pbuf_claim(struct spsc_pbuf *pb, char **buf)
+      |                                 ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c: In function ‘spsc_pbuf_claim’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:10:15: error: unknown type name ‘uint32_t’
+   10 |         const uint32_t pblen = pb->common.len;
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:10:34: error: invalid use of undefined type ‘struct spsc_pbuf’
+   10 |         const uint32_t pblen = pb->common.len;
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:11:15: error: unknown type name ‘uint32_t’
+   11 |         const uint32_t flags = pb->common.flags;
+      |               ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:11:34: error: invalid use of undefined type ‘struct spsc_pbuf’
+   11 |         const uint32_t flags = pb->common.flags;
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:12:9: error: unknown type name ‘uint32_t’
+   12 |         uint32_t *rd_idx_loc = get_rd_idx_loc(pb, flags);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:12:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:12:32: warning: implicit declaration of function ‘get_rd_idx_loc’ [-Wimplicit-function-declaration]
+   12 |         uint32_t *rd_idx_loc = get_rd_idx_loc(pb, flags);
+      |                                ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:12:32: warning: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:13:9: error: unknown type name ‘uint32_t’
+   13 |         uint32_t *wr_idx_loc = get_wr_idx_loc(pb, flags);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:13:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:13:32: warning: implicit declaration of function ‘get_wr_idx_loc’ [-Wimplicit-function-declaration]
+   13 |         uint32_t *wr_idx_loc = get_wr_idx_loc(pb, flags);
+      |                                ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:13:32: warning: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:14:9: error: unknown type name ‘uint8_t’
+   14 |         uint8_t *data_loc = get_data_loc(pb, flags);
+      |         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:14:9: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:14:29: warning: implicit declaration of function ‘get_data_loc’ [-Wimplicit-function-declaration]
+   14 |         uint8_t *data_loc = get_data_loc(pb, flags);
+      |                             ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:14:29: warning: initialization of ‘int *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:16:9: warning: implicit declaration of function ‘cache_inv’ [-Wimplicit-function-declaration]
+   16 |         cache_inv(wr_idx_loc, sizeof(*wr_idx_loc), flags);
+      |         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:17:9: warning: implicit declaration of function ‘barrier_sync_synchronize’ [-Wimplicit-function-declaration]
+   17 |         barrier_sync_synchronize();
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:19:9: error: unknown type name ‘uint32_t’
+   19 |         uint32_t wr_idx = *wr_idx_loc;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:19:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:20:9: error: unknown type name ‘uint32_t’
+   20 |         uint32_t rd_idx = *rd_idx_loc;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:20:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:26:9: error: unknown type name ‘uint32_t’
+   26 |         uint32_t bytes_stored = idx_occupied(pblen, wr_idx, rd_idx);
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:26:9: note: ‘uint32_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:26:33: warning: implicit declaration of function ‘idx_occupied’ [-Wimplicit-function-declaration]
+   26 |         uint32_t bytes_stored = idx_occupied(pblen, wr_idx, rd_idx);
+      |                                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:32:13: warning: implicit declaration of function ‘IS_ENABLED’ [-Wimplicit-function-declaration]
+   32 |         if (IS_ENABLED(CONFIG_SPSC_PBUF_UTILIZATION) && (bytes_stored > GET_UTILIZATION(flags))) {
+      |             ^~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:32:24: error: ‘CONFIG_SPSC_PBUF_UTILIZATION’ undeclared (first use in this function)
+   32 |         if (IS_ENABLED(CONFIG_SPSC_PBUF_UTILIZATION) && (bytes_stored > GET_UTILIZATION(flags))) {
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:32:24: note: each undeclared identifier is reported only once for each function it appears in
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:32:73: warning: implicit declaration of function ‘GET_UTILIZATION’ [-Wimplicit-function-declaration]
+   32 |         if (IS_ENABLED(CONFIG_SPSC_PBUF_UTILIZATION) && (bytes_stored > GET_UTILIZATION(flags))) {
+      |                                                                         ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:33:17: warning: implicit declaration of function ‘__ASSERT_NO_MSG’ [-Wimplicit-function-declaration]
+   33 |                 __ASSERT_NO_MSG(bytes_stored <= BIT_MASK(SPSC_PBUF_UTILIZATION_BITS));
+      |                 ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:33:49: warning: implicit declaration of function ‘BIT_MASK’ [-Wimplicit-function-declaration]
+   33 |                 __ASSERT_NO_MSG(bytes_stored <= BIT_MASK(SPSC_PBUF_UTILIZATION_BITS));
+      |                                                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:33:58: error: ‘SPSC_PBUF_UTILIZATION_BITS’ undeclared (first use in this function)
+   33 |                 __ASSERT_NO_MSG(bytes_stored <= BIT_MASK(SPSC_PBUF_UTILIZATION_BITS));
+      |                                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:34:19: error: invalid use of undefined type ‘struct spsc_pbuf’
+   34 |                 pb->common.flags = SET_UTILIZATION(flags, bytes_stored);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:34:36: warning: implicit declaration of function ‘SET_UTILIZATION’ [-Wimplicit-function-declaration]
+   34 |                 pb->common.flags = SET_UTILIZATION(flags, bytes_stored);
+      |                                    ^~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:36:17: warning: implicit declaration of function ‘cache_wb’ [-Wimplicit-function-declaration]
+   36 |                 cache_wb(&pb->common.flags, sizeof(pb->common.flags), flags);
+      |                 ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:36:29: error: invalid use of undefined type ‘struct spsc_pbuf’
+   36 |                 cache_wb(&pb->common.flags, sizeof(pb->common.flags), flags);
+      |                             ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:36:54: error: invalid use of undefined type ‘struct spsc_pbuf’
+   36 |                 cache_wb(&pb->common.flags, sizeof(pb->common.flags), flags);
+      |                                                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:40:9: error: unknown type name ‘uint16_t’
+   40 |         uint16_t len;
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:40:9: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:42:38: error: ‘LEN_SZ’ undeclared (first use in this function)
+   42 |         cache_inv(&data_loc[rd_idx], LEN_SZ, flags);
+      |                                      ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:43:33: error: ‘PADDING_MARK’ undeclared (first use in this function)
+   43 |         if (data_loc[rd_idx] == PADDING_MARK) {
+      |                                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:66:15: warning: implicit declaration of function ‘sys_get_be16’ [-Wimplicit-function-declaration]
+   66 |         len = sys_get_be16(&data_loc[rd_idx]);
+      |               ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:77:43: error: unknown type name ‘uint16_t’
+   77 | void spsc_pbuf_free(struct spsc_pbuf *pb, uint16_t len)
+      |                                           ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:77:43: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:110:53: error: unknown type name ‘uint16_t’
+  110 | int spsc_pbuf_read(struct spsc_pbuf *pb, char *buf, uint16_t len)
+      |                                                     ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:110:53: note: ‘uint16_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:134:38: warning: ‘struct spsc_pbuf’ declared inside parameter list will not be visible outside of this definition or declaration
+  134 | int spsc_pbuf_get_utilization(struct spsc_pbuf *pb)
+      |                                      ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c: In function ‘spsc_pbuf_get_utilization’:
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:136:25: error: ‘CONFIG_SPSC_PBUF_UTILIZATION’ undeclared (first use in this function)
+  136 |         if (!IS_ENABLED(CONFIG_SPSC_PBUF_UTILIZATION)) {
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:137:25: error: ‘ENOTSUP’ undeclared (first use in this function)
+  137 |                 return -ENOTSUP;
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:140:22: error: invalid use of undefined type ‘struct spsc_pbuf’
+  140 |         cache_inv(&pb->common.flags, sizeof(pb->common.flags), pb->common.flags);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:140:47: error: invalid use of undefined type ‘struct spsc_pbuf’
+  140 |         cache_inv(&pb->common.flags, sizeof(pb->common.flags), pb->common.flags);
+      |                                               ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:140:66: error: invalid use of undefined type ‘struct spsc_pbuf’
+  140 |         cache_inv(&pb->common.flags, sizeof(pb->common.flags), pb->common.flags);
+      |                                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:143:34: error: invalid use of undefined type ‘struct spsc_pbuf’
+  143 |         return GET_UTILIZATION(pb->common.flags);
+      |                                  ^~
+/home/huyj/zephyr-workspace/zephyr/lib/os/spsc_pbuf.c:144:1: warning: control reaches end of non-void function [-Wreturn-type]
+  144 | }
+      | ^
+[88/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[89/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[90/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[91/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[92/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread_monitor.c.obj
+[93/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[94/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[95/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[96/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[97/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/116] Building C object zephyr/kernel/CMakeFiles/kernel.dir/usage.c.obj
+[99/116] Linking C static library app/libapp.a
+[100/116] Linking C static library zephyr/arch/common/libarch__common.a
+[101/116] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[102/116] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[103/116] Generating linker_zephyr_pre0.cmd
+[104/116] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[105/116] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[106/116] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[107/116] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[108/116] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/subsys/random/CMakeLists.txt:12 (message):
+  
+
+      Warning: CONFIG_TIMER_RANDOM_GENERATOR and CONFIG_TEST_CSPRNG_GENERATOR are
+      not truly random generators. This capability is not secure and it is
+      provided for testing purposes only. Use it carefully.
+
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/spsc_pbuf/build
+
+=== RC ===
+1

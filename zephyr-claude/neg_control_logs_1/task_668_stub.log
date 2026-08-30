@@ -1,0 +1,244 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (5.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build
+-- west build: building application
+[1/109] Preparing syscall dependency handling
+
+[2/109] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/109] Generating misc/generated/syscalls_subdirs.trigger
+[4/109] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/109] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/109] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/109] Generating include/generated/zephyr/driver-validation.h
+[8/109] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/109] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/109] Generating ../../include/generated/zephyr/heap_constants.h
+[11/109] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/109] Generating include/generated/zephyr/offsets.h
+[13/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[14/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[15/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[16/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[20/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[22/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[23/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[24/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[25/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[26/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[28/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[29/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[30/109] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[31/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[32/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[35/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[36/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[38/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[39/109] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[40/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[43/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[44/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[45/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[46/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[47/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[48/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[49/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[50/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[51/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[52/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[53/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[54/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[55/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[56/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[57/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[58/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[59/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[60/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[61/109] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[62/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[63/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[65/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[66/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[67/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[68/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[69/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[70/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[71/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[72/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[74/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[75/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[76/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[77/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[78/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[79/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[80/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[81/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[82/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[83/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[84/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[85/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[86/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[87/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[88/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[89/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[90/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[91/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[92/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[93/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[94/109] Linking C static library zephyr/arch/common/libarch__common.a
+[95/109] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[96/109] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[97/109] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[98/109] Generating linker_zephyr_pre0.cmd
+[99/109] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[100/109] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[101/109] Linking C static library zephyr/libzephyr.a
+[102/109] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[103/109] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[104/109] Linking C static library zephyr/kernel/libkernel.a
+[105/109] Building C object CMakeFiles/app.dir/src/main.c.obj
+FAILED: CMakeFiles/app.dir/src/main.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/main.c.obj -MF CMakeFiles/app.dir/src/main.c.obj.d -o CMakeFiles/app.dir/src/main.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:7:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:1:59: warning: ‘struct linear_range’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | static inline int linear_range_get_win_index(const struct linear_range *r,
+      |                                                           ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:29:65: warning: ‘struct linear_range’ declared inside parameter list will not be visible outside of this definition or declaration
+   29 | static inline int linear_range_group_get_win_index(const struct linear_range *r,
+      |                                                                 ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h: In function ‘linear_range_group_get_win_index’:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:36:31: warning: implicit declaration of function ‘linear_range_get_max_value’; did you mean ‘linear_range_get_win_index’? [-Wimplicit-function-declaration]
+   36 |                 if (val_min > linear_range_get_max_value(&r[i])) {
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                               linear_range_get_win_index
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:36:60: error: invalid use of undefined type ‘struct linear_range’
+   36 |                 if (val_min > linear_range_get_max_value(&r[i])) {
+      |                                                            ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:40:53: error: invalid use of undefined type ‘struct linear_range’
+   40 |                 return linear_range_get_win_index(&r[i], val_min, val_max, idx);
+      |                                                     ^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:40:51: warning: passing argument 1 of ‘linear_range_get_win_index’ from incompatible pointer type [-Wincompatible-pointer-types]
+   40 |                 return linear_range_get_win_index(&r[i], val_min, val_max, idx);
+      |                                                   ^~~~~
+      |                                                   |
+      |                                                   const struct linear_range *
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:1:73: note: expected ‘const struct linear_range *’ but argument is of type ‘const struct linear_range *’
+    1 | static inline int linear_range_get_win_index(const struct linear_range *r,
+      |                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h: At top level:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/linear_range.h:52:2: error: #endif without #if
+   52 | #endif /* INCLUDE_ZEPHYR_SYS_LINEAR_RANGE_H_ */
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:31:34: error: array type has incomplete element type ‘struct linear_range’
+   31 | static const struct linear_range r[] = {
+      |                                  ^
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:32:9: warning: implicit declaration of function ‘LINEAR_RANGE_INIT’ [-Wimplicit-function-declaration]
+   32 |         LINEAR_RANGE_INIT(-10, 5U,  0U,  1U),
+      |         ^~~~~~~~~~~~~~~~~
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:6:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c: In function ‘linear_range_test_linear_range_values_count’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:50:23: warning: implicit declaration of function ‘linear_range_values_count’ [-Wimplicit-function-declaration]
+   50 |         zassert_equal(linear_range_values_count(&r[0]), 2U);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:50:9: note: in expansion of macro ‘zassert_equal’
+   50 |         zassert_equal(linear_range_values_count(&r[0]), 2U);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:55:23: warning: implicit declaration of function ‘linear_range_group_values_count’ [-Wimplicit-function-declaration]
+   55 |         zassert_equal(linear_range_group_values_count(r, r_cnt), 13U);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:183:35: note: in definition of macro ‘_zassert_base’
+  183 |                         z_zassert(cond, _msg ? ("(" default_msg ")") : (default_msg), __FILE__,    \
+      |                                   ^~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:197:9: note: in expansion of macro ‘_zassert_va’
+  197 |         _zassert_va(cond, default_msg, COND_CODE_1(__VA_OPT__(1), (__VA_ARGS__), (NULL)))
+      |         ^~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:324:34: note: in expansion of macro ‘zassert’
+  324 | #define zassert_equal(a, b, ...) zassert((a) == (b), #a " not equal to " #b, ##__VA_ARGS__)
+      |                                  ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:55:9: note: in expansion of macro ‘zassert_equal’
+   55 |         zassert_equal(linear_range_group_values_count(r, r_cnt), 13U);
+      |         ^~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c: In function ‘linear_range_test_linear_range_get_value’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:71:15: warning: implicit declaration of function ‘linear_range_get_value’; did you mean ‘linear_range_get_win_index’? [-Wimplicit-function-declaration]
+   71 |         ret = linear_range_get_value(&r[0], 0U, &val);
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+      |               linear_range_get_win_index
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:126:15: warning: implicit declaration of function ‘linear_range_group_get_value’; did you mean ‘linear_range_group_get_win_index’? [-Wimplicit-function-declaration]
+  126 |         ret = linear_range_group_get_value(r, r_cnt, 0U, &val);
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |               linear_range_group_get_win_index
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c: In function ‘linear_range_test_linear_range_get_index’:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:185:15: warning: implicit declaration of function ‘linear_range_get_index’; did you mean ‘linear_range_get_win_index’? [-Wimplicit-function-declaration]
+  185 |         ret = linear_range_get_index(&r[0], -10, &idx);
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+      |               linear_range_get_win_index
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:222:15: warning: implicit declaration of function ‘linear_range_group_get_index’; did you mean ‘linear_range_group_get_win_index’? [-Wimplicit-function-declaration]
+  222 |         ret = linear_range_group_get_index(r, r_cnt, -20, &idx);
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |               linear_range_group_get_win_index
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/src/main.c:31:34: warning: ‘r’ defined but not used [-Wunused-variable]
+   31 | static const struct linear_range r[] = {
+      |                                  ^
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/linear_range/build
+
+=== RC ===
+1

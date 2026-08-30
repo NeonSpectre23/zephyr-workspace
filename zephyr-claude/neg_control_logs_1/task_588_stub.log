@@ -1,0 +1,87 @@
+=== COMMAND ===
+west build -b unit_testing -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host -DM64_MODE=1 && ./build/testbinary
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/build
+-- west build: building application
+[1/7] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[3/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[4/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[5/7] Building C object CMakeFiles/testbinary.dir/main.c.obj
+In file included from /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:9:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c: In function ‘rb_contains’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:12:21: warning: implicit declaration of function ‘get_child’ [-Wimplicit-function-declaration]
+   12 |                 n = get_child(n, tree->lessthan_fn(n, node));
+      |                     ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:12:19: warning: assignment to ‘struct rbnode *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   12 |                 n = get_child(n, tree->lessthan_fn(n, node));
+      |                   ^
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c: In function ‘stack_left_limb’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:30:16: warning: assignment to ‘struct rbnode *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   30 |         for (n = get_child(n, 0U); n != NULL; n = get_child(n, 0U)) {
+      |                ^
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:30:49: warning: assignment to ‘struct rbnode *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   30 |         for (n = get_child(n, 0U); n != NULL; n = get_child(n, 0U)) {
+      |                                                 ^
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c: In function ‘z_rb_foreach_next’:
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:65:11: warning: assignment to ‘struct rbnode *’ from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   65 |         n = get_child(f->stack[f->top], 1U);
+      |           ^
+[6/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[7/7] Linking C executable testbinary
+FAILED: testbinary 
+: && /usr/bin/gcc -m64 -gdwarf-4 -T /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/ztest_unittest.ld CMakeFiles/testbinary.dir/main.c.obj CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj -o testbinary   && :
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `rb_get_min':
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/rb.h:134:(.text+0x19): undefined reference to `z_rb_get_minmax'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `rb_get_max':
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/rb.h:142:(.text+0x38): undefined reference to `z_rb_get_minmax'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `rb_walk':
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/sys/rb.h:168:(.text+0x68): undefined reference to `z_rb_walk'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `rb_contains':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:12:(.text+0x210): undefined reference to `get_child'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `stack_left_limb':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:30:(.text+0x2a0): undefined reference to `get_child'
+/usr/bin/ld: /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:30:(.text+0x304): undefined reference to `get_child'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `z_rb_foreach_next':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/../../../lib/utils/rb.c:65:(.text+0x3aa): undefined reference to `get_child'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `check_rbnode':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:97:(.text+0x7e6): undefined reference to `z_rb_child'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `checked_insert':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:192:(.text+0x10df): undefined reference to `rb_insert'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `test_tree':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:213:(.text+0x11bd): undefined reference to `rb_insert'
+/usr/bin/ld: /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:216:(.text+0x11f6): undefined reference to `rb_remove'
+/usr/bin/ld: CMakeFiles/testbinary.dir/main.c.obj: in function `rbtree_api_test_rb_get_minmax':
+/home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:270:(.text+0x13e4): undefined reference to `rb_insert'
+/usr/bin/ld: /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/main.c:273:(.text+0x1404): undefined reference to `rb_remove'
+collect2: error: ld returned 1 exit status
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr module(s) (Zephyr base): unittest
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/unit/rbtree/build
+
+=== RC ===
+1

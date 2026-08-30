@@ -1,0 +1,256 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (5.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build
+-- west build: building application
+[1/113] Preparing syscall dependency handling
+
+[2/113] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/113] Generating misc/generated/syscalls_subdirs.trigger
+[4/113] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/113] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/113] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/113] Generating include/generated/zephyr/driver-validation.h
+[8/113] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/113] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/113] Generating ../../include/generated/zephyr/heap_constants.h
+[11/113] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/113] Generating include/generated/zephyr/offsets.h
+[13/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[14/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[15/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[16/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[17/113] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[18/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[19/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[21/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[22/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[23/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/113] Building C object CMakeFiles/app.dir/src/test_module2.c.obj
+[25/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[26/113] Building C object CMakeFiles/app.dir/src/test_module.c.obj
+[27/113] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[28/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[29/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[30/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[32/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[34/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[35/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[36/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[37/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[38/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[39/113] Linking C static library zephyr/arch/common/libarch__common.a
+[40/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[41/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[42/113] Generating linker_zephyr_pre0.cmd
+[43/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[44/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[45/113] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[46/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[47/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[48/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[49/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[50/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[51/113] Building C object CMakeFiles/app.dir/src/mock_frontend.c.obj
+FAILED: CMakeFiles/app.dir/src/mock_frontend.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/mock_frontend.c.obj -MF CMakeFiles/app.dir/src/mock_frontend.c.obj.d -o CMakeFiles/app.dir/src/mock_frontend.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/src/mock_frontend.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/src/mock_frontend.c:8:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[52/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[53/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[54/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_mgmt.c:7:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[55/113] Building C object CMakeFiles/app.dir/src/main.c.obj
+FAILED: CMakeFiles/app.dir/src/main.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/main.c.obj -MF CMakeFiles/app.dir/src/main.c.obj.d -o CMakeFiles/app.dir/src/main.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/src/main.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/src/main.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[56/113] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[57/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[58/113] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj -MF zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/os/clock.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/lib/os/clock.c:226:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[59/113] Building C object CMakeFiles/app.dir/src/mock_backend.c.obj
+FAILED: CMakeFiles/app.dir/src/mock_backend.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT CMakeFiles/app.dir/src/mock_backend.c.obj -MF CMakeFiles/app.dir/src/mock_backend.c.obj.d -o CMakeFiles/app.dir/src/mock_backend.c.obj -c /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/src/mock_backend.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/src/mock_backend.c:8:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[60/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_core.c:9:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[61/113] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[62/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_msg.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_msg.c:9:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[63/113] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/113] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj -MF zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_output.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/logging/log_output.c:10:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[65/113] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+FAILED: zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR_SUPERVISOR__ -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj -MF zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj.d -o zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj -c /home/huyj/zephyr-workspace/zephyr/arch/posix/core/fatal.c
+In file included from /home/huyj/zephyr-workspace/zephyr/arch/posix/core/fatal.c:13:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[66/113] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[67/113] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[68/113] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[69/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+FAILED: zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -U_POSIX_C_SOURCE -D_POSIX_C_SOURCE=200809L -MD -MT zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj -MF zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj.d -o zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c:7:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[70/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+FAILED: zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -U_POSIX_C_SOURCE -D_POSIX_C_SOURCE=200809L -MD -MT zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj -MF zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj.d -o zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c:8:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[71/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+FAILED: zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -U_POSIX_C_SOURCE -D_POSIX_C_SOURCE=200809L -MD -MT zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj -MF zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj.d -o zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_error_hook.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest_assert.h:21,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include/zephyr/ztest.h:42,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_error_hook.c:8:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+[72/113] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+FAILED: zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -Wshadow -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -U_POSIX_C_SOURCE -D_POSIX_C_SOURCE=200809L -MD -MT zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj -MF zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj.d -o zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj -c /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_posix.c
+In file included from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include/zephyr/tc_util.h:212,
+                 from /home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_posix.c:11:
+/home/huyj/zephyr-workspace/zephyr/include/zephyr/logging/log_ctrl.h:61:10: fatal error: zephyr/syscalls/log_ctrl.h: No such file or directory
+   61 | #include <zephyr/syscalls/log_ctrl.h>
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: LOG_PROCESS_THREAD_SLEEP_MS (defined at subsys/logging/Kconfig.processing:71) was assigned
+the value '100' but got the value ''. Check these unsatisfied dependencies: LOG_PROCESS_THREAD (=n),
+LOG_MODE_DEFERRED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_PROCESS_THREAD_SLEEP_MS and/or look up
+LOG_PROCESS_THREAD_SLEEP_MS in the menuconfig/guiconfig interface. The Application Development
+Primer, Setting Configuration Values, and Kconfig - Tips and Best Practices sections of the manual
+might be helpful too.
+
+
+warning: LOG_BUFFER_SIZE (defined at subsys/logging/Kconfig.processing:121) was assigned the value
+'768' but got the value ''. Check these unsatisfied dependencies: LOG_MODE_DEFERRED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_BUFFER_SIZE and/or look up
+LOG_BUFFER_SIZE in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+
+warning: LOG_BACKEND_UART (defined at subsys/logging/backends/Kconfig.uart:4) was assigned the value
+'y' but got the value 'n'. Check these unsatisfied dependencies: UART_CONSOLE (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_BACKEND_UART and/or look up
+LOG_BACKEND_UART in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_api/build
+
+=== RC ===
+1

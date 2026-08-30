@@ -1,0 +1,1600 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/boards/native_sim_native_64.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (13.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build
+-- west build: building application
+[1/147] Preparing syscall dependency handling
+
+[2/147] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/147] Generating misc/generated/syscalls_subdirs.trigger
+[4/147] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/147] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/147] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/147] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/147] Generating include/generated/zephyr/driver-validation.h
+[9/147] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/147] Generating ../../include/generated/zephyr/heap_constants.h
+[11/147] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/147] Generating include/generated/zephyr/offsets.h
+[13/147] Building C object CMakeFiles/app.dir/src/testfs_ext_specific.c.obj
+[14/147] Building C object CMakeFiles/app.dir/src/main.c.obj
+[15/147] Building C object CMakeFiles/app.dir/src/test_basic.c.obj
+[16/147] Building C object CMakeFiles/app.dir/src/test_dirops.c.obj
+[17/147] Building C object CMakeFiles/app.dir/src/testfs_dirops.c.obj
+[18/147] Building C object CMakeFiles/app.dir/src/testfs_mount_flags.c.obj
+[19/147] Building C object CMakeFiles/app.dir/src/utils.c.obj
+[20/147] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/common/test_fs_basic.c.obj
+[21/147] Building C object CMakeFiles/app.dir/src/testfs_mount.c.obj
+[22/147] Building C object CMakeFiles/app.dir/src/testfs_open_flags.c.obj
+[23/147] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/common/test_fs_dirops.c.obj
+[24/147] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/common/test_fs_mkfs.c.obj
+[25/147] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/common/test_fs_mount_flags.c.obj
+[26/147] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/common/test_fs_open_flags.c.obj
+[27/147] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/common/test_fs_util.c.obj
+[28/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[29/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[30/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[31/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[32/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[33/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[34/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[35/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[36/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[37/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[38/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[39/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[40/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[41/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[42/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[43/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[44/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[45/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[46/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[47/147] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[48/147] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[49/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[50/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[51/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[52/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[53/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[54/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[55/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[56/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[57/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[58/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[59/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[60/147] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/disk/disk_access.c.obj
+[61/147] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[62/147] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[63/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[64/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[65/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[66/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[67/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[68/147] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[69/147] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[70/147] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[71/147] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[72/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[73/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[74/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[75/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[76/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[77/147] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[78/147] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs_impl.c.obj
+[79/147] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj
+[80/147] Building C object zephyr/subsys/fs/ext2/CMakeFiles/subsys__fs__ext2.dir/ext2_bitmap.c.obj
+[81/147] Building C object zephyr/subsys/fs/ext2/CMakeFiles/subsys__fs__ext2.dir/ext2_impl.c.obj
+[82/147] Building C object zephyr/subsys/fs/ext2/CMakeFiles/subsys__fs__ext2.dir/ext2_disk_access.c.obj
+[83/147] Building C object zephyr/subsys/fs/ext2/CMakeFiles/subsys__fs__ext2.dir/ext2_format.c.obj
+[84/147] Building C object zephyr/subsys/fs/ext2/CMakeFiles/subsys__fs__ext2.dir/ext2_diskops.c.obj
+[85/147] Building C object zephyr/subsys/fs/ext2/CMakeFiles/subsys__fs__ext2.dir/ext2_ops.c.obj
+[86/147] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_timer.c.obj
+[87/147] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_test_csprng.c.obj
+[88/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[89/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[90/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[91/147] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[92/147] Building C object zephyr/drivers/disk/CMakeFiles/drivers__disk.dir/flashdisk.c.obj
+[93/147] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[94/147] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[95/147] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[96/147] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[97/147] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[98/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[99/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[100/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[101/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[102/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[103/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[104/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[105/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[106/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[107/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[108/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[109/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[110/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[111/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[112/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[113/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[114/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[115/147] Linking C static library app/libapp.a
+[116/147] Generating linker_zephyr_pre0.cmd
+[117/147] Linking C static library zephyr/arch/common/libarch__common.a
+[118/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[119/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[120/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[121/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[122/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[123/147] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[124/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[125/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[126/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[127/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[128/147] Linking C static library zephyr/subsys/fs/libsubsys__fs.a
+[129/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[130/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[131/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[132/147] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[133/147] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[134/147] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[135/147] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[136/147] Linking C static library zephyr/drivers/disk/libdrivers__disk.a
+[137/147] Linking C static library zephyr/subsys/fs/ext2/libsubsys__fs__ext2.a
+[138/147] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[139/147] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[140/147] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[141/147] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[142/147] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[143/147] Linking C static library zephyr/libzephyr.a
+[144/147] Linking C static library zephyr/kernel/libkernel.a
+[145/147] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/fs/ext2/build/zephyr/zephyr.elf for board: native_sim/native/64
+[146/147] Building native simulator runner, and linking final executable
+[147/147] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE ext2tests
+===================================================================
+START - test_basic
+Wiping NAND
+[00:00:00.000,000] [0m<inf> flashdisk: Initialize device NAND[0m
+[00:00:00.000,000] [0m<inf> flashdisk: offset 0, sector size 512, page size 4096, volume size 134217728[0m
+[00:00:00.000,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.000,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.000,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'8�� �TKv�\z�>udvext2' vol:'ext2'[0m
+[00:00:00.000,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.000,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.000,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.000,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.000,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.000,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.000,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.000,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.000,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.000,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.000,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.000,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+creating and writing file
+opening and verifying file
+seek and tell in file
+truncate in file
+unlink hello
+[00:00:00.000,000] [0m<inf> ext2: Inode 12 is free[0m
+sync goodbye
+sync size 64
+unmounting /sml
+checking double unmount diagnoses
+[00:00:00.110,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+verify goodbye
+[00:00:00.110,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_basic in 0.110 seconds
+===================================================================
+START - test_dirops
+Wiping NAND
+[00:00:00.110,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.110,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.110,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'�CCSu�E1�x�ș�_xext2' vol:'ext2'[0m
+[00:00:00.110,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.110,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.110,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.110,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.110,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.110,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.110,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.110,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.110,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.110,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.110,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.110,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+[00:00:00.110,000] [0m<inf> ext2: Inode 11 is free[0m
+checking dir create unlink
+[00:00:00.110,000] [1;31m<err> fs: failed to unlink path (-39)[0m
+[00:00:00.110,000] [0m<inf> ext2: Inode 12 is free[0m
+[00:00:00.110,000] [0m<inf> ext2: Inode 11 is free[0m
+building layout on /sml
+before: bsize 1024 ; frsize 1024 ; blocks 8192 ; bfree 7938
+create at /sml/f1 with 1 from 0x01: 0
+create at /sml/f2 with 100 from 0x02: 0
+mkdir /sml/d1: 0
+create at /sml/d1/d1f1 with 23 from 0x0b: 0
+create at /sml/d1/d1f2 with 612 from 0x0c: 0
+exit directory /sml/d1
+create at /sml/f3 with 10000 from 0x03: 0
+after: bsize 1024 ; frsize 1024 ; blocks 8192 ; bfree 7923
+checking layout
+check /sml for 7 entries
+/sml f1 1
+/sml f2 100
+/sml d1/ 0
+check /sml/d1 for 2 entries
+/sml/d1 d1f1 23
+/sml/d1 d1f2 612
+/sml/d1 found 2 entries, 0 foreign
+/sml f3 10000
+/sml found 4 entries, 0 foreign
+verifying f1 1
+verifying f2 100
+verifying d1/ 0
+verifying d1f1 23
+verifying d1f2 612
+verifying f3 10000
+create at /sml/rename/f1f with 8 from 0x01: 0
+create at /sml/rename/f2f with 8 from 0x02: 0
+create at /sml/rename/f2t with 8 from 0x03: 0
+create at /sml/rename/f3f with 8 from 0x04: 0
+create at /sml/rename/f4f with 8 from 0x05: 0
+mkdir /sml/rename/d1f: 0
+create at /sml/rename/d1f/d1f1 with 16 from 0x05: 0
+exit directory /sml/rename/d1f
+mkdir /sml/rename/d2t: 0
+create at /sml/rename/d2t/d2f1 with 16 from 0x06: 0
+exit directory /sml/rename/d2t
+check /sml/rename for 11 entries
+/sml/rename f1f 8
+/sml/rename f2f 8
+/sml/rename f2t 8
+/sml/rename f3f 8
+/sml/rename f4f 8
+/sml/rename d1f/ 0
+check /sml/rename/d1f for 1 entries
+/sml/rename/d1f d1f1 16
+/sml/rename/d1f found 1 entries, 0 foreign
+/sml/rename d2t/ 0
+check /sml/rename/d2t for 1 entries
+/sml/rename/d2t d2f1 16
+/sml/rename/d2t found 1 entries, 0 foreign
+/sml/rename found 7 entries, 0 foreign
+/sml/rename/nofile => /sml/rename/f1t -ENOENT
+[00:00:00.440,000] [1;31m<err> fs: failed to rename file or dir (-2)[0m
+/sml/rename/f1f => /sml/rename/f1t ok
+/sml/rename/f2f => /sml/rename/f2t clobber ok
+[00:00:00.440,000] [0m<inf> ext2: Inode 20 is free[0m
+/sml/rename/f3f => /sml/rename/d1f/d1f2t move ok
+/sml/rename/d1f => /sml/rename/d2t -ENOTEMPTY
+[00:00:00.440,000] [1;31m<err> fs: failed to rename file or dir (-39)[0m
+/sml/rename/d1f => /sml/rename/d1t ok
+check /sml/rename for 10 entries
+/sml/rename f1t 8
+/sml/rename f2t 8
+/sml/rename f4f 8
+/sml/rename d1t/ 0
+check /sml/rename/d1t for 2 entries
+/sml/rename/d1t d1f1 16
+/sml/rename/d1t d1f2t 8
+/sml/rename/d1t found 2 entries, 0 foreign
+/sml/rename d2t/ 0
+check /sml/rename/d2t for 1 entries
+/sml/rename/d2t d2f1 16
+/sml/rename/d2t found 1 entries, 0 foreign
+/sml/rename found 5 entries, 0 foreign
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_dirops in 0.440 seconds
+===================================================================
+START - test_dirops_basic
+Wiping NAND
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'�$���A�&"/' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-22)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-22)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_dirops_basic in 0.000 seconds
+===================================================================
+START - test_indirect_block_removal
+Wiping NAND
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'}' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+Block size: 1024
+Bytes_to_write: 13312
+Truncating to 12288
+Truncating to 0
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_indirect_block_removal in 0.000 seconds
+===================================================================
+START - test_mkfs_simple
+Wiping NAND
+Mount with flag no format
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [1;31m<err> fs: fs mount error (-22)[0m
+Try mkfs with RW access
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'ƑEfZ�H����$�-��ext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+Mount created file system without formatting
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_mkfs_simple in 0.000 seconds
+===================================================================
+START - test_mount_flags
+Wiping NAND
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [1;31m<err> fs: fs mount error (-22)[0m
+Mount unformatted with FS_MOUNT_FLAG_NO_FORMAT set
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [1;31m<err> fs: fs mount error (-22)[0m
+Mount unformatted with FS_MOUNT_FLAG_READ_ONLY set
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'@��W�AZ�J�FO?Lext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+Mount again to format volume
+Create some file
+Create other directory
+Mount as read-only
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_mount_flags in 0.000 seconds
+===================================================================
+START - test_mount_only
+Wiping NAND
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [1;31m<err> fs: fs mount error (-22)[0m
+Mount unformatted with FS_MOUNT_FLAG_NO_FORMAT set
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [1;31m<err> fs: fs mount error (-22)[0m
+Mount unformatted with FS_MOUNT_FLAG_READ_ONLY set
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'��͸��Eǡ۝��Q.�ext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+Mount again to format volume
+Create some file
+Mount as read-only
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_mount_only in 0.000 seconds
+===================================================================
+START - test_open_flags
+Wiping NAND
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'L:����KM�`;J�@W�ext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+
+## BEGIN 1: Attempt open non-existent (line 146)
+# 147: OPEN /sml/open_flags_file with flags 0
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 148: OPEN /sml/open_flags_file with flags 2
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 149: OPEN /sml/open_flags_file with flags 1
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 150: OPEN /sml/open_flags_file with flags 3
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 151: OPEN /sml/open_flags_file with flags 20
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 152: OPEN /sml/open_flags_file with flags 40
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 153: OPEN /sml/open_flags_file with flags 21
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 154: OPEN /sml/open_flags_file with flags 22
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 155: OPEN /sml/open_flags_file with flags 23
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 156: OPEN /sml/open_flags_file with flags 43
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 157: OPEN /sml/open_flags_file with flags 60
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 158: OPEN /sml/open_flags_file with flags 63
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+## END 1
+
+## BEGIN 2: Attempt create new with no R/W access (line 165)
+# 167: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 168: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 169: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 170: CLOSE /sml/open_flags_file
+SUCCESS
+# 171: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 2
+
+## BEGIN 3: Attempt create new with READ access (line 178)
+# 179: OPEN /sml/open_flags_file with flags 11
+SUCCESS
+# 181: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 185: READ /sml/open_flags_file
+SUCCESS
+# 186: CLOSE /sml/open_flags_file
+SUCCESS
+# 187: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 3
+
+## BEGIN 4: Attempt create new with WRITE access (line 191)
+# 192: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 193: WRITE /sml/open_flags_file
+SUCCESS
+# 195: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 199: CLOSE /sml/open_flags_file
+SUCCESS
+# 200: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 4
+
+## BEGIN 5: Attempt create new with R/W access (line 204)
+# 205: OPEN /sml/open_flags_file with flags 13
+SUCCESS
+# 206: WRITE /sml/open_flags_file
+SUCCESS
+# 208: READ /sml/open_flags_file
+SUCCESS
+# 209: CLOSE /sml/open_flags_file
+SUCCESS
+# 210: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 5
+
+## BEGIN 6: Attempt open existing with no R/W access (line 214)
+# 215: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 215: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 215: CLOSE /sml/open_flags_file
+SUCCESS
+# 217: OPEN /sml/open_flags_file with flags 0
+SUCCESS
+# 218: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 219: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 220: CLOSE /sml/open_flags_file
+SUCCESS
+# 224: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 6
+
+## BEGIN 7: Attempt open existing with READ access (line 228)
+# 229: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 229: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 229: CLOSE /sml/open_flags_file
+SUCCESS
+# 230: OPEN /sml/open_flags_file with flags 1
+SUCCESS
+# 232: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 237: READ /sml/open_flags_file
+SUCCESS
+# 238: CLOSE /sml/open_flags_file
+SUCCESS
+# 239: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 7
+
+## BEGIN 8: Attempt open existing with WRITE access (line 243)
+# 244: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 244: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 244: CLOSE /sml/open_flags_file
+SUCCESS
+# 245: OPEN /sml/open_flags_file with flags 2
+SUCCESS
+# 246: CHKPOS
+SUCCESS
+# 247: WRITE /sml/open_flags_file
+SUCCESS
+# 249: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 253: CLOSE /sml/open_flags_file
+SUCCESS
+# 254: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 8
+
+## BEGIN 9: Attempt open existing with R/W access (line 258)
+# 259: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 259: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 259: CLOSE /sml/open_flags_file
+SUCCESS
+# 260: OPEN /sml/open_flags_file with flags 3
+SUCCESS
+# 261: WRITE /sml/open_flags_file
+SUCCESS
+# 263: READ /sml/open_flags_file
+SUCCESS
+# 264: CLOSE /sml/open_flags_file
+SUCCESS
+# 265: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 9
+
+## BEGIN 10: Attempt append existing with no R/W access (line 269)
+# 270: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 270: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 270: CLOSE /sml/open_flags_file
+SUCCESS
+# 272: OPEN /sml/open_flags_file with flags 20
+SUCCESS
+# 273: CHKPOS
+SUCCESS
+# 274: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 275: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 276: CLOSE /sml/open_flags_file
+SUCCESS
+# 280: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 10
+
+## BEGIN 11: Attempt append existing with READ access (line 284)
+# 285: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 285: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 285: CLOSE /sml/open_flags_file
+SUCCESS
+# 286: OPEN /sml/open_flags_file with flags 21
+SUCCESS
+# 287: CHKPOS
+SUCCESS
+# 289: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 294: READ /sml/open_flags_file
+SUCCESS
+# 295: CLOSE /sml/open_flags_file
+SUCCESS
+# 296: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 11
+
+## BEGIN 12: Attempt append existing with WRITE access (line 300)
+# 301: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 301: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 301: CLOSE /sml/open_flags_file
+SUCCESS
+# 302: OPEN /sml/open_flags_file with flags 22
+SUCCESS
+# 303: CHKPOS
+SUCCESS
+# 304: WRITE /sml/open_flags_file
+SUCCESS
+# 306: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 310: CLOSE /sml/open_flags_file
+SUCCESS
+# 311: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 12
+
+## BEGIN 13: Attempt append existing with R/W access (line 315)
+# 316: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 316: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 316: CLOSE /sml/open_flags_file
+SUCCESS
+# 317: OPEN /sml/open_flags_file with flags 23
+SUCCESS
+# 318: CHKPOS
+SUCCESS
+# 319: WRITE /sml/open_flags_file
+SUCCESS
+# 321: READ /sml/open_flags_file
+SUCCESS
+# 322: CLOSE /sml/open_flags_file
+SUCCESS
+# 323: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 13
+
+## BEGIN 14: Attempt truncate a new file without write access (line 327)
+# 328: OPEN /sml/open_flags_file with flags 50
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 329: CLOSE /sml/open_flags_file
+SUCCESS
+# 330: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+## END 14
+
+## BEGIN 15: Attempt truncate a new file with write access (line 333)
+# 334: OPEN /sml/open_flags_file with flags 52
+SUCCESS
+# 335: CLOSE /sml/open_flags_file
+SUCCESS
+# 336: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 15
+
+## BEGIN 16: Attempt truncate existing with no write access (line 339)
+# 340: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 340: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 340: CLOSE /sml/open_flags_file
+SUCCESS
+# 341: OPEN /sml/open_flags_file with flags 40
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 342: CLOSE /sml/open_flags_file
+SUCCESS
+# 343: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 16
+
+## BEGIN 17: Attempt truncate existing with write access (line 346)
+# 347: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 347: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 347: CLOSE /sml/open_flags_file
+SUCCESS
+# 348: OPEN /sml/open_flags_file with flags 42
+SUCCESS
+# 349: CLOSE /sml/open_flags_file
+SUCCESS
+# 350: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 17
+
+## BEGIN 18: Attempt truncate existing with read access (line 353)
+# 354: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 354: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 354: CLOSE /sml/open_flags_file
+SUCCESS
+# 355: OPEN /sml/open_flags_file with flags 41
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 356: CLOSE /sml/open_flags_file
+SUCCESS
+# 357: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 18
+
+## BEGIN 19: Attempt truncate existing with R/W access (line 360)
+# 361: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 361: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 361: CLOSE /sml/open_flags_file
+SUCCESS
+# 362: OPEN /sml/open_flags_file with flags 43
+SUCCESS
+# 363: CLOSE /sml/open_flags_file
+SUCCESS
+# 364: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 19
+
+## BEGIN 20: Attempt read on truncated file but no read access (line 367)
+# 368: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 368: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 368: CLOSE /sml/open_flags_file
+SUCCESS
+# 369: OPEN /sml/open_flags_file with flags 42
+SUCCESS
+# 371: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 375: CLOSE /sml/open_flags_file
+SUCCESS
+# 376: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 20
+
+## BEGIN 21: Attempt append existing with WRITE access truncated file (line 379)
+# 380: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 380: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 380: CLOSE /sml/open_flags_file
+SUCCESS
+# 381: OPEN /sml/open_flags_file with flags 62
+SUCCESS
+# 382: CHKPOS
+SUCCESS
+# 383: WRITE /sml/open_flags_file
+SUCCESS
+# 385: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 389: CLOSE /sml/open_flags_file
+SUCCESS
+# 390: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 21
+
+## BEGIN 22: Check if append adds data to file (line 398)
+# 400: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 401: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 402: WRITE /sml/open_flags_file
+SUCCESS
+# 403: CLOSE /sml/open_flags_file
+SUCCESS
+# 405: OPEN /sml/open_flags_file with flags 22
+SUCCESS
+# 406: CHKPOS
+SUCCESS
+# 407: WRITE /sml/open_flags_file
+SUCCESS
+# 408: CHKPOS
+SUCCESS
+# 409: CLOSE /sml/open_flags_file
+SUCCESS
+# 410: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 22
+
+## BEGIN 23: Check if appended forwards file before write (line 414)
+# 416: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 417: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 418: WRITE /sml/open_flags_file
+SUCCESS
+# 419: CLOSE /sml/open_flags_file
+SUCCESS
+# 421: OPEN /sml/open_flags_file with flags 22
+SUCCESS
+# 422: CHKPOS
+SUCCESS
+# 423: REWIND
+SUCCESS
+# 424: WRITE /sml/open_flags_file
+SUCCESS
+# 425: CHKPOS
+SUCCESS
+# 426: CLOSE /sml/open_flags_file
+SUCCESS
+# 427: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 23
+
+## BEGIN 24: Check if file is truncated with data (line 431)
+# 433: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 434: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 435: WRITE /sml/open_flags_file
+SUCCESS
+# 436: CLOSE /sml/open_flags_file
+SUCCESS
+# 439: OPEN /sml/open_flags_file with flags 11
+SUCCESS
+# 440: READ /sml/open_flags_file
+SUCCESS
+# 441: CLOSE /sml/open_flags_file
+SUCCESS
+# 443: OPEN /sml/open_flags_file with flags 43
+SUCCESS
+# 444: CHKPOS
+SUCCESS
+# 445: READ /sml/open_flags_file
+SUCCESS
+# 446: CLOSE /sml/open_flags_file
+SUCCESS
+# 447: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 24
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_open_flags in 0.000 seconds
+===================================================================
+START - test_open_flags_2K
+Wiping NAND
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:2048 fs_sz:33554432 ino_bytes:4096 uuid:'�r{v`�Db���o��ext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:33554432[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 501 l+f: 502[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:16384 per_grp:16384 occupied:503 used:503[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:7952 used:11 itable_blocks:497[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 16384 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 7952 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42fb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 10[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42ffa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 501[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 502[0m
+
+## BEGIN 1: Attempt open non-existent (line 146)
+# 147: OPEN /sml/open_flags_file with flags 0
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 148: OPEN /sml/open_flags_file with flags 2
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 149: OPEN /sml/open_flags_file with flags 1
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 150: OPEN /sml/open_flags_file with flags 3
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 151: OPEN /sml/open_flags_file with flags 20
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 152: OPEN /sml/open_flags_file with flags 40
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 153: OPEN /sml/open_flags_file with flags 21
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 154: OPEN /sml/open_flags_file with flags 22
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 155: OPEN /sml/open_flags_file with flags 23
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 156: OPEN /sml/open_flags_file with flags 43
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+# 157: OPEN /sml/open_flags_file with flags 60
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 158: OPEN /sml/open_flags_file with flags 63
+[00:00:00.550,000] [1;31m<err> fs: file open error (-2)[0m
+SUCCESS
+## END 1
+
+## BEGIN 2: Attempt create new with no R/W access (line 165)
+# 167: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 168: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 169: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 170: CLOSE /sml/open_flags_file
+SUCCESS
+# 171: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 2
+
+## BEGIN 3: Attempt create new with READ access (line 178)
+# 179: OPEN /sml/open_flags_file with flags 11
+SUCCESS
+# 181: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 185: READ /sml/open_flags_file
+SUCCESS
+# 186: CLOSE /sml/open_flags_file
+SUCCESS
+# 187: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 3
+
+## BEGIN 4: Attempt create new with WRITE access (line 191)
+# 192: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 193: WRITE /sml/open_flags_file
+SUCCESS
+# 195: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 199: CLOSE /sml/open_flags_file
+SUCCESS
+# 200: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 4
+
+## BEGIN 5: Attempt create new with R/W access (line 204)
+# 205: OPEN /sml/open_flags_file with flags 13
+SUCCESS
+# 206: WRITE /sml/open_flags_file
+SUCCESS
+# 208: READ /sml/open_flags_file
+SUCCESS
+# 209: CLOSE /sml/open_flags_file
+SUCCESS
+# 210: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 5
+
+## BEGIN 6: Attempt open existing with no R/W access (line 214)
+# 215: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 215: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 215: CLOSE /sml/open_flags_file
+SUCCESS
+# 217: OPEN /sml/open_flags_file with flags 0
+SUCCESS
+# 218: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 219: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 220: CLOSE /sml/open_flags_file
+SUCCESS
+# 224: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 6
+
+## BEGIN 7: Attempt open existing with READ access (line 228)
+# 229: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 229: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 229: CLOSE /sml/open_flags_file
+SUCCESS
+# 230: OPEN /sml/open_flags_file with flags 1
+SUCCESS
+# 232: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 237: READ /sml/open_flags_file
+SUCCESS
+# 238: CLOSE /sml/open_flags_file
+SUCCESS
+# 239: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 7
+
+## BEGIN 8: Attempt open existing with WRITE access (line 243)
+# 244: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 244: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 244: CLOSE /sml/open_flags_file
+SUCCESS
+# 245: OPEN /sml/open_flags_file with flags 2
+SUCCESS
+# 246: CHKPOS
+SUCCESS
+# 247: WRITE /sml/open_flags_file
+SUCCESS
+# 249: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 253: CLOSE /sml/open_flags_file
+SUCCESS
+# 254: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 8
+
+## BEGIN 9: Attempt open existing with R/W access (line 258)
+# 259: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 259: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 259: CLOSE /sml/open_flags_file
+SUCCESS
+# 260: OPEN /sml/open_flags_file with flags 3
+SUCCESS
+# 261: WRITE /sml/open_flags_file
+SUCCESS
+# 263: READ /sml/open_flags_file
+SUCCESS
+# 264: CLOSE /sml/open_flags_file
+SUCCESS
+# 265: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 9
+
+## BEGIN 10: Attempt append existing with no R/W access (line 269)
+# 270: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 270: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 270: CLOSE /sml/open_flags_file
+SUCCESS
+# 272: OPEN /sml/open_flags_file with flags 20
+SUCCESS
+# 273: CHKPOS
+SUCCESS
+# 274: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 275: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 276: CLOSE /sml/open_flags_file
+SUCCESS
+# 280: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 10
+
+## BEGIN 11: Attempt append existing with READ access (line 284)
+# 285: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 285: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 285: CLOSE /sml/open_flags_file
+SUCCESS
+# 286: OPEN /sml/open_flags_file with flags 21
+SUCCESS
+# 287: CHKPOS
+SUCCESS
+# 289: WRITE /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file write error (-13)[0m
+SUCCESS
+# 294: READ /sml/open_flags_file
+SUCCESS
+# 295: CLOSE /sml/open_flags_file
+SUCCESS
+# 296: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 11
+
+## BEGIN 12: Attempt append existing with WRITE access (line 300)
+# 301: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 301: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 301: CLOSE /sml/open_flags_file
+SUCCESS
+# 302: OPEN /sml/open_flags_file with flags 22
+SUCCESS
+# 303: CHKPOS
+SUCCESS
+# 304: WRITE /sml/open_flags_file
+SUCCESS
+# 306: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 310: CLOSE /sml/open_flags_file
+SUCCESS
+# 311: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 12
+
+## BEGIN 13: Attempt append existing with R/W access (line 315)
+# 316: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 316: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 316: CLOSE /sml/open_flags_file
+SUCCESS
+# 317: OPEN /sml/open_flags_file with flags 23
+SUCCESS
+# 318: CHKPOS
+SUCCESS
+# 319: WRITE /sml/open_flags_file
+SUCCESS
+# 321: READ /sml/open_flags_file
+SUCCESS
+# 322: CLOSE /sml/open_flags_file
+SUCCESS
+# 323: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 13
+
+## BEGIN 14: Attempt truncate a new file without write access (line 327)
+# 328: OPEN /sml/open_flags_file with flags 50
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 329: CLOSE /sml/open_flags_file
+SUCCESS
+# 330: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+## END 14
+
+## BEGIN 15: Attempt truncate a new file with write access (line 333)
+# 334: OPEN /sml/open_flags_file with flags 52
+SUCCESS
+# 335: CLOSE /sml/open_flags_file
+SUCCESS
+# 336: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 15
+
+## BEGIN 16: Attempt truncate existing with no write access (line 339)
+# 340: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 340: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 340: CLOSE /sml/open_flags_file
+SUCCESS
+# 341: OPEN /sml/open_flags_file with flags 40
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 342: CLOSE /sml/open_flags_file
+SUCCESS
+# 343: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 16
+
+## BEGIN 17: Attempt truncate existing with write access (line 346)
+# 347: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 347: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 347: CLOSE /sml/open_flags_file
+SUCCESS
+# 348: OPEN /sml/open_flags_file with flags 42
+SUCCESS
+# 349: CLOSE /sml/open_flags_file
+SUCCESS
+# 350: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 17
+
+## BEGIN 18: Attempt truncate existing with read access (line 353)
+# 354: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 354: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 354: CLOSE /sml/open_flags_file
+SUCCESS
+# 355: OPEN /sml/open_flags_file with flags 41
+[00:00:00.550,000] [1;31m<err> fs: file should be opened for write to truncate!![0m
+SUCCESS
+# 356: CLOSE /sml/open_flags_file
+SUCCESS
+# 357: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 18
+
+## BEGIN 19: Attempt truncate existing with R/W access (line 360)
+# 361: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 361: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 361: CLOSE /sml/open_flags_file
+SUCCESS
+# 362: OPEN /sml/open_flags_file with flags 43
+SUCCESS
+# 363: CLOSE /sml/open_flags_file
+SUCCESS
+# 364: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 19
+
+## BEGIN 20: Attempt read on truncated file but no read access (line 367)
+# 368: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 368: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 368: CLOSE /sml/open_flags_file
+SUCCESS
+# 369: OPEN /sml/open_flags_file with flags 42
+SUCCESS
+# 371: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 375: CLOSE /sml/open_flags_file
+SUCCESS
+# 376: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 20
+
+## BEGIN 21: Attempt append existing with WRITE access truncated file (line 379)
+# 380: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 380: OPEN /sml/open_flags_file with flags 10
+SUCCESS
+# 380: CLOSE /sml/open_flags_file
+SUCCESS
+# 381: OPEN /sml/open_flags_file with flags 62
+SUCCESS
+# 382: CHKPOS
+SUCCESS
+# 383: WRITE /sml/open_flags_file
+SUCCESS
+# 385: READ /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: file read error (-13)[0m
+SUCCESS
+# 389: CLOSE /sml/open_flags_file
+SUCCESS
+# 390: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 21
+
+## BEGIN 22: Check if append adds data to file (line 398)
+# 400: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 401: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 402: WRITE /sml/open_flags_file
+SUCCESS
+# 403: CLOSE /sml/open_flags_file
+SUCCESS
+# 405: OPEN /sml/open_flags_file with flags 22
+SUCCESS
+# 406: CHKPOS
+SUCCESS
+# 407: WRITE /sml/open_flags_file
+SUCCESS
+# 408: CHKPOS
+SUCCESS
+# 409: CLOSE /sml/open_flags_file
+SUCCESS
+# 410: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 22
+
+## BEGIN 23: Check if appended forwards file before write (line 414)
+# 416: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 417: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 418: WRITE /sml/open_flags_file
+SUCCESS
+# 419: CLOSE /sml/open_flags_file
+SUCCESS
+# 421: OPEN /sml/open_flags_file with flags 22
+SUCCESS
+# 422: CHKPOS
+SUCCESS
+# 423: REWIND
+SUCCESS
+# 424: WRITE /sml/open_flags_file
+SUCCESS
+# 425: CHKPOS
+SUCCESS
+# 426: CLOSE /sml/open_flags_file
+SUCCESS
+# 427: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 23
+
+## BEGIN 24: Check if file is truncated with data (line 431)
+# 433: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [1;31m<err> fs: failed to unlink path (-2)[0m
+SUCCESS
+# 434: OPEN /sml/open_flags_file with flags 12
+SUCCESS
+# 435: WRITE /sml/open_flags_file
+SUCCESS
+# 436: CLOSE /sml/open_flags_file
+SUCCESS
+# 439: OPEN /sml/open_flags_file with flags 11
+SUCCESS
+# 440: READ /sml/open_flags_file
+SUCCESS
+# 441: CLOSE /sml/open_flags_file
+SUCCESS
+# 443: OPEN /sml/open_flags_file with flags 43
+SUCCESS
+# 444: CHKPOS
+SUCCESS
+# 445: READ /sml/open_flags_file
+SUCCESS
+# 446: CLOSE /sml/open_flags_file
+SUCCESS
+# 447: UNLINK /sml/open_flags_file
+[00:00:00.550,000] [0m<inf> ext2: Inode 12 is free[0m
+SUCCESS
+## END 24
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_open_flags_2K in 0.000 seconds
+===================================================================
+START - test_statvfs
+Wiping NAND
+[00:00:00.550,000] [1;31m<err> ext2: Wrong file system magic number (0)[0m
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'�?��B'����p�ext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+Mounted file system: bsize:1024 frsize:1024 blocks:8192, bfree:7937
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_statvfs in 0.000 seconds
+===================================================================
+START - test_write_big_file
+Wiping NAND
+[00:00:00.550,000] [0m<inf> ext2: Formatting the storage device[0m
+[00:00:00.550,000] [0m<inf> ext2: [Config] blk_sz:1024 fs_sz:8388608 ino_bytes:4096 uuid:'�o/�Gް�!��I6ext2' vol:'ext2'[0m
+[00:00:00.550,000] [0m<inf> ext2: [Memory] available:134217728 requested:8388608[0m
+[00:00:00.550,000] [0m<inf> ext2: root: 253 l+f: 254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Blocks] total:8192 per_grp:8192 occupied:255 used:254[0m
+[00:00:00.550,000] [0m<inf> ext2: [Inodes] total:1984 used:11 itable_blocks:248[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 8191 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: last byte: 80[0m
+[00:00:00.550,000] [0m<dbg> ext2: set_bitmap_padding: Set bitmap padding: 1984 bytes[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42eb20[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Inode offset: 2[0m
+[00:00:00.550,000] [0m<dbg> ext2: default_directory_inode: Set directory inode: 0x42efa0[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Root dir blk: 253[0m
+[00:00:00.550,000] [0m<dbg> ext2: ext2_format: Lost found dir blk: 254[0m
+Available blocks: 7905
+Block size: 1024
+Bytes_to_write: 8094720
+Truncating to 3035520
+Truncating to 1138320
+Truncating to 426870
+Truncating to 160074
+Truncating to 60027
+Truncating to 22509
+Truncating to 8439
+Truncating to 3162
+Truncating to 1185
+Truncating to 444
+Truncating to 165
+Truncating to 60
+Truncating to 21
+Truncating to 6
+Truncating to 0
+[00:00:00.550,000] [1;31m<err> fs: fs not mounted (mp == 0x42c1e0)[0m
+ PASS - test_write_big_file in 0.000 seconds
+===================================================================
+TESTSUITE ext2tests succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [ext2tests]: pass = 11, fail = 0, skip = 0, total = 11 duration = 0.550 seconds
+ - PASS - [ext2tests.test_basic] duration = 0.110 seconds
+ - PASS - [ext2tests.test_dirops] duration = 0.440 seconds
+ - PASS - [ext2tests.test_dirops_basic] duration = 0.000 seconds
+ - PASS - [ext2tests.test_indirect_block_removal] duration = 0.000 seconds
+ - PASS - [ext2tests.test_mkfs_simple] duration = 0.000 seconds
+ - PASS - [ext2tests.test_mount_flags] duration = 0.000 seconds
+ - PASS - [ext2tests.test_mount_only] duration = 0.000 seconds
+ - PASS - [ext2tests.test_open_flags] duration = 0.000 seconds
+ - PASS - [ext2tests.test_open_flags_2K] duration = 0.000 seconds
+ - PASS - [ext2tests.test_statvfs] duration = 0.000 seconds
+ - PASS - [ext2tests.test_write_big_file] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+
+warning: DISK_DRIVER_RAM (defined at drivers/disk/Kconfig.ram:4) was assigned the value 'y' but got
+the value 'n'. Check these unsatisfied dependencies: DT_HAS_ZEPHYR_RAM_DISK_ENABLED (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_DISK_DRIVER_RAM and/or look up
+DISK_DRIVER_RAM in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/subsys/random/CMakeLists.txt:12 (message):
+  
+
+      Warning: CONFIG_TIMER_RANDOM_GENERATOR and CONFIG_TEST_CSPRNG_GENERATOR are
+      not truly random generators. This capability is not secure and it is
+      provided for testing purposes only. Use it carefully.
+
+
+
+=== RC ===
+0

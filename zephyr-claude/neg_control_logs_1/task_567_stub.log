@@ -1,0 +1,344 @@
+=== COMMAND ===
+west build -b native_sim/native/64 -p -d build -- -DZEPHYR_TOOLCHAIN_VARIANT=host && ./build/zephyr/zephyr.exe
+
+=== STDOUT ===
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (13.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build
+-- west build: building application
+[1/110] Preparing syscall dependency handling
+
+[2/110] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/110] Generating misc/generated/syscalls_subdirs.trigger
+[4/110] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/110] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/110] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/110] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/110] Generating include/generated/zephyr/driver-validation.h
+[9/110] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/110] Generating ../../include/generated/zephyr/heap_constants.h
+[11/110] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/110] Generating include/generated/zephyr/offsets.h
+[13/110] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[20/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[24/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[26/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[28/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[29/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/110] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[32/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[33/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[38/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[39/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[40/110] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[41/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[42/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[56/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[57/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[58/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[59/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[60/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[61/110] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[62/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[63/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[66/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[67/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[68/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[69/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[70/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[71/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[72/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[73/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[74/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[75/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[76/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[77/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[78/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/uuid/uuid.c.obj
+FAILED: zephyr/CMakeFiles/zephyr.dir/lib/uuid/uuid.c.obj 
+ccache /usr/bin/gcc -DKERNEL -DK_HEAP_MEM_POOL_SIZE=0 -D__ZEPHYR__=1 -I/home/huyj/zephyr-workspace/zephyr/kernel/include -I/home/huyj/zephyr-workspace/zephyr/arch/posix/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/include/generated/zephyr -I/home/huyj/zephyr-workspace/zephyr/include -I/home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/include/generated -I/home/huyj/zephyr-workspace/zephyr/soc/native/inf_clock -I/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/common/src/include -I/home/huyj/zephyr-workspace/zephyr/scripts/native_simulator/native/src/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/include -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/coverage -I/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/include -fno-strict-aliasing -Os -imacros /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build/zephyr/include/generated/zephyr/autoconf.h -fno-common -g -gdwarf-4 -fdiagnostics-color=always -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wdouble-promotion -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr/tests/lib/uuid=CMAKE_SOURCE_DIR -fmacro-prefix-map=/home/huyj/zephyr-workspace/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/home/huyj/zephyr-workspace=WEST_TOPDIR -ffunction-sections -fdata-sections -m64 -fPIC -fvisibility=hidden -fno-freestanding -std=c17 -MD -MT zephyr/CMakeFiles/zephyr.dir/lib/uuid/uuid.c.obj -MF zephyr/CMakeFiles/zephyr.dir/lib/uuid/uuid.c.obj.d -o zephyr/CMakeFiles/zephyr.dir/lib/uuid/uuid.c.obj -c /home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:1:29: warning: ‘struct uuid’ declared inside parameter list will not be visible outside of this definition or declaration
+    1 | int uuid_generate_v4(struct uuid *out)
+      |                             ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:6:2: error: #endif without #if
+    6 | #endif
+      |  ^~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:64:28: warning: ‘struct uuid’ declared inside parameter list will not be visible outside of this definition or declaration
+   64 | int uuid_copy(const struct uuid *data, struct uuid *out)
+      |                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: In function ‘uuid_copy’:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:66:20: error: ‘NULL’ undeclared (first use in this function)
+   66 |         if (out == NULL) {
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:1:1: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+  +++ |+#include <stddef.h>
+    1 | int uuid_generate_v4(struct uuid *out)
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:66:20: note: each undeclared identifier is reported only once for each function it appears in
+   66 |         if (out == NULL) {
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:67:25: error: ‘EINVAL’ undeclared (first use in this function)
+   67 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:69:9: warning: implicit declaration of function ‘memcpy’ [-Wimplicit-function-declaration]
+   69 |         memcpy(out->val, data->val, UUID_SIZE);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:1:1: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+  +++ |+#include <string.h>
+    1 | int uuid_generate_v4(struct uuid *out)
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:69:9: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+   69 |         memcpy(out->val, data->val, UUID_SIZE);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:69:9: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:69:19: error: invalid use of undefined type ‘struct uuid’
+   69 |         memcpy(out->val, data->val, UUID_SIZE);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:69:30: error: invalid use of undefined type ‘const struct uuid’
+   69 |         memcpy(out->val, data->val, UUID_SIZE);
+      |                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:69:37: error: ‘UUID_SIZE’ undeclared (first use in this function)
+   69 |         memcpy(out->val, data->val, UUID_SIZE);
+      |                                     ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:73:28: error: unknown type name ‘uint8_t’
+   73 | int uuid_from_buffer(const uint8_t data[UUID_SIZE], struct uuid *out)
+      |                            ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:73:41: error: ‘UUID_SIZE’ undeclared here (not in a function)
+   73 | int uuid_from_buffer(const uint8_t data[UUID_SIZE], struct uuid *out)
+      |                                         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:73:60: warning: ‘struct uuid’ declared inside parameter list will not be visible outside of this definition or declaration
+   73 | int uuid_from_buffer(const uint8_t data[UUID_SIZE], struct uuid *out)
+      |                                                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: In function ‘uuid_from_buffer’:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:75:22: error: ‘NULL’ undeclared (first use in this function)
+   75 |         if ((data == NULL) || (out == NULL)) {
+      |                      ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:75:22: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:76:25: error: ‘EINVAL’ undeclared (first use in this function)
+   76 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:78:9: warning: incompatible implicit declaration of built-in function ‘memcpy’ [-Wbuiltin-declaration-mismatch]
+   78 |         memcpy(out->val, data, UUID_SIZE);
+      |         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:78:9: note: include ‘<string.h>’ or provide a declaration of ‘memcpy’
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:78:19: error: invalid use of undefined type ‘struct uuid’
+   78 |         memcpy(out->val, data, UUID_SIZE);
+      |                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:78:32: error: ‘UUID_SIZE’ undeclared (first use in this function)
+   78 |         memcpy(out->val, data, UUID_SIZE);
+      |                                ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:82:38: error: ‘UUID_STR_LEN’ undeclared here (not in a function)
+   82 | int uuid_from_string(const char data[UUID_STR_LEN], struct uuid *out)
+      |                                      ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:82:60: warning: ‘struct uuid’ declared inside parameter list will not be visible outside of this definition or declaration
+   82 | int uuid_from_string(const char data[UUID_STR_LEN], struct uuid *out)
+      |                                                            ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: In function ‘uuid_from_string’:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:22: error: ‘NULL’ undeclared (first use in this function)
+   84 |         if ((data == NULL) || (strlen(data) + 1 != UUID_STR_LEN) || (out == NULL)) {
+      |                      ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:22: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:32: warning: implicit declaration of function ‘strlen’ [-Wimplicit-function-declaration]
+   84 |         if ((data == NULL) || (strlen(data) + 1 != UUID_STR_LEN) || (out == NULL)) {
+      |                                ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:32: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:32: warning: incompatible implicit declaration of built-in function ‘strlen’ [-Wbuiltin-declaration-mismatch]
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:32: note: include ‘<string.h>’ or provide a declaration of ‘strlen’
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:84:52: error: ‘UUID_STR_LEN’ undeclared (first use in this function)
+   84 |         if ((data == NULL) || (strlen(data) + 1 != UUID_STR_LEN) || (out == NULL)) {
+      |                                                    ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:85:25: error: ‘EINVAL’ undeclared (first use in this function)
+   85 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:90:21: warning: implicit declaration of function ‘should_be_hyphen’ [-Wimplicit-function-declaration]
+   90 |                 if (should_be_hyphen(i)) {
+      |                     ^~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:97:22: warning: implicit declaration of function ‘isxdigit’ [-Wimplicit-function-declaration]
+   97 |                 if (!isxdigit(char_i)) {
+      |                      ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:1:1: note: include ‘<ctype.h>’ or provide a declaration of ‘isxdigit’
+  +++ |+#include <ctype.h>
+    1 | int uuid_generate_v4(struct uuid *out)
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:112:17: error: unknown type name ‘size_t’
+  112 |                 size_t hex2bin_rc =
+      |                 ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:112:17: note: ‘size_t’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:113:25: warning: implicit declaration of function ‘hex2bin’ [-Wimplicit-function-declaration]
+  113 |                         hex2bin(&data[data_idx], 2, &out->val[out_idx], UUID_SIZE - out_idx);
+      |                         ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:113:57: error: invalid use of undefined type ‘struct uuid’
+  113 |                         hex2bin(&data[data_idx], 2, &out->val[out_idx], UUID_SIZE - out_idx);
+      |                                                         ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:113:73: error: ‘UUID_SIZE’ undeclared (first use in this function)
+  113 |                         hex2bin(&data[data_idx], 2, &out->val[out_idx], UUID_SIZE - out_idx);
+      |                                                                         ^~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: At top level:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:123:45: error: unknown type name ‘uint8_t’
+  123 | int uuid_to_buffer(const struct uuid *data, uint8_t out[UUID_SIZE])
+      |                                             ^~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:1:1: note: ‘uint8_t’ is defined in header ‘<stdint.h>’; did you forget to ‘#include <stdint.h>’?
+  +++ |+#include <stdint.h>
+    1 | int uuid_generate_v4(struct uuid *out)
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:132:54: error: ‘UUID_STR_LEN’ undeclared here (not in a function)
+  132 | int uuid_to_string(const struct uuid *data, char out[UUID_STR_LEN])
+      |                                                      ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:132:33: warning: ‘struct uuid’ declared inside parameter list will not be visible outside of this definition or declaration
+  132 | int uuid_to_string(const struct uuid *data, char out[UUID_STR_LEN])
+      |                                 ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c: In function ‘uuid_to_string’:
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:134:20: error: ‘NULL’ undeclared (first use in this function)
+  134 |         if (out == NULL) {
+      |                    ^~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:134:20: note: ‘NULL’ is defined in header ‘<stddef.h>’; did you forget to ‘#include <stddef.h>’?
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:135:25: error: ‘EINVAL’ undeclared (first use in this function)
+  135 |                 return -EINVAL;
+      |                         ^~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:137:9: warning: implicit declaration of function ‘snprintf’ [-Wimplicit-function-declaration]
+  137 |         snprintf(out, UUID_STR_LEN,
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:1:1: note: include ‘<stdio.h>’ or provide a declaration of ‘snprintf’
+  +++ |+#include <stdio.h>
+    1 | int uuid_generate_v4(struct uuid *out)
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:137:9: warning: incompatible implicit declaration of built-in function ‘snprintf’ [-Wbuiltin-declaration-mismatch]
+  137 |         snprintf(out, UUID_STR_LEN,
+      |         ^~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:137:9: note: include ‘<stdio.h>’ or provide a declaration of ‘snprintf’
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:137:23: error: ‘UUID_STR_LEN’ undeclared (first use in this function)
+  137 |         snprintf(out, UUID_STR_LEN,
+      |                       ^~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:139:22: error: invalid use of undefined type ‘const struct uuid’
+  139 |                  data->val[0], data->val[1], data->val[2], data->val[3], data->val[4], data->val[5],
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:139:36: error: invalid use of undefined type ‘const struct uuid’
+  139 |                  data->val[0], data->val[1], data->val[2], data->val[3], data->val[4], data->val[5],
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:139:50: error: invalid use of undefined type ‘const struct uuid’
+  139 |                  data->val[0], data->val[1], data->val[2], data->val[3], data->val[4], data->val[5],
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:139:64: error: invalid use of undefined type ‘const struct uuid’
+  139 |                  data->val[0], data->val[1], data->val[2], data->val[3], data->val[4], data->val[5],
+      |                                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:139:78: error: invalid use of undefined type ‘const struct uuid’
+  139 |                  data->val[0], data->val[1], data->val[2], data->val[3], data->val[4], data->val[5],
+      |                                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:139:92: error: invalid use of undefined type ‘const struct uuid’
+  139 |                  data->val[0], data->val[1], data->val[2], data->val[3], data->val[4], data->val[5],
+      |                                                                                            ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:140:22: error: invalid use of undefined type ‘const struct uuid’
+  140 |                  data->val[6], data->val[7], data->val[8], data->val[9], data->val[10],
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:140:36: error: invalid use of undefined type ‘const struct uuid’
+  140 |                  data->val[6], data->val[7], data->val[8], data->val[9], data->val[10],
+      |                                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:140:50: error: invalid use of undefined type ‘const struct uuid’
+  140 |                  data->val[6], data->val[7], data->val[8], data->val[9], data->val[10],
+      |                                                  ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:140:64: error: invalid use of undefined type ‘const struct uuid’
+  140 |                  data->val[6], data->val[7], data->val[8], data->val[9], data->val[10],
+      |                                                                ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:140:78: error: invalid use of undefined type ‘const struct uuid’
+  140 |                  data->val[6], data->val[7], data->val[8], data->val[9], data->val[10],
+      |                                                                              ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:141:22: error: invalid use of undefined type ‘const struct uuid’
+  141 |                  data->val[11], data->val[12], data->val[13], data->val[14], data->val[15]);
+      |                      ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:141:37: error: invalid use of undefined type ‘const struct uuid’
+  141 |                  data->val[11], data->val[12], data->val[13], data->val[14], data->val[15]);
+      |                                     ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:141:52: error: invalid use of undefined type ‘const struct uuid’
+  141 |                  data->val[11], data->val[12], data->val[13], data->val[14], data->val[15]);
+      |                                                    ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:141:67: error: invalid use of undefined type ‘const struct uuid’
+  141 |                  data->val[11], data->val[12], data->val[13], data->val[14], data->val[15]);
+      |                                                                   ^~
+/home/huyj/zephyr-workspace/zephyr/lib/uuid/uuid.c:141:82: error: invalid use of undefined type ‘const struct uuid’
+  141 |                  data->val[11], data->val[12], data->val[13], data->val[14], data->val[15]);
+      |                                                                                  ^~
+[79/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[80/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[81/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[82/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[83/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[84/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[85/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[86/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[87/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[88/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[89/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[90/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[91/110] Linking C static library app/libapp.a
+[92/110] Generating linker_zephyr_pre0.cmd
+[93/110] Linking C static library zephyr/arch/common/libarch__common.a
+[94/110] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[95/110] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[96/110] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[97/110] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[98/110] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[99/110] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+ninja: build stopped: subcommand failed.
+
+=== STDERR ===
+Loading Zephyr default modules (Zephyr base).
+FATAL ERROR: command exited with status 1: /usr/bin/cmake --build /home/huyj/zephyr-workspace/zephyr/tests/lib/uuid/build
+
+=== RC ===
+1

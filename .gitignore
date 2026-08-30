@@ -28,13 +28,6 @@ build/
 build/
 **/build/
 
-# ---- Trajectory logs (large, not reproducible) ----
-zephyr-claude/trajectory/
-zephyr-claude/failed_trajectories/
-
-# ---- Benchmark results (regeneratable) ----
-zephyr-claude/results/
-
 # ---- Claude sandbox workspace (scratches) ----
 .zephyr-workspaces/
 .claude_home/
