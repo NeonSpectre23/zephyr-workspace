@@ -1,123 +1,149 @@
-# Zephyr RTOS Code Completion Benchmark
+# Zephyr RTOS 代码补全基准测试
 
-A benchmark for evaluating LLMs (Claude / DeepSeek / etc.) on **Zephyr RTOS C function completion** — the model sees a Zephyr source file with a function body replaced by `/* MASKED */`, must implement it, and the result is validated by `west build` + running the actual unit tests.
+用于评估大语言模型（Claude / DeepSeek 等）在 **Zephyr RTOS C 函数补全**任务上的表现——模型看到一份函数体被替换为 `/* MASKED */` 的 Zephyr 源文件，需要实现该函数，最终通过 `west build` 编译 + 运行真实单元测试来验证结果。
 
-> Forked from a RIOT-OS benchmark pattern. Adapted for Zephyr 4.4.0, tested with DeepSeek v4 Flash via Anthropic-compatible API.
-> 
-> **Note:** This repo contains only the benchmark framework and dataset. The Zephyr RTOS source code and its modules are **not included** — they are fetched automatically by `west init` + `west update` during setup.
+> 从 RIOT-OS 基准测试模式移植而来，适配 Zephyr 4.4.0，已通过 Anthropic 兼容 API 配合 DeepSeek v4 Flash 测试。
+>
+> **说明：** 本仓库只包含基准测试框架和数据集。Zephyr RTOS 源码及其模块**不包含在内**——它们会在安装时由 `west init` + `west update` 自动拉取。
 
-## What's in This Repo (vs. fetched by west)
+## 仓库内容（git 内 vs. west 拉取）
 
-| Included in git | Fetched by `west update` |
+| 包含在 git 中 | 由 `west update` 拉取 |
 |---|---|
-| `zephyr-claude/` — benchmark framework | `zephyr/` — Zephyr RTOS source |
-| `zephyr-bench/` — 885 tasks + oracles | `modules/` — HAL, crypto, filesystem |
-| `activate.sh`, `setup.sh`, `environment.yml` | `bootloader/` — MCUboot |
-| `claude_settings.template`, `.gitignore` | `tools/edtt/` — Bluetooth test tool |
-| `README.md`, `.github/workflows/ci.yml` | |
+| `zephyr-claude/` — 基准测试框架 | `zephyr/` — Zephyr RTOS 源码 |
+| `zephyr-bench/` — 712 个任务 + oracle | `modules/` — HAL、加密、文件系统 |
+| `activate.sh`、`setup.sh`、`environment.yml` | `bootloader/` — MCUboot |
+| `claude_settings.template`、`.gitignore` | `tools/edtt/` — 蓝牙测试工具 |
+| `README.md`、`.github/workflows/ci.yml` | |
 
-### File tree
+### 目录结构
 
 ```
 zephyr-workspace/
-├── zephyr/               ← Zephyr RTOS v4.4.0 (fetched by west, not in git)
-├── zephyr-bench/         ← Benchmark dataset (885 tasks) + build scripts  ★ in git
-│   ├── zephyr_tasks.c.jsonl    628 tasks (C files)
-│   ├── zephyr_tasks.h.jsonl    257 tasks (header files)
-│   ├── oracles/                885 verified reference implementations
-│   ├── build_zephyr_dataset.py Dataset construction from unit tests
-│   ├── extract_zephyr_tests.py ZTEST block extraction
-│   └── verify_zephyr_tests.py  Oracle injection & validation
-├── zephyr-claude/        ← Evaluation harness  ★ in git
-│   ├── agent.py               Main pipeline: mask → Claude → verify
-│   ├── mask.py                tree-sitter AST operations
-│   ├── runner.py              CLI entry point
-│   ├── prompt.py              LLM prompt template
-│   ├── config.py              Global configuration
-│   ├── Dockerfile             Sandbox image (Ubuntu + west + Claude Code CLI)
-│   ├── analyze_results.py     Results analysis & statistics
-│   └── final_analysis.py      Deep-dive failure pattern analysis
-├── bootloader/           ← MCUboot (fetched by west, not in git)
-├── modules/              ← HAL, crypto, etc. (fetched by west, not in git)
-├── tools/                ← (fetched by west, not in git)
-├── activate.sh           ← Environment activation script
+├── zephyr/               ← Zephyr RTOS v4.4.0（west 拉取，不在 git 中）
+├── zephyr-bench/         ← 基准数据集（712 个已验证任务）+ 构建脚本  ★ 在 git 中
+│   ├── zephyr_tasks.c.jsonl    493 个任务（C 文件）
+│   ├── zephyr_tasks.h.jsonl    219 个任务（头文件）
+│   ├── oracles/                712 个已验证的参考实现
+│   ├── build_zephyr_dataset.py 从单元测试构建数据集
+│   ├── extract_zephyr_tests.py ZTEST 块提取
+│   ├── verify_zephyr_tests.py  Oracle 注入与验证
+│   └── filter_dataset.py       按验证判定筛出最终数据集
+├── zephyr-claude/        ← 评估框架  ★ 在 git 中
+│   ├── agent.py               主流水线：mask → Claude → verify
+│   ├── mask.py                tree-sitter AST 操作
+│   ├── runner.py              CLI 入口
+│   ├── prompt.py              LLM 提示词模板
+│   ├── config.py              全局配置
+│   ├── Dockerfile             沙箱镜像（Ubuntu + west + Claude Code CLI）
+│   ├── inject_test.py         答案注入验证（oracle 应通过测试）
+│   ├── neg_control.py         负控制验证（空实现应让测试失败）
+│   ├── whitebox.py            失败机理分类（对齐三 track taxonomy）
+│   ├── analyze_results.py     结果分析与统计
+│   ├── final_analysis.py      失败模式深入分析
+│   └── settings.json          benchmark 专用 API 配置（gitignore，见 §6）
+├── bootloader/           ← MCUboot（west 拉取，不在 git 中）
+├── modules/              ← HAL、加密等（west 拉取，不在 git 中）
+├── tools/                ←（west 拉取，不在 git 中）
+├── activate.sh           ← 环境激活脚本
 ├── .gitignore
-├── environment.yml       ← Conda environment specification
-├── claude_settings.template  ← Claude API config template
-├── setup.sh              ← One-click environment setup
-└── .github/workflows/    ← CI configuration
+├── environment.yml       ← Conda 环境定义
+├── claude_settings.template  ← Claude API 配置模板
+├── setup.sh              ← 一键环境安装脚本
+└── .github/workflows/    ← CI 配置
 ```
 
-## How It Works
+## 工作原理
 
 ```
-1. git reset --hard HEAD          # Clean the Zephyr source
-2. Copy target file → workspace   # Only the file to edit
-3. tree-sitter: mask function body → /* MASKED */
-4. Run Claude Code CLI in Docker  # Zephyr source RO, target file RW
-5. Read Claude output → diff
-6. AST integrity check            # Did Claude edit only the target function?
-7. Inject Claude code → original source
-8. west build + run unit test     # Compiles? Tests pass?
-9. git reset → restore            # Back to clean state
+1. git reset --hard HEAD          # 清理 Zephyr 源码
+2. 复制目标文件到工作区            # 只保留要编辑的文件
+3. tree-sitter：将函数体遮蔽为 /* MASKED */
+4. 在 Docker 中运行 Claude Code CLI  # Zephyr 源码只读，目标文件可写
+5. 读取 Claude 输出 → diff
+6. AST 完整性检查                  # Claude 是否只修改了目标函数？
+7. 将 Claude 代码注入原始源码
+8. west build + 运行单元测试       # 能编译吗？测试通过吗？
+9. git reset → 还原               # 恢复到干净状态
 ```
 
-### Safety Checks
+### 安全检查
 
-- **AST normalization equality**: compares normalized masked vs. final source — catches edits outside the target function
-- **Body keyword check**: forbids `#define`, `#include`, `typedef`, `__asm__` inside function body
-- **Docker sandbox**: `--cap-drop ALL`, `--security-opt no-new-privileges`, read-only mount for Zephyr source
+- **AST 归一化相等性**：比较归一化后的遮蔽源码与最终源码——可发现目标函数之外的修改
+- **函数体关键字检查**：禁止在函数体内出现 `#define`、`#include`、`typedef`、`__asm__`
+- **Docker 沙箱**：`--cap-drop ALL`、`--security-opt no-new-privileges`、Zephyr 源码只读挂载、`--network host` + `--disallowedTools "WebSearch,WebFetch"`（禁用 web 工具）
 
-## Prerequisites
+## 环境要求
 
-| Dependency | Version / Location | Notes |
+| 依赖 | 版本 / 位置 | 说明 |
 |---|---|---|
-| **Zephyr SDK** | [v1.0.1](https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v1.0.1) | GNU cross-compiler toolchains |
-| **Conda / Miniconda** | Python 3.12 | Build tool isolation |
-| **Docker** | Desktop 24+ | Sandbox for Claude Code CLI |
-| **Claude Code CLI** | v2.1.146 (in Docker) | LLM under test |
-| **API Key** | Anthropic / compatible | e.g. DeepSeek, Anthropic |
+| **Zephyr SDK** | [v1.0.1](https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v1.0.1) | GNU 交叉编译工具链 |
+| **Conda / Miniconda** | Python 3.12 | 构建工具隔离 |
+| **Docker** | Desktop 24+ | Claude Code CLI 沙箱 |
+| **Claude Code CLI** | v2.1.146（在 Docker 中） | 被测大语言模型 |
+| **API Key** | Anthropic / 兼容 | 例如 DeepSeek、Anthropic |
 
-## Setup
+## 安装
 
-### 1. Clone this repo
+### 1. 克隆本仓库
 
 ```bash
 git clone https://github.com/YOUR_USER/zephyr-workspace.git
 cd zephyr-workspace
 ```
 
-### 2. Fetch Zephyr source code + modules
+### 2. 拉取 Zephyr 源码和模块
 
-The Zephyr RTOS source and its modules are not stored in this repo (they are large and version-pinned). Restore them with west:
+Zephyr RTOS 源码及其模块不存储在本仓库中（体积大且版本固定）。使用 west 恢复它们：
+
+**方案 A — 标准 west 流程：**
 
 ```bash
-# Clean out any old west configuration
+# 清理旧的 west 配置
 rm -rf .west
 
-# Initialize west with the official Zephyr manifest at v4.4.0
+# 使用 v4.4.0 官方 Zephyr manifest 初始化 west
 west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.4.0
 
-# Fetch all projects (zephyr/, modules/, bootloader/, tools/)
+# 拉取所有项目（zephyr/、modules/、bootloader/、tools/）
 west update
 ```
 
-> ⏱ This downloads ~1 GB of source code. Time for coffee.
+**方案 B — 浅克隆（推荐 GitHub 慢/不稳定时使用）：**
 
-### 3. Set up conda environment
+`west init` 会克隆 zephyr manifest 仓库的**全部 git 历史**（约 160 万对象）。在被墙/慢速网络（例如中国大陆）下通常会以 `fatal: early EOF` / `fetch-pack: unexpected disconnect` 失败。本基准测试从不使用 zephyr 的 git 历史——`inject_test.py` 只做 reset 和构建——所以浅克隆功能完全一样，下载量却小得多：
+
+```bash
+# 清理残留/半成品状态
+rm -rf .west zephyr
+
+# 只拉取 v4.4.0 快照（无历史）
+git clone --depth 1 --branch v4.4.0 https://github.com/zephyrproject-rtos/zephyr zephyr
+
+# 用本地仓库初始化 west（跳过全量历史克隆）
+west init -l zephyr
+
+# 拉取所有项目（zephyr/、modules/、bootloader/、tools/）
+west update
+```
+
+> ⏱ 两种方式都会下载约 1 GB 源码。喝杯咖啡等吧。
+> `west update` 可断点续传——如果某个项目以 `early EOF` 失败，重新执行即可。也可以通过 `git config --global http.postBuffer 524288000` 缓解大仓库克隆超时。
+
+### 3. 配置 conda 环境
 
 ```bash
 conda env create -f environment.yml
 conda activate zephyr
 ```
 
-Or use the activation script (handles conda activation + env vars):
+或者使用激活脚本（自动处理 conda 激活 + 环境变量）：
 
 ```bash
 source activate.sh
 ```
 
-### 4. Install Zephyr SDK
+### 4. 安装 Zephyr SDK
 
 ```bash
 wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64.tar.xz
@@ -126,38 +152,51 @@ cd ~/zephyr-sdk-1.0.1/
 ./setup.sh
 ```
 
-### 5. Build Docker sandbox
+> 基准测试从 `ZEPHYR_SDK_INSTALL_DIR` 环境变量读取 SDK 路径，默认 `~/zephyr-sdk-1.0.1`。如果安装在其他位置：运行前执行 `export ZEPHYR_SDK_INSTALL_DIR=/path/to/your/sdk`。
+
+### 5. 构建 Docker 沙箱
 
 ```bash
 cd zephyr-claude
 docker build -t zephyr-sandbox:latest .
 ```
 
-### 6. Configure API key
+> 沙箱容器以 `--network host` 启动（`ZEPHYR_CLAUDE_NETWORK`，默认 `host`）——这是必需的，因为容器内的 Claude Code 要调用 LLM API（如 `api.deepseek.com`）。如需临时改用其他网络（如 `bridge`）：`export ZEPHYR_CLAUDE_NETWORK=bridge`。同时启动命令带 `--disallowedTools "WebSearch,WebFetch"`，禁用 Claude 的 web 搜索/抓取工具，防止被测模型联网查答案。注意这只禁用了 web 工具，容器内 `Bash` 未禁用。
 
-Copy the template and fill in your API key:
+### 6. 配置 API Key
+
+基准测试在 Docker 容器里运行 Claude Code CLI，需要配置 LLM 的 API 地址和 Key。配置文件按以下优先级查找（见 `zephyr-claude/config.py` 的 `_default_claude_settings()`），也可用环境变量 `ZEPHYR_CLAUDE_SETTINGS` 强制指定任意配置文件：
+
+1. **`zephyr-claude/settings.json`** — benchmark 专用配置，**推荐使用**。它不在任何 `.claude/` 目录下，交互式 Claude 根本不会读取，因此改基准测试的模型/Key 完全不影响你日常使用（例如 cc-switch 的配置）；
+2. **`~/.claude/settings.json`** — 你的交互式 Claude 配置，作为回退项。
+
+配置方法（benchmark 专用）：
 
 ```bash
-mkdir -p ~/.claude
-cp claude_settings.template ~/.claude/settings.json
-# Edit ~/.claude/settings.json → replace "sk-xxx" with your real key
+cd zephyr-workspace
+cp claude_settings.template zephyr-claude/settings.json
+# 编辑 zephyr-claude/settings.json → 把 "sk-xxx" 替换成你的真实 Key
 ```
 
-Supported API providers (via `ANTHROPIC_BASE_URL`):
-- **DeepSeek**: `https://api.deepseek.com/anthropic`
-- **Anthropic**: `https://api.anthropic.com` (omit or set to empty)
-- **Any Anthropic-compatible proxy**
+该文件已被 `.gitignore` 排除（`**/settings.json`），不会提交到仓库。
 
-Start with the default model `deepseek-v4-flash` — change `ANTHROPIC_MODEL` as needed.
+支持的 API 提供方（通过 `ANTHROPIC_BASE_URL` 配置）：
+- **DeepSeek**：`https://api.deepseek.com/anthropic`
+- **Anthropic**：`https://api.anthropic.com`（留空或不设置）
+- **任意 Anthropic 兼容代理**
 
-### 7. Verify dependencies
+默认模型为 `deepseek-v4-flash`——按需修改 `ANTHROPIC_MODEL`（连同 `ANTHROPIC_DEFAULT_*_MODEL` 等一起改，运行时会全部注入容器）。
+
+> 每次跑任务时 `agent.py` 会把选中的配置文件复制进容器内 Claude 的 `claude_home/settings.json`，并追加一个 `claude-on-completion` 钩子用于检测任务完成，同时把其中 `ANTHROPIC_*` 环境变量通过 `-e` 传入容器。改模型/Key 只需改配置文件，不用改代码。
+
+### 7. 验证依赖
 
 ```bash
 cd zephyr-claude
 python runner.py --check
 ```
 
-Expected output:
+预期输出：
 ```
 === Zephyr-Claude Dependency Check ===
   [OK] Docker daemon
@@ -172,80 +211,86 @@ Expected output:
 All checks passed.
 ```
 
-## Usage
+## 使用
 
-### Run a single task
+### 运行单个任务
 
 ```bash
 cd zephyr-claude
 python runner.py --task-id 1
 ```
 
-### Run a batch
+### 运行批量任务
 
 ```bash
 python runner.py --batch 10
 ```
 
-### Resume (skip already-passed tasks)
+### 断点续跑（跳过已通过的任务）
 
 ```bash
 python runner.py --batch 100 --resume
 ```
 
-### Start from a specific task
+### 从指定任务开始
 
 ```bash
 python runner.py --batch 50 --start 200
 ```
 
-### Verify the dataset (inject oracle → build → test)
+### 验证数据集（两轮验证：答案注入 + 负控制）
 
 ```bash
+# ① 答案注入：oracle（正确答案）应能通过测试
 python inject_test.py --batch 5
+
+# ② 负控制：空实现应让测试失败（找出"假验证"弱任务）
+python neg_control.py --batch 5
 ```
 
-### Analyze results
+验证后可用 `zephyr-bench/filter_dataset.py` 只保留 GOOD 任务，产出最终数据集（当前 712 个）。
+
+### 分析结果
 
 ```bash
 python analyze_results.py
 ```
 
-## Dataset: 885 Tasks
+## 数据集：712 个已验证任务
 
-Tasks are extracted from Zephyr RTOS unit tests (`tests/unit/`, `tests/subsys/`, `tests/lib/`) via `extract_zephyr_tests.py`:
+当前数据集为 **712 个通过两轮验证的 GOOD 任务**（oracle 注入通过测试 + 空实现注入让测试失败），由原始 884 个任务经负控制扫描筛除弱任务后得到。任务通过 `extract_zephyr_tests.py` 从 Zephyr RTOS 单元测试（`tests/unit/`、`tests/subsys/`、`tests/lib/`）中提取：
 
-| Source | Count | Priority |
+| 来源 | 优先级 | 说明 |
 |---|---|---|
-| `lib/` | highest | Core library functions |
-| `subsys/` | high | Subsystem APIs |
-| `arch/` | medium | Architecture-specific |
-| `kernel/` | medium | Kernel APIs |
-| `drivers/` | low | Device drivers |
+| `lib/` | 最高 | 核心库函数 |
+| `subsys/` | 高 | 子系统 API |
+| `arch/` | 中 | 架构相关 |
+| `kernel/` | 中 | 内核 API |
+| `drivers/` | 低 | 设备驱动 |
 
-Each task contains:
-- `task_id` — unique identifier
-- `sut_function` — function name to implement
-- `source_path` — file containing the function
-- `masked_code` — function signature with `/* TODO(agent) */` body
-- `oracle` — path to reference implementation
-- `run_command` — `west build` command to verify
-- `unit_test` — ZTEST name for test pass/fail detection
+每个任务包含：
+- `task_id` — 唯一标识符
+- `sut_function` — 需要实现的函数名
+- `source_path` — 包含该函数的文件
+- `masked_code` — 函数签名，函数体为 `/* TODO(agent) */`
+- `oracle` — 参考实现路径
+- `run_command` — 用于验证的 `west build` 命令
+- `unit_test` — 用于判断测试通过/失败的 ZTEST 名称
 
-## Error Categories
+## 错误分类
 
-| Category | Meaning | Common Causes |
+| 分类 | 含义 | 常见原因 |
 |---|---|---|
-| `compile_error` | Build failure | Wrong API name, preprocessor mismatch, syntax |
-| `test_failure` | Compiles but test fails | Algorithm edge cases, wrong constants |
-| `crash` | Runtime crash | NULL pointer, uninitialized fields |
-| `illegal_modifications` | Edited outside target function | `#undef`, global changes |
-| `timeout` | `west build` exceeded 5 min | Large dependency tree |
-| `watchdog` | Claude session timeout (8h) | Stuck / infinite loop |
+| `compile_error` | 构建失败 | API 名称错误、预处理不匹配、语法错误 |
+| `test_failure` | 能编译但测试失败 | 算法边界情况、常量错误 |
+| `crash` | 运行时崩溃 | 空指针、未初始化字段 |
+| `illegal_modifications` | 修改了目标函数之外的代码 | `#undef`、全局修改 |
+| `timeout` | `west build` 超过 5 分钟 | 依赖树过大 |
+| `watchdog` | Claude 会话超时（8 小时） | 卡死 / 死循环 |
 
-## Results
+## 结果
 
-Results are stored in `zephyr-claude/results/results.jsonl` (JSONL format, one result per line):
+结果存储在 `zephyr-claude/results/results.jsonl`（JSONL 格式，每行一条结果）：
 
 ```json
 {
@@ -260,9 +305,9 @@ Results are stored in `zephyr-claude/results/results.jsonl` (JSONL format, one r
 }
 ```
 
-Trajectory logs (full Claude session + diff + verify output) are stored in `zephyr-claude/trajectory/`.
+轨迹日志（完整的 Claude 会话 + diff + 验证输出）存储在 `zephyr-claude/trajectory/`。
 
-## License
+## 许可证
 
-Zephyr RTOS is under [Apache 2.0](zephyr/LICENSE).  
-Benchmark tooling is provided under the same terms.
+Zephyr RTOS 采用 [Apache 2.0](zephyr/LICENSE) 许可证。  
+基准测试工具同样以该许可证条款提供。
