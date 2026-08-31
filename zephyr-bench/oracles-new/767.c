@@ -1,4 +1,0 @@
-void smp_dummy_add_data(void)
-{
-	dummy_mcumgr_add_data(smp_receive_buffer, smp_receive_pos);
-}

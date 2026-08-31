@@ -11,7 +11,7 @@
 | 包含在 git 中 | 由 `west update` 拉取 |
 |---|---|
 | `zephyr-claude/` — 基准测试框架 | `zephyr/` — Zephyr RTOS 源码 |
-| `zephyr-bench/` — 884 个任务 + oracle | `modules/` — HAL、加密、文件系统 |
+| `zephyr-bench/` — 712 个任务 + oracle | `modules/` — HAL、加密、文件系统 |
 | `activate.sh`、`setup.sh`、`environment.yml` | `bootloader/` — MCUboot |
 | `claude_settings.template`、`.gitignore` | `tools/edtt/` — 蓝牙测试工具 |
 | `README.md`、`.github/workflows/ci.yml` | |
@@ -21,13 +21,14 @@
 ```
 zephyr-workspace/
 ├── zephyr/               ← Zephyr RTOS v4.4.0（west 拉取，不在 git 中）
-├── zephyr-bench/         ← 基准数据集（884 个任务）+ 构建脚本  ★ 在 git 中
-│   ├── zephyr_tasks.c.jsonl    627 个任务（C 文件）
-│   ├── zephyr_tasks.h.jsonl    257 个任务（头文件）
-│   ├── oracles/                884 个已验证的参考实现
+├── zephyr-bench/         ← 基准数据集（712 个已验证任务）+ 构建脚本  ★ 在 git 中
+│   ├── zephyr_tasks.c.jsonl    493 个任务（C 文件）
+│   ├── zephyr_tasks.h.jsonl    219 个任务（头文件）
+│   ├── oracles/                712 个已验证的参考实现
 │   ├── build_zephyr_dataset.py 从单元测试构建数据集
 │   ├── extract_zephyr_tests.py ZTEST 块提取
-│   └── verify_zephyr_tests.py  Oracle 注入与验证
+│   ├── verify_zephyr_tests.py  Oracle 注入与验证
+│   └── filter_dataset.py       按验证判定筛出最终数据集
 ├── zephyr-claude/        ← 评估框架  ★ 在 git 中
 │   ├── agent.py               主流水线：mask → Claude → verify
 │   ├── mask.py                tree-sitter AST 操作
@@ -35,6 +36,9 @@ zephyr-workspace/
 │   ├── prompt.py              LLM 提示词模板
 │   ├── config.py              全局配置
 │   ├── Dockerfile             沙箱镜像（Ubuntu + west + Claude Code CLI）
+│   ├── inject_test.py         答案注入验证（oracle 应通过测试）
+│   ├── neg_control.py         负控制验证（空实现应让测试失败）
+│   ├── whitebox.py            失败机理分类（对齐三 track taxonomy）
 │   ├── analyze_results.py     结果分析与统计
 │   ├── final_analysis.py      失败模式深入分析
 │   └── settings.json          benchmark 专用 API 配置（gitignore，见 §6）
@@ -234,11 +238,17 @@ python runner.py --batch 100 --resume
 python runner.py --batch 50 --start 200
 ```
 
-### 验证数据集（注入 oracle → 构建 → 测试）
+### 验证数据集（两轮验证：答案注入 + 负控制）
 
 ```bash
+# ① 答案注入：oracle（正确答案）应能通过测试
 python inject_test.py --batch 5
+
+# ② 负控制：空实现应让测试失败（找出"假验证"弱任务）
+python neg_control.py --batch 5
 ```
+
+验证后可用 `zephyr-bench/filter_dataset.py` 只保留 GOOD 任务，产出最终数据集（当前 712 个）。
 
 ### 分析结果
 
@@ -246,9 +256,9 @@ python inject_test.py --batch 5
 python analyze_results.py
 ```
 
-## 数据集：884 个任务
+## 数据集：712 个已验证任务
 
-任务通过 `extract_zephyr_tests.py` 从 Zephyr RTOS 单元测试（`tests/unit/`、`tests/subsys/`、`tests/lib/`）中提取：
+当前数据集为 **712 个通过两轮验证的 GOOD 任务**（oracle 注入通过测试 + 空实现注入让测试失败），由原始 884 个任务经负控制扫描筛除弱任务后得到。任务通过 `extract_zephyr_tests.py` 从 Zephyr RTOS 单元测试（`tests/unit/`、`tests/subsys/`、`tests/lib/`）中提取：
 
 | 来源 | 优先级 | 说明 |
 |---|---|---|
