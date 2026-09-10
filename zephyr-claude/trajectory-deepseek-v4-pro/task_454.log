@@ -1,0 +1,311 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is in place. Here's what the function does:
+
+1. **Initialization check** — If `BACKEND_FS_NOT_INITIALIZED`, calls `allocate_new_file(&fs_file)` to open/create the appropriate log file. On failure, marks the backend as `CORRUPTED`.
+2. **State guard** — If the backend is in any state other than `OK` (e.g., `CORRUPTED`), returns `-EIO`.
+3. **File size check** — Uses `fs_tell` to get the current write position. If the incoming data would push past `CONFIG_LOG_BACKEND_FS_FILE_SIZE`, the current file is closed and a new one is allocated (which handles rotation and deletion of old files per `CONFIG_LOG_BACKEND_FS_FILES_LIMIT`).
+4. **Write** — Calls `fs_write` to write the formatted log data. On failure, marks the backend as `CORRUPTED`.
+5. Returns 0 on success.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/logging/backends/log_backend_fs.c
++++ subsys/logging/backends/log_backend_fs.c
+@@ -138,7 +138,43 @@
+ 
+ int write_log_to_file(uint8_t *data, size_t length, void *ctx)
+ {
+-    /* MASKED - implement this function */
++	int rc;
++	off_t pos;
++
++	if (backend_state == BACKEND_FS_NOT_INITIALIZED) {
++		rc = allocate_new_file(&fs_file);
++		if (rc < 0) {
++			backend_state = BACKEND_FS_CORRUPTED;
++			return rc;
++		}
++		backend_state = BACKEND_FS_OK;
++	}
++
++	if (backend_state != BACKEND_FS_OK) {
++		return -EIO;
++	}
++
++	/* Check if the current write would exceed the file size limit. */
++	pos = fs_tell(&fs_file);
++	if (pos + length > CONFIG_LOG_BACKEND_FS_FILE_SIZE) {
++		fs_close(&fs_file);
++		backend_state = BACKEND_FS_NOT_INITIALIZED;
++
++		rc = allocate_new_file(&fs_file);
++		if (rc < 0) {
++			backend_state = BACKEND_FS_CORRUPTED;
++			return rc;
++		}
++		backend_state = BACKEND_FS_OK;
++	}
++
++	rc = fs_write(&fs_file, data, length);
++	if (rc < 0) {
++		backend_state = BACKEND_FS_CORRUPTED;
++		return rc;
++	}
++
++	return 0;
+ }
+ 
+ static int get_log_file_id(struct fs_dirent *ent)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/boards/native_sim_native_64.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/prj.conf'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/boards/native_sim_native_64.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (8.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build
+-- west build: building application
+[1/120] Preparing syscall dependency handling
+
+[2/120] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/120] Generating misc/generated/syscalls_subdirs.trigger
+[4/120] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/120] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/120] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/120] Generating include/generated/zephyr/driver-validation.h
+[8/120] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/120] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/120] Generating ../../include/generated/zephyr/heap_constants.h
+[11/120] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/120] Generating include/generated/zephyr/offsets.h
+[13/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[14/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[15/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[16/120] Building C object CMakeFiles/app.dir/src/log_fs_test.c.obj
+[17/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[19/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[20/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[21/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[22/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[23/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[24/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[25/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[26/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[28/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[29/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[30/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[31/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[32/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/120] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/120] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/120] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[36/120] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[37/120] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[38/120] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[39/120] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[40/120] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[41/120] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[42/120] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[43/120] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[44/120] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[45/120] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[46/120] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[47/120] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[48/120] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[49/120] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[50/120] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[51/120] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[52/120] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[53/120] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[54/120] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[55/120] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[56/120] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[57/120] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj
+[58/120] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs_impl.c.obj
+[59/120] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/littlefs_fs.c.obj
+[60/120] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/120] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/120] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/120] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/120] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[65/120] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[66/120] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[67/120] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[68/120] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[69/120] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/zephyr_lfs_crc.c.obj
+[70/120] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs_util.c.obj
+[71/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[72/120] Building C object modules/littlefs/CMakeFiles/modules__littlefs.dir/home/huyj/zephyr-workspace/modules/fs/littlefs/lfs.c.obj
+[73/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[74/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[75/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[76/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[77/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[78/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[79/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[80/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[81/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[82/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[83/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[84/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[85/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[86/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[87/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[88/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[89/120] Generating linker_zephyr_pre0.cmd
+[90/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[91/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[92/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[93/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[94/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[95/120] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[96/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[97/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[98/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[99/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[100/120] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[101/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[102/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[103/120] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[104/120] Linking C static library zephyr/arch/common/libarch__common.a
+[105/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[106/120] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[107/120] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[108/120] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[109/120] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[110/120] Linking C static library zephyr/subsys/fs/libsubsys__fs.a
+[111/120] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[112/120] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[113/120] Linking C static library zephyr/libzephyr.a
+[114/120] Linking C static library modules/littlefs/libmodules__littlefs.a
+[115/120] Linking C static library zephyr/kernel/libkernel.a
+[116/120] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/subsys/logging/backends/log_backend_fs.c.obj
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/backends/log_backend_fs.c:117:12: warning: ‘check_log_file_exist’ defined but not used [-Wunused-function]
+  117 | static int check_log_file_exist(int num)
+      |            ^~~~~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/backends/log_backend_fs.c:57:12: warning: ‘create_log_dir’ defined but not used [-Wunused-function]
+   57 | static int create_log_dir(const char *path)
+      |            ^~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/backends/log_backend_fs.c:36:12: warning: ‘check_log_volume_available’ defined but not used [-Wunused-function]
+   36 | static int check_log_volume_available(void)
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~
+[117/120] Linking C static library app/libapp.a
+[118/120] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_backend_fs/build/zephyr/zephyr.elf for board: native_sim/native/64
+[119/120] Building native simulator runner, and linking final executable
+[120/120] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE test_log_backend_fs
+===================================================================
+START - test_fs_nonexist
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/logging/log_backend_fs/src/log_fs_test.c:50: test_log_backend_fs_test_fs_nonexist: (rc not equal to sizeof(to_log))
+Unexpected rteval.
+ FAIL - test_fs_nonexist in 0.000 seconds
+===================================================================
+START - test_log_fs_file_content
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/logging/log_backend_fs/src/log_fs_test.c:111: test_log_backend_fs_test_log_fs_file_content: (fs_open(&file, fname, FS_O_READ) not equal to 0)
+Can not open log file.
+ FAIL - test_log_fs_file_content in 0.000 seconds
+===================================================================
+START - test_log_fs_file_size
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/logging/log_backend_fs/src/log_fs_test.c:155: test_log_backend_fs_test_log_fs_file_size: (fs_stat(fname, &entry) not equal to 0)
+Can not get file info.
+ FAIL - test_log_fs_file_size in 0.000 seconds
+===================================================================
+START - test_log_fs_files_max
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/logging/log_backend_fs/src/log_fs_test.c:226: test_log_backend_fs_test_log_fs_files_max: (rc not equal to 0)
+Can not open directory.
+ FAIL - test_log_fs_files_max in 0.000 seconds
+===================================================================
+START - test_wipe_fs_logs
+ PASS - test_wipe_fs_logs in 0.000 seconds
+===================================================================
+TESTSUITE test_log_backend_fs failed.
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE FAIL -  20.00% [test_log_backend_fs]: pass = 1, fail = 4, skip = 0, total = 5 duration = 0.000 seconds
+ - FAIL - [test_log_backend_fs.test_fs_nonexist] duration = 0.000 seconds
+ - FAIL - [test_log_backend_fs.test_log_fs_file_content] duration = 0.000 seconds
+ - FAIL - [test_log_backend_fs.test_log_fs_file_size] duration = 0.000 seconds
+ - FAIL - [test_log_backend_fs.test_log_fs_files_max] duration = 0.000 seconds
+ - PASS - [test_log_backend_fs.test_wipe_fs_logs] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION FAILED
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+warning: LOG_PROCESS_THREAD_STACK_SIZE (defined at soc/nordic/nrf54h/Kconfig.defconfig:45,
+subsys/logging/Kconfig.processing:78) was assigned the value '4096' but got the value ''. Check
+these unsatisfied dependencies: ((LOG && PM && SOC_SERIES_NRF54H && SOC_FAMILY_NORDIC_NRF) ||
+(LOG_PROCESS_THREAD && LOG_MODE_DEFERRED && !LOG_FRONTEND_ONLY && !LOG_MODE_MINIMAL && LOG)) (=n).
+See http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_PROCESS_THREAD_STACK_SIZE and/or
+look up LOG_PROCESS_THREAD_STACK_SIZE in the menuconfig/guiconfig interface. The Application
+Development Primer, Setting Configuration Values, and Kconfig - Tips and Best Practices sections of
+the manual might be helpful too.
+
+
+warning: The choice symbol LOG_MODE_DEFERRED (defined at subsys/logging/Kconfig.mode:11) was
+selected (set =y), but no symbol ended up as the choice selection. See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LOG_MODE_DEFERRED and/or look up
+LOG_MODE_DEFERRED in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+
+warning: The choice symbol FS_LOG_LEVEL_OFF (defined at
+subsys/logging/Kconfig.template.log_config:8) was selected (set =y), but no symbol ended up as the
+choice selection. See http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_FS_LOG_LEVEL_OFF
+and/or look up FS_LOG_LEVEL_OFF in the menuconfig/guiconfig interface. The Application Development
+Primer, Setting Configuration Values, and Kconfig - Tips and Best Practices sections of the manual
+might be helpful too.
+
+
+
+

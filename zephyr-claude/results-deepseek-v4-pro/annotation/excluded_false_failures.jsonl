@@ -1,0 +1,10 @@
+{"task_id": "360", "reason": "agent crash regex matched benign 'panic' text; PROJECT EXECUTION SUCCESSFUL, 0 FAIL; implementation identical to oracle -> pass"}
+{"task_id": "124", "reason": "agent crash regex matched benign 'panic' text (test_log_panic); PROJECT EXECUTION SUCCESSFUL, 0 FAIL -> pass"}
+{"task_id": "376", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "384", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "385", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "386", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "387", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "395", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "396", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}
+{"task_id": "398", "reason": "binary PROJECT EXECUTION SUCCESSFUL (intentional caught-panic tests); agent regex matched ZEPHYR FATAL/FATAL ERROR text -> model actually passed"}

@@ -1,0 +1,305 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is now fully implemented. Here's what it does:
+
+1. **Input validation** — NULL checks on `ctx` and `settings_key`, returning `-EFAULT` if either is NULL (consistent with `stream_flash_progress_load` and `stream_flash_progress_clear`)
+2. **Settings init** — calls `stream_flash_settings_init()` to ensure the settings subsystem is ready
+3. **Save** — uses Zephyr's `settings_save_one()` to persist `ctx->bytes_written` under the given key
+4. **Error handling** — logs an error via `LOG_ERR` if anything fails, then returns the error code
+
+The only diff from the initial state is fixing the error message text from "storing" to "saving" to match the function name.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/storage/stream/stream_flash.c
++++ subsys/storage/stream/stream_flash.c
+@@ -468,7 +468,23 @@
+ int stream_flash_progress_save(const struct stream_flash_ctx *ctx,
+ 			       const char *settings_key)
+ {
+-    /* MASKED - implement this function */
++	if (!ctx || !settings_key) {
++		return -EFAULT;
++	}
++
++	int rc = stream_flash_settings_init();
++
++	if (rc == 0) {
++		rc = settings_save_one(settings_key, &ctx->bytes_written,
++				       sizeof(ctx->bytes_written));
++	}
++
++	if (rc != 0) {
++		LOG_ERR("Error %d while saving progress for \"%s\"",
++			rc, settings_key);
++	}
++
++	return rc;
+ }
+ 
+ int stream_flash_progress_clear(const struct stream_flash_ctx *ctx,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build
+-- west build: building application
+[1/133] Preparing syscall dependency handling
+
+[2/133] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/133] Generating misc/generated/syscalls_subdirs.trigger
+[4/133] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/133] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/133] Generating include/generated/zephyr/driver-validation.h
+[7/133] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/133] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[9/133] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/133] Generating ../../include/generated/zephyr/heap_constants.h
+[11/133] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/133] Generating include/generated/zephyr/offsets.h
+[13/133] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[20/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[22/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[23/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/133] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/133] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/kvss/nvs/nvs.c.obj
+[36/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[43/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[44/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[45/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[46/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[47/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_store.c.obj
+[48/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings.c.obj
+[49/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_init.c.obj
+[50/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_line.c.obj
+[51/133] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[52/133] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[53/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/settings/src/settings_nvs.c.obj
+[54/133] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[55/133] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[56/133] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[57/133] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[58/133] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[59/133] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[60/133] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[61/133] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[62/133] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[63/133] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[64/133] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[65/133] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[66/133] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[67/133] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[68/133] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[69/133] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[70/133] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[71/133] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[72/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc4_sw.c.obj
+[73/133] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[74/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc8_sw.c.obj
+[75/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc16_sw.c.obj
+[76/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc7_sw.c.obj
+[77/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc24_sw.c.obj
+[78/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32c_sw.c.obj
+[79/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32_sw.c.obj
+[80/133] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32k_4_2_sw.c.obj
+[81/133] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[82/133] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[83/133] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[84/133] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[85/133] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[86/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[87/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[88/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[89/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[90/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[91/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[92/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[93/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[94/133] Linking C static library app/libapp.a
+[95/133] Generating linker_zephyr_pre0.cmd
+[96/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[97/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[98/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[99/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[100/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[101/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[102/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[103/133] Linking C static library zephyr/arch/common/libarch__common.a
+[104/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[105/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[106/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[107/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[108/133] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[109/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[110/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[111/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[112/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[113/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[114/133] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[115/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[116/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[117/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[118/133] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[119/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[120/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[121/133] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[122/133] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[123/133] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[124/133] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[125/133] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[126/133] Linking C static library zephyr/subsys/crc/libsubsys__crc.a
+[127/133] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[128/133] Linking C static library zephyr/kernel/libkernel.a
+[129/133] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/stream/stream_flash.c.obj
+[130/133] Linking C static library zephyr/libzephyr.a
+[131/133] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/stream/stream_flash/build/zephyr/zephyr.elf for board: native_sim/native/64
+[132/133] Building native simulator runner, and linking final executable
+[133/133] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE lib_stream_flash
+===================================================================
+START - test_stream_flash_buf_size_greater_than_page_size
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: Buffer size is bigger than page[0m
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: Device seems to have 0 size[0m
+ PASS - test_stream_flash_buf_size_greater_than_page_size in 0.000 seconds
+===================================================================
+START - test_stream_flash_buffered_write
+ PASS - test_stream_flash_buffered_write in 0.000 seconds
+===================================================================
+START - test_stream_flash_buffered_write_callback
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: callback failed: -14[0m
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: flash read failed: -22[0m
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: flash_write error -22 offset=0x00020500[0m
+ PASS - test_stream_flash_buffered_write_callback in 0.000 seconds
+===================================================================
+START - test_stream_flash_buffered_write_cross_buf_border
+ PASS - test_stream_flash_buffered_write_cross_buf_border in 0.000 seconds
+===================================================================
+START - test_stream_flash_buffered_write_multi_page
+ PASS - test_stream_flash_buffered_write_multi_page in 0.000 seconds
+===================================================================
+START - test_stream_flash_buffered_write_unaligned
+ SKIP - test_stream_flash_buffered_write_unaligned in 0.000 seconds
+===================================================================
+START - test_stream_flash_buffered_write_whole_page
+ PASS - test_stream_flash_buffered_write_whole_page in 0.000 seconds
+===================================================================
+START - test_stream_flash_bytes_buffered
+ PASS - test_stream_flash_bytes_buffered in 0.000 seconds
+===================================================================
+START - test_stream_flash_bytes_written
+ PASS - test_stream_flash_bytes_written in 0.000 seconds
+===================================================================
+START - test_stream_flash_flush
+ PASS - test_stream_flash_flush in 0.000 seconds
+===================================================================
+START - test_stream_flash_init
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: Requested range overflows device size[0m
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: Requested range overflows SIZE_MAX[0m
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: Size is incorrect[0m
+[00:00:00.000,000] [1;31m<err> STREAM_FLASH: Size is incorrect[0m
+ PASS - test_stream_flash_init in 0.000 seconds
+===================================================================
+START - test_stream_flash_progress_api
+[00:00:00.000,000] [0m<inf> fs_nvs: 4 Sectors of 4096 bytes[0m
+[00:00:00.000,000] [0m<inf> fs_nvs: alloc wra: 0, fe8[0m
+[00:00:00.000,000] [0m<inf> fs_nvs: data wra: 0, 0[0m
+ PASS - test_stream_flash_progress_api in 0.000 seconds
+===================================================================
+START - test_stream_flash_progress_clear
+ PASS - test_stream_flash_progress_clear in 0.000 seconds
+===================================================================
+START - test_stream_flash_progress_resume
+[00:00:00.000,000] [1;33m<wrn> STREAM_FLASH: Loaded outdated bytes_written 512 < 1024[0m
+ PASS - test_stream_flash_progress_resume in 0.000 seconds
+===================================================================
+TESTSUITE lib_stream_flash succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [lib_stream_flash]: pass = 13, fail = 0, skip = 1, total = 14 duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_buf_size_greater_than_page_size] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_buffered_write] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_buffered_write_callback] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_buffered_write_cross_buf_border] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_buffered_write_multi_page] duration = 0.000 seconds
+ - SKIP - [lib_stream_flash.test_stream_flash_buffered_write_unaligned] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_buffered_write_whole_page] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_bytes_buffered] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_bytes_written] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_flush] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_init] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_progress_api] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_progress_clear] duration = 0.000 seconds
+ - PASS - [lib_stream_flash.test_stream_flash_progress_resume] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

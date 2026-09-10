@@ -1,0 +1,300 @@
+============================================================
+=== Claude Session ===
+============================================================
+Done. The non-KERNEL `ztest_test_skip` now:
+
+- Allows skipping from `TEST_PHASE_SETUP`, `TEST_PHASE_BEFORE`, and `TEST_PHASE_TEST` — matching the KERNEL version's valid phases
+- Sets the result to `ZTEST_RESULT_SKIP` and calls `test_finalize()` to terminate the test thread, consistent with how `ztest_test_fail` and `ztest_test_pass` work in the non-KERNEL block
+- Reports an error for any other phase (AFTER, TEARDOWN, FRAMEWORK) and sets `ZTEST_STATUS_CRITICAL_ERROR`
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/testsuite/ztest/src/ztest.c
++++ subsys/testsuite/ztest/src/ztest.c
+@@ -610,7 +610,19 @@
+ 
+ void ztest_test_skip(void)
+ {
+-    /* MASKED - implement this function */
++	switch (cur_phase) {
++	case TEST_PHASE_SETUP:
++	case TEST_PHASE_BEFORE:
++	case TEST_PHASE_TEST:
++		__ztest_set_test_result(ZTEST_RESULT_SKIP);
++		test_finalize();
++		break;
++	default:
++		PRINT_DATA(" ERROR: cannot skip in test phase '%s()', bailing\n",
++			   get_friendly_phase_name(cur_phase));
++		test_status = ZTEST_STATUS_CRITICAL_ERROR;
++		break;
++	}
+ }
+ EXPORT_SYMBOL(ztest_test_skip);
+ 
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build
+-- west build: building application
+[1/109] Preparing syscall dependency handling
+
+[2/109] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/109] Generating misc/generated/syscalls_subdirs.trigger
+[4/109] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/109] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/109] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/109] Generating include/generated/zephyr/driver-validation.h
+[8/109] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/109] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/109] Generating ../../include/generated/zephyr/heap_constants.h
+[11/109] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/109] Generating include/generated/zephyr/offsets.h
+[13/109] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[19/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[28/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[29/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/109] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[35/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[39/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[40/109] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[41/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[42/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[50/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[56/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[57/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[58/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[59/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[60/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[61/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[62/109] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[63/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[64/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[65/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[66/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[67/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[68/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[69/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[70/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[71/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[72/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[74/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[75/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[76/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[77/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[78/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[79/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[80/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[81/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[82/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[83/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[84/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[85/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[86/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[87/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[88/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[89/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[90/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[91/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[92/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[93/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[94/109] Linking C static library app/libapp.a
+[95/109] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[96/109] Linking C static library zephyr/arch/common/libarch__common.a
+[97/109] Generating linker_zephyr_pre0.cmd
+[98/109] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[99/109] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[100/109] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[101/109] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[102/109] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[103/109] Linking C static library zephyr/libzephyr.a
+[104/109] Linking C static library zephyr/kernel/libkernel.a
+[105/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[106/109] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[107/109] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/lib/cbprintf_package/build/zephyr/zephyr.elf for board: native_sim/native/64
+[108/109] Building native simulator runner, and linking final executable
+[109/109] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE cbprintf_package
+===================================================================
+sizeof:  int=4 long=8 ptr=8 long long=8 double=8 long double=16
+alignof: int=4 long=8 ptr=8 long long=8 double=8 long double=16
+With C11 _Generic
+START - test_cbprintf_fsc_package
+Skipping test, platform does not detect RO strings.
+ SKIP - test_cbprintf_fsc_package in 0.000 seconds
+===================================================================
+START - test_cbprintf_must_runtime_package
+ PASS - test_cbprintf_must_runtime_package in 0.000 seconds
+===================================================================
+START - test_cbprintf_package
+-----------------------------------------
+test long b1b2b3b4 ffffffffbdc5ca39 e4e3e2e1
+runtime package 0x7821c77fdd70:
+09 00 00 00 00 00 00 00 e3 28 41 00 00 00 00 00 b4 b3 b2 b1 00 00 00 00 39 ca c5 bd ff ff ff ff e1 e2 e3 e4 
+static package 0x7821c77fdd40:
+09 00 00 00 00 00 00 00 e3 28 41 00 00 00 00 00 b4 b3 b2 b1 21 78 00 00 39 ca c5 bd ff ff ff ff e1 e2 e3 e4 
+-----------------------------------------
+test long long b1b2b3b4 1122334455667788 e4e3e2e1
+runtime package 0x7821c77fdd70:
+09 00 00 00 00 00 00 00 ee 29 41 00 00 00 00 00 b4 b3 b2 b1 00 00 00 00 88 77 66 55 44 33 22 11 e1 e2 e3 e4 
+static package 0x7821c77fdd40:
+09 00 00 00 00 00 00 00 ee 29 41 00 00 00 00 00 b4 b3 b2 b1 00 00 00 00 88 77 66 55 44 33 22 11 e1 e2 e3 e4 
+-----------------------------------------
+test 100 -300 -11
+runtime package 0x7821c77fdd70:
+09 00 00 00 00 00 00 00 08 2a 41 00 00 00 00 00 64 00 00 00 00 00 00 00 d4 fe ff ff 00 00 00 00 f5 ff ff ff 
+static package 0x7821c77fdd40:
+09 00 00 00 00 00 00 00 08 2a 41 00 00 00 00 00 64 00 00 00 00 00 00 00 d4 fe ff ff 00 00 00 00 f5 ff ff ff 
+-----------------------------------------
+test -1111111111 1122334455667788 100 4660 74565
+runtime package 0x7821c77fdd60:
+0d 00 00 00 00 00 00 00 19 2a 41 00 00 00 00 00 39 ca c5 bd ff ff ff ff 88 77 66 55 44 33 22 11 64 00 00 00 00 00 00 00 34 12 00 00 00 00 00 00 45 23 01 00 
+static package 0x7821c77fdd20:
+0d 00 00 00 00 00 00 00 19 2a 41 00 00 00 00 00 39 ca c5 bd ff ff ff ff 88 77 66 55 44 33 22 11 64 00 00 00 21 78 00 00 34 12 00 00 00 00 00 00 45 23 01 00 
+-----------------------------------------
+test 2864425659 187723000031931
+runtime package 0x7821c77fdd80:
+08 00 00 00 00 00 00 00 33 2a 41 00 00 00 00 00 bb aa bb aa 00 00 00 00 bb aa bb aa bb aa 00 00 
+static package 0x7821c77fdd60:
+08 00 00 00 00 00 00 00 33 2a 41 00 00 00 00 00 bb aa bb aa 00 00 00 00 bb aa bb aa bb aa 00 00 
+-----------------------------------------
+test a (nil)
+runtime package 0x7821c77fdd80:
+08 00 00 00 00 00 00 00 41 2a 41 00 00 00 00 00 61 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+static package 0x7821c77fdd60:
+08 00 00 00 00 00 00 00 41 2a 41 00 00 00 00 00 61 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+-----------------------------------------
+test test test
+runtime package 0x7821c77fdd70:
+08 02 00 00 00 00 00 00 4c 2a 41 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 04 74 65 73 74 00 06 74 65 73 74 00 
+static package 0x7821c77fdd50:
+08 00 00 00 00 00 00 00 4c 2a 41 00 00 00 00 00 d1 2d 41 00 00 00 00 00 d1 2d 41 00 00 00 00 00 
+ PASS - test_cbprintf_package in 0.000 seconds
+===================================================================
+START - test_cbprintf_package_convert
+ PASS - test_cbprintf_package_convert in 0.000 seconds
+===================================================================
+START - test_cbprintf_package_convert_static
+ PASS - test_cbprintf_package_convert_static in 0.000 seconds
+===================================================================
+START - test_cbprintf_package_convert_strl
+ PASS - test_cbprintf_package_convert_strl in 0.000 seconds
+===================================================================
+START - test_cbprintf_ro_loc
+ PASS - test_cbprintf_ro_loc in 0.000 seconds
+===================================================================
+START - test_cbprintf_ro_loc_rw_present
+ PASS - test_cbprintf_ro_loc_rw_present in 0.000 seconds
+===================================================================
+START - test_cbprintf_ro_rw_loc
+ PASS - test_cbprintf_ro_rw_loc in 0.000 seconds
+===================================================================
+START - test_cbprintf_ro_rw_loc_const_char_ptr
+ SKIP - test_cbprintf_ro_rw_loc_const_char_ptr in 0.000 seconds
+===================================================================
+START - test_cbprintf_rw_loc_const_char_ptr
+ SKIP - test_cbprintf_rw_loc_const_char_ptr in 0.000 seconds
+===================================================================
+START - test_cbprintf_rw_str_indexes
+Skipping test, platform does not detect RO strings.
+ SKIP - test_cbprintf_rw_str_indexes in 0.000 seconds
+===================================================================
+TESTSUITE cbprintf_package succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [cbprintf_package]: pass = 8, fail = 0, skip = 4, total = 12 duration = 0.000 seconds
+ - SKIP - [cbprintf_package.test_cbprintf_fsc_package] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_must_runtime_package] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_package] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_package_convert] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_package_convert_static] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_package_convert_strl] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_ro_loc] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_ro_loc_rw_present] duration = 0.000 seconds
+ - PASS - [cbprintf_package.test_cbprintf_ro_rw_loc] duration = 0.000 seconds
+ - SKIP - [cbprintf_package.test_cbprintf_ro_rw_loc_const_char_ptr] duration = 0.000 seconds
+ - SKIP - [cbprintf_package.test_cbprintf_rw_loc_const_char_ptr] duration = 0.000 seconds
+ - SKIP - [cbprintf_package.test_cbprintf_rw_str_indexes] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

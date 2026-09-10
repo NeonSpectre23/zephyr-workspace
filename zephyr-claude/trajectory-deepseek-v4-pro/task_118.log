@@ -1,0 +1,325 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is implemented. Here's a summary of the logic based on the code analysis:
+
+**`log_frontend_stmesp_demux_packet_start`** handles three types of packets depending on the current STM context:
+
+1. **HW events** — when `curr_m_ch` has `M_CH_HW_EVENT` (major=0x80) set. Reads the event byte from `*data` and commits a HW event packet. Returns 1.
+
+2. **Trace points** — when channel >= `CONFIG_LOG_FRONTEND_STMESP_TP_CHAN_BASE` (255). NULL data creates a trace point without data; non-NULL data creates one with data. Both commit immediately. Returns 1.
+
+3. **Log messages** — when channel < TP_CHAN_BASE. Parses `data[0]` as the log header, overrides the header's `major` field with the current context's major index (since the STM MAJOR opcode is the authoritative source, not the header word), allocates an active entry from the mem slab and space in the MPSC packet buffer, then returns 0 to indicate the packet is pending (more data and a `packet_end()` call will follow).
+
+Guard conditions handle skip mode, invalid `curr_m_ch`, and previous incomplete packets by closing them before returning `-EINVAL`. Allocation failures return `-ENOMEM`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/logging/frontends/log_frontend_stmesp_demux.c
++++ subsys/logging/frontends/log_frontend_stmesp_demux.c
+@@ -455,7 +455,86 @@
+ 
+ int log_frontend_stmesp_demux_packet_start(uint32_t *data, uint64_t *ts)
+ {
+-    /* MASKED - implement this function */
++	if (skip) {
++		return 0;
++	}
++
++	if (demux.curr_m_ch == M_CH_INVALID) {
++		return -EINVAL;
++	}
++
++	if (demux.curr != NULL) {
++		/* Previous package was incomplete. Finish it. */
++		log_frontend_stmesp_demux_packet_end();
++		return -EINVAL;
++	}
++
++	/* HW event. */
++	if (demux.curr_m_ch & M_CH_HW_EVENT) {
++		if (data == NULL) {
++			return -EINVAL;
++		}
++
++		log_frontend_stmesp_demux_hw_event(ts, (uint8_t)*data);
++		return 1;
++	}
++
++	uint16_t ch = demux.curr_m_ch & C_ID_MASK;
++	uint16_t m_id_val = demux.curr_m_ch >> M_ID_OFF;
++	uint8_t m = get_major_id(m_id_val);
++
++	/* Trace point (turbo log on trace point channel). */
++	if (ch >= CONFIG_LOG_FRONTEND_STMESP_TP_CHAN_BASE) {
++		if (data == NULL) {
++			store_turbo_log0(m, ch, ts, 0);
++		} else {
++			store_tracepoint(m, ch, ts, data);
++		}
++
++		return 1;
++	}
++
++	/* Regular log message - data must contain the log header. */
++	if (data == NULL) {
++		return -EINVAL;
++	}
++
++	union log_frontend_stmesp_demux_header hdr = {.raw = data[0]};
++	size_t total_wlen = calc_wlen(hdr.log.total_len +
++		offsetof(struct log_frontend_stmesp_demux_log, data));
++	struct log_frontend_stmesp_demux_active_entry *entry;
++
++	/* Override major in the header with the current context index. */
++	hdr.log.major = m;
++
++	if (k_mem_slab_alloc(&demux.mslab, (void **)&entry, K_NO_WAIT) != 0) {
++		return -ENOMEM;
++	}
++
++	union log_frontend_stmesp_demux_packet pkt = {
++		.generic = mpsc_pbuf_alloc(&demux.pbuf, total_wlen, K_NO_WAIT)
++	};
++
++	if (pkt.generic == NULL) {
++		k_mem_slab_free(&demux.mslab, entry);
++		return -ENOMEM;
++	}
++
++	pkt.log->type = LOG_FRONTEND_STMESP_DEMUX_TYPE_LOG;
++	pkt.log->content_invalid = 0;
++	pkt.log->timestamp = ts ? *ts : 0;
++	pkt.log->hdr = hdr.log;
++	pkt.log->padding = 0;
++
++	entry->m_ch = demux.curr_m_ch;
++	entry->ts = ts ? *ts : 0;
++	entry->packet = pkt.log;
++	entry->off = 0;
++
++	sys_slist_append(&demux.active_entries, &entry->node);
++	demux.curr = entry;
++
++	return 0;
+ }
+ 
+ void log_frontend_stmesp_demux_timestamp(uint64_t ts)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build
+-- west build: building application
+[1/111] Preparing syscall dependency handling
+
+[2/111] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/111] Generating misc/generated/syscalls_subdirs.trigger
+[4/111] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/111] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/111] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/111] Generating include/generated/zephyr/driver-validation.h
+[8/111] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/111] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/111] Generating ../../include/generated/zephyr/heap_constants.h
+[11/111] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/111] Generating include/generated/zephyr/offsets.h
+[13/111] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[16/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[17/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[18/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[19/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+[22/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[23/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[25/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[27/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[32/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[33/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[34/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/111] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[39/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[40/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/111] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[47/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[48/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[52/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[53/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[61/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[62/111] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[63/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[64/111] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[65/111] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[66/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[67/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[68/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[69/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[70/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[71/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[72/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[74/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[75/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[76/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[77/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[78/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[79/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[80/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[81/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[82/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[83/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[84/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[85/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[86/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[87/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[88/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[89/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[90/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[91/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[92/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[93/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[94/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[95/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[96/111] Linking C static library app/libapp.a
+[97/111] Linking C static library zephyr/arch/common/libarch__common.a
+[98/111] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[99/111] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[100/111] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[101/111] Generating linker_zephyr_pre0.cmd
+[102/111] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[103/111] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[104/111] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[105/111] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[106/111] Linking C static library zephyr/kernel/libkernel.a
+[107/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/frontends/log_frontend_stmesp_demux.c.obj
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/frontends/log_frontend_stmesp_demux.c:345:13: warning: ‘garbage_collector’ defined but not used [-Wunused-function]
+  345 | static void garbage_collector(uint32_t now)
+      |             ^~~~~~~~~~~~~~~~~
+/home/huyj/zephyr-workspace/zephyr/subsys/logging/frontends/log_frontend_stmesp_demux.c:296:13: warning: ‘store_turbo_log1’ defined but not used [-Wunused-function]
+  296 | static void store_turbo_log1(uint16_t m_id, uint16_t id, uint64_t *ts, uint32_t data)
+      |             ^~~~~~~~~~~~~~~~
+[108/111] Linking C static library zephyr/libzephyr.a
+[109/111] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/build/zephyr/zephyr.elf for board: native_sim/native/64
+[110/111] Building native simulator runner, and linking final executable
+[111/111] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE log_frontend_stmesp_demux_test
+===================================================================
+START - test_basic
+ PASS - test_basic in 0.000 seconds
+===================================================================
+START - test_drop_too_many_active
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/logging/log_frontend_stmesp_demux/src/main.c:349: log_frontend_stmesp_demux_test_test_drop_too_many_active: log_frontend_stmesp_demux_get_dropped() not equal to 1
+
+ FAIL - test_drop_too_many_active in 0.000 seconds
+===================================================================
+START - test_hw_event
+ PASS - test_hw_event in 0.000 seconds
+===================================================================
+START - test_init
+ PASS - test_init in 0.000 seconds
+===================================================================
+START - test_max_utilization
+ PASS - test_max_utilization in 0.000 seconds
+===================================================================
+START - test_mix
+ PASS - test_mix in 0.000 seconds
+===================================================================
+START - test_overwrite
+ PASS - test_overwrite in 0.000 seconds
+===================================================================
+START - test_reset
+ PASS - test_reset in 0.000 seconds
+===================================================================
+START - test_trace_point
+ PASS - test_trace_point in 0.000 seconds
+===================================================================
+TESTSUITE log_frontend_stmesp_demux_test failed.
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE FAIL -  88.89% [log_frontend_stmesp_demux_test]: pass = 8, fail = 1, skip = 0, total = 9 duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_basic] duration = 0.000 seconds
+ - FAIL - [log_frontend_stmesp_demux_test.test_drop_too_many_active] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_hw_event] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_init] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_max_utilization] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_mix] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_overwrite] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_reset] duration = 0.000 seconds
+ - PASS - [log_frontend_stmesp_demux_test.test_trace_point] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION FAILED
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

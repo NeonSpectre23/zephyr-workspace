@@ -1,0 +1,122 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is syntactically sound (braces balanced, returns match all code paths). Here's a summary of the implementation:
+
+**`timeutil_sync_state_update`** at `lib/utils/timeutil.c:79`:
+
+| Scenario | Behavior |
+|---|---|
+| `inst == NULL` or `inst->ref == 0` | Return `-EINVAL` (uninitialized/invalid instant) |
+| `tsp->base.ref == 0` (no base yet) | Set `base = *inst`, `skew = 1.0f`, return `0` |
+| `inst->ref <= base.ref` or `inst->local <= base.local` | Return `-EINVAL` (not strictly after base) |
+| Valid successor instant | Set `latest = *inst`, return `1` |
+
+The implementation follows the documented contract and matches all existing test expectations in `tests/unit/timeutil/test_sync.c`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/utils/timeutil.c
++++ lib/utils/timeutil.c
+@@ -79,7 +79,23 @@
+ int timeutil_sync_state_update(struct timeutil_sync_state *tsp,
+ 			       const struct timeutil_sync_instant *inst)
+ {
+-    /* MASKED - implement this function */
++	if ((inst == NULL) || (inst->ref == 0)) {
++		return -EINVAL;
++	}
++
++	if (tsp->base.ref == 0) {
++		tsp->base = *inst;
++		tsp->skew = 1.0f;
++		return 0;
++	}
++
++	if ((inst->ref <= tsp->base.ref) ||
++	    (inst->local <= tsp->base.local)) {
++		return -EINVAL;
++	}
++
++	tsp->latest = *inst;
++	return 1;
+ }
+ 
+ int timeutil_sync_state_set_skew(struct timeutil_sync_state *tsp, float skew,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (5.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build
+-- west build: building application
+[1/11] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[3/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[4/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[5/11] Building C object CMakeFiles/testbinary.dir/test_gmtime.c.obj
+[6/11] Building C object CMakeFiles/testbinary.dir/test_s64.c.obj
+[7/11] Building C object CMakeFiles/testbinary.dir/main.c.obj
+[8/11] Building C object CMakeFiles/testbinary.dir/test_s32.c.obj
+[9/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[10/11] Building C object CMakeFiles/testbinary.dir/test_sync.c.obj
+[11/11] Linking C executable testbinary
+Running TESTSUITE timeutil_api
+===================================================================
+START - test_gmtime
+ PASS - test_gmtime in 0.000 seconds
+===================================================================
+START - test_s32
+ PASS - test_s32 in 0.000 seconds
+===================================================================
+START - test_s64
+ PASS - test_s64 in 0.000 seconds
+===================================================================
+START - test_sync
+ PASS - test_sync in 0.000 seconds
+===================================================================
+TESTSUITE timeutil_api succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [timeutil_api]: pass = 4, fail = 0, skip = 0, total = 4 duration = 0.000 seconds
+ - PASS - [timeutil_api.test_gmtime] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_s32] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_s64] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_sync] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr module(s) (Zephyr base): unittest
+
+
+

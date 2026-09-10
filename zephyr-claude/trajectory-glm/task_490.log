@@ -1,0 +1,1237 @@
+============================================================
+=== Claude Session ===
+============================================================
+Implemented `zvfs_free_fd` — it calls `z_fd_unref(fd)` to decrement the reference count. When the count reaches 0, `z_fd_unref` clears the entry's `obj` and `vtable`, making the fd slot available for reuse (which is exactly the inverse of `zvfs_reserve_fd`).
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/os/zvfs/zvfs_fdtable.c
++++ lib/os/zvfs/zvfs_fdtable.c
+@@ -309,7 +309,8 @@
+ 
+ void zvfs_free_fd(int fd)
+ {
+-    /* MASKED - implement this function */
++	/* Assumes fd was already bounds-checked. */
++	(void)z_fd_unref(fd);
+ }
+ 
+ int zvfs_alloc_fd(void *obj, const struct fd_op_vtable *vtable)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable
+-- CMake version: 4.2.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6")
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42")
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (12.6s)
+-- Generating done (0.2s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build
+-- west build: building application
+[1/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_add.c.obj
+[2/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_add_sep.c.obj
+[3/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_append.c.obj
+[4/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_count.c.obj
+[5/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_create.c.obj
+[6/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_create_sep.c.obj
+[7/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_delete.c.obj
+[8/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_extract.c.obj
+[9/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_insert.c.obj
+[10/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_next.c.obj
+[11/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_stringify.c.obj
+[12/1127] Preparing syscall dependency handling
+
+[13/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/argz_replace.c.obj
+[14/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/buf_findstr.c.obj
+[15/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/envz_add.c.obj
+[16/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/envz_entry.c.obj
+[17/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/envz_get.c.obj
+[18/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/envz_merge.c.obj
+[19/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/envz_remove.c.obj
+[20/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/argz/envz_strip.c.obj
+[21/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/caseconv.c.obj
+[22/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/ctype_.c.obj
+[23/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/ctype_table.c.obj
+[24/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/ctype_wide.c.obj
+[25/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isalnum.c.obj
+[26/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isalnum_l.c.obj
+[27/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isalpha_l.c.obj
+[28/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isalpha.c.obj
+[29/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isascii.c.obj
+[30/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isascii_l.c.obj
+[31/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isblank.c.obj
+[32/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isblank_l.c.obj
+[33/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iscntrl.c.obj
+[34/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iscntrl_l.c.obj
+[35/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isdigit.c.obj
+[36/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isdigit_l.c.obj
+[37/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isgraph.c.obj
+[38/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isgraph_l.c.obj
+[39/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/islower.c.obj
+[40/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/islower_l.c.obj
+[41/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isprint_l.c.obj
+[42/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isprint.c.obj
+[43/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/ispunct.c.obj
+[44/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/ispunct_l.c.obj
+[45/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isspace.c.obj
+[46/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isspace_l.c.obj
+[47/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isupper.c.obj
+[48/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isupper_l.c.obj
+[49/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswalnum.c.obj
+[50/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswalnum_l.c.obj
+[51/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswalpha.c.obj
+[52/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswalpha_l.c.obj
+[53/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswblank.c.obj
+[54/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswblank_l.c.obj
+[55/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswcntrl.c.obj
+[56/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswcntrl_l.c.obj
+[57/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswctype.c.obj
+[58/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswctype_l.c.obj
+[59/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswdigit.c.obj
+[60/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswdigit_l.c.obj
+[61/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswgraph.c.obj
+[62/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswgraph_l.c.obj
+[63/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswlower.c.obj
+[64/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswlower_l.c.obj
+[65/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswprint.c.obj
+[66/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswprint_l.c.obj
+[67/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswpunct.c.obj
+[68/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswpunct_l.c.obj
+[69/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswspace.c.obj
+[70/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswspace_l.c.obj
+[71/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswupper.c.obj
+[72/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswupper_l.c.obj
+[73/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswxdigit.c.obj
+[74/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/iswxdigit_l.c.obj
+[75/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isxdigit.c.obj
+[76/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/isxdigit_l.c.obj
+[77/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/jp2uc.c.obj
+[78/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/toascii.c.obj
+[79/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/toascii_l.c.obj
+[80/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/tolower.c.obj
+[81/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/tolower_l.c.obj
+[82/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/toupper.c.obj
+[83/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/toupper_l.c.obj
+[84/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/towctrans.c.obj
+[85/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/towctrans_l.c.obj
+[86/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/towlower.c.obj
+[87/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/towlower_l.c.obj
+[88/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/towupper.c.obj
+[89/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/towupper_l.c.obj
+[90/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/wctrans.c.obj
+[91/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/wctype.c.obj
+[92/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/wctype_l.c.obj
+[93/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ctype/wctrans_l.c.obj
+[94/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/errno/errno.c.obj
+[95/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/iconv/iconv.c.obj
+[96/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/iconv/iconv_close.c.obj
+[97/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/iconv/iconv_open.c.obj
+[98/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/misc/ffs.c.obj
+[99/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/misc/fini.c.obj
+[100/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/misc/init.c.obj
+[101/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/misc/lock.c.obj
+[102/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/misc/unctrl.c.obj
+[103/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/picolib/picosbrk.c.obj
+[104/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/picolib/dso_handle.c.obj
+[105/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/picolib/getauxval.c.obj
+[106/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/collcmp.c.obj
+[107/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/dirname.c.obj
+[108/1127] Generating misc/generated/syscalls_subdirs.trigger
+[109/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/basename.c.obj
+[110/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/fnmatch.c.obj
+[111/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/fpathconf.c.obj
+[112/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/pathconf.c.obj
+[113/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/regcomp.c.obj
+[114/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/regerror.c.obj
+[115/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/regexec.c.obj
+[116/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/posix/regfree.c.obj
+[117/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/bsd_qsort_r.c.obj
+[118/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/bsearch.c.obj
+[119/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hash_bigkey.c.obj
+[120/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hash_buf.c.obj
+[121/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hash.c.obj
+[122/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hash_func.c.obj
+[123/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hash_log2.c.obj
+[124/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hash_page.c.obj
+[125/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hcreate.c.obj
+[126/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/hcreate_r.c.obj
+[127/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/ndbm.c.obj
+[128/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/qsort.c.obj
+[129/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/qsort_r.c.obj
+[130/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/tdelete.c.obj
+[131/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/tdestroy.c.obj
+[132/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/tfind.c.obj
+[133/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/tsearch.c.obj
+[134/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/search/twalk.c.obj
+[135/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/signal/psignal.c.obj
+[136/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/signal/sig2str.c.obj
+[137/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/signal/signal.c.obj
+[138/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/chk_fail.c.obj
+[139/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/gets_chk.c.obj
+[140/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/memcpy_chk.c.obj
+[141/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/memmove_chk.c.obj
+[142/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/mempcpy_chk.c.obj
+[143/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/memset_chk.c.obj
+[144/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/snprintf_chk.c.obj
+[145/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/sprintf_chk.c.obj
+[146/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/stack_protector.c.obj
+[147/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/stpcpy_chk.c.obj
+[148/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/stpncpy_chk.c.obj
+[149/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/strcat_chk.c.obj
+[150/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/strcpy_chk.c.obj
+[151/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/strncat_chk.c.obj
+[152/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/strncpy_chk.c.obj
+[153/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/vsnprintf_chk.c.obj
+[154/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ssp/vsprintf_chk.c.obj
+[155/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/a64l.c.obj
+[156/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/abort.c.obj
+[157/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/abs.c.obj
+[158/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/aligned_alloc.c.obj
+[159/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/arc4random_uniform.c.obj
+[160/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/assert.c.obj
+[161/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/assert_func.c.obj
+[162/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/assert_no_arg.c.obj
+[163/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/atof.c.obj
+[164/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/arc4random.c.obj
+[165/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/atoff.c.obj
+[166/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/atoi.c.obj
+[167/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/atol.c.obj
+[168/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/atoll.c.obj
+[169/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/btowc.c.obj
+[170/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/div.c.obj
+[171/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/drand48.c.obj
+[172/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/environ.c.obj
+[173/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/eprintf.c.obj
+[174/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/erand48.c.obj
+[175/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/_Exit.c.obj
+[176/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/getenv.c.obj
+[177/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/getenv_r.c.obj
+[178/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/getopt.c.obj
+[179/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/getsubopt.c.obj
+[180/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/imaxabs.c.obj
+[181/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/imaxdiv.c.obj
+[182/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/itoa.c.obj
+[183/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/jrand48.c.obj
+[184/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/l64a.c.obj
+[185/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/labs.c.obj
+[186/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/lcong48.c.obj
+[187/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/ldiv.c.obj
+[188/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/llabs.c.obj
+[189/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/lldiv.c.obj
+[190/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/lrand48.c.obj
+[191/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mblen.c.obj
+[192/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbrlen.c.obj
+[193/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbrtowc.c.obj
+[194/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbsinit.c.obj
+[195/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbsnrtowcs.c.obj
+[196/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbsrtowcs.c.obj
+[197/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbstowcs.c.obj
+[198/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbtowc.c.obj
+[199/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mbtowc_r.c.obj
+[200/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/mrand48.c.obj
+[201/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/nrand48.c.obj
+[202/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/putenv.c.obj
+[203/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/rand48.c.obj
+[204/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/rand.c.obj
+[205/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/random.c.obj
+[206/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/rand_r.c.obj
+[207/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/reallocarray.c.obj
+[208/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/reallocf.c.obj
+[209/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/rpmatch.c.obj
+[210/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/sb_charsets.c.obj
+[211/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/seed48.c.obj
+[212/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/setenv.c.obj
+[213/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/srand.c.obj
+[214/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/srand48.c.obj
+[215/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/srandom.c.obj
+[216/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/system.c.obj
+[217/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/utoa.c.obj
+[218/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wcsnrtombs.c.obj
+[219/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wcsrtombs.c.obj
+[220/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wcstombs.c.obj
+[221/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wcrtomb.c.obj
+[222/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wctob.c.obj
+[223/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wctomb.c.obj
+[224/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/wctomb_r.c.obj
+[225/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/pico-atexit.c.obj
+[226/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/pico-exit.c.obj
+[227/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/pico-exitprocs.c.obj
+[228/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/pico-onexit.c.obj
+[229/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/pico-cxa-atexit.c.obj
+[230/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/set_constraint_handler_s.c.obj
+[231/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/stdlib/ignore_handler_s.c.obj
+[232/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/bcmp.c.obj
+[233/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/bcopy.c.obj
+[234/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/explicit_bzero.c.obj
+[235/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/bzero.c.obj
+[236/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/ffsl.c.obj
+[237/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/ffsll.c.obj
+[238/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/fls.c.obj
+[239/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/flsl.c.obj
+[240/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/flsll.c.obj
+[241/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/gnu_basename.c.obj
+[242/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/index.c.obj
+[243/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memccpy.c.obj
+[244/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memchr.c.obj
+[245/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memcpy.c.obj
+[246/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memmem.c.obj
+[247/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memcmp.c.obj
+[248/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memmove.c.obj
+[249/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/mempcpy.c.obj
+[250/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memrchr.c.obj
+[251/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memset.c.obj
+[252/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memset_explicit.c.obj
+[253/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/rawmemchr.c.obj
+[254/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/rindex.c.obj
+[255/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/stpcpy.c.obj
+[256/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/stpncpy.c.obj
+[257/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcasecmp.c.obj
+[258/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcasestr.c.obj
+[259/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strchrnul.c.obj
+[260/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcasecmp_l.c.obj
+[261/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcat.c.obj
+[262/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strchr.c.obj
+[263/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcoll.c.obj
+[264/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcoll_l.c.obj
+[265/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcmp.c.obj
+[266/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcpy.c.obj
+[267/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcspn.c.obj
+[268/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strdup.c.obj
+[269/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strerror.c.obj
+[270/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strlwr.c.obj
+[271/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strerror_r.c.obj
+[272/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strlcat.c.obj
+[273/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strlcpy.c.obj
+[274/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strlen.c.obj
+[275/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncasecmp.c.obj
+[276/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncasecmp_l.c.obj
+[277/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncat.c.obj
+[278/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncmp.c.obj
+[279/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncpy.c.obj
+[280/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strndup.c.obj
+[281/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strnlen.c.obj
+[282/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strnstr.c.obj
+[283/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strpbrk.c.obj
+[284/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strrchr.c.obj
+[285/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strsep.c.obj
+[286/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strsignal.c.obj
+[287/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strspn.c.obj
+[288/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strstr.c.obj
+[289/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strtok.c.obj
+[290/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strtok_r.c.obj
+[291/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strupr.c.obj
+[292/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strverscmp.c.obj
+[293/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strxfrm.c.obj
+[294/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strxfrm_l.c.obj
+[295/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/swab.c.obj
+[296/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/timingsafe_bcmp.c.obj
+[297/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/timingsafe_memcmp.c.obj
+[298/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcpcpy.c.obj
+[299/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcpncpy.c.obj
+[300/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscasecmp.c.obj
+[301/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscasecmp_l.c.obj
+[302/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscat.c.obj
+[303/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcschr.c.obj
+[304/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscmp.c.obj
+[305/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscoll.c.obj
+[306/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscoll_l.c.obj
+[307/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscpy.c.obj
+[308/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcscspn.c.obj
+[309/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsdup.c.obj
+[310/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcslcat.c.obj
+[311/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcslen.c.obj
+[312/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsncasecmp.c.obj
+[313/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsncasecmp_l.c.obj
+[314/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcslcpy.c.obj
+[315/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsncat.c.obj
+[316/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsncmp.c.obj
+[317/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsncpy.c.obj
+[318/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsnlen.c.obj
+[319/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcspbrk.c.obj
+[320/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsrchr.c.obj
+[321/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsspn.c.obj
+[322/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsstr.c.obj
+[323/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcstok.c.obj
+[324/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcswidth.c.obj
+[325/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsxfrm.c.obj
+[326/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcsxfrm_l.c.obj
+[327/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wcwidth.c.obj
+[328/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wmemchr.c.obj
+[329/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wmemcmp.c.obj
+[330/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wmemcpy.c.obj
+[331/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wmemmove.c.obj
+[332/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wmempcpy.c.obj
+[333/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/wmemset.c.obj
+[334/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/xpg_strerror_r.c.obj
+[335/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memcpy_s.c.obj
+[336/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memmove_s.c.obj
+[337/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/memset_s.c.obj
+[338/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcat_s.c.obj
+[339/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strcpy_s.c.obj
+[340/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strerror_s.c.obj
+[341/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strerrorlen_s.c.obj
+[342/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncat_s.c.obj
+[343/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strnlen_s.c.obj
+[344/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/string/strncpy_s.c.obj
+[345/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/asctime.c.obj
+[346/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/asctime_r.c.obj
+[347/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/clock.c.obj
+[348/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/ctime.c.obj
+[349/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/ctime_r.c.obj
+[350/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/difftime.c.obj
+[351/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/gettzinfo.c.obj
+[352/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/gmtime.c.obj
+[353/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/gmtime_r.c.obj
+[354/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/lcltime.c.obj
+[355/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/lcltime_r.c.obj
+[356/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/lcltime_buf.c.obj
+[357/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/mktime.c.obj
+[358/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/month_lengths.c.obj
+[359/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/strftime.c.obj
+[360/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/strptime.c.obj
+[361/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/time.c.obj
+[362/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/tzcalc_limits.c.obj
+[363/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/tzset.c.obj
+[364/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/tzvars.c.obj
+[365/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/time/wcsftime.c.obj
+[366/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/asnprintf.c.obj
+[367/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/asprintf.c.obj
+[368/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/atold_engine.c.obj
+[369/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/bufio.c.obj
+[370/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/clearerr.c.obj
+[371/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/compare_exchange.c.obj
+[372/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/dtox_engine.c.obj
+[373/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ecvt.c.obj
+[374/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ecvtf.c.obj
+[375/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ecvtf_r.c.obj
+[376/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ecvtl.c.obj
+[377/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ecvtl_r.c.obj
+[378/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ecvt_r.c.obj
+[379/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/exchange.c.obj
+[380/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fcvt.c.obj
+[381/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fcvtf.c.obj
+[382/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fcvtl_r.c.obj
+[383/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fclose.c.obj
+[384/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fcvtf_r.c.obj
+[385/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fcvtl.c.obj
+[386/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fcvt_r.c.obj
+[387/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fdevopen.c.obj
+[388/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fdopen.c.obj
+[389/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/feof.c.obj
+[390/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ferror.c.obj
+[391/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fflush.c.obj
+[392/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fgetc.c.obj
+[393/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fgets.c.obj
+[394/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fgetwc.c.obj
+[395/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fgetws.c.obj
+[396/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fileno.c.obj
+[397/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/filestrget.c.obj
+[398/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/filestrputalloc.c.obj
+[399/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/filestrput.c.obj
+[400/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/filewstrget.c.obj
+[401/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/flockfile.c.obj
+[402/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fmemopen.c.obj
+[403/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fopen.c.obj
+[404/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fprintf.c.obj
+[405/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fputc.c.obj
+[406/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fputs.c.obj
+[407/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fputws.c.obj
+[408/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fread.c.obj
+[409/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fputwc.c.obj
+[410/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/freopen.c.obj
+[411/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fscanf.c.obj
+[412/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fseek.c.obj
+[413/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fseeko.c.obj
+[414/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ftell.c.obj
+[415/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ftello.c.obj
+[416/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ftox_engine.c.obj
+[417/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ftrylockfile.c.obj
+[418/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/funlockfile.c.obj
+[419/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/funopen.c.obj
+[420/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fwide.c.obj
+[421/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fwprintf.c.obj
+[422/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fwrite.c.obj
+[423/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/fwscanf.c.obj
+[424/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/gcvt.c.obj
+[425/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/gcvtf.c.obj
+[426/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/gcvtl.c.obj
+[427/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/getchar.c.obj
+[428/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/getdelim.c.obj
+[429/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/getline.c.obj
+[430/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/gets.c.obj
+[431/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/getwchar.c.obj
+[432/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ldtoa_engine.c.obj
+[433/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ldtox_engine.c.obj
+[434/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/mktemp.c.obj
+[435/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/printf.c.obj
+[436/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/putchar.c.obj
+[437/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/matchcaseprefix.c.obj
+[438/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/perror.c.obj
+[439/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/puts.c.obj
+[440/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/putwchar.c.obj
+[441/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/remove.c.obj
+[442/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/rewind.c.obj
+[443/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/scanf.c.obj
+[444/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/setbuf.c.obj
+[445/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/setbuffer.c.obj
+[446/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/setlinebuf.c.obj
+[447/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/sflags.c.obj
+[448/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/snprintf.c.obj
+[449/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/snprintfd.c.obj
+[450/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/snprintff.c.obj
+[451/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/setvbuf.c.obj
+[452/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/sprintf.c.obj
+[453/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/sprintfd.c.obj
+[454/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/sprintff.c.obj
+[455/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/sscanf.c.obj
+[456/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strfromd.c.obj
+[457/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strfromf.c.obj
+[458/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strfroml.c.obj
+[459/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtod.c.obj
+[460/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtod_l.c.obj
+[461/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtof.c.obj
+[462/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtof_l.c.obj
+[463/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoimax_l.c.obj
+[464/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtol.c.obj
+[465/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoimax.c.obj
+[466/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtold.c.obj
+[467/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtold_l.c.obj
+[468/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtol_l.c.obj
+[469/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoll.c.obj
+[470/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoll_l.c.obj
+[471/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoul.c.obj
+[472/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoul_l.c.obj
+[473/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoull.c.obj
+[474/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoull_l.c.obj
+[475/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoumax.c.obj
+[476/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/strtoumax_l.c.obj
+[477/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/swprintf.c.obj
+[478/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/swscanf.c.obj
+[479/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/tmpfile.c.obj
+[480/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/tmpnam.c.obj
+[481/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ungetc.c.obj
+[482/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ungetwc.c.obj
+[483/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vasnprintf.c.obj
+[484/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vasprintf.c.obj
+[485/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vffprintf.c.obj
+[486/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vffscanf.c.obj
+[487/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfiprintf.c.obj
+[488/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfiscanf.c.obj
+[489/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vflprintf.c.obj
+[490/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vflscanf.c.obj
+[491/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfmscanf.c.obj
+[492/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfmprintf.c.obj
+[493/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfprintf.c.obj
+[494/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfscanf.c.obj
+[495/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfwprintf.c.obj
+[496/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfwscanf.c.obj
+[497/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vprintf.c.obj
+[498/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vscanf.c.obj
+[499/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vsnprintf.c.obj
+[500/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vsprintf.c.obj
+[501/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vsscanf.c.obj
+[502/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vswprintf.c.obj
+[503/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vswscanf.c.obj
+[504/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vwprintf.c.obj
+[505/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vwscanf.c.obj
+[506/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstod.c.obj
+[507/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstod_l.c.obj
+[508/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstof.c.obj
+[509/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstof_l.c.obj
+[510/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoimax.c.obj
+[511/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoimax_l.c.obj
+[512/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstol.c.obj
+[513/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstold.c.obj
+[514/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstold_l.c.obj
+[515/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstol_l.c.obj
+[516/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoll.c.obj
+[517/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoll_l.c.obj
+[518/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoul.c.obj
+[519/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoul_l.c.obj
+[520/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoull.c.obj
+[521/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoull_l.c.obj
+[522/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoumax.c.obj
+[523/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wcstoumax_l.c.obj
+[524/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wprintf.c.obj
+[525/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/wscanf.c.obj
+[526/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/sprintf_s.c.obj
+[527/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vfprintf_s.c.obj
+[528/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/vsnprintf_s.c.obj
+[529/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/atod_ryu.c.obj
+[530/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/atof_ryu.c.obj
+[531/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/dtoa_ryu.c.obj
+[532/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ftoa_ryu.c.obj
+[533/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ryu_divpow2.c.obj
+[534/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ryu_log10.c.obj
+[535/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ryu_log2pow5.c.obj
+[536/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ryu_pow5bits.c.obj
+[537/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ryu_table.c.obj
+[538/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/tinystdio/ryu_umul128.c.obj
+[539/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/uchar/c16rtomb.c.obj
+[540/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/uchar/c32rtomb.c.obj
+[541/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/uchar/c8rtomb.c.obj
+[542/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/uchar/mbrtoc16.c.obj
+[543/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/uchar/mbrtoc32.c.obj
+[544/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/uchar/mbrtoc8.c.obj
+[545/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_array.c.obj
+[546/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr.c.obj
+[547/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_float.c.obj
+[548/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_mem.c.obj
+[549/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_private.c.obj
+[550/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_rec.c.obj
+[551/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_reference.c.obj
+[552/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_sizeof.c.obj
+[553/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/xdr/xdr_stdio.c.obj
+[554/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/duplocale.c.obj
+[555/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/freelocale.c.obj
+[556/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/getlocalename_l.c.obj
+[557/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/localeconv.c.obj
+[558/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/localedata.c.obj
+[559/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/locale_ctype_ptr.c.obj
+[560/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/locale_ctype_ptr_l.c.obj
+[561/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/locale_mb_cur_max.c.obj
+[562/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/locale_names.c.obj
+[563/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/newlocale.c.obj
+[564/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/nl_langinfo.c.obj
+[565/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/setlocale.c.obj
+[566/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/timedata.c.obj
+[567/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/locale/uselocale.c.obj
+[568/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_cfi_type_check_to_string.c.obj
+[569/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_error.c.obj
+[570/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_add_overflow.c.obj
+[571/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_alignment_assumption.c.obj
+[572/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_builtin_unreachable.c.obj
+[573/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_cfi_bad_type.c.obj
+[574/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_cfi_check_fail.c.obj
+[575/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_divrem_overflow.c.obj
+[576/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_dynamic_type_cache_miss.c.obj
+[577/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_float_cast_overflow.c.obj
+[578/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_function_type_mismatch.c.obj
+[579/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_implicit_conversion.c.obj
+[580/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_invalid_builtin.c.obj
+[581/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_invalid_objc_cast.c.obj
+[582/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_load_invalid_value.c.obj
+[583/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_missing_return.c.obj
+[584/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_mul_overflow.c.obj
+[585/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_negate_overflow.c.obj
+[586/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_nonnull_arg.c.obj
+[587/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_nonnull_return.c.obj
+[588/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_nonnull_return_v1.c.obj
+[589/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_nullability_arg.c.obj
+[590/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_nullability_return.c.obj
+[591/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_nullability_return_v1.c.obj
+[592/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_out_of_bounds.c.obj
+[593/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_pointer_overflow.c.obj
+[594/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_shift_out_of_bounds.c.obj
+[595/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_sub_overflow.c.obj
+[596/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_type_mismatch.c.obj
+[597/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_type_mismatch_v1.c.obj
+[598/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_message.c.obj
+[599/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_type_check_to_string.c.obj
+[600/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_val_to_imax.c.obj
+[601/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_handle_vla_bound_not_positive.c.obj
+[602/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_val_to_string.c.obj
+[603/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_val_to_umax.c.obj
+[604/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libc/ubsan/ubsan_warning.c.obj
+[605/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/signgam.c.obj
+[606/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_finite.c.obj
+[607/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_copysign.c.obj
+[608/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_modf.c.obj
+[609/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_scalbn.c.obj
+[610/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_cbrt.c.obj
+[611/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_exp10.c.obj
+[612/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_expm1.c.obj
+[613/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_ilogb.c.obj
+[614/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_infinity.c.obj
+[615/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_iseqsig.c.obj
+[616/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_isinf.c.obj
+[617/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_isnan.c.obj
+[618/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_issignaling.c.obj
+[619/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_log1p.c.obj
+[620/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_nan.c.obj
+[621/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_nextafter.c.obj
+[622/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_pow10.c.obj
+[623/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_logb.c.obj
+[624/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_log2.c.obj
+[625/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_fdim.c.obj
+[626/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_rint.c.obj
+[627/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_fma.c.obj
+[628/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_fmax.c.obj
+[629/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_fmin.c.obj
+[630/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_fpclassify.c.obj
+[631/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_getpayload.c.obj
+[632/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_lrint.c.obj
+[633/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_llrint.c.obj
+[634/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_lround.c.obj
+[635/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_llround.c.obj
+[636/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_nearbyint.c.obj
+[637/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_remquo.c.obj
+[638/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_round.c.obj
+[639/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_scalbln.c.obj
+[640/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_signbit.c.obj
+[641/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/s_trunc.c.obj
+[642/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/exp_data.c.obj
+[643/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_with_errno.c.obj
+[644/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_uflow.c.obj
+[645/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_oflow.c.obj
+[646/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_divzero.c.obj
+[647/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_invalid.c.obj
+[648/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_may_uflow.c.obj
+[649/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_check_uflow.c.obj
+[650/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_err_check_oflow.c.obj
+[651/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_inexact.c.obj
+[652/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_inexactf.c.obj
+[653/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/log_data.c.obj
+[654/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/log2_data.c.obj
+[655/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/pow.c.obj
+[656/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/pow_log_data.c.obj
+[657/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_finite.c.obj
+[658/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_copysign.c.obj
+[659/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_modf.c.obj
+[660/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_scalbn.c.obj
+[661/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_cbrt.c.obj
+[662/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_exp10.c.obj
+[663/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_getpayload.c.obj
+[664/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_expm1.c.obj
+[665/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_ilogb.c.obj
+[666/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_infinity.c.obj
+[667/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_iseqsig.c.obj
+[668/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_isinf.c.obj
+[669/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_isnan.c.obj
+[670/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_issignaling.c.obj
+[671/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_log1p.c.obj
+[672/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_nan.c.obj
+[673/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_nextafter.c.obj
+[674/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_pow10.c.obj
+[675/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_fdim.c.obj
+[676/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_rint.c.obj
+[677/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_logb.c.obj
+[678/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_fma.c.obj
+[679/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_fmax.c.obj
+[680/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_fmin.c.obj
+[681/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_fpclassify.c.obj
+[682/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_lrint.c.obj
+[683/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_llrint.c.obj
+[684/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_lround.c.obj
+[685/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_llround.c.obj
+[686/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_nearbyint.c.obj
+[687/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_remquo.c.obj
+[688/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_round.c.obj
+[689/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_scalbln.c.obj
+[690/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_trunc.c.obj
+[691/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_exp2_data.c.obj
+[692/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_log_data.c.obj
+[693/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_log2_data.c.obj
+[694/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sf_pow_log2_data.c.obj
+[695/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sinf.c.obj
+[696/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sincosf.c.obj
+[697/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sincosf_data.c.obj
+[698/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_divzerof.c.obj
+[699/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_with_errnof.c.obj
+[700/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_uflowf.c.obj
+[701/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_may_uflowf.c.obj
+[702/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_oflowf.c.obj
+[703/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_invalidf.c.obj
+[704/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_check_oflowf.c.obj
+[705/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_errf_check_uflowf.c.obj
+[706/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/copysignl.c.obj
+[707/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/frexpl.c.obj
+[708/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/exp10l.c.obj
+[709/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/math_inexactl.c.obj
+[710/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/nanl.c.obj
+[711/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/fabsl.c.obj
+[712/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/nexttoward.c.obj
+[713/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/nexttowardf.c.obj
+[714/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sl_iseqsig.c.obj
+[715/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/common/sl_issignaling.c.obj
+[716/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/k_cos.c.obj
+[717/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/k_rem_pio2.c.obj
+[718/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/k_sin.c.obj
+[719/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/k_tan.c.obj
+[720/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/kf_cos.c.obj
+[721/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/kf_rem_pio2.c.obj
+[722/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/kf_sin.c.obj
+[723/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/kf_tan.c.obj
+[724/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_acos.c.obj
+[725/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_acosh.c.obj
+[726/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_asin.c.obj
+[727/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_asinh.c.obj
+[728/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_atan.c.obj
+[729/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_atan2.c.obj
+[730/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_atanh.c.obj
+[731/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_ceil.c.obj
+[732/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_cos.c.obj
+[733/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_cosh.c.obj
+[734/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_erf.c.obj
+[735/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_drem.c.obj
+[736/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_exp.c.obj
+[737/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_exp2.c.obj
+[738/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_fabs.c.obj
+[739/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_floor.c.obj
+[740/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_fmod.c.obj
+[741/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_frexp.c.obj
+[742/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_hypot.c.obj
+[743/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_j0.c.obj
+[744/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_j1.c.obj
+[745/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_jn.c.obj
+[746/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_lgamma.c.obj
+[747/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_log.c.obj
+[748/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_log10.c.obj
+[749/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_pow.c.obj
+[750/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_rem_pio2.c.obj
+[751/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_remainder.c.obj
+[752/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_scalb.c.obj
+[753/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_signif.c.obj
+[754/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_sin.c.obj
+[755/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_sincos.c.obj
+[756/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_sinh.c.obj
+[757/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_sqrt.c.obj
+[758/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_tan.c.obj
+[759/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_tanh.c.obj
+[760/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/s_tgamma.c.obj
+[761/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_acos.c.obj
+[762/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_acosh.c.obj
+[763/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_asin.c.obj
+[764/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_asinh.c.obj
+[765/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_atan.c.obj
+[766/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_atan2.c.obj
+[767/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_atanh.c.obj
+[768/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_ceil.c.obj
+[769/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_cos.c.obj
+[770/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_cosh.c.obj
+[771/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_drem.c.obj
+[772/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_erf.c.obj
+[773/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_exp.c.obj
+[774/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_exp2.c.obj
+[775/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_fabs.c.obj
+[776/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_floor.c.obj
+[777/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_frexp.c.obj
+[778/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_fmod.c.obj
+[779/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_hypot.c.obj
+[780/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_j0.c.obj
+[781/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_j1.c.obj
+[782/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_jn.c.obj
+[783/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_lgamma.c.obj
+[784/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_log.c.obj
+[785/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_log10.c.obj
+[786/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_log2.c.obj
+[787/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_pow.c.obj
+[788/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_rem_pio2.c.obj
+[789/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_remainder.c.obj
+[790/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_signif.c.obj
+[791/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_scalb.c.obj
+[792/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_sin.c.obj
+[793/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_sincos.c.obj
+[794/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_sinh.c.obj
+[795/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_sqrt.c.obj
+[796/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_tan.c.obj
+[797/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_tanh.c.obj
+[798/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sf_tgamma.c.obj
+[799/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sr_lgamma.c.obj
+[800/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/srf_lgamma.c.obj
+[801/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_acoshl.c.obj
+[802/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_expl.c.obj
+[803/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/math/sl_hypot.c.obj
+[804/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_atanhl.c.obj
+[805/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_coshl.c.obj
+[806/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_fmodl.c.obj
+[807/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_hypotl.c.obj
+[808/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_lgammal_r.c.obj
+[809/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_log10l.c.obj
+[810/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_log2l.c.obj
+[811/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_logl.c.obj
+[812/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_powl.c.obj
+[813/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_sinhl.c.obj
+[814/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_tgammal.c.obj
+[815/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/invtrig.c.obj
+[816/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/k_cosl.c.obj
+[817/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/k_sinl.c.obj
+[818/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/k_tanl.c.obj
+[819/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_asinhl.c.obj
+[820/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_ceill.c.obj
+[821/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_copysignl.c.obj
+[822/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_erfl.c.obj
+[823/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_exp2l.c.obj
+[824/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_expm1l.c.obj
+[825/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_floorl.c.obj
+[826/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_log1pl.c.obj
+[827/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_modfl.c.obj
+[828/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_nanl.c.obj
+[829/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_nexttoward.c.obj
+[830/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_nexttowardf.c.obj
+[831/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_nextafterl.c.obj
+[832/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_remquol.c.obj
+[833/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_tanhl.c.obj
+[834/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_truncl.c.obj
+[835/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_acosl.c.obj
+[836/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_asinl.c.obj
+[837/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_atan2l.c.obj
+[838/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_lgammal.c.obj
+[839/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_remainderl.c.obj
+[840/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/e_sqrtl.c.obj
+[841/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/polevll.c.obj
+[842/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_ilogbl.c.obj
+[843/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_cosl.c.obj
+[844/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_atanl.c.obj
+[845/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_cbrtl.c.obj
+[846/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_fabsl.c.obj
+[847/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_fdiml.c.obj
+[848/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_fmal.c.obj
+[849/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_fmaxl.c.obj
+[850/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_fminl.c.obj
+[851/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_frexpl.c.obj
+[852/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_isinfl.c.obj
+[853/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_isnanl.c.obj
+[854/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_llroundl.c.obj
+[855/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_logbl.c.obj
+[856/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_lrintl.c.obj
+[857/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_llrintl.c.obj
+[858/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_lroundl.c.obj
+[859/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_rintl.c.obj
+[860/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_roundl.c.obj
+[861/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_scalbnl.c.obj
+[862/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_signbitl.c.obj
+[863/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_sincosl.c.obj
+[864/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_sinl.c.obj
+[865/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/s_tanl.c.obj
+[866/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_check_oflowl.c.obj
+[867/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_check_uflowl.c.obj
+[868/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_invalidl.c.obj
+[869/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_oflowl.c.obj
+[870/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_divzerol.c.obj
+[871/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_uflowl.c.obj
+[872/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/ld/math_errl_with_errnol.c.obj
+[873/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/fenv/fe_dfl_env.c.obj
+[874/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/fenv/fenv.c.obj
+[875/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/fenv/fegetmode.c.obj
+[876/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/fenv/fesetmode.c.obj
+[877/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cabs.c.obj
+[878/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cacos.c.obj
+[879/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cacosh.c.obj
+[880/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/carg.c.obj
+[881/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/casin.c.obj
+[882/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/casinh.c.obj
+[883/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/catanh.c.obj
+[884/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ccosh.c.obj
+[885/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/catan.c.obj
+[886/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ccos.c.obj
+[887/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cephes_subr.c.obj
+[888/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cexp.c.obj
+[889/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cimag.c.obj
+[890/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/clog.c.obj
+[891/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/clog10.c.obj
+[892/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/conj.c.obj
+[893/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cpow.c.obj
+[894/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cproj.c.obj
+[895/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/creal.c.obj
+[896/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csin.c.obj
+[897/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csqrt.c.obj
+[898/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csinh.c.obj
+[899/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ctan.c.obj
+[900/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ctanh.c.obj
+[901/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cabsf.c.obj
+[902/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/casinf.c.obj
+[903/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ccosf.c.obj
+[904/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cimagf.c.obj
+[905/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cprojf.c.obj
+[906/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csqrtf.c.obj
+[907/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cacosf.c.obj
+[908/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/casinhf.c.obj
+[909/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ccoshf.c.obj
+[910/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/clogf.c.obj
+[911/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ctanf.c.obj
+[912/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/clog10f.c.obj
+[913/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/crealf.c.obj
+[914/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cacoshf.c.obj
+[915/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/catanf.c.obj
+[916/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cephes_subrf.c.obj
+[917/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/conjf.c.obj
+[918/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csinf.c.obj
+[919/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ctanhf.c.obj
+[920/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cargf.c.obj
+[921/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/catanhf.c.obj
+[922/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cexpf.c.obj
+[923/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cpowf.c.obj
+[924/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cabsl.c.obj
+[925/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csinhf.c.obj
+[926/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/creall.c.obj
+[927/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cimagl.c.obj
+[928/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/conjl.c.obj
+[929/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cprojl.c.obj
+[930/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csqrtl.c.obj
+[931/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cacoshl.c.obj
+[932/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cacosl.c.obj
+[933/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cargl.c.obj
+[934/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/casinhl.c.obj
+[935/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/casinl.c.obj
+[936/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/catanhl.c.obj
+[937/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ccoshl.c.obj
+[938/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/catanl.c.obj
+[939/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cephes_subrl.c.obj
+[940/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ccosl.c.obj
+[941/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cexpl.c.obj
+[942/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/clog10l.c.obj
+[943/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/clogl.c.obj
+[944/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/cpowl.c.obj
+[945/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csinl.c.obj
+[946/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ctanhl.c.obj
+[947/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/ctanl.c.obj
+[948/1127] Building C object modules/picolibc/CMakeFiles/c.dir/newlib/libm/complex/csinhl.c.obj
+[949/1127] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[950/1127] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[951/1127] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[952/1127] Linking C static library modules/picolibc/libc.a
+[953/1127] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[954/1127] Generating include/generated/zephyr/driver-validation.h
+[955/1127] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[956/1127] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[957/1127] Generating ../../include/generated/zephyr/heap_constants.h
+[958/1127] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[959/1127] Generating include/generated/zephyr/offsets.h
+[960/1127] Building C object CMakeFiles/app.dir/src/main.c.obj
+[961/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[962/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/hash/hash_func32_djb2.c.obj
+[963/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/hash/hash_func32_murmur3.c.obj
+[964/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[965/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[966/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[967/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[968/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[969/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[970/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[971/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[972/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[973/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[974/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[975/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[976/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[977/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[978/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[979/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[980/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[981/1127] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[982/1127] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[983/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[984/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[985/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[986/1127] Generating ../../../include/generated/posix/strsignal_table.h
+[987/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[988/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[989/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[990/1127] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[991/1127] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[992/1127] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[993/1127] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[994/1127] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[995/1127] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[996/1127] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[997/1127] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[998/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/assert.c.obj
+[999/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/cbprintf.c.obj
+[1000/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/chk_fail.c.obj
+[1001/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/errno_wrap.c.obj
+[1002/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/exit.c.obj
+[1003/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/locks.c.obj
+[1004/1127] Building C object zephyr/lib/libc/picolibc/CMakeFiles/lib__libc__picolibc.dir/stdio.c.obj
+[1005/1127] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/stdlib/abort.c.obj
+[1006/1127] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/time/time.c.obj
+[1007/1127] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/stdlib/malloc.c.obj
+[1008/1127] Building C object zephyr/lib/libc/common/CMakeFiles/lib__libc__common.dir/source/stdio/remove.c.obj
+[1009/1127] Building C object zephyr/lib/posix/eventfd/CMakeFiles/lib__posix__eventfd.dir/eventfd.c.obj
+[1010/1127] Building C object zephyr/lib/posix/c_lib_ext/CMakeFiles/lib__posix__c_lib_ext.dir/fnmatch.c.obj
+[1011/1127] Building C object zephyr/lib/posix/c_lib_ext/CMakeFiles/lib__posix__c_lib_ext.dir/getentropy.c.obj
+[1012/1127] Building C object zephyr/lib/posix/c_lib_ext/CMakeFiles/lib__posix__c_lib_ext.dir/getopt_shim.c.obj
+[1013/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/aio.c.obj
+[1014/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/barrier.c.obj
+[1015/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/clock_selection.c.obj
+[1016/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/perror.c.obj
+[1017/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/device_io.c.obj
+[1018/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/fd_mgmt.c.obj
+[1019/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/file_system_r.c.obj
+[1020/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/env.c.obj
+[1021/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/fs.c.obj
+[1022/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/mprotect.c.obj
+[1023/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/mmap.c.obj
+[1024/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/sleep.c.obj
+[1025/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/multi_process.c.obj
+[1026/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/signal.c.obj
+[1027/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/confstr.c.obj
+[1028/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/spinlock.c.obj
+[1029/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/clock.c.obj
+[1030/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/timespec_to_timeout.c.obj
+[1031/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/env_common.c.obj
+[1032/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/sysconf.c.obj
+[1033/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/timer.c.obj
+[1034/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/rwlock.c.obj
+[1035/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/semaphore.c.obj
+[1036/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/cond.c.obj
+[1037/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/grp.c.obj
+[1038/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/key.c.obj
+[1039/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/pthread.c.obj
+[1040/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/mlockall.c.obj
+[1041/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/mutex.c.obj
+[1042/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/pwd.c.obj
+[1043/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/fsync.c.obj
+[1044/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/mlock.c.obj
+[1045/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/shm.c.obj
+[1046/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/xsi_single_process.c.obj
+[1047/1127] Building C object zephyr/lib/os/zvfs/CMakeFiles/lib__os__zvfs.dir/zvfs_file_vmethods.c.obj
+[1048/1127] Building C object zephyr/lib/os/zvfs/CMakeFiles/lib__os__zvfs.dir/zvfs_eventfd.c.obj
+[1049/1127] Building C object zephyr/lib/os/zvfs/CMakeFiles/lib__os__zvfs.dir/zvfs_poll.c.obj
+[1050/1127] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[1051/1127] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[1052/1127] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[1053/1127] Building C object zephyr/lib/os/zvfs/CMakeFiles/lib__os__zvfs.dir/zvfs_select.c.obj
+[1054/1127] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[1055/1127] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[1056/1127] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[1057/1127] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[1058/1127] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[1059/1127] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[1060/1127] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs.c.obj
+[1061/1127] Building C object zephyr/subsys/fs/CMakeFiles/subsys__fs.dir/fs_impl.c.obj
+[1062/1127] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[1063/1127] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[1064/1127] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[1065/1127] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[1066/1127] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[1067/1127] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_weak_impl.c.obj
+[1068/1127] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_native.c.obj
+[1069/1127] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[1070/1127] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[1071/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[1072/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[1073/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[1074/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[1075/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[1076/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[1077/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[1078/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[1079/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[1080/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[1081/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[1082/1127] Generating linker_zephyr_pre0.cmd
+[1083/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[1084/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[1085/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[1086/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[1087/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[1088/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[1089/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[1090/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[1091/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[1092/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[1093/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[1094/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[1095/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[1096/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[1097/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[1098/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[1099/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[1100/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[1101/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/usage.c.obj
+[1102/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[1103/1127] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[1104/1127] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[1105/1127] Linking C static library app/libapp.a
+[1106/1127] Linking C static library zephyr/lib/posix/eventfd/liblib__posix__eventfd.a
+[1107/1127] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[1108/1127] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[1109/1127] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[1110/1127] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[1111/1127] Linking C static library zephyr/lib/posix/c_lib_ext/liblib__posix__c_lib_ext.a
+[1112/1127] Linking C static library zephyr/lib/libc/common/liblib__libc__common.a
+[1113/1127] Linking C static library zephyr/arch/common/libarch__common.a
+[1114/1127] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[1115/1127] Linking C static library zephyr/subsys/fs/libsubsys__fs.a
+[1116/1127] Linking C static library zephyr/lib/libc/picolibc/liblib__libc__picolibc.a
+[1117/1127] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[1118/1127] Linking C static library zephyr/drivers/hwinfo/libdrivers__hwinfo.a
+[1119/1127] Linking C static library zephyr/libzephyr.a
+[1120/1127] Linking C static library zephyr/kernel/libkernel.a
+[1121/1127] Building C object zephyr/lib/posix/options/CMakeFiles/lib__posix__options.dir/uname.c.obj
+[1122/1127] Linking C static library zephyr/lib/posix/options/liblib__posix__options.a
+[1123/1127] Building C object zephyr/lib/os/zvfs/CMakeFiles/lib__os__zvfs.dir/zvfs_fdtable.c.obj
+[1124/1127] Linking C static library zephyr/lib/os/zvfs/liblib__os__zvfs.a
+[1125/1127] Linking C executable zephyr/zephyr.elf; Logical command for additional byproducts on target: zephyr_pre0
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/lib/fdtable/build/zephyr/zephyr.elf for board: native_sim/native/64
+[1126/1127] Building native simulator runner, and linking final executable
+[1127/1127] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE fdtable
+===================================================================
+START - test_z_fd_multiple_access
+ PASS - test_z_fd_multiple_access in 0.000 seconds
+===================================================================
+START - test_zvfs_alloc_fd
+ PASS - test_zvfs_alloc_fd in 0.000 seconds
+===================================================================
+START - test_zvfs_finalize_fd
+ PASS - test_zvfs_finalize_fd in 0.000 seconds
+===================================================================
+START - test_zvfs_free_fd
+ PASS - test_zvfs_free_fd in 0.000 seconds
+===================================================================
+START - test_zvfs_get_fd_obj
+ PASS - test_zvfs_get_fd_obj in 0.000 seconds
+===================================================================
+START - test_zvfs_get_fd_obj_and_vtable
+ PASS - test_zvfs_get_fd_obj_and_vtable in 0.000 seconds
+===================================================================
+START - test_zvfs_reserve_fd
+ PASS - test_zvfs_reserve_fd in 0.000 seconds
+===================================================================
+TESTSUITE fdtable succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [fdtable]: pass = 7, fail = 0, skip = 0, total = 7 duration = 0.000 seconds
+ - PASS - [fdtable.test_z_fd_multiple_access] duration = 0.000 seconds
+ - PASS - [fdtable.test_zvfs_alloc_fd] duration = 0.000 seconds
+ - PASS - [fdtable.test_zvfs_finalize_fd] duration = 0.000 seconds
+ - PASS - [fdtable.test_zvfs_free_fd] duration = 0.000 seconds
+ - PASS - [fdtable.test_zvfs_get_fd_obj] duration = 0.000 seconds
+ - PASS - [fdtable.test_zvfs_get_fd_obj_and_vtable] duration = 0.000 seconds
+ - PASS - [fdtable.test_zvfs_reserve_fd] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

@@ -1,0 +1,333 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is in place. Here's a summary of what the function does:
+
+1. **Validates inputs** — asserts `group` and `out_blocks` are non-NULL (same pattern as other functions in this file)
+2. **Handles zero-count** — returns success immediately if `count == 0` (consistent with `sys_multi_mem_blocks_free` and `sys_mem_blocks_alloc`)
+3. **Selects allocator** — calls `group->choice_fn(group, cfg)` to pick which allocator to use
+4. **Handles no allocator chosen** — returns `-EINVAL` if `choice_fn` returns NULL
+5. **Allocates blocks** — delegates to `sys_mem_blocks_alloc(chosen, count, out_blocks)`
+6. **Reports block size** — if `blk_size` is non-NULL, writes `BIT(chosen->info.blk_sz_shift)` (the block size in bytes of the chosen allocator)
+7. **Returns** — 0 on success, `-EINVAL` if no allocator selected, `-ENOMEM` if allocation fails (propagated from `sys_mem_blocks_alloc`)
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/mem_blocks/mem_blocks.c
++++ lib/mem_blocks/mem_blocks.c
+@@ -347,7 +347,33 @@
+ 			       void **out_blocks,
+ 			       size_t *blk_size)
+ {
+-    /* MASKED - implement this function */
++	int ret = 0;
++	sys_mem_blocks_t *chosen;
++
++	__ASSERT_NO_MSG(group != NULL);
++	__ASSERT_NO_MSG(out_blocks != NULL);
++
++	if (count == 0) {
++		goto out;
++	}
++
++	chosen = group->choice_fn(group, cfg);
++	if (chosen == NULL) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	ret = sys_mem_blocks_alloc(chosen, count, out_blocks);
++	if (ret != 0) {
++		goto out;
++	}
++
++	if (blk_size != NULL) {
++		*blk_size = BIT(chosen->info.blk_sz_shift);
++	}
++
++out:
++	return ret;
+ }
+ 
+ int sys_multi_mem_blocks_free(sys_multi_mem_blocks_t *group,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (5.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build
+-- west build: building application
+[1/111] Preparing syscall dependency handling
+
+[2/111] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/111] Generating misc/generated/syscalls_subdirs.trigger
+[4/111] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/111] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/111] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/111] Generating include/generated/zephyr/driver-validation.h
+[8/111] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/111] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/111] Generating ../../include/generated/zephyr/heap_constants.h
+[11/111] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/111] Generating include/generated/zephyr/offsets.h
+[13/111] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap_listener.c.obj
+[17/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[19/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[20/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[21/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[22/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[23/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[24/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[25/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[32/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[33/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/111] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[40/111] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[41/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[42/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[43/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[44/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[45/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[46/111] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[47/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[48/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[50/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/111] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[53/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[54/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[55/111] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[56/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[57/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[58/111] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[61/111] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[62/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[63/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[64/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[65/111] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[66/111] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[67/111] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[68/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[69/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[70/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[71/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[72/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[73/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[74/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[75/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[76/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[77/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[78/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[79/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[80/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[81/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[82/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[83/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[84/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[85/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[86/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[87/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[88/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[89/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[90/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[91/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[92/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[93/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[94/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[95/111] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[96/111] Linking C static library app/libapp.a
+[97/111] Linking C static library zephyr/arch/common/libarch__common.a
+[98/111] Generating linker_zephyr_pre0.cmd
+[99/111] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[100/111] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[101/111] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[102/111] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[103/111] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[104/111] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[105/111] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[106/111] Linking C static library zephyr/kernel/libkernel.a
+[107/111] Building C object zephyr/CMakeFiles/zephyr.dir/lib/mem_blocks/mem_blocks.c.obj
+[108/111] Linking C static library zephyr/libzephyr.a
+[109/111] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/lib/mem_blocks/build/zephyr/zephyr.elf for board: native_sim/native/64
+[110/111] Building native simulator runner, and linking final executable
+[111/111] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE lib_mem_block
+===================================================================
+START - test_mem_block_alloc_free
+ PASS - test_mem_block_alloc_free in 0.000 seconds
+===================================================================
+START - test_mem_block_alloc_free_alt_buf
+ PASS - test_mem_block_alloc_free_alt_buf in 0.000 seconds
+===================================================================
+START - test_mem_block_alloc_free_contiguous
+ PASS - test_mem_block_alloc_free_contiguous in 0.000 seconds
+===================================================================
+START - test_mem_block_get
+ PASS - test_mem_block_get in 0.000 seconds
+===================================================================
+START - test_mem_block_invalid_params
+ PASS - test_mem_block_invalid_params in 0.000 seconds
+===================================================================
+START - test_mem_block_invalid_params_panic_1
+ASSERTION FAIL [mem_block != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:132
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_mem_block_invalid_params_p)[0m
+Caught system error -- reason 4
+ PASS - test_mem_block_invalid_params_panic_1 in 0.000 seconds
+===================================================================
+START - test_mem_block_invalid_params_panic_2
+ASSERTION FAIL [out_blocks != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:133
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_mem_block_invalid_params_p)[0m
+Caught system error -- reason 4
+ PASS - test_mem_block_invalid_params_panic_2 in 0.000 seconds
+===================================================================
+START - test_mem_block_invalid_params_panic_3
+ASSERTION FAIL [mem_block != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:258
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_mem_block_invalid_params_p)[0m
+Caught system error -- reason 4
+ PASS - test_mem_block_invalid_params_panic_3 in 0.000 seconds
+===================================================================
+START - test_mem_block_invalid_params_panic_4
+ASSERTION FAIL [in_blocks != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:259
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_mem_block_invalid_params_p)[0m
+Caught system error -- reason 4
+ PASS - test_mem_block_invalid_params_panic_4 in 0.000 seconds
+===================================================================
+START - test_mem_block_multi_alloc_free
+ PASS - test_mem_block_multi_alloc_free in 0.000 seconds
+===================================================================
+START - test_mem_block_multi_alloc_free_alt_buf
+ PASS - test_mem_block_multi_alloc_free_alt_buf in 0.000 seconds
+===================================================================
+START - test_multi_mem_block_alloc_free
+ PASS - test_multi_mem_block_alloc_free in 0.000 seconds
+===================================================================
+START - test_multi_mem_block_invalid_params
+ PASS - test_multi_mem_block_invalid_params in 0.000 seconds
+===================================================================
+START - test_multi_mem_block_invalid_params_panic_1
+ASSERTION FAIL [group != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:353
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_multi_mem_block_invalid_pa)[0m
+Caught system error -- reason 4
+ PASS - test_multi_mem_block_invalid_params_panic_1 in 0.000 seconds
+===================================================================
+START - test_multi_mem_block_invalid_params_panic_2
+ASSERTION FAIL [out_blocks != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:354
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_multi_mem_block_invalid_pa)[0m
+Caught system error -- reason 4
+ PASS - test_multi_mem_block_invalid_params_panic_2 in 0.000 seconds
+===================================================================
+START - test_multi_mem_block_invalid_params_panic_3
+ASSERTION FAIL [group != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:386
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_multi_mem_block_invalid_pa)[0m
+Caught system error -- reason 4
+ PASS - test_multi_mem_block_invalid_params_panic_3 in 0.000 seconds
+===================================================================
+START - test_multi_mem_block_invalid_params_panic_4
+ASSERTION FAIL [in_blocks != ((void *)0)] @ WEST_TOPDIR/zephyr/lib/mem_blocks/mem_blocks.c:387
+@ WEST_TOPDIR/zephyr/lib/os/assert.c:43
+[00:00:00.000,000] [1;31m<err> os: >>> ZEPHYR FATAL ERROR 4: Kernel panic on CPU 0[0m
+[00:00:00.000,000] [1;31m<err> os: Current thread: 0x418d40 (test_multi_mem_block_invalid_pa)[0m
+Caught system error -- reason 4
+ PASS - test_multi_mem_block_invalid_params_panic_4 in 0.000 seconds
+===================================================================
+TESTSUITE lib_mem_block succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [lib_mem_block]: pass = 17, fail = 0, skip = 0, total = 17 duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_alloc_free] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_alloc_free_alt_buf] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_alloc_free_contiguous] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_get] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_invalid_params] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_invalid_params_panic_1] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_invalid_params_panic_2] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_invalid_params_panic_3] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_invalid_params_panic_4] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_multi_alloc_free] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_mem_block_multi_alloc_free_alt_buf] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_multi_mem_block_alloc_free] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_multi_mem_block_invalid_params] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_multi_mem_block_invalid_params_panic_1] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_multi_mem_block_invalid_params_panic_2] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_multi_mem_block_invalid_params_panic_3] duration = 0.000 seconds
+ - PASS - [lib_mem_block.test_multi_mem_block_invalid_params_panic_4] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

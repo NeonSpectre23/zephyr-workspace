@@ -1,0 +1,86 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's a summary of what `ubx_frame_encode` does:
+
+**Frame layout written to `buf`:**
+```
+[0xB5] [0x62] [class] [id] [len_lo] [len_hi] [payload...] [CK_A] [CK_B]
+```
+
+**Key implementation details:**
+
+1. **Validation**: Returns `-EINVAL` if `payload` is NULL with non-zero length, and `-ENOMEM` if the output buffer is too small
+2. **Header**: Writes the two preamble sync characters (0xB5, 0x62), class, id, and payload length as little-endian uint16 — using the existing `UBX_FRAME_PREAMBLE_SYNC_CHAR_1_IDX`, `UBX_FRAME_PREAMBLE_SYNC_CHAR_2_IDX`, and `UBX_FRAME_MSG_CLASS_IDX` constants
+3. **Payload**: Copies payload bytes after the 6-byte header
+4. **Checksum**: Computes CK_A/CK_B over class, id, payload_len (LE), and payload — identical algorithm to `ubx_calc_checksum` (iterative: `CK_A += byte; CK_B += CK_A`), covering the same range (everything from class through end of payload)
+5. **Return**: Returns the total frame size (`UBX_FRAME_SZ(payload_len)`) on success
+
+The `#include <errno.h>` was added for `EINVAL`/`ENOMEM` error codes, consistent with Zephyr conventions.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/modem/ubx/protocol.h
++++ include/zephyr/modem/ubx/protocol.h
+@@ -8,6 +8,7 @@
+ #ifndef ZEPHYR_MODEM_UBX_PROTOCOL_
+ #define ZEPHYR_MODEM_UBX_PROTOCOL_
+ 
++#include <errno.h>
+ #include <stdint.h>
+ #include <zephyr/modem/ubx/checksum.h>
+ 
+@@ -435,7 +436,42 @@
+ 				    const uint8_t *payload, size_t payload_len,
+ 				    uint8_t *buf, size_t buf_len)
+ {
+-    /* MASKED - implement this function */
++	size_t frame_len = UBX_FRAME_SZ(payload_len);
++	uint8_t ck_a = 0;
++	uint8_t ck_b = 0;
++
++	if (payload_len > 0 && payload == NULL) {
++		return -EINVAL;
++	}
++
++	if (buf_len < frame_len) {
++		return -ENOMEM;
++	}
++
++	buf[UBX_FRAME_PREAMBLE_SYNC_CHAR_1_IDX] = UBX_PREAMBLE_SYNC_CHAR_1;
++	buf[UBX_FRAME_PREAMBLE_SYNC_CHAR_2_IDX] = UBX_PREAMBLE_SYNC_CHAR_2;
++	buf[UBX_FRAME_MSG_CLASS_IDX] = class;
++	buf[3] = id;
++	buf[4] = (uint8_t)(payload_len & 0xFF);
++	buf[5] = (uint8_t)((payload_len >> 8) & 0xFF);
++
++	for (size_t i = 0; i < payload_len; i++) {
++		buf[UBX_FRAME_HEADER_SZ + i] = payload[i];
++	}
++
++	ck_a += class; ck_b += ck_a;
++	ck_a += id;    ck_b += ck_a;
++	ck_a += (uint8_t)(payload_len & 0xFF);       ck_b += ck_a;
++	ck_a += (uint8_t)((payload_len >> 8) & 0xFF); ck_b += ck_a;
++
++	for (size_t i = 0; i < payload_len; i++) {
++		ck_a += payload[i]; ck_b += ck_a;
++	}
++
++	buf[UBX_FRAME_HEADER_SZ + payload_len] = ck_a;
++	buf[UBX_FRAME_HEADER_SZ + payload_len + 1] = ck_b;
++
++	return (int)frame_len;
+ }
+ 
+ #define UBX_FRAME_DEFINE(_name, _frame)								   \
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

@@ -1,0 +1,32 @@
+============================================================
+=== Claude Session ===
+============================================================
+Done. `net_buf_destroy` now resolves the buffer's pool via `net_buf_pool_get(buf->pool_id)` and returns the buffer to the pool's free LIFO with `k_lifo_put(&pool->free, buf)`, which is the inverse of the allocation path that uses `k_lifo_get(&pool->free, timeout)`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/net_buf.h
++++ include/zephyr/net_buf.h
+@@ -1523,7 +1523,9 @@
+  */
+ static inline void net_buf_destroy(struct net_buf *buf)
+ {
+-    /* MASKED - implement this function */
++	struct net_buf_pool *pool = net_buf_pool_get(buf->pool_id);
++
++	k_lifo_put(&pool->free, buf);
+ }
+ 
+ /**
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

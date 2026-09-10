@@ -1,0 +1,298 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. The function handles all the test cases:
+
+1. **Message size validation** — rejects messages where `chan->message_size > CONFIG_ZBUS_PROXY_AGENT_MAX_MESSAGE_SIZE`
+2. **Channel name length validation** — rejects names that are empty or whose length (plus NUL terminator) doesn't fit in the `zbus_proxy_msg.channel_name` buffer
+3. **Message forwarding** — copies the channel message data and name into a `zbus_proxy_msg` and sends it via `agent->backend_api->backend_send`
+4. **Send error handling** — logs the error when `backend_send` returns a negative value
+
+The implementation matches the patterns established in the rest of the file (consistent indentation, error logging, use of `_ZBUS_CHAN_NAME` for log messages, and `zbus_chan_const_msg` for read-only access to channel data as required in listener context).
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/zbus/proxy_agent/zbus_proxy_agent.c
++++ subsys/zbus/proxy_agent/zbus_proxy_agent.c
+@@ -57,7 +57,38 @@
+ void zbus_proxy_agent_listener_cb(const struct zbus_channel *chan,
+ 				  const struct zbus_proxy_agent *agent)
+ {
+-    /* MASKED - implement this function */
++	struct zbus_proxy_msg msg = {0};
++	size_t name_len;
++	int ret;
++
++	/* Validate message size fits in the proxy message buffer */
++	if (chan->message_size > CONFIG_ZBUS_PROXY_AGENT_MAX_MESSAGE_SIZE) {
++		LOG_ERR("Message size %zu exceeds maximum %u for channel '%s'",
++			chan->message_size, CONFIG_ZBUS_PROXY_AGENT_MAX_MESSAGE_SIZE,
++			_ZBUS_CHAN_NAME(chan));
++		return;
++	}
++
++	/* Validate channel name length including NUL terminator fits in the buffer */
++	name_len = strlen(chan->name);
++	if (name_len == 0 || name_len >= CONFIG_ZBUS_PROXY_AGENT_MAX_CHANNEL_NAME_SIZE) {
++		LOG_ERR("Channel name length %zu invalid for proxy agent '%s'",
++			name_len, agent->name);
++		return;
++	}
++
++	/* Build the proxy message to send to the remote domain */
++	msg.message_size = chan->message_size;
++	memcpy(msg.message, zbus_chan_const_msg(chan), chan->message_size);
++	msg.channel_name_len = name_len + 1;
++	memcpy(msg.channel_name, chan->name, name_len + 1);
++
++	/* Forward through the backend to the remote domain */
++	ret = agent->backend_api->backend_send(agent, &msg);
++	if (ret < 0) {
++		LOG_ERR("Failed to send message for channel '%s': %d",
++			_ZBUS_CHAN_NAME(chan), ret);
++	}
+ }
+ 
+ static int zbus_proxy_agent_receive_cb(const struct zbus_proxy_agent *agent,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build
+-- west build: building application
+[1/115] Preparing syscall dependency handling
+
+[2/115] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/115] Generating misc/generated/syscalls_subdirs.trigger
+[4/115] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/115] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/115] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/115] Generating include/generated/zephyr/driver-validation.h
+[8/115] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/115] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/115] Generating ../../include/generated/zephyr/heap_constants.h
+[11/115] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/115] Generating include/generated/zephyr/offsets.h
+[13/115] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/115] Building C object CMakeFiles/app.dir/src/zbus_proxy_agent_mock.c.obj
+[15/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[18/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[19/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[24/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[31/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/115] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[42/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/115] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[50/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[51/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[52/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[53/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[54/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[55/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[61/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[62/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_mock.c.obj
+[63/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/115] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus.c.obj
+[65/115] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus_iterable_sections.c.obj
+[66/115] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[67/115] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[68/115] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[69/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[70/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[71/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[72/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[73/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[74/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[75/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[76/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[77/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[78/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[79/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[80/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[81/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[82/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[83/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[84/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[85/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[86/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[87/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[88/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[89/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[90/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[92/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[93/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[94/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[96/115] Linking C static library app/libapp.a
+[97/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[99/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[100/115] Linking C static library zephyr/arch/common/libarch__common.a
+[101/115] Generating linker_zephyr_pre0.cmd
+[102/115] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[103/115] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[104/115] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[105/115] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[106/115] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[107/115] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[108/115] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[109/115] Linking C static library zephyr/libzephyr.a
+[110/115] Linking C static library zephyr/kernel/libkernel.a
+[111/115] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/proxy_agent/zbus_proxy_agent.c.obj
+[112/115] Linking C static library zephyr/subsys/zbus/libsubsys__zbus.a
+[113/115] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/proxy_agent/proxy_agent/build/zephyr/zephyr.elf for board: native_sim/native/64
+[114/115] Building native simulator runner, and linking final executable
+[115/115] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_set_recv_cb: Mock backend set_recv_cb success[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_init: Mock backend init called, returning 0[0m
+[00:00:00.000,000] [0m<dbg> zbus_proxy_agent: zbus_init_proxy_agent: Proxy agent unused_proxy_agent initialized successfully[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_set_recv_cb: Mock backend set_recv_cb success[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_init: Mock backend init called, returning 0[0m
+[00:00:00.000,000] [0m<dbg> zbus_proxy_agent: zbus_init_proxy_agent: Proxy agent test_proxy_agent initialized successfully[0m
+Running TESTSUITE zbus_proxy_agent_tests
+===================================================================
+START - test_proxy_agent_config_generation
+ PASS - test_proxy_agent_config_generation in 0.000 seconds
+===================================================================
+START - test_shadow_channel_validator
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Shadow channel can only be published by proxy agent 'test_proxy_agent'[0m
+ PASS - test_shadow_channel_validator in 0.000 seconds
+===================================================================
+START - test_zbus_init_proxy_agent_error_handling
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_set_recv_cb: Mock backend set_recv_cb failing with -1[0m
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Failed to set receive callback for proxy agent error_handling_agent: -1[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_set_recv_cb: Mock backend set_recv_cb success[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_init: Mock backend init called, returning -5[0m
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Failed to initialize backend for proxy agent error_handling_agent: -5[0m
+ PASS - test_zbus_init_proxy_agent_error_handling in 0.000 seconds
+===================================================================
+START - test_zbus_init_proxy_agent_invalid_params
+ZBUS ASSERT: Proxy agent configuration is NULL in init
+ZBUS ASSERT: Thread ID storage is NULL in proxy agent init
+ PASS - test_zbus_init_proxy_agent_invalid_params in 0.000 seconds
+===================================================================
+START - test_zbus_proxy_agent_listener_cb_error_handling
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Message size 129 exceeds maximum 128 for channel 'invalid_size_chan'[0m
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Channel name length 32 invalid for proxy agent 'test_proxy_agent'[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_send: Mock backend send failing with -3[0m
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Failed to send message for channel 'valid_chan': -3[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_send: Mock backend send: channel=valid_chan, size=10, count=1[0m
+ PASS - test_zbus_proxy_agent_listener_cb_error_handling in 0.000 seconds
+===================================================================
+START - test_zbus_proxy_agent_listener_cb_from_zbus
+[00:00:00.000,000] [0m<inf> proxy_agent_test: Received message on channel test_channel: test_value=123[0m
+[00:00:00.000,000] [0m<dbg> proxy_agent_mock: zbus_proxy_agent_mock_backend_send: Mock backend send: channel=test_channel, size=4, count=1[0m
+ PASS - test_zbus_proxy_agent_listener_cb_from_zbus in 0.000 seconds
+===================================================================
+START - test_zbus_proxy_agent_receive_cb
+[00:00:00.000,000] [0m<inf> proxy_agent_test: Received message on channel test_shadow_channel: test_value=567[0m
+ PASS - test_zbus_proxy_agent_receive_cb in 0.000 seconds
+===================================================================
+START - test_zbus_proxy_agent_receive_cb_invalid_msg
+[00:00:00.000,000] [1;31m<err> zbus_proxy_agent: Size mismatch for channel 'test_shadow_channel': got 10 expected 4[0m
+ PASS - test_zbus_proxy_agent_receive_cb_invalid_msg in 0.110 seconds
+===================================================================
+START - test_zbus_proxy_agent_receive_cb_no_channel
+[00:00:00.110,000] [1;31m<err> zbus_proxy_agent: Channel 'non_existent_channel' not found for received message[0m
+ PASS - test_zbus_proxy_agent_receive_cb_no_channel in 0.110 seconds
+===================================================================
+START - test_zbus_proxy_agent_receive_cb_wrong_shadow_channel
+[00:00:00.220,000] [1;31m<err> zbus_proxy_agent: Channel 'unused_shadow_channel' is not a shadow channel for proxy agent 'test_proxy_agent'[0m
+ PASS - test_zbus_proxy_agent_receive_cb_wrong_shadow_channel in 0.110 seconds
+===================================================================
+TESTSUITE zbus_proxy_agent_tests succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [zbus_proxy_agent_tests]: pass = 10, fail = 0, skip = 0, total = 10 duration = 0.330 seconds
+ - PASS - [zbus_proxy_agent_tests.test_proxy_agent_config_generation] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_shadow_channel_validator] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_init_proxy_agent_error_handling] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_init_proxy_agent_invalid_params] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_proxy_agent_listener_cb_error_handling] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_proxy_agent_listener_cb_from_zbus] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_proxy_agent_receive_cb] duration = 0.000 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_proxy_agent_receive_cb_invalid_msg] duration = 0.110 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_proxy_agent_receive_cb_no_channel] duration = 0.110 seconds
+ - PASS - [zbus_proxy_agent_tests.test_zbus_proxy_agent_receive_cb_wrong_shadow_channel] duration = 0.110 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

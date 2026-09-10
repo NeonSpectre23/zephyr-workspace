@@ -1,0 +1,68 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's a summary of what was done:
+
+**`include/zephyr/math/interpolation.h`** — implemented `linear_interpolate`:
+
+1. **Boundary clamping**: Returns `y_axis[0]` when `x ≤ x_axis[0]` and `y_axis[len-1]` when `x ≥ x_axis[len-1]`.
+
+2. **Linear search**: Iterates over the curve segments (array length is `uint8_t`, max 255 elements) to find the two data points bracketing `x`.
+
+3. **Interpolation**: Computes `y = y1 + (dy / dx) * offset` using:
+   - 64-bit intermediate (`int64_t`) for the `dy * t` multiplication to avoid overflow
+   - `DIV_ROUND_CLOSEST` from `<zephyr/sys/util.h>` for correct rounding (ties away from zero, matching the documented behavior: 1.5 → 2, -5.5 → -6)
+
+4. **Added** `#include <zephyr/sys/util.h>` at line 12 for the `DIV_ROUND_CLOSEST` macro.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/math/interpolation.h
++++ include/zephyr/math/interpolation.h
+@@ -9,6 +9,7 @@
+ 
+ #include <stdint.h>
+ #include <math.h>
++#include <zephyr/sys/util.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -44,7 +45,27 @@
+ static inline int32_t linear_interpolate(const int32_t *x_axis, const int32_t *y_axis, uint8_t len,
+ 					 int32_t x)
+ {
+-    /* MASKED - implement this function */
++	/* Clamp to boundary values */
++	if (x <= x_axis[0]) {
++		return y_axis[0];
++	}
++	if (x >= x_axis[len - 1]) {
++		return y_axis[len - 1];
++	}
++
++	/* Find the segment containing x and interpolate */
++	for (uint8_t i = 0; i < len - 1; i++) {
++		if (x >= x_axis[i] && x < x_axis[i + 1]) {
++			int32_t dx = x_axis[i + 1] - x_axis[i];
++			int32_t dy = y_axis[i + 1] - y_axis[i];
++			int32_t t = x - x_axis[i];
++			int64_t num = (int64_t)dy * t;
++
++			return y_axis[i] + (int32_t)DIV_ROUND_CLOSEST(num, dx);
++		}
++	}
++
++	return y_axis[len - 1];
+ }
+ 
+ /**
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

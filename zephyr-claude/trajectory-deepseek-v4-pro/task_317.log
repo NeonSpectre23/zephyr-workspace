@@ -1,0 +1,238 @@
+============================================================
+=== Claude Session ===
+============================================================
+Done. The function iterates through each constraint in the list and calls `pm_policy_state_lock_put` for each state/substate pair — the exact mirror of `pm_policy_state_constraints_get` (which calls `pm_policy_state_lock_get`). The `pm_policy_state_lock_put` function already handles the `#if DT_HAS_COMPAT_STATUS_OKAY(zephyr_power_state)` guard internally, so no additional guard is needed here.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/pm/policy/policy_state_lock.c
++++ subsys/pm/policy/policy_state_lock.c
+@@ -110,7 +110,10 @@
+ 
+ void pm_policy_state_constraints_put(struct pm_state_constraints *constraints)
+ {
+-    /* MASKED - implement this function */
++	for (int i = 0; i < constraints->count; i++) {
++		pm_policy_state_lock_put(constraints->list[i].state,
++					 constraints->list[i].substate_id);
++	}
+ }
+ 
+ bool pm_policy_state_lock_is_active(enum pm_state state, uint8_t substate_id)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build
+-- west build: building application
+[1/115] Preparing syscall dependency handling
+
+[2/115] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/115] Generating misc/generated/syscalls_subdirs.trigger
+[4/115] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/115] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/115] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/115] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/115] Generating include/generated/zephyr/driver-validation.h
+[9/115] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/115] Generating ../../include/generated/zephyr/heap_constants.h
+[11/115] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/115] Generating include/generated/zephyr/offsets.h
+[13/115] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/115] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/115] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[36/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[38/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[39/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/pm.c.obj
+[42/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/state.c.obj
+[43/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/policy/policy_events.c.obj
+[44/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/policy/policy_latency.c.obj
+[45/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/policy/policy_state_lock.c.obj
+[46/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/pm/policy/policy_default.c.obj
+[47/115] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[48/115] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[49/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[50/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[51/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[52/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[53/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[54/115] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[55/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[56/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[57/115] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[58/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[59/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[60/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[61/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[62/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[63/115] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[64/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[65/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[66/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[67/115] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[68/115] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[69/115] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[70/115] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[71/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[72/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[73/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[74/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[75/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[76/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[77/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[78/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[79/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[80/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[82/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[83/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[84/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[85/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[86/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[87/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[88/115] Linking C static library app/libapp.a
+[89/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[90/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[91/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[92/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[93/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[94/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[96/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[97/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[98/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[99/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[100/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[101/115] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[102/115] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[103/115] Generating linker_zephyr_pre0.cmd
+[104/115] Linking C static library zephyr/arch/common/libarch__common.a
+[105/115] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[106/115] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[107/115] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[108/115] Linking C static library zephyr/libzephyr.a
+[109/115] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[110/115] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[111/115] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[112/115] Linking C static library zephyr/kernel/libkernel.a
+[113/115] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/pm/policy_api/build/zephyr/zephyr.elf for board: native_sim/native/64
+[114/115] Building native simulator runner, and linking final executable
+[115/115] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE policy_api
+===================================================================
+START - test_pm_policy_events
+ PASS - test_pm_policy_events in 0.000 seconds
+===================================================================
+START - test_pm_policy_latency_subscribe_null_disables
+Latency changed to 10000
+ PASS - test_pm_policy_latency_subscribe_null_disables in 0.000 seconds
+===================================================================
+START - test_pm_policy_next_state_custom
+ SKIP - test_pm_policy_next_state_custom in 0.000 seconds
+===================================================================
+START - test_pm_policy_next_state_default
+ PASS - test_pm_policy_next_state_default in 0.000 seconds
+===================================================================
+START - test_pm_policy_next_state_default_allowed
+ PASS - test_pm_policy_next_state_default_allowed in 0.000 seconds
+===================================================================
+START - test_pm_policy_next_state_default_latency
+Latency changed to 10000
+Latency changed to 10000
+Latency changed to 50000
+Latency changed to -1
+ PASS - test_pm_policy_next_state_default_latency in 0.000 seconds
+===================================================================
+START - test_pm_policy_state_all_lock
+ PASS - test_pm_policy_state_all_lock in 0.000 seconds
+===================================================================
+START - test_pm_policy_state_constraints
+Constraint 0: state=1, substate_id=1
+Constraint 1: state=4, substate_id=100
+ PASS - test_pm_policy_state_constraints in 0.000 seconds
+===================================================================
+TESTSUITE policy_api succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [policy_api]: pass = 7, fail = 0, skip = 1, total = 8 duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_events] duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_latency_subscribe_null_disables] duration = 0.000 seconds
+ - SKIP - [policy_api.test_pm_policy_next_state_custom] duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_next_state_default] duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_next_state_default_allowed] duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_next_state_default_latency] duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_state_all_lock] duration = 0.000 seconds
+ - PASS - [policy_api.test_pm_policy_state_constraints] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

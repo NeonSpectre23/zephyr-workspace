@@ -8,13 +8,13 @@
 
 ## 仓库内容（git 内 vs. west 拉取）
 
-| 包含在 git 中 | 由 `west update` 拉取 |
-|---|---|
-| `zephyr-claude/` — 基准测试框架 | `zephyr/` — Zephyr RTOS 源码 |
-| `zephyr-bench/` — 712 个任务 + oracle | `modules/` — HAL、加密、文件系统 |
-| `activate.sh`、`setup.sh`、`environment.yml` | `bootloader/` — MCUboot |
-| `claude_settings.template`、`.gitignore` | `tools/edtt/` — 蓝牙测试工具 |
-| `README.md`、`.github/workflows/ci.yml` | |
+| 包含在 git 中                                  | 由 `west update` 拉取         |
+| ------------------------------------------ | -------------------------- |
+| `zephyr-claude/` — 基准测试框架                  | `zephyr/` — Zephyr RTOS 源码 |
+| `zephyr-bench/` — 712 个任务 + oracle         | `modules/` — HAL、加密、文件系统   |
+| `activate.sh`、`setup.sh`、`environment.yml` | `bootloader/` — MCUboot    |
+| `claude_settings.template`、`.gitignore`    | `tools/edtt/` — 蓝牙测试工具     |
+| `README.md`、`.github/workflows/ci.yml`     | <br />                     |
 
 ### 目录结构
 
@@ -39,9 +39,9 @@ zephyr-workspace/
 │   ├── inject_test.py         答案注入验证（oracle 应通过测试）
 │   ├── neg_control.py         负控制验证（空实现应让测试失败）
 │   ├── whitebox.py            失败机理分类（对齐三 track taxonomy）
-│   ├── analyze_results.py     结果分析与统计
-│   ├── final_analysis.py      失败模式深入分析
-│   └── settings.json          benchmark 专用 API 配置（gitignore，见 §6）
+│   ├── analyze_run.py         whitebox 复用流水线（classify/casebook/prelabel/finalize/normalize/audit/selftest）
+│   ├── annotate_worklist.py   失败样本 casebook 生成（oracle-vs-Claude 对照）
+│   └── settings.json          benchmark 专用 API 配置（gitignore，详见 zephyr-claude/README）
 ├── bootloader/           ← MCUboot（west 拉取，不在 git 中）
 ├── modules/              ← HAL、加密等（west 拉取，不在 git 中）
 ├── tools/                ←（west 拉取，不在 git 中）
@@ -75,20 +75,20 @@ zephyr-workspace/
 
 ## 环境要求
 
-| 依赖 | 版本 / 位置 | 说明 |
-|---|---|---|
-| **Zephyr SDK** | [v1.0.1](https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v1.0.1) | GNU 交叉编译工具链 |
-| **Conda / Miniconda** | Python 3.12 | 构建工具隔离 |
-| **Docker** | Desktop 24+ | Claude Code CLI 沙箱 |
-| **Claude Code CLI** | v2.1.146（在 Docker 中） | 被测大语言模型 |
-| **API Key** | Anthropic / 兼容 | 例如 DeepSeek、Anthropic |
+| 依赖                    | 版本 / 位置                                                                    | 说明                    |
+| --------------------- | -------------------------------------------------------------------------- | --------------------- |
+| **Zephyr SDK**        | [v1.0.1](https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v1.0.1) | GNU 交叉编译工具链           |
+| **Conda / Miniconda** | Python 3.12                                                                | 构建工具隔离                |
+| **Docker**            | Desktop 24+                                                                | Claude Code CLI 沙箱    |
+| **Claude Code CLI**   | v2.1.146（在 Docker 中）                                                       | 被测大语言模型               |
+| **API Key**           | Anthropic / 兼容                                                             | 例如 DeepSeek、Anthropic |
 
 ## 安装
 
 ### 1. 克隆本仓库
 
 ```bash
-git clone https://github.com/YOUR_USER/zephyr-workspace.git
+git clone https://github.com/NeonSpectre23/zephyr-workspace.git
 cd zephyr-workspace
 ```
 
@@ -146,129 +146,30 @@ source activate.sh
 ### 4. 安装 Zephyr SDK
 
 ```bash
-wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64.tar.xz
-tar xf zephyr-sdk-1.0.1_linux-x86_64.tar.xz -C ~/
+wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v1.0.1/zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz
+tar xf zephyr-sdk-1.0.1_linux-x86_64_gnu.tar.xz -C ~/
 cd ~/zephyr-sdk-1.0.1/
 ./setup.sh
 ```
 
 > 基准测试从 `ZEPHYR_SDK_INSTALL_DIR` 环境变量读取 SDK 路径，默认 `~/zephyr-sdk-1.0.1`。如果安装在其他位置：运行前执行 `export ZEPHYR_SDK_INSTALL_DIR=/path/to/your/sdk`。
 
-### 5. 构建 Docker 沙箱
-
-```bash
-cd zephyr-claude
-docker build -t zephyr-sandbox:latest .
-```
-
-> 沙箱容器以 `--network host` 启动（`ZEPHYR_CLAUDE_NETWORK`，默认 `host`）——这是必需的，因为容器内的 Claude Code 要调用 LLM API（如 `api.deepseek.com`）。如需临时改用其他网络（如 `bridge`）：`export ZEPHYR_CLAUDE_NETWORK=bridge`。同时启动命令带 `--disallowedTools "WebSearch,WebFetch"`，禁用 Claude 的 web 搜索/抓取工具，防止被测模型联网查答案。注意这只禁用了 web 工具，容器内 `Bash` 未禁用。
-
-### 6. 配置 API Key
-
-基准测试在 Docker 容器里运行 Claude Code CLI，需要配置 LLM 的 API 地址和 Key。配置文件按以下优先级查找（见 `zephyr-claude/config.py` 的 `_default_claude_settings()`），也可用环境变量 `ZEPHYR_CLAUDE_SETTINGS` 强制指定任意配置文件：
-
-1. **`zephyr-claude/settings.json`** — benchmark 专用配置，**推荐使用**。它不在任何 `.claude/` 目录下，交互式 Claude 根本不会读取，因此改基准测试的模型/Key 完全不影响你日常使用（例如 cc-switch 的配置）；
-2. **`~/.claude/settings.json`** — 你的交互式 Claude 配置，作为回退项。
-
-配置方法（benchmark 专用）：
-
-```bash
-cd zephyr-workspace
-cp claude_settings.template zephyr-claude/settings.json
-# 编辑 zephyr-claude/settings.json → 把 "sk-xxx" 替换成你的真实 Key
-```
-
-该文件已被 `.gitignore` 排除（`**/settings.json`），不会提交到仓库。
-
-支持的 API 提供方（通过 `ANTHROPIC_BASE_URL` 配置）：
-- **DeepSeek**：`https://api.deepseek.com/anthropic`
-- **Anthropic**：`https://api.anthropic.com`（留空或不设置）
-- **任意 Anthropic 兼容代理**
-
-默认模型为 `deepseek-v4-flash`——按需修改 `ANTHROPIC_MODEL`（连同 `ANTHROPIC_DEFAULT_*_MODEL` 等一起改，运行时会全部注入容器）。
-
-> 每次跑任务时 `agent.py` 会把选中的配置文件复制进容器内 Claude 的 `claude_home/settings.json`，并追加一个 `claude-on-completion` 钩子用于检测任务完成，同时把其中 `ANTHROPIC_*` 环境变量通过 `-e` 传入容器。改模型/Key 只需改配置文件，不用改代码。
-
-### 7. 验证依赖
-
-```bash
-cd zephyr-claude
-python runner.py --check
-```
-
-预期输出：
-```
-=== Zephyr-Claude Dependency Check ===
-  [OK] Docker daemon
-  [OK] Docker image 'zephyr-sandbox:latest'
-  [OK] tree-sitter (pip package)
-  [OK] Claude settings
-  [OK] Zephyr repo structure
-  [OK] Zephyr SDK
-  [OK] Dataset 'zephyr_tasks.c.jsonl'
-  [OK] Dataset 'zephyr_tasks.h.jsonl'
-
-All checks passed.
-```
-
-## 使用
-
-### 运行单个任务
-
-```bash
-cd zephyr-claude
-python runner.py --task-id 1
-```
-
-### 运行批量任务
-
-```bash
-python runner.py --batch 10
-```
-
-### 断点续跑（跳过已通过的任务）
-
-```bash
-python runner.py --batch 100 --resume
-```
-
-### 从指定任务开始
-
-```bash
-python runner.py --batch 50 --start 200
-```
-
-### 验证数据集（两轮验证：答案注入 + 负控制）
-
-```bash
-# ① 答案注入：oracle（正确答案）应能通过测试
-python inject_test.py --batch 5
-
-# ② 负控制：空实现应让测试失败（找出"假验证"弱任务）
-python neg_control.py --batch 5
-```
-
-验证后可用 `zephyr-bench/filter_dataset.py` 只保留 GOOD 任务，产出最终数据集（当前 712 个）。
-
-### 分析结果
-
-```bash
-python analyze_results.py
-```
+环境就绪后的步骤——**构建 Docker 沙箱、配置 API Key、依赖自检、跑评测、白盒分析**——见 [`zephyr-claude/README.md`](zephyr-claude/README.md)。
 
 ## 数据集：712 个已验证任务
 
 当前数据集为 **712 个通过两轮验证的 GOOD 任务**（oracle 注入通过测试 + 空实现注入让测试失败），由原始 884 个任务经负控制扫描筛除弱任务后得到。任务通过 `extract_zephyr_tests.py` 从 Zephyr RTOS 单元测试（`tests/unit/`、`tests/subsys/`、`tests/lib/`）中提取：
 
-| 来源 | 优先级 | 说明 |
-|---|---|---|
-| `lib/` | 最高 | 核心库函数 |
-| `subsys/` | 高 | 子系统 API |
-| `arch/` | 中 | 架构相关 |
-| `kernel/` | 中 | 内核 API |
-| `drivers/` | 低 | 设备驱动 |
+| 来源         | 优先级 | 说明      |
+| ---------- | --- | ------- |
+| `lib/`     | 最高  | 核心库函数   |
+| `subsys/`  | 高   | 子系统 API |
+| `arch/`    | 中   | 架构相关    |
+| `kernel/`  | 中   | 内核 API  |
+| `drivers/` | 低   | 设备驱动    |
 
 每个任务包含：
+
 - `task_id` — 唯一标识符
 - `sut_function` — 需要实现的函数名
 - `source_path` — 包含该函数的文件
@@ -277,20 +178,9 @@ python analyze_results.py
 - `run_command` — 用于验证的 `west build` 命令
 - `unit_test` — 用于判断测试通过/失败的 ZTEST 名称
 
-## 错误分类
+## 结果与白盒分析
 
-| 分类 | 含义 | 常见原因 |
-|---|---|---|
-| `compile_error` | 构建失败 | API 名称错误、预处理不匹配、语法错误 |
-| `test_failure` | 能编译但测试失败 | 算法边界情况、常量错误 |
-| `crash` | 运行时崩溃 | 空指针、未初始化字段 |
-| `illegal_modifications` | 修改了目标函数之外的代码 | `#undef`、全局修改 |
-| `timeout` | `west build` 超过 5 分钟 | 依赖树过大 |
-| `watchdog` | Claude 会话超时（8 小时） | 卡死 / 死循环 |
-
-## 结果
-
-结果存储在 `zephyr-claude/results/results.jsonl`（JSONL 格式，每行一条结果）：
+运行结果默认写 `zephyr-claude/results/results.jsonl`；多模型/多轮用 `ZEPHYR_CLAUDE_RUN_NAME=<run>` 时写 `results-<run>/results.jsonl` + `trajectory-<run>/`（JSONL，每行一条）：
 
 ```json
 {
@@ -305,9 +195,49 @@ python analyze_results.py
 }
 ```
 
-轨迹日志（完整的 Claude 会话 + diff + 验证输出）存储在 `zephyr-claude/trajectory/`。
+轨迹日志（Claude 会话 + diff + 验证输出）在对应 `trajectory[-<run>]/`。
+
+**失败分类（白盒）与分析流水线**
+
+- `zephyr-claude/whitebox.py`：失败分类成对齐 QSemOS/RIOT 的 L2 taxonomy + mechanism，输出 `whitebox_report.json`。
+- `zephyr-claude/analyze_run.py`：复用流水线 `classify`（剔 illegal/假失败/实过并修正 L1）/ `casebook` / `prelabel` / `finalize` / `normalize`（重写 results 的 passed/error\_category，留 `.raw`）/ `audit`（口径自查）/ `selftest`；报告落 `results-<model>/whitebox_report.json`、自查落 `schema_audit.json`。
+- **已产出**：`results-deepseek-v4-pro/`（712 全量，86 条真实失败）与 `results-glm/`（712 全量，27 条真实失败），各含 `annotation/`（casebook + annotations L1/L2/L3）。
+- 省 token 抽样：`zephyr-bench/sample_tasks.py` 按 module L1 抽子集 → `runner.py --data <子集> --batch N`。
+
+**通过率口径**：分母固定 **712**；`illegal_modifications`（指令遵循失败）与 harness 层失败（`timeout`/`watchdog`/`api_error`/`exception`，即 FF）**均计入分母、按失败计**（保守口径，两模型同口径）。而**机制/白盒统计剔除 FF 与 illegal**（与通过率不同口径，论文需分别标注）；白盒与 `illegal_changes` 须不相交，`analyze_run.py audit` 会断言此点。
+
+### 测试结果（712 任务，同口径）
+
+| 模型              | 通过  | 通过率   | 失败  | 指令遵循(ii) | harness FF | 真实失败   |
+| --------------- | --- | ----- | --- | -------- | ---------- | ------ |
+| deepseek-v4-pro | 612 | 86.0% | 100 | 8        | 6          | **86** |
+| glm-5.1         | 669 | 94.0% | 43  | 10       | 6          | **27** |
+
+> 通过率分母 = 712；`真实失败 = 失败 − 指令遵循 − FF`（即进白盒的条目）。详见 `results-<model>/whitebox_report.json`、`schema_audit.json`。
+
+### 白盒分析结果（真实失败）
+
+| 模型              | 真实失败 | test\_failure | crash | compile\_error | misunderstanding | hallucination |
+| --------------- | ---- | ------------- | ----- | -------------- | ---------------- | ------------- |
+| deepseek-v4-pro | 86   | 54            | 24    | 8              | 83               | 3             |
+| glm-5.1         | 27   | 16            | 7     | 4              | 27               | 0             |
+
+L2 分布（canonical，经 `L2_CONSOLIDATED` 合并）：
+
+| L2                          | deepseek-v4-pro | glm-5.1 |
+| --------------------------- | --------------- | ------- |
+| `logic_deviation`           | 53              | 19      |
+| `missing_conditional_guard` | 11              | 4       |
+| `wrong_calculation`         | 9               | 2       |
+| `extra_conditional_guard`   | 5               | 1       |
+| `missing_error_path`        | 4               | 1       |
+| `undefined_reference`（幻觉）   | 3               | 0       |
+| `semantic_drift`            | 1               | 0       |
+| **合计**                      | **86**          | **27**  |
+
+> 观察：两模型失败都以 `logic_deviation` 为主；glm 通过率更高、且**无幻觉**（compile\_error 均为签名/类型类），deepseek 有 3 条编造符号的 `undefined_reference`。逐条 L1/L2/L3 见各 `results-<model>/annotation/annotations.jsonl`。
 
 ## 许可证
 
-Zephyr RTOS 采用 [Apache 2.0](zephyr/LICENSE) 许可证。  
+Zephyr RTOS 采用 [Apache 2.0](zephyr/LICENSE) 许可证。\
 基准测试工具同样以该许可证条款提供。

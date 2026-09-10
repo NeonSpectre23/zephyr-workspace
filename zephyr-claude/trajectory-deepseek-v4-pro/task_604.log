@@ -1,0 +1,348 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation follows the same pattern as the other `<net_pkt_write_*>` functions in the file. It calls `net_pkt_write(pkt, &data, sizeof(uint8_t))` — no byte-order conversion is needed since a single byte is endianness-agnostic.
+
+The function:
+- Takes a `struct net_pkt *` and a `uint8_t` value
+- Passes a pointer to the data and its size to `net_pkt_write()`
+- The cursor position advances automatically after the write
+- Returns `0` on success or a negative `errno` code on failure
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/net/net_pkt.h
++++ include/zephyr/net/net_pkt.h
+@@ -2504,7 +2504,7 @@
+  */
+ static inline int net_pkt_write_u8(struct net_pkt *pkt, uint8_t data)
+ {
+-    /* MASKED - implement this function */
++	return net_pkt_write(pkt, &data, sizeof(uint8_t));
+ }
+ 
+ /**
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build
+-- west build: building application
+[1/161] Preparing syscall dependency handling
+
+[2/161] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/161] Generating misc/generated/syscalls_subdirs.trigger
+[4/161] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/161] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/161] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/161] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/161] Generating include/generated/zephyr/driver-validation.h
+[9/161] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/161] Generating ../../include/generated/zephyr/heap_constants.h
+[11/161] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/161] Generating include/generated/zephyr/offsets.h
+[13/161] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/mock/modem_backend_mock.c.obj
+[14/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[16/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[18/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[19/161] Building C object CMakeFiles/app.dir/src/main.c.obj
+[20/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[21/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[22/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[23/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[24/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[25/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[26/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[27/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[28/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[29/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[30/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[31/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[32/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/161] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[36/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/161] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[38/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[39/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/net/lib/utils/addr_utils.c.obj
+[43/161] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/161] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[47/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[48/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/161] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[51/161] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[52/161] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/161] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/161] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[56/161] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[57/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[58/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[59/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[60/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[61/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[62/161] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[63/161] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_entropy_device.c.obj
+[64/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[65/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[66/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc4_sw.c.obj
+[67/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc8_sw.c.obj
+[68/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc16_sw.c.obj
+[69/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc7_sw.c.obj
+[70/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc24_sw.c.obj
+[71/161] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[72/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32c_sw.c.obj
+[73/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32_sw.c.obj
+[74/161] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32k_4_2_sw.c.obj
+[75/161] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_pipe.c.obj
+[76/161] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_ppp.c.obj
+[77/161] Building C object zephyr/subsys/net/l2/ethernet/CMakeFiles/subsys__net__l2__ethernet.dir/ethernet.c.obj
+[78/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/ppp_l2.c.obj
+[79/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/fsm.c.obj
+[80/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/lcp.c.obj
+[81/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/options.c.obj
+[82/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/link.c.obj
+[83/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/network.c.obj
+[84/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/misc.c.obj
+[85/161] Building C object zephyr/subsys/net/l2/ppp/CMakeFiles/subsys__net__l2__ppp.dir/ipv6cp.c.obj
+[86/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_core.c.obj
+[87/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_if.c.obj
+[88/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_timeout.c.obj
+[89/161] Linking C static library app/libapp.a
+[90/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/utils.c.obj
+[91/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_pkt.c.obj
+[92/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_context.c.obj
+[93/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_tc.c.obj
+[94/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/icmp.c.obj
+[95/161] Generating linker_zephyr_pre0.cmd
+[96/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/net_mgmt.c.obj
+[97/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/connection.c.obj
+[98/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/icmpv6.c.obj
+[99/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/nbr.c.obj
+[100/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/ipv6.c.obj
+[101/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/ipv6_nbr.c.obj
+[102/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/ipv6_mld.c.obj
+[103/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/udp.c.obj
+[104/161] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[105/161] Building C object zephyr/subsys/net/ip/CMakeFiles/subsys__net__ip.dir/route.c.obj
+[106/161] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[107/161] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[108/161] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[109/161] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[110/161] Building C object zephyr/drivers/entropy/CMakeFiles/drivers__entropy.dir/fake_entropy_native_sim.c.obj
+[111/161] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[112/161] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[113/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[114/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[115/161] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[116/161] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[117/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[118/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[119/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[120/161] Linking C static library zephyr/arch/common/libarch__common.a
+[121/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[122/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[123/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[124/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[125/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[126/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[127/161] Linking C static library zephyr/subsys/modem/libsubsys__modem.a
+[128/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[129/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[130/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[131/161] Linking C static library zephyr/subsys/crc/libsubsys__crc.a
+[132/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[133/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[134/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[135/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[136/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[137/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[138/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[139/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[140/161] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[141/161] Linking C static library zephyr/subsys/net/l2/ethernet/libsubsys__net__l2__ethernet.a
+[142/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[143/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[144/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[145/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[146/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[147/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[148/161] Linking C static library zephyr/libzephyr.a
+[149/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[150/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[151/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[152/161] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[153/161] Linking C static library zephyr/subsys/net/l2/ppp/libsubsys__net__l2__ppp.a
+[154/161] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[155/161] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[156/161] Linking C static library zephyr/drivers/entropy/libdrivers__entropy.a
+[157/161] Linking C static library zephyr/subsys/net/ip/libsubsys__net__ip.a
+[158/161] Linking C static library zephyr/kernel/libkernel.a
+[159/161] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_ppp/build/zephyr/zephyr.elf for board: native_sim/native/64
+[160/161] Building native simulator runner, and linking final executable
+[161/161] Running utility command for native_runner_executable
+[00:00:00.000,000] [0m<dbg> os: setup_thread_stack: stack 0x479a40 for thread 0x473c80: obj_size=1024 buf_start=0x479a40  buf_size 1024 stack_ptr=0x479e40[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_lock: 0x4739c0 took mutex 0x46cdd0, count: 1, orig prio: 0[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: mutex 0x46cdd0 lock_count: 1[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: new owner of mutex 0x46cdd0: (nil) (prio: -1000)[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_lock: 0x4739c0 took mutex 0x46cdd0, count: 1, orig prio: 0[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: mutex 0x46cdd0 lock_count: 1[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: new owner of mutex 0x46cdd0: (nil) (prio: -1000)[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_lock: 0x4739c0 took mutex 0x46cdd0, count: 1, orig prio: 0[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: mutex 0x46cdd0 lock_count: 1[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: new owner of mutex 0x46cdd0: (nil) (prio: -1000)[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_lock: 0x4739c0 took mutex 0x46cdd0, count: 1, orig prio: 0[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: mutex 0x46cdd0 lock_count: 1[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: new owner of mutex 0x46cdd0: (nil) (prio: -1000)[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_lock: 0x4739c0 took mutex 0x46cdd0, count: 1, orig prio: 0[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: mutex 0x46cdd0 lock_count: 1[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: new owner of mutex 0x46cdd0: (nil) (prio: -1000)[0m
+[00:00:00.000,000] [0m<dbg> os: setup_thread_stack: stack 0x4746e0 for thread 0x473260: obj_size=768 buf_start=0x4746e0  buf_size 768 stack_ptr=0x4749e0[0m
+[00:00:00.000,000] [0m<dbg> os: setup_thread_stack: stack 0x478960 for thread 0x4733f8: obj_size=1504 buf_start=0x478960  buf_size 1504 stack_ptr=0x478f40[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_lock: 0x4739c0 took mutex 0x46cdb0, count: 1, orig prio: 0[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: mutex 0x46cdb0 lock_count: 1[0m
+[00:00:00.000,000] [0m<dbg> os: z_impl_k_mutex_unlock: new owner of mutex 0x46cdb0: (nil) (prio: -1000)[0m
+*** Booting Zephyr OS build v4.4.0 ***
+[00:00:00.000,000] [0m<dbg> os: setup_thread_stack: stack 0x4742e0 for thread 0x472c80: obj_size=1024 buf_start=0x4742e0  buf_size 1024 stack_ptr=0x4746e0[0m
+[00:00:00.000,000] [0m<dbg> os: k_sched_lock: scheduler locked (0x4739c0:0)[0m
+[00:00:00.000,000] [0m<dbg> os: k_sched_unlock: scheduler unlocked (0x4739c0:255)[0m
+Running TESTSUITE modem_ppp
+===================================================================
+START - test_corrupt_start_end_ppp_frame_receive
+[00:00:00.000,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:00.000,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 100 ticks[0m
+[00:00:00.000,000] [0m<dbg> modem_ppp: modem_ppp_is_byte_expected: Dropping byte 0x2a because 0x7e was expected.[0m
+[00:00:00.000,000] [0m<dbg> modem_ppp: modem_ppp_is_byte_expected: Dropping byte 0x46 because 0x7e was expected.[0m
+[00:00:00.000,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Receiving PPP frame[0m
+[00:00:00.000,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Received PPP frame (len 8)[0m
+ PASS - test_corrupt_start_end_ppp_frame_receive in 1.010 seconds
+===================================================================
+START - test_ip_frame_receive
+[00:00:01.010,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:01.010,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 100 ticks[0m
+[00:00:01.010,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Receiving PPP frame[0m
+[00:00:01.010,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Received PPP frame (len 45)[0m
+ PASS - test_ip_frame_receive in 1.010 seconds
+===================================================================
+START - test_ip_frame_receive_large
+[00:00:02.020,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:02.020,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 410 ticks[0m
+[00:00:02.020,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Receiving PPP frame[0m
+[00:00:02.020,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Received PPP frame (len 2048)[0m
+ PASS - test_ip_frame_receive_large in 4.110 seconds
+===================================================================
+START - test_ip_frame_send
+[00:00:06.130,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:06.130,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 10 ticks[0m
+ PASS - test_ip_frame_send in 0.110 seconds
+===================================================================
+START - test_ip_frame_send_large
+[00:00:06.240,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:06.240,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 410 ticks[0m
+ PASS - test_ip_frame_send_large in 4.110 seconds
+===================================================================
+START - test_ip_frame_send_multiple
+[00:00:10.350,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:10.350,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 10 ticks[0m
+ PASS - test_ip_frame_send_multiple in 0.110 seconds
+===================================================================
+START - test_ppp_frame_receive
+[00:00:10.460,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:10.460,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 100 ticks[0m
+[00:00:10.460,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Receiving PPP frame[0m
+[00:00:10.460,000] [0m<dbg> modem_ppp: modem_ppp_process_received_byte: Received PPP frame (len 8)[0m
+ PASS - test_ppp_frame_receive in 1.010 seconds
+===================================================================
+START - test_ppp_frame_send
+[00:00:11.470,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:11.470,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 100 ticks[0m
+ PASS - test_ppp_frame_send in 1.010 seconds
+===================================================================
+START - test_ppp_frame_send_custom_accm1
+[00:00:12.480,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:12.480,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 100 ticks[0m
+ PASS - test_ppp_frame_send_custom_accm1 in 1.010 seconds
+===================================================================
+START - test_ppp_frame_send_custom_accm2
+[00:00:13.490,000] [0m<dbg> os: setup_thread_stack: stack 0x473ee0 for thread 0x472ac0: obj_size=1024 buf_start=0x473ee0  buf_size 1024 stack_ptr=0x4742e0[0m
+[00:00:13.490,000] [0m<dbg> os: z_tick_sleep: thread 0x472ac0 for 100 ticks[0m
+ PASS - test_ppp_frame_send_custom_accm2 in 1.010 seconds
+===================================================================
+TESTSUITE modem_ppp succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [modem_ppp]: pass = 10, fail = 0, skip = 0, total = 10 duration = 14.500 seconds
+ - PASS - [modem_ppp.test_corrupt_start_end_ppp_frame_receive] duration = 1.010 seconds
+ - PASS - [modem_ppp.test_ip_frame_receive] duration = 1.010 seconds
+ - PASS - [modem_ppp.test_ip_frame_receive_large] duration = 4.110 seconds
+ - PASS - [modem_ppp.test_ip_frame_send] duration = 0.110 seconds
+ - PASS - [modem_ppp.test_ip_frame_send_large] duration = 4.110 seconds
+ - PASS - [modem_ppp.test_ip_frame_send_multiple] duration = 0.110 seconds
+ - PASS - [modem_ppp.test_ppp_frame_receive] duration = 1.010 seconds
+ - PASS - [modem_ppp.test_ppp_frame_send] duration = 1.010 seconds
+ - PASS - [modem_ppp.test_ppp_frame_send_custom_accm1] duration = 1.010 seconds
+ - PASS - [modem_ppp.test_ppp_frame_send_custom_accm2] duration = 1.010 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: subsys__modem__backends
+
+  Excluding target from build.
+
+
+WARNING: Using a test - not safe - entropy source
+
+
+

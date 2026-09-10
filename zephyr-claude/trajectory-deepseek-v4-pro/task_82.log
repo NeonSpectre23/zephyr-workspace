@@ -1,0 +1,253 @@
+============================================================
+=== Claude Session ===
+============================================================
+Implementation is done. Here's what the function does:
+
+1. **`k_fifo_get`** — blocks waiting for a net_buf from the receive FIFO. The state machine puts buffers there when SF/FF/CF processing completes a block or finishes a transfer.
+2. **Error handling** — if the FIFO returns NULL (timeout), returns the stored error or `ISOTP_RECV_TIMEOUT`, same pattern as `isotp_recv`.
+3. **Returns the buffer** via the `buffer` out-parameter, and returns the remaining data length stored in `net_buf_user_data` (0 when transfer is complete, positive when more blocks follow for BS > 0).
+
+This matches the documented contract in isotp.h:288-301.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/canbus/isotp/isotp.c
++++ subsys/canbus/isotp/isotp.c
+@@ -699,7 +699,20 @@
+ 
+ int isotp_recv_net(struct isotp_recv_ctx *rctx, struct net_buf **buffer, k_timeout_t timeout)
+ {
+-    /* MASKED - implement this function */
++	struct net_buf *buf;
++	uint32_t *ud_rem_len;
++
++	buf = k_fifo_get(&rctx->fifo, timeout);
++	if (!buf) {
++		int err = rctx->error_nr ? rctx->error_nr : ISOTP_RECV_TIMEOUT;
++
++		rctx->error_nr = 0;
++		return err;
++	}
++
++	*buffer = buf;
++	ud_rem_len = net_buf_user_data(buf);
++	return *ud_rem_len;
+ }
+ 
+ int isotp_recv(struct isotp_recv_ctx *rctx, uint8_t *data, size_t len, k_timeout_t timeout)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build
+-- west build: building application
+[1/118] Preparing syscall dependency handling
+
+[2/118] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/118] Generating misc/generated/syscalls_subdirs.trigger
+[4/118] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/118] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/118] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/118] Generating include/generated/zephyr/driver-validation.h
+[8/118] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/118] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/118] Generating ../../include/generated/zephyr/heap_constants.h
+[11/118] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/118] Generating include/generated/zephyr/offsets.h
+[13/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[14/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[15/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[16/118] Building C object CMakeFiles/app.dir/src/main.c.obj
+[17/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[18/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[19/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[20/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[21/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[22/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[23/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[29/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[31/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[32/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/118] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[39/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[40/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[41/118] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[42/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[43/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[50/118] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[51/118] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[52/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[53/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[59/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[60/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[62/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[63/118] Building C object zephyr/drivers/can/CMakeFiles/drivers__can.dir/can_common.c.obj
+[64/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[65/118] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[66/118] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[67/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[68/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[69/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[70/118] Building C object zephyr/drivers/can/CMakeFiles/drivers__can.dir/can_loopback.c.obj
+[71/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[72/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[73/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[74/118] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[75/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[76/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[77/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[78/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[79/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[80/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[82/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[83/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[84/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[85/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[86/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[87/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[88/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[89/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[90/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[91/118] Linking C static library app/libapp.a
+[92/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[93/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[94/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[95/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[96/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[97/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[99/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[100/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[101/118] Generating linker_zephyr_pre0.cmd
+[102/118] Linking C static library zephyr/arch/common/libarch__common.a
+[103/118] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[104/118] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[105/118] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[106/118] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[107/118] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[108/118] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[109/118] Linking C static library zephyr/libzephyr.a
+[110/118] Linking C static library zephyr/drivers/can/libdrivers__can.a
+[111/118] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[112/118] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[113/118] Linking C static library zephyr/kernel/libkernel.a
+[114/118] Building C object zephyr/subsys/canbus/isotp/CMakeFiles/subsys__canbus__isotp.dir/isotp.c.obj
+[115/118] Linking C static library zephyr/subsys/canbus/isotp/libsubsys__canbus__isotp.a
+[116/118] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/canbus/isotp/implementation/build/zephyr/zephyr.elf for board: native_sim/native/64
+[117/118] Building native simulator runner, and linking final executable
+[118/118] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE isotp_implementation
+===================================================================
+START - test_bind_unbind
+ PASS - test_bind_unbind in 2.800 seconds
+===================================================================
+START - test_buffer_allocation
+ PASS - test_buffer_allocation in 1.640 seconds
+===================================================================
+START - test_buffer_allocation_wait
+ PASS - test_buffer_allocation_wait in 10.220 seconds
+===================================================================
+START - test_send_receive_blocks
+ PASS - test_send_receive_blocks in 0.300 seconds
+===================================================================
+START - test_send_receive_net_blocks
+ PASS - test_send_receive_net_blocks in 0.300 seconds
+===================================================================
+START - test_send_receive_net_sf
+ PASS - test_send_receive_net_sf in 0.000 seconds
+===================================================================
+START - test_send_receive_net_single_blocks
+ PASS - test_send_receive_net_single_blocks in 0.750 seconds
+===================================================================
+START - test_send_receive_sf
+ PASS - test_send_receive_sf in 0.000 seconds
+===================================================================
+START - test_send_receive_single_block
+ PASS - test_send_receive_single_block in 0.750 seconds
+===================================================================
+TESTSUITE isotp_implementation succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [isotp_implementation]: pass = 9, fail = 0, skip = 0, total = 9 duration = 16.760 seconds
+ - PASS - [isotp_implementation.test_bind_unbind] duration = 2.800 seconds
+ - PASS - [isotp_implementation.test_buffer_allocation] duration = 1.640 seconds
+ - PASS - [isotp_implementation.test_buffer_allocation_wait] duration = 10.220 seconds
+ - PASS - [isotp_implementation.test_send_receive_blocks] duration = 0.300 seconds
+ - PASS - [isotp_implementation.test_send_receive_net_blocks] duration = 0.300 seconds
+ - PASS - [isotp_implementation.test_send_receive_net_sf] duration = 0.000 seconds
+ - PASS - [isotp_implementation.test_send_receive_net_single_blocks] duration = 0.750 seconds
+ - PASS - [isotp_implementation.test_send_receive_sf] duration = 0.000 seconds
+ - PASS - [isotp_implementation.test_send_receive_single_block] duration = 0.750 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

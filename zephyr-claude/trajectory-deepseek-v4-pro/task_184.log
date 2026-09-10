@@ -1,0 +1,101 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is in place. Here's a summary of the function:
+
+**`mpsc_pbuf_alloc`** allocates `wlen` words from the MPSC packet buffer and returns a pointer to the reserved space (or NULL on failure). The caller fills the data and then calls `mpsc_pbuf_commit` to make it visible to the consumer.
+
+Key design decisions mirroring existing patterns in the file:
+
+- **Space available**: Returns a pointer at `buffer->buf[buffer->tmp_wr_idx]` and advances `tmp_wr_idx` only (not `wr_idx` — that happens in `commit`). Unlike `put_data`, no `max_utilization_update` here since utilization is tracked at commit time.
+- **Wrapping needed** (space at end but data at beginning): Adds a skip item and retries, same as `put_data`/`put_word_ext`.
+- **Overwrite mode** (`MPSC_PBUF_MODE_OVERWRITE`): Calls `drop_item_locked` to evict oldest packets and retries, same pattern as the existing `put_*` functions.
+- **Timeout handling**: When allocation fails in non-overwrite mode and no wrapping is possible:
+  - `K_NO_WAIT`: returns NULL immediately.
+  - `K_FOREVER`: blocks on `buffer->sem` indefinitely (until consumer frees space), then retries.
+  - Finite timeout: waits once for the specified duration; if signaled, retries; if timeout expires, returns NULL.
+  - `k_can_yield()` guards the semaphore take — in ISR or spinlock-held context the wait is skipped and NULL is returned immediately.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/os/mpsc_pbuf.c
++++ lib/os/mpsc_pbuf.c
+@@ -341,7 +341,65 @@
+ union mpsc_pbuf_generic *mpsc_pbuf_alloc(struct mpsc_pbuf_buffer *buffer,
+ 					 size_t wlen, k_timeout_t timeout)
+ {
+-    /* MASKED - implement this function */
++	union mpsc_pbuf_generic *ret = NULL;
++	union mpsc_pbuf_generic *dropped_item = NULL;
++	uint32_t tmp_wr_idx_shift = 0;
++	uint32_t tmp_wr_idx_val = 0;
++	bool waited = false;
++	bool cont;
++
++	do {
++		uint32_t free_wlen;
++		k_spinlock_key_t key;
++		bool wrap;
++
++		cont = false;
++
++		key = k_spin_lock(&buffer->lock);
++
++		if (tmp_wr_idx_shift) {
++			post_drop_action(buffer, tmp_wr_idx_val, tmp_wr_idx_shift);
++			tmp_wr_idx_shift = 0;
++		}
++
++		wrap = free_space(buffer, &free_wlen);
++
++		if (free_wlen >= wlen) {
++			ret = (union mpsc_pbuf_generic *)&buffer->buf[buffer->tmp_wr_idx];
++			tmp_wr_idx_inc(buffer, wlen);
++		} else if (wrap) {
++			add_skip_item(buffer, free_wlen);
++			cont = true;
++		} else if (buffer->flags & MPSC_PBUF_MODE_OVERWRITE) {
++			tmp_wr_idx_val = buffer->tmp_wr_idx;
++			cont = drop_item_locked(buffer, free_wlen,
++						&dropped_item, &tmp_wr_idx_shift);
++		}
++
++		k_spin_unlock(&buffer->lock, key);
++
++		if (dropped_item) {
++			if (buffer->notify_drop) {
++				buffer->notify_drop(buffer, dropped_item);
++			}
++			dropped_item = NULL;
++		}
++
++		if (!cont && ret == NULL && IS_ENABLED(CONFIG_MULTITHREADING) &&
++		    k_can_yield()) {
++			if (K_TIMEOUT_EQ(timeout, K_FOREVER)) {
++				(void)k_sem_take(&buffer->sem, K_FOREVER);
++				cont = true;
++			} else if (!K_TIMEOUT_EQ(timeout, K_NO_WAIT) && !waited) {
++				if (k_sem_take(&buffer->sem, timeout) == 0) {
++					cont = true;
++					waited = true;
++				}
++			}
++		}
++	} while (cont);
++
++	return ret;
+ }
+ 
+ void mpsc_pbuf_commit(struct mpsc_pbuf_buffer *buffer,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

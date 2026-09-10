@@ -1,0 +1,75 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete and correct. Here's a summary of what `send_sf` does, matching the ISO 15765-2 protocol:
+
+**`send_sf` implementation:**
+
+1. **Prepare CAN frame** — calls `prepare_frame` with the TX address (same as `send_ff`/`send_cf`)
+2. **Extended address** — if `ISOTP_MSG_EXT_ADDR` flag is set, prepend the extended address byte
+3. **SF PCI byte** — for CAN FD frames where length > 15 (`ISOTP_PCI_SF_DL_MASK`), the 4-bit SF_DL can't hold the length, so PCI byte has `ISOTP_PCI_TYPE_SF` with 0 length, followed by an explicit 8-bit length byte. Otherwise, PCI byte is `ISOTP_PCI_TYPE_SF | len` (length fits in 4 bits). This matches the receive-side logic in `process_ff_sf` and `receive_get_sf_length`.
+4. **Copy data** — copies user data into the frame payload
+5. **Padding/DLC** — same padding logic as `send_cf`: pad to `ISOTP_PADDED_FRAME_DL_MIN` (8 bytes) if `CONFIG_ISOTP_ENABLE_TX_PADDING` is set, or for CAN FD frames > 8 bytes (AUTOSAR SWS_CanTp_00348/00351)
+6. **Send** — transmits via `can_send` with the same timeout and callback as `send_ff`/`send_cf`
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/canbus/isotp/isotp.c
++++ subsys/canbus/isotp/isotp.c
+@@ -897,7 +897,43 @@
+ 
+ static inline int send_sf(struct isotp_send_ctx *sctx)
+ {
+-    /* MASKED - implement this function */
++	struct can_frame frame;
++	int index = 0;
++	size_t len = get_send_ctx_data_len(sctx);
++	int ret;
++	const uint8_t *data;
++
++	prepare_frame(&frame, &sctx->tx_addr);
++
++	if ((sctx->tx_addr.flags & ISOTP_MSG_EXT_ADDR) != 0) {
++		frame.data[index++] = sctx->tx_addr.ext_addr;
++	}
++
++	if (IS_ENABLED(CONFIG_CAN_FD_MODE) && (sctx->tx_addr.flags & ISOTP_MSG_FDF) != 0 &&
++	    len > ISOTP_PCI_SF_DL_MASK) {
++		frame.data[index++] = ISOTP_PCI_TYPE_SF;
++		frame.data[index++] = len;
++	} else {
++		frame.data[index++] = ISOTP_PCI_TYPE_SF | len;
++	}
++
++	data = get_send_ctx_data(sctx);
++	memcpy(&frame.data[index], data, len);
++	index += len;
++
++	if (IS_ENABLED(CONFIG_ISOTP_ENABLE_TX_PADDING) ||
++	    (IS_ENABLED(CONFIG_CAN_FD_MODE) && (sctx->tx_addr.flags & ISOTP_MSG_FDF) != 0 &&
++	     index > ISOTP_PADDED_FRAME_DL_MIN)) {
++		frame.dlc = can_bytes_to_dlc(
++			MAX(ISOTP_PADDED_FRAME_DL_MIN, index));
++		memset(&frame.data[index], ISOTP_PAD_BYTE,
++		       can_dlc_to_bytes(frame.dlc) - index);
++	} else {
++		frame.dlc = can_bytes_to_dlc(index);
++	}
++
++	ret = can_send(sctx->can_dev, &frame, K_MSEC(ISOTP_A_TIMEOUT_MS), send_can_tx_cb, sctx);
++	return ret;
+ }
+ 
+ static inline int send_ff(struct isotp_send_ctx *sctx)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

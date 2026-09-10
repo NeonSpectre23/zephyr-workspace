@@ -21,12 +21,24 @@ ZEPHYR_SDK_DIR = Path(os.environ.get(
 ))
 
 TEST_TIMEOUT = 300              # west build 超时（秒）
-WATCHDOG_TIMEOUT = 8 * 3600     # Claude 保险丝（秒）
+WATCHDOG_TIMEOUT = 8 * 3600     # Claude 总保险丝（秒，通常不会触发）
+# 空闲保险丝:容器内 Claude 连续 N 秒无任何新输出(API 流挂起/静默卡死)就 kill。
+# 默认 30 分钟;env ZEPHYR_CLAUDE_IDLE_TIMEOUT 可调(秒)。经验:bigmodel/GLM 多轮长任务会
+# 在某一轮 API 请求静默挂起,8h 兜底太晚,故加此更短的"按输出活跃度"超时。
+IDLE_TIMEOUT = int(os.environ.get("ZEPHYR_CLAUDE_IDLE_TIMEOUT", "1800"))
 MAX_OUTPUT_LENGTH = 2_000_000   # 轨迹日志截断阈值
 
 # ---- 目录 ----
-TRAJECTORY_DIR = SCRIPT_DIR / "trajectory"
-RESULTS_DIR = SCRIPT_DIR / "results"
+# 运行名(env ZEPHYR_CLAUDE_RUN_NAME):多模型/多轮跑时按名隔离产物目录,
+# 与既有手工约定一致(results-<name>/ + trajectory-<name>/)。
+# 不设置时保持默认 results/ + trajectory/(向后兼容)。
+RUN_NAME = os.environ.get("ZEPHYR_CLAUDE_RUN_NAME", "").strip()
+if RUN_NAME:
+    TRAJECTORY_DIR = SCRIPT_DIR / f"trajectory-{RUN_NAME}"
+    RESULTS_DIR = SCRIPT_DIR / f"results-{RUN_NAME}"
+else:
+    TRAJECTORY_DIR = SCRIPT_DIR / "trajectory"
+    RESULTS_DIR = SCRIPT_DIR / "results"
 
 # ---- Docker 沙箱镜像 ----
 DOCKER_IMAGE = "zephyr-sandbox:latest"

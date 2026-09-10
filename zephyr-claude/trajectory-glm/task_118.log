@@ -1,0 +1,113 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's a summary of what was implemented:
+
+**`log_frontend_stmesp_demux_packet_start(uint32_t *data, uint64_t *ts)`** handles the STPv2 DMTS (Data Marked Timestamp) packet start event:
+
+1. **Garbage collection** — calls `garbage_collector(k_uptime_get_32())` to expire stale active entries (those older than `GC_TIMEOUT` ms)
+2. **Skip check** — returns 0 if the current major ID isn't in the configured list
+3. **Invalid channel check** — returns `-EINVAL` if no major has been set (`M_CH_INVALID`)
+4. **Previous packet cleanup** — if `demux.curr != NULL`, closes the previous incomplete packet via `packet_end()`
+5. **HW event** — if `curr_m_ch == M_CH_HW_EVENT`, stores an HW event packet and returns 1
+6. **Trace point** — if channel >= `TP_CHAN_BASE` or `data == NULL`, stores a trace point packet and returns 1
+7. **Log packet** — allocates a slab entry + mpsc_pbuf buffer, fills the log packet header (overriding `major` with the demuxed index), adds to the active list, and returns 0. Returns `-ENOMEM` if the slab or buffer allocation fails.
+
+**Fix to `garbage_collector`** — added a check to invalidate `demux.curr` if the garbage-collected entry is the current one, preventing a dangling pointer.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/logging/frontends/log_frontend_stmesp_demux.c
++++ subsys/logging/frontends/log_frontend_stmesp_demux.c
+@@ -357,6 +357,9 @@
+ 			entry->packet->content_invalid = 1;
+ 			mpsc_pbuf_commit(&demux.pbuf, p.generic);
+ 			demux.dropped++;
++			if (entry == demux.curr) {
++				demux.curr = NULL;
++			}
+ 			k_mem_slab_free(&demux.mslab, entry);
+ 			/* After removing one we need to stop as removing disrupts
+ 			 * iterating over the list as current node is no longer in
+@@ -455,7 +458,70 @@
+ 
+ int log_frontend_stmesp_demux_packet_start(uint32_t *data, uint64_t *ts)
+ {
+-    /* MASKED - implement this function */
++	garbage_collector(k_uptime_get_32());
++
++	if (skip) {
++		return 0;
++	}
++
++	if (demux.curr_m_ch == M_CH_INVALID) {
++		return -EINVAL;
++	}
++
++	if (demux.curr != NULL) {
++		log_frontend_stmesp_demux_packet_end();
++	}
++
++	if (demux.curr_m_ch == M_CH_HW_EVENT) {
++		log_frontend_stmesp_demux_hw_event(ts, (uint8_t)*data);
++		return 1;
++	}
++
++	uint16_t ch = demux.curr_m_ch & C_ID_MASK;
++	uint16_t m = get_major_id(demux.curr_m_ch >> M_ID_OFF);
++
++	if (ch >= CONFIG_LOG_FRONTEND_STMESP_TP_CHAN_BASE || data == NULL) {
++		store_tracepoint(m, ch, ts, data);
++		return 1;
++	}
++
++	union log_frontend_stmesp_demux_header hdr = {.raw = *data};
++	uint32_t wlen = calc_wlen(hdr.log.total_len +
++			offsetof(struct log_frontend_stmesp_demux_log, data));
++
++	struct log_frontend_stmesp_demux_active_entry *entry;
++	int err = k_mem_slab_alloc(&demux.mslab, (void **)&entry, K_NO_WAIT);
++
++	if (err != 0) {
++		demux.dropped++;
++		return -ENOMEM;
++	}
++
++	union log_frontend_stmesp_demux_packet p;
++
++	p.generic = mpsc_pbuf_alloc(&demux.pbuf, wlen, K_NO_WAIT);
++	if (p.generic == NULL) {
++		k_mem_slab_free(&demux.mslab, entry);
++		demux.dropped++;
++		return -ENOMEM;
++	}
++
++	hdr.log.major = m;
++	p.log->valid = 1;
++	p.log->type = LOG_FRONTEND_STMESP_DEMUX_TYPE_LOG;
++	p.log->content_invalid = 0;
++	p.log->timestamp = ts ? *ts : 0;
++	p.log->hdr = hdr.log;
++
++	entry->m_ch = demux.curr_m_ch;
++	entry->ts = k_uptime_get_32();
++	entry->packet = p.log;
++	entry->off = 0;
++
++	sys_slist_append(&demux.active_entries, &entry->node);
++	demux.curr = entry;
++
++	return 0;
+ }
+ 
+ void log_frontend_stmesp_demux_timestamp(uint64_t ts)
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

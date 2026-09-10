@@ -84,7 +84,7 @@ else
         echo "  → Zephyr SDK ${SDK_VERSION} already installed at ${SDK_DIR}."
     else
         echo "[2/4] Downloading Zephyr SDK ${SDK_VERSION}..."
-        SDK_TARBALL="zephyr-sdk-${SDK_VERSION}_linux-x86_64.tar.xz"
+        SDK_TARBALL="zephyr-sdk-${SDK_VERSION}_linux-x86_64_gnu.tar.xz"
         SDK_URL="https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${SDK_VERSION}/${SDK_TARBALL}"
 
         if command -v wget &> /dev/null; then

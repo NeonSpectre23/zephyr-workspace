@@ -1,0 +1,46 @@
+============================================================
+=== Claude Session ===
+============================================================
+Implementation complete. The `crc16_ccitt` function at `subsys/crc/crc16_sw.c:56` uses a 16-entry nibble lookup table for O(n) reflected CRC-16 computation with polynomial 0x1021 (reflected: 0x8408), matching the same pattern as `crc8_ccitt` in `crc8_sw.c`. Verified against all test cases from both `tests/unit/crc` and `tests/subsys/crc`, plus cross-checked against a bit-by-bit reference implementation.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/crc/crc16_sw.c
++++ subsys/crc/crc16_sw.c
+@@ -46,9 +46,25 @@
+ 	return crc;
+ }
+ 
++static const uint16_t crc16_ccitt_small_table[16] = {
++	0x0000, 0x1081, 0x2102, 0x3183,
++	0x4204, 0x5285, 0x6306, 0x7387,
++	0x8408, 0x9489, 0xa50a, 0xb58b,
++	0xc60c, 0xd68d, 0xe70e, 0xf78f,
++};
++
+ uint16_t __weak crc16_ccitt(uint16_t seed, const uint8_t *src, size_t len)
+ {
+-    /* MASKED - implement this function */
++	uint16_t crc = seed;
++	size_t i;
++
++	for (i = 0; i < len; i++) {
++		crc ^= src[i];
++		crc = (crc >> 4U) ^ crc16_ccitt_small_table[crc & 0x0FU];
++		crc = (crc >> 4U) ^ crc16_ccitt_small_table[crc & 0x0FU];
++	}
++
++	return crc;
+ }
+ 
+ uint16_t __weak crc16_itu_t(uint16_t seed, const uint8_t *src, size_t len)
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

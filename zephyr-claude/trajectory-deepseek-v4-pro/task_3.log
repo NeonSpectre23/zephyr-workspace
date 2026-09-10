@@ -1,0 +1,204 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation follows the same pattern as the other functions in the same file (e.g., `fprintfcb`, `printfcb`, `snprintfcb`):
+
+- `va_start(ap, format)` to initialize the variadic argument list
+- `cbvprintf(out, ctx, format, ap)` to delegate to the core formatting engine
+- `va_end(ap)` to clean up
+- Return the result from `cbvprintf`
+
+This is a standard va_list wrapper pattern in Zephyr — no new includes or APIs needed since `<stdarg.h>` is already included at line 7.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/os/cbprintf.c
++++ lib/os/cbprintf.c
+@@ -10,7 +10,14 @@
+ 
+ int cbprintf(cbprintf_cb out, void *ctx, const char *format, ...)
+ {
+-    /* MASKED - implement this function */
++	va_list ap;
++	int ret;
++
++	va_start(ap, format);
++	ret = cbvprintf(out, ctx, format, ap);
++	va_end(ap);
++
++	return ret;
+ }
+ 
+ #if defined(CONFIG_CBPRINTF_LIBC_SUBSTS)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/cbprintf/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/cbprintf/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/cbprintf/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/cbprintf/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/cbprintf/build
+-- west build: building application
+[1/7] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[3/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[4/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[5/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[6/7] Building C object CMakeFiles/testbinary.dir/main.c.obj
+[7/7] Linking C executable testbinary
+Running TESTSUITE prf
+===================================================================
+Opts: m32
+ COMPLETE VA_LIST
+ FULL_INTEGRAL
+ FP_N_SPECIFIER
+ LIBC_SUBSTS
+sizeof:  int=4 long=8 ptr=8 long long=8 double=8 long double=16
+alignof: int=4 long=8 ptr=8 long long=8 double=8 long double=16
+sizeof(conversion) = 12
+package alignment offset = 0
+START - test_c
+ PASS - test_c in 0.000 seconds
+===================================================================
+START - test_cbpprintf
+disabled
+ PASS - test_cbpprintf in 0.000 seconds
+===================================================================
+START - test_cbprintf_fsc_package
+disabled
+ PASS - test_cbprintf_fsc_package in 0.000 seconds
+===================================================================
+START - test_cbprintf_package
+disabled
+ PASS - test_cbprintf_package in 0.000 seconds
+===================================================================
+START - test_cbprintf_package_rw_string_indexes
+disabled
+ PASS - test_cbprintf_package_rw_string_indexes in 0.000 seconds
+===================================================================
+START - test_d_flags
+ PASS - test_d_flags in 0.000 seconds
+===================================================================
+START - test_d_length
+ PASS - test_d_length in 0.000 seconds
+===================================================================
+START - test_fp_flags
+skipping unsupported feature
+ PASS - test_fp_flags in 0.000 seconds
+===================================================================
+START - test_fp_length
+ PASS - test_fp_length in 0.000 seconds
+===================================================================
+START - test_fp_value
+skipping unsupported feature
+ PASS - test_fp_value in 0.000 seconds
+===================================================================
+START - test_is_none_char_ptr
+ PASS - test_is_none_char_ptr in 0.000 seconds
+===================================================================
+START - test_libc_substs
+ PASS - test_libc_substs in 0.000 seconds
+===================================================================
+START - test_n
+ PASS - test_n in 0.000 seconds
+===================================================================
+START - test_nop
+ PASS - test_nop in 0.000 seconds
+===================================================================
+START - test_o
+ PASS - test_o in 0.000 seconds
+===================================================================
+START - test_p
+ PASS - test_p in 0.000 seconds
+===================================================================
+START - test_p_count
+ PASS - test_p_count in 0.000 seconds
+===================================================================
+START - test_pct
+ PASS - test_pct in 0.000 seconds
+===================================================================
+START - test_pointers_validate
+ PASS - test_pointers_validate in 0.000 seconds
+===================================================================
+START - test_s
+ PASS - test_s in 0.000 seconds
+===================================================================
+START - test_star_precision
+ PASS - test_star_precision in 0.000 seconds
+===================================================================
+START - test_star_width
+ PASS - test_star_width in 0.000 seconds
+===================================================================
+START - test_v_c
+ PASS - test_v_c in 0.000 seconds
+===================================================================
+START - test_x_flags
+ PASS - test_x_flags in 0.000 seconds
+===================================================================
+START - test_x_length
+ PASS - test_x_length in 0.000 seconds
+===================================================================
+TESTSUITE prf succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [prf]: pass = 25, fail = 0, skip = 0, total = 25 duration = 0.000 seconds
+ - PASS - [prf.test_c] duration = 0.000 seconds
+ - PASS - [prf.test_cbpprintf] duration = 0.000 seconds
+ - PASS - [prf.test_cbprintf_fsc_package] duration = 0.000 seconds
+ - PASS - [prf.test_cbprintf_package] duration = 0.000 seconds
+ - PASS - [prf.test_cbprintf_package_rw_string_indexes] duration = 0.000 seconds
+ - PASS - [prf.test_d_flags] duration = 0.000 seconds
+ - PASS - [prf.test_d_length] duration = 0.000 seconds
+ - PASS - [prf.test_fp_flags] duration = 0.000 seconds
+ - PASS - [prf.test_fp_length] duration = 0.000 seconds
+ - PASS - [prf.test_fp_value] duration = 0.000 seconds
+ - PASS - [prf.test_is_none_char_ptr] duration = 0.000 seconds
+ - PASS - [prf.test_libc_substs] duration = 0.000 seconds
+ - PASS - [prf.test_n] duration = 0.000 seconds
+ - PASS - [prf.test_nop] duration = 0.000 seconds
+ - PASS - [prf.test_o] duration = 0.000 seconds
+ - PASS - [prf.test_p] duration = 0.000 seconds
+ - PASS - [prf.test_p_count] duration = 0.000 seconds
+ - PASS - [prf.test_pct] duration = 0.000 seconds
+ - PASS - [prf.test_pointers_validate] duration = 0.000 seconds
+ - PASS - [prf.test_s] duration = 0.000 seconds
+ - PASS - [prf.test_star_precision] duration = 0.000 seconds
+ - PASS - [prf.test_star_width] duration = 0.000 seconds
+ - PASS - [prf.test_v_c] duration = 0.000 seconds
+ - PASS - [prf.test_x_flags] duration = 0.000 seconds
+ - PASS - [prf.test_x_length] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr module(s) (Zephyr base): unittest
+
+
+

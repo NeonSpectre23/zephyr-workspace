@@ -1,0 +1,353 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is done. Here's what `osMailCreate` does:
+
+1. **NULL check** on `queue_def` — returns NULL if invalid
+2. **ISR guard** — returns NULL if called from interrupt context, since mail queue operations can block
+3. **`ARG_UNUSED(thread_id)`** — the thread ID parameter is part of the CMSIS RTOS v1 API signature but isn't needed in this implementation (consistent with `osMessageCreate`)
+4. **`k_mbox_init(queue_def->mbox)`** — initializes the underlying Zephyr mailbox object (`k_mbox`), which was statically allocated by the `osMailQDef` macro but not runtime-initialized
+5. Returns the `queue_def` cast to `osMailQId`
+
+The memory slab (`queue_def->pool`) doesn't need runtime initialization — it's already fully initialized at compile time by `K_MEM_SLAB_DEFINE` in the `osMailQDef` macro.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/portability/cmsis_rtos_v1/cmsis_mailq.c
++++ subsys/portability/cmsis_rtos_v1/cmsis_mailq.c
+@@ -13,7 +13,18 @@
+  */
+ osMailQId osMailCreate(const osMailQDef_t *queue_def, osThreadId thread_id)
+ {
+-    /* MASKED - implement this function */
++	if (queue_def == NULL) {
++		return NULL;
++	}
++
++	if (k_is_in_isr()) {
++		return NULL;
++	}
++
++	ARG_UNUSED(thread_id);
++
++	k_mbox_init(queue_def->mbox);
++	return (osMailQId)(queue_def);
+ }
+ 
+ /**
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build
+-- west build: building application
+[1/131] Preparing syscall dependency handling
+
+[2/131] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/131] Generating misc/generated/syscalls_subdirs.trigger
+[4/131] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/131] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/131] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/131] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/131] Generating include/generated/zephyr/driver-validation.h
+[9/131] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/131] Generating ../../include/generated/zephyr/heap_constants.h
+[11/131] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/131] Generating include/generated/zephyr/offsets.h
+[13/131] Building C object CMakeFiles/app.dir/src/kernel_apis.c.obj
+[14/131] Building C object CMakeFiles/app.dir/src/mailq.c.obj
+[15/131] Building C object CMakeFiles/app.dir/src/mempool.c.obj
+[16/131] Building C object CMakeFiles/app.dir/src/msgq.c.obj
+[17/131] Building C object CMakeFiles/app.dir/src/mutex.c.obj
+[18/131] Building C object CMakeFiles/app.dir/src/semaphore.c.obj
+[19/131] Building C object CMakeFiles/app.dir/src/signal.c.obj
+[20/131] Building C object CMakeFiles/app.dir/src/thread_apis.c.obj
+[21/131] Building C object CMakeFiles/app.dir/src/thread_instance.c.obj
+[22/131] Building C object CMakeFiles/app.dir/src/timer.c.obj
+[23/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[24/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[25/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[26/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[27/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[28/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[29/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[30/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[31/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[32/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[33/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[34/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[35/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[36/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[37/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[38/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[39/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[40/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[41/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[42/131] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[43/131] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[44/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[45/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[46/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[47/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[48/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[49/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[50/131] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[51/131] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[52/131] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[53/131] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[54/131] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[55/131] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[56/131] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[57/131] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[58/131] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[59/131] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[60/131] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[61/131] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[62/131] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[63/131] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[64/131] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[65/131] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[66/131] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[67/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_thread.c.obj
+[68/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_wait.c.obj
+[69/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_kernel.c.obj
+[70/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_timer.c.obj
+[71/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_mutex.c.obj
+[72/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_semaphore.c.obj
+[73/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_mempool.c.obj
+[74/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_msgq.c.obj
+[75/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_signal.c.obj
+[76/131] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[77/131] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[78/131] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[79/131] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[80/131] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[81/131] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[82/131] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[83/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[84/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[85/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[86/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[87/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[88/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[89/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[90/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[91/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[92/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[93/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[94/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[95/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[96/131] Linking C static library app/libapp.a
+[97/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[98/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[99/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[100/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[101/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[102/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[103/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[104/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[105/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[106/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[107/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[108/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[109/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[110/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/irq_offload.c.obj
+[111/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[112/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[113/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/poll.c.obj
+[114/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[115/131] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[116/131] Generating linker_zephyr_pre0.cmd
+[117/131] Linking C static library zephyr/arch/common/libarch__common.a
+[118/131] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[119/131] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[120/131] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[121/131] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[122/131] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[123/131] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[124/131] Linking C static library zephyr/libzephyr.a
+[125/131] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[126/131] Linking C static library zephyr/kernel/libkernel.a
+[127/131] Building C object zephyr/subsys/portability/cmsis_rtos_v1/CMakeFiles/subsys__portability__cmsis_rtos_v1.dir/cmsis_mailq.c.obj
+[128/131] Linking C static library zephyr/subsys/portability/cmsis_rtos_v1/libsubsys__portability__cmsis_rtos_v1.a
+[129/131] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/portability/cmsis_rtos_v1/build/zephyr/zephyr.elf for board: native_sim/native/64
+[130/131] Building native simulator runner, and linking final executable
+[131/131] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE cmsis_mailq
+===================================================================
+START - test_mailq
+ PASS - test_mailq in 1.020 seconds
+===================================================================
+TESTSUITE cmsis_mailq succeeded
+Running TESTSUITE cmsis_mempool
+===================================================================
+START - test_mempool
+ PASS - test_mempool in 0.110 seconds
+===================================================================
+TESTSUITE cmsis_mempool succeeded
+Running TESTSUITE cmsis_msgq
+===================================================================
+START - test_messageq
+ PASS - test_messageq in 1.020 seconds
+===================================================================
+TESTSUITE cmsis_msgq succeeded
+Running TESTSUITE cmsis_mutex
+===================================================================
+START - test_mutex
+ PASS - test_mutex in 0.110 seconds
+===================================================================
+START - test_mutex_lock_timeout
+ PASS - test_mutex_lock_timeout in 1.020 seconds
+===================================================================
+TESTSUITE cmsis_mutex succeeded
+Running TESTSUITE cmsis_semaphore
+===================================================================
+START - test_semaphore
+ PASS - test_semaphore in 1.020 seconds
+===================================================================
+TESTSUITE cmsis_semaphore succeeded
+Running TESTSUITE cmsis_signal
+===================================================================
+START - test_signal_events_isr
+ PASS - test_signal_events_isr in 0.000 seconds
+===================================================================
+START - test_signal_events_no_wait
+ PASS - test_signal_events_no_wait in 0.020 seconds
+===================================================================
+START - test_signal_events_signalled
+ PASS - test_signal_events_signalled in 0.000 seconds
+===================================================================
+START - test_signal_events_timeout
+ PASS - test_signal_events_timeout in 0.130 seconds
+===================================================================
+TESTSUITE cmsis_signal succeeded
+Running TESTSUITE cmsis_timer
+===================================================================
+START - test_timer
+oneshot_callback (Timer 1) = 1
+periodic_callback (Timer 2) = 1
+periodic_callback (Timer 2) = 2
+periodic_callback (Timer 2) = 3
+periodic_callback (Timer 2) = 4
+periodic_callback (Timer 2) = 5
+ PASS - test_timer in 5.720 seconds
+===================================================================
+TESTSUITE cmsis_timer succeeded
+Running TESTSUITE kernel_apis
+===================================================================
+START - test_kernel_start
+ PASS - test_kernel_start in 0.000 seconds
+===================================================================
+START - test_kernel_systick
+ PASS - test_kernel_systick in 1.000 seconds
+===================================================================
+TESTSUITE kernel_apis succeeded
+Running TESTSUITE thread_apis
+===================================================================
+START - test_thread_apis
+ PASS - test_thread_apis in 0.110 seconds
+===================================================================
+START - test_thread_prio
+ PASS - test_thread_prio in 0.020 seconds
+===================================================================
+TESTSUITE thread_apis succeeded
+Running TESTSUITE thread_instance
+===================================================================
+START - test_thread_instances
+ PASS - test_thread_instances in 0.000 seconds
+===================================================================
+TESTSUITE thread_instance succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [cmsis_mailq]: pass = 1, fail = 0, skip = 0, total = 1 duration = 1.020 seconds
+ - PASS - [cmsis_mailq.test_mailq] duration = 1.020 seconds
+
+SUITE PASS - 100.00% [cmsis_mempool]: pass = 1, fail = 0, skip = 0, total = 1 duration = 0.110 seconds
+ - PASS - [cmsis_mempool.test_mempool] duration = 0.110 seconds
+
+SUITE PASS - 100.00% [cmsis_msgq]: pass = 1, fail = 0, skip = 0, total = 1 duration = 1.020 seconds
+ - PASS - [cmsis_msgq.test_messageq] duration = 1.020 seconds
+
+SUITE PASS - 100.00% [cmsis_mutex]: pass = 2, fail = 0, skip = 0, total = 2 duration = 1.130 seconds
+ - PASS - [cmsis_mutex.test_mutex] duration = 0.110 seconds
+ - PASS - [cmsis_mutex.test_mutex_lock_timeout] duration = 1.020 seconds
+
+SUITE PASS - 100.00% [cmsis_semaphore]: pass = 1, fail = 0, skip = 0, total = 1 duration = 1.020 seconds
+ - PASS - [cmsis_semaphore.test_semaphore] duration = 1.020 seconds
+
+SUITE PASS - 100.00% [cmsis_signal]: pass = 4, fail = 0, skip = 0, total = 4 duration = 0.150 seconds
+ - PASS - [cmsis_signal.test_signal_events_isr] duration = 0.000 seconds
+ - PASS - [cmsis_signal.test_signal_events_no_wait] duration = 0.020 seconds
+ - PASS - [cmsis_signal.test_signal_events_signalled] duration = 0.000 seconds
+ - PASS - [cmsis_signal.test_signal_events_timeout] duration = 0.130 seconds
+
+SUITE PASS - 100.00% [cmsis_timer]: pass = 1, fail = 0, skip = 0, total = 1 duration = 5.720 seconds
+ - PASS - [cmsis_timer.test_timer] duration = 5.720 seconds
+
+SUITE PASS - 100.00% [kernel_apis]: pass = 2, fail = 0, skip = 0, total = 2 duration = 1.000 seconds
+ - PASS - [kernel_apis.test_kernel_start] duration = 0.000 seconds
+ - PASS - [kernel_apis.test_kernel_systick] duration = 1.000 seconds
+
+SUITE PASS - 100.00% [thread_apis]: pass = 2, fail = 0, skip = 0, total = 2 duration = 0.130 seconds
+ - PASS - [thread_apis.test_thread_apis] duration = 0.110 seconds
+ - PASS - [thread_apis.test_thread_prio] duration = 0.020 seconds
+
+SUITE PASS - 100.00% [thread_instance]: pass = 1, fail = 0, skip = 0, total = 1 duration = 0.000 seconds
+ - PASS - [thread_instance.test_thread_instances] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+warning: MAX_THREAD_BYTES (defined at arch/Kconfig:421) was assigned the value '4' but got the value
+''. Check these unsatisfied dependencies: USERSPACE (=n). See
+http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_MAX_THREAD_BYTES and/or look up
+MAX_THREAD_BYTES in the menuconfig/guiconfig interface. The Application Development Primer, Setting
+Configuration Values, and Kconfig - Tips and Best Practices sections of the manual might be helpful
+too.
+
+
+
+

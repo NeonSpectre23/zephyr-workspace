@@ -1,0 +1,351 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation passes all tests on both 32-bit and 64-bit `time_t` configurations.
+
+Here's what the implementation does:
+
+- **For `tv_nsec >= NSEC_PER_SEC`**: Divides to get the excess seconds, checks for positive overflow of `tv_sec`, then adds to `tv_sec` and subtracts the remainder from `tv_nsec`.
+- **For `tv_nsec < 0`**: Computes ceiling division of the absolute nanosecond value using unsigned arithmetic to avoid signed negation UB (the original code's `-ts->tv_nsec` with `LONG_MIN` was undefined behavior), checks for negative overflow of `tv_sec`, then subtracts from `tv_sec` and adds to `tv_nsec`.
+- **Already normalized** (`0 <= tv_nsec < NSEC_PER_SEC`): No-op, returns `true`.
+
+The overflow detection uses the same pattern as `timespec_add` in the header — comparing against `SYS_TIME_T_MAX` / `SYS_TIME_T_MIN` before applying the adjustment. After normalization, `timespec_is_valid` is asserted to hold.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/utils/timeutil.c
++++ lib/utils/timeutil.c
+@@ -198,5 +198,30 @@
+ 
+ bool timespec_normalize(struct timespec *ts)
+ {
+-    /* MASKED - implement this function */
+-}
++	__ASSERT_NO_MSG(ts != NULL);
++
++	if (ts->tv_nsec >= (long)NSEC_PER_SEC) {
++		long sec = ts->tv_nsec / (long)NSEC_PER_SEC;
++
++		if (ts->tv_sec > 0 && sec > SYS_TIME_T_MAX - ts->tv_sec) {
++			return false;
++		}
++
++		ts->tv_sec += (time_t)sec;
++		ts->tv_nsec -= sec * (long)NSEC_PER_SEC;
++	} else if (ts->tv_nsec < 0) {
++		unsigned long sec = DIV_ROUND_UP(-(unsigned long)ts->tv_nsec,
++						 (unsigned long)NSEC_PER_SEC);
++
++		if (ts->tv_sec < SYS_TIME_T_MIN + (time_t)sec) {
++			return false;
++		}
++
++		ts->tv_sec -= (time_t)sec;
++		ts->tv_nsec += (long)(sec * (unsigned long)NSEC_PER_SEC);
++	}
++
++	__ASSERT_NO_MSG(timespec_is_valid(ts));
++
++	return true;
++}
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (6.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build
+-- west build: building application
+[1/109] Preparing syscall dependency handling
+
+[2/109] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/109] Generating misc/generated/syscalls_subdirs.trigger
+[4/109] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/109] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/109] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/109] Generating include/generated/zephyr/driver-validation.h
+[8/109] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/109] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/109] Generating ../../include/generated/zephyr/heap_constants.h
+[11/109] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/109] Generating include/generated/zephyr/offsets.h
+[13/109] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[29/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[32/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/109] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[35/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[36/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[38/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[39/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[40/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[41/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/109] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/109] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[47/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[48/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[49/109] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[50/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[51/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[52/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[53/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[54/109] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[55/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[56/109] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[57/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[58/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[59/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[60/109] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[61/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[62/109] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[63/109] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[64/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[65/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[66/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[67/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[68/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[69/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[70/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[71/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[72/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[73/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[74/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[75/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[76/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[77/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[78/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[79/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[80/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[81/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[82/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[83/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[84/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[85/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[86/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[87/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[88/109] Linking C static library app/libapp.a
+[89/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[90/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[91/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[92/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[93/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[94/109] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[95/109] Generating linker_zephyr_pre0.cmd
+[96/109] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[97/109] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[98/109] Linking C static library zephyr/arch/common/libarch__common.a
+[99/109] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[100/109] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[101/109] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[102/109] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[103/109] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[104/109] Linking C static library zephyr/kernel/libkernel.a
+[105/109] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[106/109] Linking C static library zephyr/libzephyr.a
+[107/109] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/lib/timespec_util/build/zephyr/zephyr.elf for board: native_sim/native/64
+[108/109] Building native simulator runner, and linking final executable
+[109/109] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE timeutil_api
+===================================================================
+CONFIG_SYS_CLOCK_TICKS_PER_SEC=100
+CONFIG_TIMEOUT_64BIT=y
+K_TICK_MIN: 1
+K_TICK_MAX: 9223372036854775807
+SYS_TIMESPEC_MIN: {0, 10000000}
+SYS_TIMESPEC_MAX: {92233720368547758, 70000000}
+INT64_MIN: -9223372036854775808
+INT64_MAX: 9223372036854775807
+===================================================================
+START - test_SYS_TICKS_TO_NSECS
+ PASS - test_SYS_TICKS_TO_NSECS in 0.000 seconds
+===================================================================
+START - test_SYS_TICKS_TO_SECS
+ PASS - test_SYS_TICKS_TO_SECS in 0.000 seconds
+===================================================================
+START - test_timespec_add
+ PASS - test_timespec_add in 0.000 seconds
+===================================================================
+START - test_timespec_compare
+ PASS - test_timespec_compare in 0.000 seconds
+===================================================================
+START - test_timespec_equal
+ PASS - test_timespec_equal in 0.000 seconds
+===================================================================
+START - test_timespec_from_timeout
+3: ticks: {0}, timespec: {0, 0}
+4: ticks: {0}, timespec: {0, 0}
+5: ticks: {0}, timespec: {0, 0}
+6: ticks: {0}, timespec: {0, 0}
+15: ticks: {200}, timespec: {2, 0}
+16: ticks: {200}, timespec: {2, 0}
+17: ticks: {200}, timespec: {2, 0}
+18: ticks: {100}, timespec: {1, 0}
+19: ticks: {200}, timespec: {2, 0}
+20: ticks: {10000}, timespec: {100, 0}
+21: ticks: {1000}, timespec: {10, 0}
+26: ticks: {-1}, timespec: {9223372036854775807, 999999999}
+ PASS - test_timespec_from_timeout in 0.000 seconds
+===================================================================
+START - test_timespec_is_valid
+ PASS - test_timespec_is_valid in 0.000 seconds
+===================================================================
+START - test_timespec_negate
+ PASS - test_timespec_negate in 0.000 seconds
+===================================================================
+START - test_timespec_normalize
+0: timespec_normalize({0, 0})
+1: timespec_normalize({0, 1})
+2: timespec_normalize({1, 0})
+3: timespec_normalize({1, 1})
+4: timespec_normalize({1, 999999999})
+5: timespec_normalize({-1, 0})
+6: timespec_normalize({-1, 1})
+7: timespec_normalize({-1, 0})
+8: timespec_normalize({-1, 1})
+9: timespec_normalize({-1, 999999999})
+10: timespec_normalize({-9223372036854775808, 0})
+11: timespec_normalize({-9223372036854775808, 999999999})
+12: timespec_normalize({9223372036854775807, 0})
+13: timespec_normalize({9223372036854775807, 999999999})
+14: timespec_normalize({0, -1999999999})
+15: timespec_normalize({0, -2000000001})
+16: timespec_normalize({0, -1000000001})
+17: timespec_normalize({0, -1})
+18: timespec_normalize({0, 1000000000})
+19: timespec_normalize({0, 1000000001})
+20: timespec_normalize({1, -1})
+21: timespec_normalize({1, 1000000000})
+22: timespec_normalize({-1, -1})
+23: timespec_normalize({0, 1000000000})
+24: timespec_normalize({1, -1})
+25: timespec_normalize({1, 1000000000})
+26: timespec_normalize({-9223372036854775808, 1000000000})
+27: timespec_normalize({9223372036854775807, -1})
+28: timespec_normalize({0, -9223372036854775808})
+29: timespec_normalize({0, 9223372036854775807})
+30: timespec_normalize({-9223372036854775806, -2000000001})
+31: timespec_normalize({-9223372036854775807, -1000000001})
+32: timespec_normalize({-9223372036854775807, -1000000001})
+33: timespec_normalize({-9223372036854775808, -1})
+34: timespec_normalize({9223372036854775807, 1000000000})
+35: timespec_normalize({9223372036854775806, 2000000000})
+ PASS - test_timespec_normalize in 0.000 seconds
+===================================================================
+START - test_timespec_sub
+ PASS - test_timespec_sub in 0.000 seconds
+===================================================================
+START - test_timespec_to_timeout
+0: ticks: {0}, timespec: {-9223372036854775808, 0}
+1: ticks: {0}, timespec: {-1, 0}
+2: ticks: {0}, timespec: {-1, 999999999}
+3: ticks: {0}, timespec: {0, 0}
+4: ticks: {0}, timespec: {0, 0}
+5: ticks: {0}, timespec: {0, 0}
+6: ticks: {0}, timespec: {0, 0}
+7: ticks: {1}, timespec: {0, 1}
+8: ticks: {1}, timespec: {0, 2}
+9: ticks: {1}, timespec: {0, 10000000}
+10: ticks: {1}, timespec: {0, 1000}
+11: ticks: {1}, timespec: {0, 1000000}
+12: ticks: {2}, timespec: {0, 10000001}
+13: ticks: {2}, timespec: {0, 15000000}
+14: ticks: {2}, timespec: {0, 19999999}
+15: ticks: {200}, timespec: {2, 0}
+16: ticks: {200}, timespec: {2, 0}
+17: ticks: {200}, timespec: {2, 0}
+18: ticks: {100}, timespec: {1, 0}
+19: ticks: {200}, timespec: {2, 0}
+20: ticks: {10000}, timespec: {100, 0}
+21: ticks: {1000}, timespec: {10, 0}
+22: ticks: {1000}, timespec: {9, 990000001}
+23: ticks: {1000}, timespec: {9, 995000000}
+24: ticks: {1000}, timespec: {9, 999999999}
+25: ticks: {9223372036854775807}, timespec: {92233720368547758, 70000000}
+26: ticks: {-1}, timespec: {9223372036854775807, 999999999}
+timespec_to_timeout():
+ts: {92233720368547758, 70000000} => to: {9223372036854775807}, rem: {0, 0}
+ PASS - test_timespec_to_timeout in 0.000 seconds
+===================================================================
+TESTSUITE timeutil_api succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [timeutil_api]: pass = 11, fail = 0, skip = 0, total = 11 duration = 0.000 seconds
+ - PASS - [timeutil_api.test_SYS_TICKS_TO_NSECS] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_SYS_TICKS_TO_SECS] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_add] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_compare] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_equal] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_from_timeout] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_is_valid] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_negate] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_normalize] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_sub] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_timespec_to_timeout] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

@@ -1,0 +1,97 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `fcb_append_finish` does:
+
+1. **Reads the length prefix** from flash at `loc->fe_elem_off` and decodes it via `fcb_get_len` to get the data length
+2. **Populates** `loc->fe_data_off` and `loc->fe_data_len`
+3. **Computes CRC8-CCITT** over the length prefix bytes and all data bytes (read from flash in `FCB_TMP_BUF_SZ` blocks) - matching the algorithm in `fcb_elem_crc8`
+4. **Writes the CRC byte** at `loc->fe_data_off + fcb_len_in_flash(fcb, len)` — the aligned offset right after the data payload
+5. **Handles `FCB_FLAGS_CRC_DISABLED`** by writing `0xab` (fixed endmarker) instead of the CRC, when `CONFIG_FCB_ALLOW_FIXED_ENDMARKER` is enabled
+
+Error returns: `-ENOTSUP` for invalid offset, `-EIO` for flash read/write failures, and propagates errors from `fcb_get_len`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/fs/fcb/fcb_append.c
++++ subsys/fs/fcb/fcb_append.c
+@@ -9,6 +9,7 @@
+ #include <string.h>
+ 
+ #include <zephyr/fs/fcb.h>
++#include <zephyr/sys/crc.h>
+ #include "fcb_priv.h"
+ 
+ static struct flash_sector *
+@@ -120,5 +121,60 @@
+ int
+ fcb_append_finish(struct fcb *fcb, struct fcb_entry *loc)
+ {
+-    /* MASKED - implement this function */
++	uint8_t tmp_str[FCB_TMP_BUF_SZ];
++	int cnt;
++	int blk_sz;
++	uint8_t crc8;
++	uint16_t len;
++	uint32_t off;
++	uint32_t end;
++	int rc;
++
++	if (loc->fe_elem_off + 2 > loc->fe_sector->fs_size) {
++		return -ENOTSUP;
++	}
++
++	rc = fcb_flash_read(fcb, loc->fe_sector, loc->fe_elem_off, tmp_str, 2);
++	if (rc) {
++		return -EIO;
++	}
++
++	cnt = fcb_get_len(fcb, tmp_str, &len);
++	if (cnt < 0) {
++		return cnt;
++	}
++	loc->fe_data_off = loc->fe_elem_off + fcb_len_in_flash(fcb, cnt);
++	loc->fe_data_len = len;
++
++	crc8 = CRC8_CCITT_INITIAL_VALUE;
++	crc8 = crc8_ccitt(crc8, tmp_str, cnt);
++
++	off = loc->fe_data_off;
++	end = loc->fe_data_off + len;
++	for (; off < end; off += blk_sz) {
++		blk_sz = end - off;
++		if (blk_sz > sizeof(tmp_str)) {
++			blk_sz = sizeof(tmp_str);
++		}
++
++		rc = fcb_flash_read(fcb, loc->fe_sector, off, tmp_str, blk_sz);
++		if (rc) {
++			return -EIO;
++		}
++		crc8 = crc8_ccitt(crc8, tmp_str, blk_sz);
++	}
++
++	if (IS_ENABLED(CONFIG_FCB_ALLOW_FIXED_ENDMARKER) &&
++	    (fcb->f_flags & FCB_FLAGS_CRC_DISABLED)) {
++		crc8 = 0xab;
++	}
++
++	rc = fcb_flash_write(fcb, loc->fe_sector,
++			     loc->fe_data_off + fcb_len_in_flash(fcb, len),
++			     &crc8, FCB_CRC_SZ);
++	if (rc) {
++		return -EIO;
++	}
++
++	return 0;
+ }
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

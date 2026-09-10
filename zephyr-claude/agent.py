@@ -281,9 +281,12 @@ class ClaudeAgent:
         while True:
             if proc.poll() is not None:
                 break
-            if time.time() - last_activity > WATCHDOG_TIMEOUT:
+            if time.time() - last_activity > IDLE_TIMEOUT:
+                # 空闲保险丝:API 流挂起/静默卡死时连续无输出 IDLE_TIMEOUT 秒即 kill
+                # (复用 watchdog 处理路径,避免空等到 8h)。
                 proc.kill()
-                output_chunks.append("\n[WATCHDOG] killed\n")
+                output_chunks.append(
+                    f"\n[WATCHDOG] killed (idle > {IDLE_TIMEOUT}s)\n")
                 break
             events = sel.select(timeout=1.0)
             for key, _ in events:
@@ -361,38 +364,48 @@ class ClaudeAgent:
         # 恢复原始文件
         target_src.write_text(original)
 
-        # 解析 ztest 输出
-        build_fail = bool(re.search(r"(?:BUILD FAILED|FATAL ERROR|ninja: error"
-            r"|undefined reference)", stdout + stderr))
-        fatal_fail = bool(re.search(r"(?:Segmentation fault|Aborted|panic)", stdout + stderr))
-
-        target_test = task.get("unit_test", "")
-        specific_fail = bool(target_test and re.search(
-            rf"FAIL\s+-\s+{re.escape(target_test)}", stdout))
-
-        total_failures = len(re.findall(r'FAIL\s+-\s+', stdout))
+        # ---- 判定(不要用易误伤的单词) ----
+        # 教训(PR3 白盒复盘):纯关键词会把良性文本判成失败——'FATAL ERROR' 匹配到
+        # 运行时 "ZEPHYR FATAL ERROR"(真 panic);'panic' 匹配到受控 panic 测试名
+        # (test_log_panic)或内核打印;target unit_test 名不匹配时真实 test_failure 被
+        # 误标 test_not_executed。故按"是否产出了可运行测试 + PROJECT 终态 + 未捕获崩溃"判。
+        s = stdout + stderr
+        ran_tests = bool(re.search(
+            r"(?:Running TESTSUITE|START - test|PASS - |FAIL - |SUITE (?:PASS|FAIL))", s))
+        build_fail = bool(re.search(
+            r"(?:BUILD FAILED|ninja: error|undefined reference|"
+            r"\bfatal error:|\berror:)", s))
+        # 未捕获崩溃:出现 ZEPHYR FATAL / ASSERTION FAIL 的次数多于被 'Caught system error'
+        # 捕获的次数(受控 panic 测试会 1:1 配对并被框架捕获→不算失败);段错误不可捕获。
+        fatal_events = len(re.findall(r"ZEPHYR FATAL ERROR", s))
+        caught = s.count("Caught system error")
+        uncaught_crash = (fatal_events > caught) or ("Segmentation fault" in s) or (
+            "ASSERTION FAIL" in s and "Caught system error" not in s)
 
         project_success = "PROJECT EXECUTION SUCCESSFUL" in stdout
         project_failed = "PROJECT EXECUTION FAILED" in stdout
+        total_failures = len(re.findall(r'FAIL\s+-\s+', stdout))
 
-        passed = (not build_fail and not fatal_fail and not specific_fail
-                  and project_success)
-
+        # 失败类别(互斥,按序判定)
         error_cat = None
-        if build_fail:
-            passed = False
+        passed = False
+        if project_success:
+            # 显式全部通过(含被捕获的受控 panic 测试)——native_sim 只有真全过才打 SUCCESS,
+            # 未捕获崩溃进程已停、不会打出 SUCCESS。故 SUCCESS 优先,避免良性文本(如
+            # 输出里偶现 "Segmentation fault"/"ASSERTION FAIL")把真通过误判成失败。
+            passed = True
+            error_cat = ERROR_NONE
+        elif build_fail and not ran_tests:
+            # 编译/链接失败:二进制没产出 → 无任何测试运行标记
             error_cat = ERROR_COMPILE
-        elif fatal_fail:
-            passed = False
+        elif uncaught_crash:
+            # 未捕获运行时崩溃(panic / segfault)
             error_cat = ERROR_CRASH
-        elif specific_fail:
-            passed = False
+        elif ran_tests and (project_failed or total_failures > 0):
+            # 测试跑了且有失败 → 真实 test_failure(不依赖是否命中具体 unit_test 名)
             error_cat = ERROR_TEST_FAIL
-        elif project_failed:
-            passed = False
-            error_cat = ERROR_TEST_FAIL
-        elif not project_success:
-            passed = False
+        else:
+            # 其余:测试未真正执行 / 无法判定
             error_cat = ERROR_TEST_NOT_RUN
 
         return passed, test_out, total_failures, error_cat
