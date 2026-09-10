@@ -18,6 +18,7 @@
 | `verify_zephyr_tests.py` | 数据集验证脚本（west build / GCC 轻量两种模式） |
 | `filter_dataset.py` | **按验证判定筛出最终数据集**（只保留 GOOD，重编号，重建 oracles） |
 | `mask_engine.py` | 函数体遮蔽工具（`mask_function`） |
+| `sample_tasks.py` | **按 module L1 分层抽样**，产出可给 `runner.py --data` 用的子集 jsonl |
 
 
 ## 数据流水线
@@ -69,13 +70,15 @@ python verify_zephyr_tests.py --input zephyr_tasks.c.jsonl \
 ### 4. 筛出最终数据集（验证后）
 
 ```bash
-# 输入 neg_control 判定结果，输出仅 GOOD 的最终数据集
+# 输入 = neg_control 的判定结果(JSON: task_id -> verdict)，输出仅 GOOD 的最终数据集
 python filter_dataset.py \
-    --orig ../zephyr-claude/final_verdicts.json \
+    --orig <neg_control 结果.json> \
+    [--recheck <重跑判定.json>] \
     --bench .
 ```
 
-> 完整验证（两轮判定）在 `zephyr-claude/` 里做（`neg_control.py`），`filter_dataset.py` 消费其结果。原数据集会自动备份为 `*-full.jsonl` / `oracles-full/`。
+> 完整验证（两轮判定）在 `zephyr-claude/` 里做（`neg_control.py` 产出 `neg_control_results.json` 等），`filter_dataset.py` 消费其结果；判定合并规则：`--recheck` 中的任务以其为准，其余用 `--orig`。
+> 筛选时默认会把原数据集备份为 `*-full.jsonl` / `oracles-full/`（当前仓库未保留该备份，仅描述行为）。
 
 ## 任务数据格式
 
@@ -125,17 +128,52 @@ SUT 由测试文件**实际调用**的函数推导（tree-sitter 解析 `call_ex
 
 排除 `tests` / `build` / `doc` / `scripts` / `boards` / `soc` 等目录与框架函数（`zassert_*`、`printk`、`memcpy` 等）。
 
-## 最终数据集现状（712 任务）
+## 最终数据集现状（712 任务，module L1 划分）
 
-| 子系统 | 数量 |
-|---|---|
-| `subsys` | 345 |
-| `include`（头文件内联） | 214 |
-| `lib` | 137 |
-| `kernel` | 13 |
-| `modules` / `samples` / `drivers` | 各 1 |
+module L1 与 `zephyr-claude/whitebox.py` 的 `classify_module` **同口径**（顶层目录 + `include/zephyr/<sub>/` 头文件内联归并到子模块）——`whitebox_report.json` 的 `module` 字段与下面的分层抽样均用这套 L1：
 
-> ⚠️ `drivers` 覆盖极少——驱动类任务的测试大多不真验证函数，在验证阶段被 WEAK 筛除。数据集偏向 `subsys`/`lib` 核心库，跨模块覆盖需在论文中如实披露。
+| module | 数量 | 占比 | .c / .h | 说明 / 代表函数 |
+|---|---|---|---|---|
+| `subsys` | 345 | 48.5% | 341 / 4 | crc、fs/fcb、pm、usb、modem、mem_blocks 等 |
+| `lib` | 137 | 19.2% | 136 / 1 | hex、cbprintf、heap、smf、onoff、bitarray、rb 等 |
+| `sys` | 90 | 12.6% | 0 / 90 | `include/zephyr/sys/*.h`：atomic、spsc_pbuf、ring_buffer、linear_range |
+| `net` | 66 | 9.3% | 0 / 66 | 几乎全为 `include/zephyr/net_buf.h`(62) + 少量 `net/*.h` |
+| `kernel` | 23 | 3.2% | 13 / 10 | device/驱动模型 + 内核 API（`device.h`/`kernel.h` 归 kernel）|
+| `rtio` | 15 | 2.1% | 0 / 15 | `include/zephyr/rtio/*.h` |
+| `zbus` | 11 | 1.5% | 0 / 11 | `include/zephyr/zbus/*.h` |
+| `logging` | 10 | 1.4% | 0 / 10 | `include/zephyr/logging/*.h` |
+| `drivers` | 4 | 0.6% | 1 / 3 | uart_emul、uhc |
+| `fs` / `modem` / `shell` | 各 2 | 0.3% | 全 .h | fs.h、modem_chat/ubx、shell_backend |
+| `modules` / `samples` | 各 1 | 0.1% | .c | lvgl_init、usbd sample |
+| `storage` / `math` / `random` | 各 1 | 0.1% | .h | flash_map、interpolation、sys_rand32 |
+
+> ⚠️ 口径说明：表中将头文件内联按子系统归并（`include/zephyr/<sub>/` → `<sub>`），故出现 `sys`/`net`/`rtio`… 这些子系统级 L1；若按"`include` 单独一组"的粗口径则是 214 个。`net` 的 66 条几乎全是 `net_buf.h`（62），并非网络栈整体，跨模块解读时注意。`drivers` 覆盖极少——驱动类任务多因"测试不真验证函数"在验证阶段被 WEAK 筛除；数据集整体偏向 `subsys`/`lib` 核心库，模块覆盖不均需在论文中如实披露。
+
+### 模块维度与既有 track 的对齐声明（整改清单 §四要求）
+
+跨 track 模块图**只做 per-model 呈现、不跨 track 相加**；对齐性显式声明如下（不可对齐项须在论文中如实披露）：
+
+| Zephyr module L1 | 与 QSem / RIOT | 说明 |
+|---|---|---|
+| `kernel` | 概念对齐 QSem `kernel` | — |
+| `subsys` | 概念对齐 RIOT `sys/*`（粒度更粗）| 子系统不再细分 |
+| `drivers` | 概念对齐（RIOT 驱动分散于多个模块）| — |
+| `lib` / `arch` / `modules` / `samples` | **Zephyr 独有，不可对齐** | 无对应项 |
+| `<subsystem>`（`sys`/`net`/`rtio`/`zbus`/`logging`…）| **Zephyr 特有，不可对齐** | 来自 `include/zephyr/<sub>/` 头文件内联的归并 |
+
+### 按模块分层抽样（省 token / 保证覆盖）
+
+多模型（如 GLM）全量跑太耗 token 时，可按 module L1 分层抽子集给 runner：
+
+```bash
+cd zephyr-bench
+python sample_tasks.py --total 100 --strategy proportional_min --seed 0 \
+    --out zephyr_tasks.sample.jsonl      # 每非空模块至少 1 条,其余按占比
+# 可选 --module subsys lib sys net kernel / --print-ids / 其它 --seed
+cd ../zephyr-claude
+ZEPHYR_CLAUDE_RUN_NAME=glm-sample \
+  python runner.py --data ../zephyr-bench/zephyr_tasks.sample.jsonl --batch 100
+```
 
 ## 依赖
 
@@ -143,3 +181,4 @@ SUT 由测试文件**实际调用**的函数推导（tree-sitter 解析 `call_ex
 - `tree-sitter` + `tree-sitter-c`（`build_zephyr_dataset.py` / `mask_engine.py` 需要）
 - Zephyr 源码（`../zephyr`，west 拉取）
 - Zephyr SDK（`verify_zephyr_tests.py` west build 模式需要）
+- `sample_tasks.py` 复用 `../zephyr-claude/whitebox.py` 的 `classify_module`（module L1），无需 Zephyr SDK

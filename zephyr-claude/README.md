@@ -18,8 +18,8 @@
 | `inject_test.py` | **答案注入验证**：注入 oracle → build → 测试，验证数据集"能过" |
 | `neg_control.py` | **负控制验证**：注入空实现，找出测试未真正验证函数的弱任务 |
 | `whitebox.py` | **失败机理分类**：从 results + trajectory 生成对齐三 track 的 whitebox_report |
-| `analyze_results.py` | 结果统计（通过率/错误分类/运行时/按目录/按文件类型） |
-| `final_analysis.py` | 失败 case 逐例复盘（读 trajectory） |
+| `analyze_run.py` | **whitebox 复用流水线**：classify（剔假失败+修正 L1）/ casebook / prelabel / finalize / selftest |
+| `annotate_worklist.py` | 失败样本 casebook 生成（oracle-vs-Claude 对照，供逐条人工/AI 判 L2/L3） |
 | `Dockerfile` | 沙箱镜像：Ubuntu 24.04 + west + Claude Code CLI |
 | `settings.json` | benchmark 专用 API 配置（Key/模型，**已被 gitignore**） |
 
@@ -66,6 +66,17 @@
 | `timeout` / `watchdog` | build 超时 / Claude 会话超时 |
 | `api_error` | Claude 未完成（API 异常） |
 
+## 构建 Docker 沙箱
+
+评测在 Docker 容器内运行 Claude Code CLI，需先构建沙箱镜像：
+
+```bash
+cd zephyr-claude
+docker build -t zephyr-sandbox:latest .
+```
+
+> 沙箱容器以 `--network host` 启动（`ZEPHYR_CLAUDE_NETWORK`，默认 `host`）——这是必需的，因为容器内的 Claude Code 要调用 LLM API（如 `api.deepseek.com`）。如需临时改用其他网络（如 `bridge`）：`export ZEPHYR_CLAUDE_NETWORK=bridge`。同时启动命令带 `--disallowedTools "WebSearch,WebFetch"`，禁用 Claude 的 web 搜索/抓取工具，防止被测模型联网查答案。注意这只禁用了 web 工具，容器内 `Bash` 未禁用。
+
 ## 使用
 
 ### 依赖自检
@@ -110,6 +121,30 @@ python whitebox.py
 # 输出 results/whitebox_report.json（对齐 QSem/RIOT 的统一 taxonomy）
 ```
 
+### whitebox 复用流水线（analyze_run.py）
+
+一次模型 run（`results*.jsonl` + `trajectory*/`）的确定性分析入口，供多模型（如 GLM）复用同一套口径：
+
+```bash
+python analyze_run.py classify  --results results-<m>/results.jsonl --trajectory trajectory-<m>
+#   → 剔除 illegal / harness 假失败(FF) / "实过却判败"(日志有 PROJECT EXECUTION SUCCESSFUL),
+#     对每条真实失败给出修正 L1(compile_error / crash / test_failure)
+python analyze_run.py casebook  --results ... --trajectory ... --out casebook.jsonl
+#   → 拼出每条 oracle-vs-Claude 对照(供逐条判 L2/L3)
+python analyze_run.py prelabel  --casebook casebook.jsonl --out prelabel.jsonl
+#   → 确定性预标(只有把握的模式 + confidence;其余 needs_llm)
+python analyze_run.py finalize  --annotations annotations.jsonl --casebook casebook.jsonl --out whitebox_report.json
+#   → annotations(task_id/L1/L2/L3)→ canonical L2 + mechanism + module → 最终报告
+python analyze_run.py normalize --results results-<m>/results.jsonl --trajectory trajectory-<m>
+#   → 用修复后判定重写 results 的 passed/error_category(留 .raw 备份,零算力)
+python analyze_run.py audit     --results results-<m>/results.jsonl --trajectory trajectory-<m> \
+    --whitebox results-<m>/whitebox_report.json --out results-<m>/schema_audit.json
+#   → 口径自查:illegal∩whitebox=∅ / 假失败剔除 / mechanism==L2_TO_MECH / 无占位 L2
+python analyze_run.py selftest   # 分类逻辑回归自检
+```
+
+约定与白盒口径一致：**细粒度 L2/L3 需人工/AI 逐条判定**（参考 QSem/RIOT 也是 per-task 标注；`prelabel` 只自动标高置信子集，如编译期幻觉 `undefined_reference`/`hallucinated_api`、crash 空指针保护缺失候选），L1/mechanism/module 与报告生成全自动可复现。`agent.py` 判定已加固：`PROJECT EXECUTION SUCCESSFUL` 最优先(实过不算失败)、受控 panic 测试(Caught system error)不算崩溃、编译错只认"有编译错误且无测试运行"、test_failure 不依赖具体 `unit_test` 名。
+
 ## 数据集质量验证的完整流程
 
 **两轮验证**定义"可用任务"：oracle 注入必须通过（正确答案有效）+ 空实现注入必须失败（测试真验证函数）。
@@ -147,15 +182,29 @@ python whitebox.py
 - **双标签**：每条失败同时带 mechanism + module 两个平行维度
 - 指令遵循失败（`illegal_changes` 非空）不进 whitebox，在 results.jsonl 单独统计
 
+> ⚠️ **口径说明**：早期 runner 结果里 `test_not_executed`/`compile_error` 有误标（只查特定 `unit_test` 名、`FATAL ERROR`/`panic` 单词误匹配、受控 panic 测试误判）。agent.py 判定已加固；分析历史结果时用 `analyze_run.py classify` 得到修正 L1，并把"实过却判败"样本剔除（见 `results-deepseek-v4-pro/annotation/excluded_false_failures.jsonl`）。
+
 ## 配置
 
 ### API 配置（settings.json）
 
+基准测试在 Docker 容器里运行 Claude Code CLI，需要配置 LLM 的 API 地址和 Key。配置文件按以下优先级查找（见 `config.py` 的 `_default_claude_settings()`），也可用环境变量 `ZEPHYR_CLAUDE_SETTINGS` 强制指定任意配置文件：
+
+1. **`zephyr-claude/settings.json`** — benchmark 专用配置，**推荐使用**。它不在任何 `.claude/` 目录下，交互式 Claude 根本不会读取，因此改基准测试的模型/Key 完全不影响你日常使用（例如 cc-switch 的配置）；
+2. **`~/.claude/settings.json`** — 你的交互式 Claude 配置，作为回退项；
+3. WSL 下另会扫描 `/mnt/c/Users/*/.claude/settings.json`。
+
+配置方法（benchmark 专用）：
+
 ```bash
-cp ../claude_settings.template settings.json   # 填入真实 Key/模型
+cd zephyr-workspace
+cp claude_settings.template zephyr-claude/settings.json
+# 编辑 zephyr-claude/settings.json → 把 "sk-xxx" 替换成真实 Key
 ```
 
-agent.py 会把这个文件复制进容器内 Claude 的 `claude_home/settings.json` 并注入 `ANTHROPIC_*` 环境变量。
+该文件已被 `.gitignore` 排除（`**/settings.json`），不会提交到仓库。支持的 API 提供方（通过 `ANTHROPIC_BASE_URL` 配置）：DeepSeek `https://api.deepseek.com/anthropic`、Anthropic `https://api.anthropic.com`、任意 Anthropic 兼容代理。默认模型 `deepseek-v4-flash`——按需修改 `ANTHROPIC_MODEL`（连同 `ANTHROPIC_DEFAULT_*_MODEL` 一起改）。
+
+> 每次跑任务时 `agent.py` 会把选中的配置文件复制进容器内 Claude 的 `claude_home/settings.json`，并追加一个 `claude-on-completion` 钩子用于检测任务完成，同时把其中 `ANTHROPIC_*` 环境变量通过 `-e` 传入容器。改模型/Key 只需改配置文件，不用改代码。
 
 ### 环境变量
 
@@ -165,6 +214,8 @@ agent.py 会把这个文件复制进容器内 Claude 的 `claude_home/settings.j
 | `ZEPHYR_CLAUDE_NETWORK` | Docker 网络模式（默认 `host`） |
 | `ZEPHYR_SDK_INSTALL_DIR` | Zephyr SDK 路径（默认 `$HOME/zephyr-sdk-1.0.1`） |
 | `ZEPHYR_WORKSPACE_BASE` | 任务工作区目录（默认 `$HOME/.zephyr-workspaces`） |
+| `ZEPHYR_CLAUDE_RUN_NAME` | 运行名（如 `glm-5.1`）：输出到 `results-<name>/` + `trajectory-<name>/`，多模型跑互不覆盖 |
+| `ZEPHYR_CLAUDE_IDLE_TIMEOUT` | 空闲保险丝（秒，默认 1800=30 分钟）：容器内 Claude 连续无新输出则 kill（防 API 流静默挂起空等 8h） |
 
 ### 结果字段（results.jsonl）
 
@@ -180,6 +231,16 @@ agent.py 会把这个文件复制进容器内 Claude 的 `claude_home/settings.j
   "snapshot": { "git_head": "...", "claude_model": "...", "task": {...} }
 }
 ```
+
+## 口径与差异说明（对照整改清单）
+
+- **数据集 712 vs 885**：本 track 最终用 712 个经两轮验证的 GOOD 任务；清单 §二 stage-2 提到的 885 是 PR#3 原始集（未过滤弱任务）。如需 885，可用 `neg_control` + `filter_dataset.py` 重建/再筛。
+- **网络模式**：`config.py` 默认 `--network host`（与既有 track 的 `none` **不同**，属清单硬伤②）——原因是容器内 Claude Code CLI 需访问 LLM API；但是对齐了RIOT和Qsem中的处理方法。
+- **结果目录**：多模型用 `results-<run>/` + `trajectory-<run>/`（`ZEPHYR_CLAUDE_RUN_NAME`）。当前全量产物：`results-deepseek-v4-pro/`（712，whitebox 86 条）与 `results-glm/`（712，whitebox 27 条），各含 `annotation/`（casebook + annotations）与 `schema_audit.json`。
+- **通过率口径（约定）**：分母固定为 **712**；`illegal_modifications` 与 harness 层失败（`timeout`/`watchdog`/`api_error`/`exception`，即 FF）**均计入分母、按失败计**（保守口径，两模型同口径）。当前：deepseek 612/712（86.0%）、glm 669/712（94.0%）。
+- **机制统计口径**：机制/白盒统计**剔除 FF 与 illegal**（清单铁律①：`is_false_failure` 整条剔除、不计入失败；instruction-following 只由 `results.jsonl` 的 `illegal_changes` 提供、与白盒不相交）。即"通过率"与"机制统计"的分母不同，需在论文中分别注明。
+- **口径自查**：`analyze_run.py audit` 断言 `illegal ∩ whitebox = ∅`、白盒=判定出的真实失败集、假失败已剔、`mechanism == L2_TO_MECH[L2]`、无占位 L2；两模型均 `all_pass: true`。`analyze_run.py normalize` 用修复后判定重写 `results` 的 `passed/error_category`（留 `.raw` 备份，零算力）。
+- **schema/口径**：`whitebox_report.json` 字段与 QSem/RIOT 参考一致；mechanism 三分类由权威 `L2_TO_MECH` 派生；`instruction_following` 仅由 `results.jsonl` 的 `illegal_changes` 提供且与白盒不相交。
 
 ## 环境依赖
 
