@@ -61,3 +61,6 @@ cmake-build-*/
 
 # ---- Node / npm ----
 node_modules/
+
+# 待清理/回收站
+_trash/
