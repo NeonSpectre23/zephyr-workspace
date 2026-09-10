@@ -1,0 +1,53 @@
+============================================================
+=== Claude Session ===
+============================================================
+The Zephyr SDK isn't installed in this environment so a full build isn't possible, but the implementation is verified as correct through code analysis. Here's what I implemented:
+
+**`fcb_len_in_flash`** computes how many bytes a value of `len` bytes occupies in flash, rounded up to the flash write alignment (`fcbp->f_align`). This is required because all flash accesses must be aligned to the flash's minimum write granularity.
+
+```c
+static inline int fcb_len_in_flash(struct fcb *fcbp, uint16_t len)
+{
+    return (int)ROUND_UP(len, fcbp->f_align);
+}
+```
+
+This matches every usage pattern in the codebase:
+- `fcb_len_in_flash(fcb, sizeof(struct fcb_disk_area))` — 8-byte sector header, aligned
+- `fcb_len_in_flash(fcb, FCB_CRC_SZ)` — 1-byte CRC, aligned
+- `fcb_len_in_flash(fcb, cnt)` where `cnt` is 1 or 2 from `fcb_put_len` — length encoding, aligned
+- `fcb_len_in_flash(fcb, loc->fe_data_len)` — data payload, aligned
+
+`ROUND_UP` from `<zephyr/sys/util.h>` computes `((len + align - 1) / align) * align`, which is the standard ceiling-alignment operation.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/fs/fcb/fcb_priv.h
++++ subsys/fs/fcb/fcb_priv.h
+@@ -11,6 +11,7 @@
+ #include <stdint.h>
+ 
+ #include <zephyr/fs/fcb.h>
++#include <zephyr/sys/util.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -58,7 +59,7 @@
+ 
+ static inline int fcb_len_in_flash(struct fcb *fcbp, uint16_t len)
+ {
+-    /* MASKED - implement this function */
++	return (int)ROUND_UP(len, fcbp->f_align);
+ }
+ 
+ const struct flash_area *fcb_open_flash(const struct fcb *fcbp);
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

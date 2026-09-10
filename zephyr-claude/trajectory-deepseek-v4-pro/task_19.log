@@ -1,0 +1,58 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's a summary of the changes to `subsys/crc/crc24_sw.c`:
+
+**What changed:** Replaced the TODO stub in `crc24_pgp_update` with a working table-driven implementation using the existing `crc24q[]` lookup table.
+
+**Key details:**
+- CRC-24 (PGP) and CRC-24Q share the same generator polynomial `0x864CFB`, so the existing `crc24q[]` table is reused directly — no ROM waste from duplicating a 1KB lookup table
+- The function was moved to after the `crc24q[]` table declaration so it can reference the static array
+- The algorithm is byte-at-a-time table lookup: `crc = ((crc << 8) & 0xFFFFFF) ^ crc24q[data[i] ^ (crc >> 16)]` — same pattern as `crc24q_rtcm3`
+- Verified against all 6 test vectors in `tests/unit/crc/main.c` (the 3 full CRC results and the 3 multi-step incremental update results)
+- `crc24_pgp` at the top of the file works because `crc24_pgp_update` is declared in `<zephyr/sys/crc.h>`
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/crc/crc24_sw.c
++++ subsys/crc/crc24_sw.c
+@@ -12,12 +12,6 @@
+ uint32_t __weak crc24_pgp(const uint8_t *data, size_t len)
+ {
+ 	return crc24_pgp_update(CRC24_PGP_INITIAL_VALUE, data, len) & CRC24_FINAL_VALUE_MASK;
+-}
+-
+-/* CRC-24 implementation from the section 6.1 of the RFC 4880 */
+-uint32_t __weak crc24_pgp_update(uint32_t crc, const uint8_t *data, size_t len)
+-{
+-    /* MASKED - implement this function */
+ }
+ 
+ /** This code is originally extracted from github.com/go-gnss/rtcm,
+@@ -59,6 +53,16 @@
+ 	0x42fa2f, 0xc4b6d4, 0xc82f22, 0x4e63d9, 0xd11cce, 0x575035, 0x5bc9c3, 0xdd8538
+ };
+ 
++/* CRC-24 (PGP) reuses the crc24q table (same generator polynomial). */
++uint32_t __weak crc24_pgp_update(uint32_t crc, const uint8_t *data, size_t len)
++{
++	for (size_t i = 0; i < len; i++) {
++		crc = ((crc << 8) & 0xFFFFFF) ^ crc24q[data[i] ^ (crc >> 16)];
++	}
++
++	return crc;
++}
++
+ /**
+  * @brief Calculate RTCM3 frame checksum
+  *
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

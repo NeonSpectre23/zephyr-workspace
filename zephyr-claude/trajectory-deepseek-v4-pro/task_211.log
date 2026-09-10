@@ -1,0 +1,121 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is implemented. Here's the logic:
+
+1. **Reconstruct `timer_start_64`** — `timer_start` is stored as `uint32_t` (low 32 bits of the 64-bit uptime). We recover the full 64-bit value using the signed-difference trick: `now + (int64_t)(int32_t)(timer_start - (uint32_t)now)`, which correctly handles the 32-bit epoch wrap. This is the same technique used in `net_timeout_remaining` just below.
+
+2. **Add the total remaining duration** — `timer_timeout + wrap_counter * NET_TIMEOUT_MAX_VALUE` gives the milliseconds remaining from `timer_start` to expiration. Adding this to the reconstructed start time yields the absolute deadline.
+
+Both fields (`timer_timeout` and `wrap_counter`) are maintained by `net_timeout_evaluate()`, which is called periodically per the function's contract. The includes already present in the file (`zephyr/net/net_timeout.h` and `zephyr/sys_clock.h`) cover all types and macros used.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/net/ip/net_timeout.c
++++ subsys/net/ip/net_timeout.c
+@@ -44,7 +44,15 @@
+ int64_t net_timeout_deadline(const struct net_timeout *timeout,
+ 			     int64_t now)
+ {
+-    /* MASKED - implement this function */
++	int64_t timer_start_64;
++
++	timer_start_64 = now + (int64_t)(int32_t)(timeout->timer_start -
++						  (uint32_t)now);
++
++	return timer_start_64 +
++	       (int64_t)timeout->timer_timeout +
++	       (int64_t)((uint64_t)timeout->wrap_counter *
++			 (uint64_t)NET_TIMEOUT_MAX_VALUE);
+ }
+ 
+ uint32_t net_timeout_remaining(const struct net_timeout *timeout,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (8.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build
+-- west build: building application
+[1/7] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[3/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[4/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[5/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[6/7] Building C object CMakeFiles/testbinary.dir/main.c.obj
+[7/7] Linking C executable testbinary
+Running TESTSUITE net_timeout
+===================================================================
+START - test_basics
+ PASS - test_basics in 0.000 seconds
+===================================================================
+START - test_deadline
+ PASS - test_deadline in 0.000 seconds
+===================================================================
+START - test_evaluate_basic
+ PASS - test_evaluate_basic in 0.000 seconds
+===================================================================
+START - test_evaluate_whitebox
+
+    Assertion failed at /home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/main.c:351: net_timeout_test_evaluate_whitebox: net_timeout_deadline(&nto, now) not equal to deadline
+
+ at test function
+ FAIL - test_evaluate_whitebox in 0.000 seconds
+===================================================================
+START - test_nop
+ PASS - test_nop in 0.000 seconds
+===================================================================
+START - test_remaining
+ PASS - test_remaining in 0.000 seconds
+===================================================================
+START - test_set
+ PASS - test_set in 0.000 seconds
+===================================================================
+TESTSUITE net_timeout failed.
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE FAIL -  85.71% [net_timeout]: pass = 6, fail = 1, skip = 0, total = 7 duration = 0.000 seconds
+ - PASS - [net_timeout.test_basics] duration = 0.000 seconds
+ - PASS - [net_timeout.test_deadline] duration = 0.000 seconds
+ - PASS - [net_timeout.test_evaluate_basic] duration = 0.000 seconds
+ - FAIL - [net_timeout.test_evaluate_whitebox] duration = 0.000 seconds
+ - PASS - [net_timeout.test_nop] duration = 0.000 seconds
+ - PASS - [net_timeout.test_remaining] duration = 0.000 seconds
+ - PASS - [net_timeout.test_set] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION FAILED
+
+--- stderr ---
+Loading Zephyr module(s) (Zephyr base): unittest
+
+
+

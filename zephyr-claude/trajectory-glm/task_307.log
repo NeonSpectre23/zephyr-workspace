@@ -1,0 +1,43 @@
+============================================================
+=== Claude Session ===
+============================================================
+Done. The implementation follows the same pattern as `pm_policy_latency_request_add`:
+
+1. Store the callback in `req->cb`
+2. Acquire `latency_lock` spinlock
+3. Append `req->node` to the `latency_subs` list
+4. Release the spinlock
+
+This ensures the subscription list is accessed atomically, matching how `update_max_latency` iterates the list and how `pm_policy_latency_changed_unsubscribe` removes from it.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/pm/policy/policy_latency.c
++++ subsys/pm/policy/policy_latency.c
+@@ -91,7 +91,13 @@
+ void pm_policy_latency_changed_subscribe(struct pm_policy_latency_subscription *req,
+ 					 pm_policy_latency_changed_cb_t cb)
+ {
+-    /* MASKED - implement this function */
++	req->cb = cb;
++
++	k_spinlock_key_t key = k_spin_lock(&latency_lock);
++
++	sys_slist_append(&latency_subs, &req->node);
++
++	k_spin_unlock(&latency_lock, key);
+ }
+ 
+ void pm_policy_latency_changed_unsubscribe(struct pm_policy_latency_subscription *req)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

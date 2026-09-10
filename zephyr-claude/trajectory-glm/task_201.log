@@ -1,0 +1,40 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `net_buf_frag_insert` does:
+
+1. **Asserts** that both `parent` and `frag` are non-NULL (consistent with `net_buf_frag_del`, `net_buf_frag_add`, `net_buf_frag_last`, etc.)
+2. **Sets `frag->frags = parent->frags`** — the new fragment picks up whatever was after the parent, preserving the existing chain
+3. **Sets `parent->frags = frag`** — the parent now links to the new fragment
+
+This matches the documented contract: "Insert a new fragment into the buffer fragments list after the parent" with the caller transferring ownership of the fragment reference (no `net_buf_ref` call needed — the same pattern as `net_buf_frag_add`).
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/net_buf/buf.c
++++ lib/net_buf/buf.c
+@@ -569,7 +569,11 @@
+ 
+ void net_buf_frag_insert(struct net_buf *parent, struct net_buf *frag)
+ {
+-    /* MASKED - implement this function */
++    __ASSERT_NO_MSG(parent);
++    __ASSERT_NO_MSG(frag);
++
++    frag->frags = parent->frags;
++    parent->frags = frag;
+ }
+ 
+ struct net_buf *net_buf_frag_add(struct net_buf *head, struct net_buf *frag)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

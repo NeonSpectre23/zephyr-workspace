@@ -1,0 +1,61 @@
+============================================================
+=== Claude Session ===
+============================================================
+Both APIs are properly available:
+- `rb_insert` in `zephyr/sys/rb.h` (line 122)
+- `z_sched_wake` in `ksched.h` (line 237) — already included
+- `_current` is already used elsewhere in the file (lines 90, 93)
+- `k_yield()` is a standard Zephyr kernel API from `zephyr/kernel.h`
+
+The implementation is complete. Here's a summary of what `k_p4wq_submit` does:
+
+1. **Acquires the queue spinlock** for mutual exclusion
+2. **Detects resubmit** by checking if `item->thread == _current` (true when a handler resubmits its own work item)
+3. **Initializes the item** (`thread = NULL`, `queue = queue`)
+4. **Inserts into the rbtree** via `rb_insert` — the work is now queued by priority/deadline
+5. **Sets the requeued flag** on the current thread if resubmitting, so the worker loop doesn't try to remove the item from the active list (whose `dlnode` union was overwritten by `rbnode`)
+6. **Wakes a waiting worker** via `z_sched_wake` — if any threads are sleeping on the waitq, the highest-priority one is unpended and made ready
+7. **Releases the lock**
+8. **Yields** as a scheduling point, allowing a higher-priority worker to preempt immediately per the API contract
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/os/p4wq.c
++++ lib/os/p4wq.c
+@@ -226,7 +226,23 @@
+ 
+ void k_p4wq_submit(struct k_p4wq *queue, struct k_p4wq_work *item)
+ {
+-    /* MASKED - implement this function */
++	k_spinlock_key_t k = k_spin_lock(&queue->lock);
++	bool resubmit = (item->thread == _current);
++
++	item->thread = NULL;
++	item->queue = queue;
++
++	rb_insert(&queue->queue, &item->rbnode);
++
++	if (resubmit) {
++		thread_set_requeued(_current);
++	}
++
++	z_sched_wake(&queue->waitq, 0, NULL);
++
++	k_spin_unlock(&queue->lock, k);
++
++	k_yield();
+ }
+ 
+ bool k_p4wq_cancel(struct k_p4wq *queue, struct k_p4wq_work *item)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

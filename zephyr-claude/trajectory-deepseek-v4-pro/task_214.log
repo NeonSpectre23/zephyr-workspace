@@ -1,0 +1,119 @@
+============================================================
+=== Claude Session ===
+============================================================
+All 7 tests pass. Here's what was implemented:
+
+**`net_timeout_set`** at `subsys/net/ip/net_timeout.c:10` — converts `lifetime` (seconds) to milliseconds, then splits the total across two fields:
+- `timer_start` — records `now` as the reference timestamp (32-bit uptime in ms)
+- `wrap_counter` — number of full `NET_TIMEOUT_MAX_VALUE` chunks remaining beyond the current one
+- `timer_timeout` — milliseconds remaining in the current chunk (capped at `NET_TIMEOUT_MAX_VALUE`)
+
+The edge case where `total_ms` is an exact multiple of `NET_TIMEOUT_MAX_VALUE` is handled by converting to `timer_timeout = NET_TIMEOUT_MAX_VALUE` and decrementing the wrap counter, which avoids a double-decrement bug in `net_timeout_evaluate`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/net/ip/net_timeout.c
++++ subsys/net/ip/net_timeout.c
+@@ -11,7 +11,16 @@
+ 		     uint32_t lifetime,
+ 		     uint32_t now)
+ {
+-    /* MASKED - implement this function */
++	uint64_t total_ms = (uint64_t)lifetime * MSEC_PER_SEC;
++
++	timeout->timer_start = now;
++	timeout->wrap_counter = (uint32_t)(total_ms / NET_TIMEOUT_MAX_VALUE);
++	timeout->timer_timeout = (uint32_t)(total_ms % NET_TIMEOUT_MAX_VALUE);
++
++	if ((timeout->timer_timeout == 0U) && (timeout->wrap_counter > 0U)) {
++		timeout->timer_timeout = NET_TIMEOUT_MAX_VALUE;
++		timeout->wrap_counter--;
++	}
+ }
+ 
+ int64_t net_timeout_deadline(const struct net_timeout *timeout,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (7.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/net_timeout/build
+-- west build: building application
+[1/7] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[3/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[4/7] Building C object CMakeFiles/testbinary.dir/main.c.obj
+[5/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[6/7] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[7/7] Linking C executable testbinary
+Running TESTSUITE net_timeout
+===================================================================
+START - test_basics
+ PASS - test_basics in 0.000 seconds
+===================================================================
+START - test_deadline
+ PASS - test_deadline in 0.000 seconds
+===================================================================
+START - test_evaluate_basic
+ PASS - test_evaluate_basic in 0.000 seconds
+===================================================================
+START - test_evaluate_whitebox
+ PASS - test_evaluate_whitebox in 0.000 seconds
+===================================================================
+START - test_nop
+ PASS - test_nop in 0.000 seconds
+===================================================================
+START - test_remaining
+ PASS - test_remaining in 0.000 seconds
+===================================================================
+START - test_set
+ PASS - test_set in 0.000 seconds
+===================================================================
+TESTSUITE net_timeout succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [net_timeout]: pass = 7, fail = 0, skip = 0, total = 7 duration = 0.000 seconds
+ - PASS - [net_timeout.test_basics] duration = 0.000 seconds
+ - PASS - [net_timeout.test_deadline] duration = 0.000 seconds
+ - PASS - [net_timeout.test_evaluate_basic] duration = 0.000 seconds
+ - PASS - [net_timeout.test_evaluate_whitebox] duration = 0.000 seconds
+ - PASS - [net_timeout.test_nop] duration = 0.000 seconds
+ - PASS - [net_timeout.test_remaining] duration = 0.000 seconds
+ - PASS - [net_timeout.test_set] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr module(s) (Zephyr base): unittest
+
+
+

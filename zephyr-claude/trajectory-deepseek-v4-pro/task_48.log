@@ -1,0 +1,255 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation follows the same pattern as the existing `flash_area_read`, `flash_area_write`, and `flash_area_erase` functions:
+
+1. **Bounds checking** — validates both source and destination offsets/lengths against their respective flash area sizes using `is_in_flash_area_bounds()`, returning `-EINVAL` if out of range.
+2. **Delegation** — calls `flash_copy()` with the device-level offsets (`fa_off + offset`), which handles device readiness (`-ENODEV`), buffer validation, integer overflow, overlapping range detection, and the actual copy operation.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/storage/flash_map/flash_map.c
++++ subsys/storage/flash_map/flash_map.c
+@@ -86,7 +86,17 @@
+ 		    const struct flash_area *dst_fa, off_t dst_off,
+ 		    off_t len, uint8_t *buf, size_t buf_size)
+ {
+-    /* MASKED - implement this function */
++	if (!is_in_flash_area_bounds(src_fa, src_off, len)) {
++		return -EINVAL;
++	}
++
++	if (!is_in_flash_area_bounds(dst_fa, dst_off, len)) {
++		return -EINVAL;
++	}
++
++	return flash_copy(src_fa->fa_dev, src_fa->fa_off + src_off,
++			  dst_fa->fa_dev, dst_fa->fa_off + dst_off,
++			  len, buf, buf_size);
+ }
+ 
+ int flash_area_flatten(const struct flash_area *fa, off_t off, size_t len)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/app.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build
+-- west build: building application
+[1/117] Preparing syscall dependency handling
+
+[2/117] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/117] Generating misc/generated/syscalls_subdirs.trigger
+[4/117] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/117] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/117] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/117] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/117] Generating include/generated/zephyr/driver-validation.h
+[9/117] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/117] Generating ../../include/generated/zephyr/heap_constants.h
+[11/117] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/117] Generating include/generated/zephyr/offsets.h
+[13/117] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[16/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[17/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[18/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[19/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[20/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[25/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[26/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[27/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[28/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[29/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[30/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/117] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[36/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/stats/stats.c.obj
+[39/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[40/117] Building C object zephyr/CMakeFiles/zephyr.dir/drivers/flash/flash_util.c.obj
+[41/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[42/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[43/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[44/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_default.c.obj
+[45/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map_layout.c.obj
+[46/117] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[47/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[48/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[49/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[50/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[51/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[52/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[53/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[54/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[55/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[56/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[57/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[58/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[59/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[60/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[61/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[62/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[63/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[64/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[65/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[66/117] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[67/117] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_page_layout.c.obj
+[68/117] Building C object zephyr/drivers/flash/CMakeFiles/drivers__flash.dir/flash_simulator.c.obj
+[69/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[70/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[71/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[72/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[73/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[74/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[75/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[76/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[77/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[78/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[79/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[80/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[81/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[82/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[83/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[84/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[85/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[86/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[87/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[88/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[89/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[90/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[91/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[92/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[93/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[94/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[95/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[96/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[97/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[98/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[99/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[100/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[101/117] Linking C static library app/libapp.a
+[102/117] Linking C static library zephyr/arch/common/libarch__common.a
+[103/117] Generating linker_zephyr_pre0.cmd
+[104/117] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[105/117] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[106/117] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[107/117] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[108/117] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[109/117] Linking C static library zephyr/drivers/flash/libdrivers__flash.a
+[110/117] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[111/117] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[112/117] Linking C static library zephyr/kernel/libkernel.a
+[113/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/storage/flash_map/flash_map.c.obj
+[114/117] Linking C static library zephyr/libzephyr.a
+[115/117] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/storage/flash_map/build/zephyr/zephyr.elf for board: native_sim/native/64
+[116/117] Building native simulator runner, and linking final executable
+[117/117] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE flash_map
+===================================================================
+START - test_fixed_partition_node_macros
+ PASS - test_fixed_partition_node_macros in 0.000 seconds
+===================================================================
+START - test_fixed_subpartition_node_macros
+ PASS - test_fixed_subpartition_node_macros in 0.000 seconds
+===================================================================
+START - test_flash_area_copy
+ PASS - test_flash_area_copy in 0.000 seconds
+===================================================================
+START - test_flash_area_device_is_ready
+ PASS - test_flash_area_device_is_ready in 0.000 seconds
+===================================================================
+START - test_flash_area_disabled_device
+ PASS - test_flash_area_disabled_device in 0.000 seconds
+===================================================================
+START - test_flash_area_erase_and_flatten
+Flash area info:
+	pointer:	 0x73c4699fedd0
+	offset:	 479232
+	size:	 430080
+ PASS - test_flash_area_erase_and_flatten in 0.000 seconds
+===================================================================
+START - test_flash_area_erased_val
+ PASS - test_flash_area_erased_val in 0.000 seconds
+===================================================================
+START - test_flash_area_get_sectors
+ PASS - test_flash_area_get_sectors in 0.000 seconds
+===================================================================
+START - test_flash_area_sectors
+ PASS - test_flash_area_sectors in 0.000 seconds
+===================================================================
+START - test_parameter_overflows
+ PASS - test_parameter_overflows in 0.000 seconds
+===================================================================
+TESTSUITE flash_map succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [flash_map]: pass = 10, fail = 0, skip = 0, total = 10 duration = 0.000 seconds
+ - PASS - [flash_map.test_fixed_partition_node_macros] duration = 0.000 seconds
+ - PASS - [flash_map.test_fixed_subpartition_node_macros] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_copy] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_device_is_ready] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_disabled_device] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_erase_and_flatten] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_erased_val] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_get_sectors] duration = 0.000 seconds
+ - PASS - [flash_map.test_flash_area_sectors] duration = 0.000 seconds
+ - PASS - [flash_map.test_parameter_overflows] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

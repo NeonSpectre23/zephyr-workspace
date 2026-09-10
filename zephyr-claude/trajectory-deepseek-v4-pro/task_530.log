@@ -1,0 +1,322 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function mirrors `log_msg_get_package` — it writes the data length via the `len` out-parameter and returns a pointer to the data region, which sits immediately after the cbprintf package within `msg->data` (at offset `package_len` into the flexible array).
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/logging/log_msg.h
++++ include/zephyr/logging/log_msg.h
+@@ -850,7 +850,9 @@
+  */
+ static inline uint8_t *log_msg_get_data(struct log_msg *msg, size_t *len)
+ {
+-    /* MASKED - implement this function */
++	*len = msg->hdr.desc.data_len;
++
++	return msg->data + msg->hdr.desc.package_len;
+ }
+ 
+ /** @brief Get string package.
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build
+-- west build: building application
+[1/110] Preparing syscall dependency handling
+
+[2/110] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/110] Generating misc/generated/syscalls_subdirs.trigger
+[4/110] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/110] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/110] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/110] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/110] Generating include/generated/zephyr/driver-validation.h
+[9/110] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/110] Generating ../../include/generated/zephyr/heap_constants.h
+[11/110] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/110] Generating include/generated/zephyr/offsets.h
+[13/110] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[20/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[21/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[22/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[23/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[24/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[25/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[26/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[27/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[28/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[29/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[30/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[31/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[32/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/mpsc_pbuf.c.obj
+[33/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[34/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/110] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/110] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[44/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[45/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[46/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[50/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[51/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[52/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[53/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[54/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[60/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[61/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[62/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[63/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[64/110] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[65/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[66/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[67/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[68/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[69/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[70/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[71/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[72/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[73/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[74/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[75/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[76/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[77/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[78/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[79/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[80/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[81/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[82/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[83/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[84/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[85/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[86/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[87/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[88/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[89/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[90/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[92/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[93/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[94/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[95/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[96/110] Linking C static library zephyr/arch/common/libarch__common.a
+[97/110] Linking C static library app/libapp.a
+[98/110] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[99/110] Generating linker_zephyr_pre0.cmd
+[100/110] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[101/110] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[102/110] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[103/110] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[104/110] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[105/110] Linking C static library zephyr/libzephyr.a
+[106/110] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[107/110] Linking C static library zephyr/kernel/libkernel.a
+[108/110] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/logging/log_msg/build/zephyr/zephyr.elf for board: native_sim/native/64
+[109/110] Building native simulator runner, and linking final executable
+[110/110] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE log_msg
+===================================================================
+START - test_log_msg_0_args_msg
+Test string:0 args
+-----------------------printing message--------------------
+message 0x7d21713feaa8
+package len: 16, data len: 0
+04 00 00 00 00 00 00 00 9c 03 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713feba8
+package len: 16, data len: 0
+04 00 00 00 00 00 00 00 9c 03 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713feca8
+package len: 16, data len: 0
+04 00 00 00 00 00 00 00 9c 03 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+ PASS - test_log_msg_0_args_msg in 0.000 seconds
+===================================================================
+START - test_log_msg_fp
+ PASS - test_log_msg_fp in 0.000 seconds
+===================================================================
+START - test_log_msg_only_data
+-----------------------printing message--------------------
+message 0x7d21713fea98
+package len: 0, data len: 4
+
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713feb98
+package len: 0, data len: 4
+
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713fec98
+package len: 0, data len: 4
+
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+ PASS - test_log_msg_only_data in 0.000 seconds
+===================================================================
+START - test_log_msg_string_and_data
+-----------------------printing message--------------------
+message 0x7d21713fea98
+package len: 16, data len: 4
+04 00 00 00 00 00 00 00 ff 05 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713feb98
+package len: 16, data len: 4
+04 00 00 00 00 00 00 00 ff 05 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713fec98
+package len: 16, data len: 4
+04 00 00 00 00 00 00 00 ff 05 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+ PASS - test_log_msg_string_and_data in 0.000 seconds
+===================================================================
+START - test_log_msg_various_args
+Test string:%d %d %lld %p %lld %p
+-----------------------printing message--------------------
+message 0x7d21713fe998
+package len: 64, data len: 0
+10 00 00 00 00 00 00 00 00 04 41 00 00 00 00 00 fb ff ff ff 00 00 00 00 45 00 00 00 00 00 00 00 12 34 56 34 12 34 12 00 f8 ec 3f 71 21 7d 00 00 12 34 56 34 12 34 12 00 50 1b 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713fea98
+package len: 64, data len: 0
+10 00 00 00 00 00 00 00 00 04 41 00 00 00 00 00 fb ff ff ff 00 00 00 00 45 00 00 00 00 00 00 00 12 34 56 34 12 34 12 00 f8 ec 3f 71 21 7d 00 00 12 34 56 34 12 34 12 00 50 1b 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+-----------------------printing message--------------------
+message 0x7d21713feb98
+package len: 64, data len: 0
+10 00 00 00 00 00 00 00 00 04 41 00 00 00 00 00 fb ff ff ff 00 00 00 00 45 00 00 00 00 00 00 00 12 34 56 34 12 34 12 00 f8 ec 3f 71 21 7d 00 00 12 34 56 34 12 34 12 00 50 1b 41 00 00 00 00 00 
+source: 0x7b
+timestamp: 287454020
+-------------------end of printing message-----------------
+ PASS - test_log_msg_various_args in 0.000 seconds
+===================================================================
+START - test_mode_size_data_only
+ PASS - test_mode_size_data_only in 0.000 seconds
+===================================================================
+START - test_mode_size_plain_str_data
+ PASS - test_mode_size_plain_str_data in 0.000 seconds
+===================================================================
+START - test_mode_size_plain_string
+ PASS - test_mode_size_plain_string in 0.000 seconds
+===================================================================
+START - test_mode_size_str_with_2strings
+ PASS - test_mode_size_str_with_2strings in 0.000 seconds
+===================================================================
+START - test_mode_size_str_with_strings
+ PASS - test_mode_size_str_with_strings in 0.000 seconds
+===================================================================
+START - test_saturate
+ PASS - test_saturate in 0.000 seconds
+===================================================================
+TESTSUITE log_msg succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [log_msg]: pass = 11, fail = 0, skip = 0, total = 11 duration = 0.000 seconds
+ - PASS - [log_msg.test_log_msg_0_args_msg] duration = 0.000 seconds
+ - PASS - [log_msg.test_log_msg_fp] duration = 0.000 seconds
+ - PASS - [log_msg.test_log_msg_only_data] duration = 0.000 seconds
+ - PASS - [log_msg.test_log_msg_string_and_data] duration = 0.000 seconds
+ - PASS - [log_msg.test_log_msg_various_args] duration = 0.000 seconds
+ - PASS - [log_msg.test_mode_size_data_only] duration = 0.000 seconds
+ - PASS - [log_msg.test_mode_size_plain_str_data] duration = 0.000 seconds
+ - PASS - [log_msg.test_mode_size_plain_string] duration = 0.000 seconds
+ - PASS - [log_msg.test_mode_size_str_with_2strings] duration = 0.000 seconds
+ - PASS - [log_msg.test_mode_size_str_with_strings] duration = 0.000 seconds
+ - PASS - [log_msg.test_saturate] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

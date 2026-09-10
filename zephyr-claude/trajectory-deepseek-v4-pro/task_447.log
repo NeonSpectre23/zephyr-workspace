@@ -1,0 +1,356 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is implemented and looks correct. Here's a summary of what `usbh_req_setup` does:
+
+1. **Derives the endpoint direction** from `bmRequestType` bit 7 (0x00 for OUT, 0x80 for IN)
+2. **Builds the USB setup packet** with `sys_cpu_to_le16()` for multi-byte fields (USB wire format is little-endian)
+3. **Allocates a UHC transfer** via `usbh_xfer_alloc` with the `ch9_req_cb` completion callback
+4. **Copies the setup packet** into `xfer->setup_pkt` (the 8-byte buffer the UHC reads)
+5. **Attaches the data buffer** if one is provided (`usbh_xfer_buf_add`)
+6. **Applies the `no_status` flag** from the global `ctrl_req_no_status` toggle
+7. **Resets and waits** on the `ch9_req_sync` semaphore after enqueuing (`k_sem_take` with `SETUP_REQ_TIMEOUT`)
+8. **Handles timeout** by dequeuing (which triggers `ch9_req_cb` with `-ECONNRESET`), or freeing manually if dequeue fails
+9. **Returns `xfer->err`** from the completion callback on success
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/usb/host/usbh_ch9.c
++++ subsys/usb/host/usbh_ch9.c
+@@ -55,7 +55,66 @@
+ 		   const uint16_t wLength,
+ 		   struct net_buf *const buf)
+ {
+-    /* MASKED - implement this function */
++	struct usb_setup_packet setup;
++	struct uhc_transfer *xfer;
++	uint8_t ep;
++	int ret;
++
++	/* Endpoint direction matches the request direction bit */
++	ep = bmRequestType & 0x80U;
++
++	/* Build setup packet in USB little-endian wire format */
++	setup.bmRequestType = bmRequestType;
++	setup.bRequest = bRequest;
++	setup.wValue = sys_cpu_to_le16(wValue);
++	setup.wIndex = sys_cpu_to_le16(wIndex);
++	setup.wLength = sys_cpu_to_le16(wLength);
++
++	/* Allocate a UHC transfer for this control request */
++	xfer = usbh_xfer_alloc(udev, ep, ch9_req_cb, NULL);
++	if (xfer == NULL) {
++		return -ENOMEM;
++	}
++
++	/* Copy the 8-byte setup packet into the transfer */
++	memcpy(xfer->setup_pkt, &setup, sizeof(struct usb_setup_packet));
++
++	/* Attach data buffer, if any */
++	if (buf != NULL) {
++		ret = usbh_xfer_buf_add(udev, xfer, buf);
++		if (ret != 0) {
++			usbh_xfer_free(udev, xfer);
++			return ret;
++		}
++	}
++
++	/* Apply no_status flag if configured by the caller */
++	xfer->no_status = ctrl_req_no_status;
++
++	/* Reset completion semaphore before enqueue */
++	k_sem_reset(&ch9_req_sync);
++
++	/* Submit the transfer to the UHC */
++	ret = usbh_xfer_enqueue(udev, xfer);
++	if (ret != 0) {
++		usbh_xfer_free(udev, xfer);
++		return ret;
++	}
++
++	/* Wait for transfer completion */
++	if (k_sem_take(&ch9_req_sync, K_MSEC(SETUP_REQ_TIMEOUT)) != 0) {
++		/* Transfer timed out, attempt to cancel */
++		ret = usbh_xfer_dequeue(udev, xfer);
++		if (ret != 0) {
++			/* Dequeue failed, free the transfer manually */
++			usbh_xfer_free(udev, xfer);
++		}
++
++		return -ETIMEDOUT;
++	}
++
++	/* Return the transfer result from the completion callback */
++	return xfer->err;
+ }
+ 
+ int usbh_req_desc(struct usb_device *const udev,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/boards/native_sim_64.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/prj.conf'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/boards/native_sim_64.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build
+-- west build: building application
+[1/144] Preparing syscall dependency handling
+
+[2/144] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/144] Generating misc/generated/syscalls_subdirs.trigger
+[4/144] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/144] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/144] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/144] Generating include/generated/zephyr/driver-validation.h
+[8/144] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/144] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/144] Generating ../../include/generated/zephyr/heap_constants.h
+[11/144] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/144] Generating include/generated/zephyr/offsets.h
+[13/144] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[20/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[21/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[22/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[23/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[24/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[25/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/144] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[35/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[36/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/144] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/144] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[50/144] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[51/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[60/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_ch9.c.obj
+[64/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_core.c.obj
+[65/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[66/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_device.c.obj
+[67/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_desc.c.obj
+[68/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_init.c.obj
+[69/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_config.c.obj
+[70/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_class.c.obj
+[71/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_interface.c.obj
+[72/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/class/loopback.c.obj
+[73/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_class.c.obj
+[74/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_endpoint.c.obj
+[75/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_msg.c.obj
+[76/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_api.c.obj
+[77/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj
+[78/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_core.c.obj
+[79/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_desc.c.obj
+[80/144] Building C object zephyr/drivers/usb/udc/CMakeFiles/drivers__usb__udc.dir/udc_common.c.obj
+[81/144] Building C object zephyr/drivers/usb/uhc/CMakeFiles/drivers__usb__uhc.dir/uhc_common.c.obj
+[82/144] Building C object zephyr/drivers/usb/udc/CMakeFiles/drivers__usb__udc.dir/udc_virtual.c.obj
+[83/144] Building C object zephyr/drivers/usb/uhc/CMakeFiles/drivers__usb__uhc.dir/uhc_virtual.c.obj
+[84/144] Building C object zephyr/drivers/usb/uvb/CMakeFiles/drivers__usb__uvb.dir/uvb.c.obj
+[85/144] Building C object zephyr/drivers/usb/common/buf/CMakeFiles/drivers__usb__common__buf.dir/usb_buf.c.obj
+[86/144] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[87/144] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_weak_impl.c.obj
+[88/144] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_native.c.obj
+[89/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[90/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[91/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[92/144] Linking C static library app/libapp.a
+[93/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[94/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[95/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[96/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[97/144] Generating linker_zephyr_pre0.cmd
+[98/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[99/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[100/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[101/144] Linking C static library zephyr/arch/common/libarch__common.a
+[102/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[103/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[104/144] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[105/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[106/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[107/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[108/144] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[109/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[110/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[111/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[112/144] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[113/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[114/144] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[115/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[116/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[117/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[118/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[119/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[120/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[121/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[122/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[123/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[124/144] Linking C static library zephyr/libzephyr.a
+[125/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[126/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[127/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[128/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[129/144] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[130/144] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[131/144] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[132/144] Linking C static library zephyr/subsys/usb/device_next/libsubsys__usb__device_next.a
+[133/144] Linking C static library zephyr/drivers/usb/uvb/libdrivers__usb__uvb.a
+[134/144] Linking C static library zephyr/drivers/usb/udc/libdrivers__usb__udc.a
+[135/144] Linking C static library zephyr/drivers/usb/common/buf/libdrivers__usb__common__buf.a
+[136/144] Linking C static library zephyr/drivers/usb/uhc/libdrivers__usb__uhc.a
+[137/144] Linking C static library zephyr/drivers/hwinfo/libdrivers__hwinfo.a
+[138/144] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[139/144] Linking C static library zephyr/kernel/libkernel.a
+[140/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_ch9.c.obj
+[141/144] Linking C static library zephyr/subsys/usb/host/libsubsys__usb__host.a
+[142/144] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/zephyr.elf for board: native_sim/native/64
+[143/144] Building native simulator runner, and linking final executable
+[144/144] Running utility command for native_runner_executable
+[00:00:00.000,000] [0m<inf> udc_vrt: Device 0x428090 (max. speed 2) belongs to uhc_vrt0[0m
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE device_next
+===================================================================
+[00:00:00.050,001] [0m<inf> usb_test: Host controller enabled[0m
+[00:00:00.050,001] [0m<inf> usbd_init: bNumInterfaces 3 wTotalLength 109[0m
+[00:00:00.050,001] [0m<inf> usbd_init: bNumInterfaces 3 wTotalLength 109[0m
+[00:00:00.050,001] [0m<inf> usbd_core: Actual device speed 2[0m
+[00:00:00.050,001] [0m<inf> usb_test: Device support enabled[0m
+[00:00:00.103,002] [0m<inf> usbh_dev: New device with address 1 state 2[0m
+[00:00:00.105,002] [0m<inf> usb_loopback: Enable loopback_0[0m
+[00:00:00.106,002] [0m<inf> usbh_dev: Configuration 1 bNumInterfaces 3[0m
+START - test_control_nodata
+[00:00:00.260,002] [1;31m<err> uhc: Failed to allocate transfer[0m
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/usb/device_next/src/main.c:269: device_next_test_control_nodata: (err not equal to 0)
+Transfer status is an error
+ FAIL - test_control_nodata in 0.010 seconds
+===================================================================
+START - test_get_configuration
+[00:00:00.260,002] [1;31m<err> uhc: Failed to allocate transfer[0m
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/usb/device_next/src/main.c:322: device_next_test_get_configuration: (err not equal to 0)
+Transfer status is an error
+ FAIL - test_get_configuration in 0.000 seconds
+===================================================================
+START - test_get_desc_string
+[00:00:00.260,002] [1;31m<err> uhc: Failed to allocate transfer[0m
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/usb/device_next/src/main.c:96: device_next_test_get_desc_string: (err not equal to 0)
+Transfer status is an error
+ FAIL - test_get_desc_string in 0.000 seconds
+===================================================================
+START - test_set_interface
+[00:00:00.260,002] [1;31m<err> uhc: Failed to allocate transfer[0m
+ PASS - test_set_interface in 0.000 seconds
+===================================================================
+START - test_vendor_control_in
+[00:00:00.260,002] [1;31m<err> uhc: Failed to allocate transfer[0m
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/usb/device_next/src/main.c:144: device_next_test_vendor_control_in: (err not equal to 0)
+Transfer status is an error
+ FAIL - test_vendor_control_in in 0.000 seconds
+===================================================================
+START - test_vendor_control_out
+[00:00:00.260,002] [1;31m<err> uhc: Failed to allocate transfer[0m
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/usb/device_next/src/main.c:206: device_next_test_vendor_control_out: (err not equal to 0)
+Transfer status is an error
+ FAIL - test_vendor_control_out in 0.000 seconds
+===================================================================
+TESTSUITE device_next failed.
+[00:00:00.260,002] [0m<inf> usb_loopback: Transfer ep 0x81, len 1024 cancelled[0m
+[00:00:00.260,002] [1;31m<err> usb_loopback: Failed to enqueue buffer[0m
+[00:00:00.260,002] [0m<inf> usb_loopback: Transfer ep 0x01, len 0 cancelled[0m
+[00:00:00.260,002] [1;31m<err> usb_loopback: Failed to enqueue buffer[0m
+[00:00:00.260,002] [0m<inf> usb_loopback: Disable loopback_0[0m
+[00:00:00.260,002] [0m<inf> usb_test: Device support disabled[0m
+[00:00:00.260,002] [0m<inf> usb_test: Host controller disabled[0m
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE FAIL -  16.67% [device_next]: pass = 1, fail = 5, skip = 0, total = 6 duration = 0.010 seconds
+ - FAIL - [device_next.test_control_nodata] duration = 0.010 seconds
+ - FAIL - [device_next.test_get_configuration] duration = 0.000 seconds
+ - FAIL - [device_next.test_get_desc_string] duration = 0.000 seconds
+ - PASS - [device_next.test_set_interface] duration = 0.000 seconds
+ - FAIL - [device_next.test_vendor_control_in] duration = 0.000 seconds
+ - FAIL - [device_next.test_vendor_control_out] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION FAILED
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

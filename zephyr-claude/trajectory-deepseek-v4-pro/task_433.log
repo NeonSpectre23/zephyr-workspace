@@ -1,0 +1,459 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `usbd_shutdown` does:
+
+1. **Precondition check**: Returns `-EPERM` if not initialized (matching `usbd_enable`'s pattern)
+2. **Locks** the device mutex
+3. **Frees the preallocated SETUP buffer** via `usbd_free_preallocated()` — per the comment at line 279-280, this buffer is kept across `udc_disable()`/`udc_enable()` cycles and only freed on shutdown
+4. **Calls `usbd_device_shutdown_core()`** to clean up classes, descriptors, vendor requests, and shut down the UDC driver
+5. **Clears `status.initialized`** flag
+6. **Unlocks** and returns the result
+
+The function follows the same lock/unlock and error-handling patterns as `usbd_init` and `usbd_disable` in the same file. All identifiers used are declared in `usbd_device.h` (the internal header included at line 10) or defined earlier in the same file.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/usb/device_next/usbd_device.c
++++ subsys/usb/device_next/usbd_device.c
+@@ -384,7 +384,27 @@
+ 
+ int usbd_shutdown(struct usbd_context *const uds_ctx)
+ {
+-    /* MASKED - implement this function */
++	int ret;
++
++	if (!usbd_is_initialized(uds_ctx)) {
++		LOG_WRN("USB device support is not initialized");
++		return -EPERM;
++	}
++
++	usbd_device_lock(uds_ctx);
++
++	usbd_free_preallocated(uds_ctx);
++
++	ret = usbd_device_shutdown_core(uds_ctx);
++	if (ret) {
++		LOG_ERR("Failed to shutdown USB device core, %d", ret);
++	}
++
++	uds_ctx->status.initialized = false;
++
++	usbd_device_unlock(uds_ctx);
++
++	return ret;
+ }
+ 
+ bool usbd_can_detect_vbus(struct usbd_context *const uds_ctx)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Found devicetree overlay: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/boards/native_sim_64.overlay
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/prj.conf'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/boards/native_sim_64.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build
+-- west build: building application
+[1/144] Preparing syscall dependency handling
+
+[2/144] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/144] Generating misc/generated/syscalls_subdirs.trigger
+[4/144] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/144] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/144] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/144] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/144] Generating include/generated/zephyr/driver-validation.h
+[9/144] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/144] Generating ../../include/generated/zephyr/heap_constants.h
+[11/144] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/144] Generating include/generated/zephyr/offsets.h
+[13/144] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[20/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[21/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[22/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[23/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[25/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/144] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/144] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/144] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/144] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[47/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/144] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/144] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[50/144] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[51/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/144] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[58/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[59/144] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[60/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[63/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_desc.c.obj
+[64/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_ch9.c.obj
+[65/144] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[66/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_core.c.obj
+[67/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_init.c.obj
+[68/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_config.c.obj
+[69/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_class.c.obj
+[70/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_endpoint.c.obj
+[71/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_msg.c.obj
+[72/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/class/loopback.c.obj
+[73/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_interface.c.obj
+[74/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_ch9.c.obj
+[75/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_class.c.obj
+[76/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_core.c.obj
+[77/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_api.c.obj
+[78/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_device.c.obj
+[79/144] Building C object zephyr/subsys/usb/host/CMakeFiles/subsys__usb__host.dir/usbh_desc.c.obj
+[80/144] Linking C static library app/libapp.a
+[81/144] Building C object zephyr/drivers/usb/udc/CMakeFiles/drivers__usb__udc.dir/udc_common.c.obj
+[82/144] Building C object zephyr/drivers/usb/udc/CMakeFiles/drivers__usb__udc.dir/udc_virtual.c.obj
+[83/144] Building C object zephyr/drivers/usb/uhc/CMakeFiles/drivers__usb__uhc.dir/uhc_common.c.obj
+[84/144] Building C object zephyr/drivers/usb/uhc/CMakeFiles/drivers__usb__uhc.dir/uhc_virtual.c.obj
+[85/144] Building C object zephyr/drivers/usb/uvb/CMakeFiles/drivers__usb__uvb.dir/uvb.c.obj
+[86/144] Building C object zephyr/drivers/usb/common/buf/CMakeFiles/drivers__usb__common__buf.dir/usb_buf.c.obj
+[87/144] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[88/144] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_native.c.obj
+[89/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[90/144] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[91/144] Building C object zephyr/drivers/hwinfo/CMakeFiles/drivers__hwinfo.dir/hwinfo_weak_impl.c.obj
+[92/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[93/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[94/144] Generating linker_zephyr_pre0.cmd
+[95/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[96/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[97/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[98/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[99/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[100/144] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[101/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[102/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[103/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[104/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[105/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[106/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[107/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[108/144] Linking C static library zephyr/arch/common/libarch__common.a
+[109/144] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[110/144] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[111/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[112/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[113/144] Linking C static library zephyr/libzephyr.a
+[114/144] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[115/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[116/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[117/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[118/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[119/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[120/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[121/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[122/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[123/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[124/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[125/144] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[126/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[127/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[128/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[129/144] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[130/144] Linking C static library zephyr/drivers/usb/udc/libdrivers__usb__udc.a
+[131/144] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[132/144] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[133/144] Linking C static library zephyr/drivers/usb/uvb/libdrivers__usb__uvb.a
+[134/144] Linking C static library zephyr/drivers/usb/uhc/libdrivers__usb__uhc.a
+[135/144] Linking C static library zephyr/drivers/usb/common/buf/libdrivers__usb__common__buf.a
+[136/144] Linking C static library zephyr/drivers/hwinfo/libdrivers__hwinfo.a
+[137/144] Linking C static library zephyr/subsys/usb/host/libsubsys__usb__host.a
+[138/144] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[139/144] Linking C static library zephyr/kernel/libkernel.a
+[140/144] Building C object zephyr/subsys/usb/device_next/CMakeFiles/subsys__usb__device_next.dir/usbd_device.c.obj
+[141/144] Linking C static library zephyr/subsys/usb/device_next/libsubsys__usb__device_next.a
+[142/144] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/usb/device_next/build/zephyr/zephyr.elf for board: native_sim/native/64
+[143/144] Building native simulator runner, and linking final executable
+[144/144] Running utility command for native_runner_executable
+[00:00:00.000,000] [0m<inf> udc_vrt: Device 0x427090 (max. speed 2) belongs to uhc_vrt0[0m
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE device_next
+===================================================================
+[00:00:00.050,001] [0m<inf> usb_test: Host controller enabled[0m
+[00:00:00.050,001] [0m<inf> usbd_init: bNumInterfaces 3 wTotalLength 109[0m
+[00:00:00.050,001] [0m<inf> usbd_init: bNumInterfaces 3 wTotalLength 109[0m
+[00:00:00.050,001] [0m<inf> usbd_core: Actual device speed 2[0m
+[00:00:00.050,001] [0m<inf> usb_test: Device support enabled[0m
+[00:00:00.103,002] [0m<inf> usbh_dev: New device with address 1 state 2[0m
+[00:00:00.105,002] [0m<inf> usb_loopback: Enable loopback_0[0m
+[00:00:00.106,002] [0m<inf> usbh_dev: Configuration 1 bNumInterfaces 3[0m
+START - test_control_nodata
+ PASS - test_control_nodata in 0.064 seconds
+===================================================================
+START - test_get_configuration
+ PASS - test_get_configuration in 0.001 seconds
+===================================================================
+START - test_get_desc_string
+ PASS - test_get_desc_string in 0.003 seconds
+===================================================================
+START - test_set_interface
+[00:00:00.319,002] [0m<inf> usbd_ch9: Interface or alternate does not exist[0m
+[00:00:00.319,002] [0m<inf> usbd_ch9: protocol error:[0m
+[00:00:00.319,002] [0m<inf> usbd_ch9: setup:
+                                   01 0b 01 00 00 00 00 00                          |........         [0m
+ PASS - test_set_interface in 0.001 seconds
+===================================================================
+START - test_vendor_control_in
+[00:00:00.320,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.321,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.322,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.323,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.324,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.325,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.326,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.327,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.328,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.329,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.330,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.331,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.332,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.333,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.334,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.335,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.336,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.337,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.338,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.339,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.340,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.341,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.342,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.343,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.344,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.345,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.346,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.347,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.348,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.349,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.350,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.351,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.352,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.353,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.354,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.355,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.356,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.357,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.358,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.359,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.360,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.361,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.362,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.363,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.364,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.365,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.366,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.367,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.368,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.369,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.370,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.371,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.372,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.373,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.374,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.375,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.376,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.377,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.378,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.379,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.380,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.381,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.382,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.383,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.384,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.385,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.386,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.387,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.388,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.389,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.390,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.391,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.392,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.393,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.394,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.395,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.396,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.397,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.398,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.399,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.400,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.401,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.402,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.403,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.404,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.405,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.406,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.407,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.408,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.409,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.410,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.411,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.412,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.413,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.414,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+[00:00:00.415,002] [1;33m<wrn> usb_loopback: Device-to-Host, wLength 64 | 64[0m
+ PASS - test_vendor_control_in in 0.096 seconds
+===================================================================
+START - test_vendor_control_out
+[00:00:00.416,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.417,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.418,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.419,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.420,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.421,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.422,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.423,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.424,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.425,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.426,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.427,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.428,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.429,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.430,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.431,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.432,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.433,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.434,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.435,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.436,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.437,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.438,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.439,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.440,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.441,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.442,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.443,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.444,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.445,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.446,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.447,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.448,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.449,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.450,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.451,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.452,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.453,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.454,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.455,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.456,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.457,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.458,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.459,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.460,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.461,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.462,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.463,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.496,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.497,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.498,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.499,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.500,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.501,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.502,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.503,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.504,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.505,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.506,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.507,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.508,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.509,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.510,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+[00:00:00.511,002] [1;33m<wrn> usb_loopback: Host-to-Device, wLength 64 | 64[0m
+ PASS - test_vendor_control_out in 0.096 seconds
+===================================================================
+TESTSUITE device_next succeeded
+[00:00:00.511,002] [0m<inf> usb_loopback: Transfer ep 0x81, len 1024 cancelled[0m
+[00:00:00.511,002] [1;31m<err> usb_loopback: Failed to enqueue buffer[0m
+[00:00:00.511,002] [0m<inf> usb_loopback: Transfer ep 0x01, len 0 cancelled[0m
+[00:00:00.511,002] [1;31m<err> usb_loopback: Failed to enqueue buffer[0m
+[00:00:00.511,002] [0m<inf> usb_loopback: Disable loopback_0[0m
+[00:00:00.511,002] [0m<inf> usb_test: Device support disabled[0m
+[00:00:00.511,002] [0m<inf> usb_test: Host controller disabled[0m
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [device_next]: pass = 6, fail = 0, skip = 0, total = 6 duration = 0.261 seconds
+ - PASS - [device_next.test_control_nodata] duration = 0.064 seconds
+ - PASS - [device_next.test_get_configuration] duration = 0.001 seconds
+ - PASS - [device_next.test_get_desc_string] duration = 0.003 seconds
+ - PASS - [device_next.test_set_interface] duration = 0.001 seconds
+ - PASS - [device_next.test_vendor_control_in] duration = 0.096 seconds
+ - PASS - [device_next.test_vendor_control_out] duration = 0.096 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

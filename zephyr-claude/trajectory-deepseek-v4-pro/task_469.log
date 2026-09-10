@@ -1,0 +1,51 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is implemented. Here's what it does:
+
+1. **NULL/empty check** — returns `NULL` for `NULL` or `""` input (matching test expectations)
+2. **Iterates all channels** — uses `STRUCT_SECTION_FOREACH(zbus_channel, chan)` (same pattern as `zbus_chan_from_id`)
+3. **String comparison** — compares `name` with `chan->name` using `strcmp`
+4. **Returns match or NULL** — returns the matching channel pointer, or `NULL` if not found
+
+I also added `#include <string.h>` since the file didn't previously have it. The function is guarded by `#if defined(CONFIG_ZBUS_CHANNEL_NAME)` and follows the same conventions as the existing `zbus_chan_from_id`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/zbus/zbus.c
++++ subsys/zbus/zbus.c
+@@ -10,6 +10,7 @@
+ #include <zephyr/sys/check.h>
+ #include <zephyr/sys/iterable_sections.h>
+ #include <zephyr/sys/printk.h>
++#include <string.h>
+ #include <zephyr/zbus/zbus.h>
+ LOG_MODULE_REGISTER(zbus, CONFIG_ZBUS_LOG_LEVEL);
+ 
+@@ -160,7 +161,15 @@
+ 
+ const struct zbus_channel *zbus_chan_from_name(const char *name)
+ {
+-    /* MASKED - implement this function */
++	if (name == NULL || name[0] == '\0') {
++		return NULL;
++	}
++	STRUCT_SECTION_FOREACH(zbus_channel, chan) {
++		if (strcmp(name, chan->name) == 0) {
++			return chan;
++		}
++	}
++	return NULL;
+ }
+ 
+ #endif /* CONFIG_ZBUS_CHANNEL_NAME */
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

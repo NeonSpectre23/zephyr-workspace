@@ -1,0 +1,278 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `gnss_rtk_decoder_frame_get` does:
+
+1. **Input validation**: Returns `-ENOENT` if any pointer is NULL or the buffer is too small for a minimum RTCM3 frame.
+
+2. **Scan loop**: Iterates through the buffer looking for the sync byte `0xD3`. Once found, reads the 2-byte big-endian header using `sys_get_be16` (safe for unaligned access) and extracts the 10-bit payload length via the existing `RTCM3_FRAME_PAYLOAD_SZ` macro.
+
+3. **Bounds check**: Verifies that the full frame (sync + header + payload + 3-byte CRC) fits within the buffer before proceeding.
+
+4. **CRC validation**: Uses Zephyr's `crc24q_rtcm3()` function, which returns 0 when the CRC-24Q checksum embedded in the frame matches the computed value over the entire frame.
+
+5. **Output**: On success, sets `*data` to point at the frame start within the buffer, `*data_len` to the total frame size, and returns 0. Returns `-ENOENT` if no valid frame is found.
+
+The function uses only the existing `#include`d headers and macros already defined in the file, with no new dependencies.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/gnss/rtk/protocol/rtcm3.c
++++ subsys/gnss/rtk/protocol/rtcm3.c
+@@ -31,5 +31,46 @@
+ int gnss_rtk_decoder_frame_get(uint8_t *buf, size_t buf_len,
+ 			       uint8_t **data, size_t *data_len)
+ {
+-    /* MASKED - implement this function */
++	size_t i;
++
++	if (buf == NULL || data == NULL || data_len == NULL) {
++		return -ENOENT;
++	}
++
++	/* Need at least the minimum frame size */
++	if (buf_len < RTCM3_FRAME_OVERHEAD) {
++		return -ENOENT;
++	}
++
++	/* Scan buffer for a valid RTCM3 frame */
++	for (i = 0; i <= buf_len - RTCM3_FRAME_OVERHEAD; i++) {
++		uint16_t hdr;
++		uint16_t payload_len;
++		size_t frame_len;
++
++		if (buf[i] != RTCM3_SYNC_BYTE) {
++			continue;
++		}
++
++		/* Parse 2-byte big-endian header for payload length */
++		hdr = sys_get_be16(&buf[i + RTCM3_FRAME_SYNC_SZ]);
++		payload_len = RTCM3_FRAME_PAYLOAD_SZ(hdr);
++		frame_len = RTCM3_FRAME_SZ(payload_len);
++
++		/* Verify complete frame is in the buffer */
++		if (frame_len > buf_len - i) {
++			continue;
++		}
++
++		/* Validate CRC-24Q (returns 0 when checksum matches) */
++		if (crc24q_rtcm3(&buf[i], frame_len) != 0) {
++			continue;
++		}
++
++		*data = &buf[i];
++		*data_len = frame_len;
++		return 0;
++	}
++
++	return -ENOENT;
+ }
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build
+-- west build: building application
+[1/121] Preparing syscall dependency handling
+
+[2/121] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/121] Generating misc/generated/syscalls_subdirs.trigger
+[4/121] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/121] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/121] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/121] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[8/121] Generating include/generated/zephyr/driver-validation.h
+[9/121] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/121] Generating ../../include/generated/zephyr/heap_constants.h
+[11/121] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/121] Generating include/generated/zephyr/offsets.h
+[13/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[14/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[15/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[16/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[19/121] Building C object CMakeFiles/app.dir/src/main.c.obj
+[20/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/121] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/121] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/121] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/121] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/121] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/121] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/121] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/121] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[56/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[57/121] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[58/121] Building C object zephyr/subsys/gnss/rtk/CMakeFiles/subsys__gnss__rtk.dir/rtk.c.obj
+[59/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc4_sw.c.obj
+[61/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/121] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc8_sw.c.obj
+[65/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc16_sw.c.obj
+[66/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc7_sw.c.obj
+[67/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc24_sw.c.obj
+[68/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32c_sw.c.obj
+[69/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32_sw.c.obj
+[70/121] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32k_4_2_sw.c.obj
+[71/121] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[72/121] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[73/121] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[74/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[75/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[76/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[77/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[78/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[79/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[80/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[81/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[82/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[83/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[84/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[85/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[86/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[87/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[88/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[89/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[90/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[91/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[92/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[93/121] Linking C static library app/libapp.a
+[94/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[95/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[96/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[97/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[98/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[99/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[100/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[101/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[102/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[103/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[104/121] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[105/121] Generating linker_zephyr_pre0.cmd
+[106/121] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[107/121] Linking C static library zephyr/arch/common/libarch__common.a
+[108/121] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[109/121] Linking C static library zephyr/libzephyr.a
+[110/121] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[111/121] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[112/121] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[113/121] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[114/121] Linking C static library zephyr/subsys/crc/libsubsys__crc.a
+[115/121] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[116/121] Linking C static library zephyr/kernel/libkernel.a
+[117/121] Building C object zephyr/subsys/gnss/rtk/CMakeFiles/subsys__gnss__rtk.dir/protocol/rtcm3.c.obj
+[118/121] Linking C static library zephyr/subsys/gnss/rtk/libsubsys__gnss__rtk.a
+[119/121] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/gnss/rtk/rtcm3/build/zephyr/zephyr.elf for board: native_sim/native/64
+[120/121] Building native simulator runner, and linking final executable
+[121/121] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE rtk_decoder
+===================================================================
+START - test_frame_exceeding_remaining_bytes_is_skipped
+ PASS - test_frame_exceeding_remaining_bytes_is_skipped in 0.000 seconds
+===================================================================
+START - test_frame_is_detected
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/gnss/rtk/rtcm3/src/main.c:26: rtk_decoder_test_frame_is_detected: 0 not equal to gnss_rtk_decoder_frame_get(cmd_rtcm3, sizeof(cmd_rtcm3), &data, &data_len)
+
+ FAIL - test_frame_is_detected in 0.000 seconds
+===================================================================
+START - test_frame_is_detected_after_invalid_data
+
+    Assertion failed at WEST_TOPDIR/zephyr/tests/subsys/gnss/rtk/rtcm3/src/main.c:44: rtk_decoder_test_frame_is_detected_after_invalid_data: 0 not equal to gnss_rtk_decoder_frame_get(cmd_rtcm3, sizeof(cmd_rtcm3), &data, &data_len)
+
+ FAIL - test_frame_is_detected_after_invalid_data in 0.000 seconds
+===================================================================
+START - test_frame_with_invalid_crc_is_invalid_data
+ PASS - test_frame_with_invalid_crc_is_invalid_data in 0.000 seconds
+===================================================================
+START - test_frame_with_zero_payload_len_is_skipped
+ PASS - test_frame_with_zero_payload_len_is_skipped in 0.000 seconds
+===================================================================
+TESTSUITE rtk_decoder failed.
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE FAIL -  60.00% [rtk_decoder]: pass = 3, fail = 2, skip = 0, total = 5 duration = 0.000 seconds
+ - PASS - [rtk_decoder.test_frame_exceeding_remaining_bytes_is_skipped] duration = 0.000 seconds
+ - FAIL - [rtk_decoder.test_frame_is_detected] duration = 0.000 seconds
+ - FAIL - [rtk_decoder.test_frame_is_detected_after_invalid_data] duration = 0.000 seconds
+ - PASS - [rtk_decoder.test_frame_with_invalid_crc_is_invalid_data] duration = 0.000 seconds
+ - PASS - [rtk_decoder.test_frame_with_zero_payload_len_is_skipped] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION FAILED
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

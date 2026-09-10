@@ -1,0 +1,27 @@
+{"task_id": "13", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "28", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "42", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "47", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "98", "L1": "crash", "candidates": [{"L2": "missing_null_check", "confidence": "medium", "basis": "oracle 空指针保护 2 处 > claude 0 处"}], "needs_llm": true}
+{"task_id": "152", "L1": "crash", "candidates": [], "needs_llm": true}
+{"task_id": "168", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "182", "L1": "compile_error", "candidates": [], "needs_llm": true}
+{"task_id": "231", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "270", "L1": "crash", "candidates": [{"L2": "missing_null_check", "confidence": "medium", "basis": "oracle 空指针保护 2 处 > claude 0 处"}], "needs_llm": true}
+{"task_id": "298", "L1": "crash", "candidates": [{"L2": "missing_null_check", "confidence": "medium", "basis": "oracle 空指针保护 2 处 > claude 0 处"}], "needs_llm": true}
+{"task_id": "364", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "368", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "373", "L1": "compile_error", "candidates": [{"L2": "hallucinated_api", "confidence": "high", "basis": "implicit declaration/undeclared"}], "needs_llm": false}
+{"task_id": "396", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "431", "L1": "crash", "candidates": [{"L2": "missing_null_check", "confidence": "medium", "basis": "oracle 空指针保护 2 处 > claude 0 处"}], "needs_llm": true}
+{"task_id": "439", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "447", "L1": "crash", "candidates": [], "needs_llm": true}
+{"task_id": "457", "L1": "crash", "candidates": [], "needs_llm": true}
+{"task_id": "465", "L1": "compile_error", "candidates": [], "needs_llm": true}
+{"task_id": "466", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "503", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "615", "L1": "compile_error", "candidates": [{"L2": "hallucinated_api", "confidence": "high", "basis": "implicit declaration/undeclared"}], "needs_llm": false}
+{"task_id": "640", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "690", "L1": "test_failure", "candidates": [], "needs_llm": true}
+{"task_id": "691", "L1": "crash", "candidates": [{"L2": "missing_null_check", "confidence": "medium", "basis": "oracle 空指针保护 1 处 > claude 0 处"}], "needs_llm": true}
+{"task_id": "710", "L1": "test_failure", "candidates": [], "needs_llm": true}

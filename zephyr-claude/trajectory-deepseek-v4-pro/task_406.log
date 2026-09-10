@@ -1,0 +1,124 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is implemented. Here's what it does:
+
+1. **Validation** — returns `-EINVAL` if skew is invalid, `base.ref` is unset, or `localp` is NULL (mirrors the pattern in `timeutil_sync_ref_from_local`).
+
+2. **Reference delta** — computes `ref_delta = ref - base.ref` (may be negative if the target ref is before the base).
+
+3. **Convert to local ticks** — `ref_delta * local_Hz / ref_Hz` converts the reference delta to nominal local clock ticks.
+
+4. **Inverse skew correction** — when `CONFIG_TIMEUTIL_APPLY_SKEW` is enabled and skew differs from 1.0, divides by skew (the inverse of the forward function's multiplication). This is correct because the skew definition is: `nominal = observed * skew`, so to recover observed ticks from nominal: `observed = nominal / skew`.
+
+5. **Result** — adds `base.local` to get the absolute local instant. Unlike the ref direction, negative local values are allowed (the API docs say "An interpolated value before local time 0 is provided without error"). Returns `0` if skew is 1.0, `1` otherwise.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/utils/timeutil.c
++++ lib/utils/timeutil.c
+@@ -164,7 +164,26 @@
+ int timeutil_sync_local_from_ref(const struct timeutil_sync_state *tsp,
+ 				 uint64_t ref, int64_t *localp)
+ {
+-    /* MASKED - implement this function */
++	int rv = -EINVAL;
++
++	if ((tsp->skew > 0) && (tsp->base.ref > 0) && (localp != NULL)) {
++		const struct timeutil_sync_config *cfg = tsp->cfg;
++		int64_t ref_delta = ref - tsp->base.ref;
++		int64_t local_delta = ref_delta * cfg->local_Hz / cfg->ref_Hz;
++
++#ifdef CONFIG_TIMEUTIL_APPLY_SKEW
++		if (tsp->skew != 1.0f) {
++			local_delta /= (double)tsp->skew;
++		}
++#endif /* CONFIG_TIMEUTIL_APPLY_SKEW */
++
++		int64_t local_abs = (int64_t)tsp->base.local + local_delta;
++
++		*localp = local_abs;
++		rv = (tsp->skew != 1.0f) ? 1 : 0;
++	}
++
++	return rv;
+ }
+ 
+ int32_t timeutil_sync_skew_to_ppb(float skew)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build pristine
+-- west build: generating a build system
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: unit_testing, qualifiers: unit_testing
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/boards/unit_testing/unit_testing/unit_testing_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (4.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/unit/timeutil/build
+-- west build: building application
+[1/11] Generating zephyr/include/generated/zephyr/kobj-types-enum.h, zephyr/include/generated/zephyr/otype-to-str.h, zephyr/include/generated/zephyr/otype-to-size.h
+[2/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_rules.c.obj
+[3/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_defaults.c.obj
+[4/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest_mock.c.obj
+[5/11] Building C object CMakeFiles/testbinary.dir/test_s32.c.obj
+[6/11] Building C object CMakeFiles/testbinary.dir/test_s64.c.obj
+[7/11] Building C object CMakeFiles/testbinary.dir/test_gmtime.c.obj
+[8/11] Building C object CMakeFiles/testbinary.dir/main.c.obj
+[9/11] Building C object CMakeFiles/testbinary.dir/test_sync.c.obj
+[10/11] Building C object CMakeFiles/testbinary.dir/home/huyj/zephyr-workspace/zephyr/subsys/testsuite/ztest/src/ztest.c.obj
+[11/11] Linking C executable testbinary
+Running TESTSUITE timeutil_api
+===================================================================
+START - test_gmtime
+ PASS - test_gmtime in 0.000 seconds
+===================================================================
+START - test_s32
+ PASS - test_s32 in 0.000 seconds
+===================================================================
+START - test_s64
+ PASS - test_s64 in 0.000 seconds
+===================================================================
+START - test_sync
+ PASS - test_sync in 0.000 seconds
+===================================================================
+TESTSUITE timeutil_api succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [timeutil_api]: pass = 4, fail = 0, skip = 0, total = 4 duration = 0.000 seconds
+ - PASS - [timeutil_api.test_gmtime] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_s32] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_s64] duration = 0.000 seconds
+ - PASS - [timeutil_api.test_sync] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr module(s) (Zephyr base): unittest
+
+
+

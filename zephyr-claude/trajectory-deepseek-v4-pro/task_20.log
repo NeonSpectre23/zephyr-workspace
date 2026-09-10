@@ -1,0 +1,44 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what was done:
+
+- **Line 83**: Added `__weak` attribute (consistent with `crc24_pgp` and `crc24_pgp_update`)
+- **Lines 85-88**: Standard byte-wise CRC-24Q computation using the precomputed `crc24q` lookup table:
+  1. Initialize CRC to `0` (CRC-24Q initial value)
+  2. For each byte: `index = ((crc >> 16) ^ byte) & 0xFF` — XOR the top byte of the running CRC with the data byte to index into the table
+  3. `crc = ((crc << 8) ^ table[index]) & 0x00FFFFFF` — shift left by 8, XOR with table entry, mask to 24 bits
+  4. Return the final CRC
+
+When the function is called with data that includes the 3-byte CRC appended (as RTCM3 frames do), the result will be `0` for a valid checksum — matching the documented behavior.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/crc/crc24_sw.c
++++ subsys/crc/crc24_sw.c
+@@ -80,7 +80,13 @@
+  * @retval 0 if the data-frame contains a checksum and it matches.
+  * @retval Result if data-frame does not contain checksum.
+  */
+-uint32_t crc24q_rtcm3(const uint8_t *data, size_t len)
++uint32_t __weak crc24q_rtcm3(const uint8_t *data, size_t len)
+ {
+-    /* MASKED - implement this function */
++	uint32_t crc = 0;
++
++	while (len--) {
++		crc = ((crc << 8) ^ crc24q[((crc >> 16) ^ *data++) & 0xFF]) & 0x00FFFFFF;
++	}
++
++	return crc;
+ }
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

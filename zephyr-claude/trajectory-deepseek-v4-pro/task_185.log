@@ -1,0 +1,80 @@
+=== Claude Session ===
+============================================================
+The function `mpsc_pbuf_claim` is implemented. Here's a summary of the logic:
+
+1. **Lock** — acquires the spinlock (`k_spin_lock`) for thread safety, consistent with all other public functions in this file.
+
+2. **Loop over skip packets** — checks `available()` to see if data exists between `tmp_rd_idx` and `wr_idx`. If the item at `buf[tmp_rd_idx]` is an internal skip packet (e.g., wrap padding from `add_skip_item` or an interrupted drop from `post_drop_action`), it advances `tmp_rd_idx` past it and retries.
+
+3. **Claim valid packet** — if the item is valid (`valid=1`), it sets `busy=1` (marking it as claimed so the writer-side drop logic knows not to overwrite it), advances `tmp_rd_idx` past the packet's length (obtained via `get_wlen` callback), then returns the pointer.
+
+4. **Return NULL** — if no data is available or the item at the read position is neither valid nor a skip (shouldn't happen normally, but handles edge cases like the `MPSC_PBUF_FULL` false positive in `available()`).
+
+This pairs with `mpsc_pbuf_free` which clears `valid`, optionally clears `busy`, advances `rd_idx`, and gives the semaphore.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/os/mpsc_pbuf.c
++++ lib/os/mpsc_pbuf.c
+@@ -535,7 +535,48 @@
+ 
+ const union mpsc_pbuf_generic *mpsc_pbuf_claim(struct mpsc_pbuf_buffer *buffer)
+ {
+-    /* MASKED - implement this function */
++	const union mpsc_pbuf_generic *item = NULL;
++	uint32_t skip_len;
++	uint32_t avail;
++	k_spinlock_key_t key;
++
++	key = k_spin_lock(&buffer->lock);
++
++	/* Loop to skip over any internal skip-packets that may be at the
++	 * current read position (e.g. wrap padding or interrupted drops).
++	 */
++	while (true) {
++		(void)available(buffer, &avail);
++		if (avail == 0) {
++			k_spin_unlock(&buffer->lock, key);
++			return NULL;
++		}
++
++		item = (const union mpsc_pbuf_generic *)&buffer->buf[buffer->tmp_rd_idx];
++
++		skip_len = get_skip(item);
++		if (skip_len == 0) {
++			break;
++		}
++
++		MPSC_PBUF_DBG(buffer, "claim: skip packet (len:%d)", skip_len);
++		buffer->tmp_rd_idx = idx_inc(buffer, buffer->tmp_rd_idx, skip_len);
++	}
++
++	if (is_valid(item)) {
++		uint32_t wlen = buffer->get_wlen(item);
++
++		/* Mark packet as claimed (busy). */
++		((union mpsc_pbuf_generic *)item)->hdr.busy = 1;
++		buffer->tmp_rd_idx = idx_inc(buffer, buffer->tmp_rd_idx, wlen);
++
++		k_spin_unlock(&buffer->lock, key);
++		MPSC_PBUF_DBG(buffer, "claimed %p", item);
++		return item;
++	}
++
++	k_spin_unlock(&buffer->lock, key);
++	return NULL;
+ }
+ 
+ void mpsc_pbuf_free(struct mpsc_pbuf_buffer *buffer,
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

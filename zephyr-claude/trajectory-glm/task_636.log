@@ -1,0 +1,46 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is correct. The function:
+
+1. Calls `rtio_sqe_prep_read()` with `NULL` buffer and `0` length (matching the `rtio_sqe_prep_read_with_pool` pattern, since the mempool allocates buffers)
+2. Sets both `RTIO_SQE_MEMPOOL_BUFFER` and `RTIO_SQE_MULTISHOT` flags — the `RTIO_SQE_MULTISHOT` docstring explicitly states it "must exist along `RTIO_SQE_MEMPOOL_BUFFER`"
+
+This follows the same pattern as `rtio_sqe_prep_read_with_pool` (line 452-458) but adds the `RTIO_SQE_MULTISHOT` flag to enable continuous read completions until canceled.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/rtio/sqe.h
++++ include/zephyr/rtio/sqe.h
+@@ -457,11 +457,20 @@
+ 	sqe->flags = RTIO_SQE_MEMPOOL_BUFFER;
+ }
+ 
++/**
++ * @brief Prepare a read op submission with context's mempool that continues until canceled
++ *
++ * Sets up a multishot read where the SQE continues producing CQEs until
++ * canceled. The buffer is allocated from the RTIO mempool on each completion.
++ *
++ * @see rtio_sqe_prep_read_with_pool()
++ */
+ static inline void rtio_sqe_prep_read_multishot(struct rtio_sqe *sqe,
+ 						const struct rtio_iodev *iodev, int8_t prio,
+ 						void *userdata)
+ {
+-    /* MASKED - implement this function */
++	rtio_sqe_prep_read(sqe, iodev, prio, NULL, 0, userdata);
++	sqe->flags = RTIO_SQE_MEMPOOL_BUFFER | RTIO_SQE_MULTISHOT;
+ }
+ 
+ /**
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

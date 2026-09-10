@@ -1,0 +1,251 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation sets `state` to `STP_STATE_OUT_OF_SYNC` so the decoder enters sync-loss recovery mode, and resets all tracking state (`ncnt`, `ntotal`, `noff`, `curr_ch`, `base_ts`, `prev_ts`). This means:
+
+- On the next `mipi_stp_decoder_decode` call, the state machine enters the `STP_STATE_OUT_OF_SYNC` case
+- It will scan for the ASYNC marker pattern (21 consecutive `0xF` nibbles followed by `0x0`)
+- All data before ASYNC is found is dropped
+- Once ASYNC is found, the decoder transitions back to normal opcode decoding
+
+This matches the documented behavior in the header: *"decoder starts to look for ASYNC marker and drops all data until ASYNC is found."*
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/debug/mipi_stp_decoder.c
++++ subsys/debug/mipi_stp_decoder.c
+@@ -658,7 +658,13 @@
+ 
+ void mipi_stp_decoder_sync_loss(void)
+ {
+-    /* MASKED - implement this function */
++	state = STP_STATE_OUT_OF_SYNC;
++	ncnt = 0;
++	ntotal = 0;
++	noff = 0;
++	curr_ch = 0;
++	base_ts = 0;
++	prev_ts = 0;
+ }
+ 
+ int mipi_stp_decoder_decode(const uint8_t *data, size_t len)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (10.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build
+-- west build: building application
+[1/110] Preparing syscall dependency handling
+
+[2/110] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/110] Generating misc/generated/syscalls_subdirs.trigger
+[4/110] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/110] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/110] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/110] Generating include/generated/zephyr/driver-validation.h
+[8/110] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/110] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/110] Generating ../../include/generated/zephyr/heap_constants.h
+[11/110] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/110] Generating include/generated/zephyr/offsets.h
+[13/110] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/110] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[36/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[37/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[38/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[39/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[40/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/110] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[45/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[46/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[48/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[56/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[57/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[58/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[59/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[60/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[61/110] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[62/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[63/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[65/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[66/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[67/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[68/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[69/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[70/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[71/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[72/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[73/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[74/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[75/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[76/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[77/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[78/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[79/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[80/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[81/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[82/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[83/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[84/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[85/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[86/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[87/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[88/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[89/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[90/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[91/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[92/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[93/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[94/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[95/110] Generating linker_zephyr_pre0.cmd
+[96/110] Linking C static library app/libapp.a
+[97/110] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[98/110] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[99/110] Linking C static library zephyr/arch/common/libarch__common.a
+[100/110] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[101/110] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[102/110] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[103/110] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[104/110] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[105/110] Linking C static library zephyr/kernel/libkernel.a
+[106/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/debug/mipi_stp_decoder.c.obj
+[107/110] Linking C static library zephyr/libzephyr.a
+[108/110] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/debug/mipi_stp_decoder/build/zephyr/zephyr.elf for board: native_sim/native/64
+[109/110] Building native simulator runner, and linking final executable
+[110/110] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE mipi_stp_decoder_test
+===================================================================
+START - test_chunk_async
+ PASS - test_chunk_async in 0.000 seconds
+===================================================================
+START - test_chunk_channel
+ PASS - test_chunk_channel in 0.000 seconds
+===================================================================
+START - test_chunk_data
+ PASS - test_chunk_data in 0.000 seconds
+===================================================================
+START - test_chunk_data_ts
+ PASS - test_chunk_data_ts in 0.000 seconds
+===================================================================
+START - test_chunk_errors
+ PASS - test_chunk_errors in 0.000 seconds
+===================================================================
+START - test_chunk_freq2
+ PASS - test_chunk_freq2 in 0.000 seconds
+===================================================================
+START - test_chunk_freq
+ PASS - test_chunk_freq in 0.000 seconds
+===================================================================
+START - test_chunk_major
+ PASS - test_chunk_major in 0.000 seconds
+===================================================================
+START - test_chunk_null
+ PASS - test_chunk_null in 0.000 seconds
+===================================================================
+START - test_multi_chunk_async
+ PASS - test_multi_chunk_async in 0.000 seconds
+===================================================================
+START - test_multi_chunk_data_ts
+ PASS - test_multi_chunk_data_ts in 0.000 seconds
+===================================================================
+START - test_sync_loss
+ PASS - test_sync_loss in 0.000 seconds
+===================================================================
+TESTSUITE mipi_stp_decoder_test succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [mipi_stp_decoder_test]: pass = 12, fail = 0, skip = 0, total = 12 duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_async] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_channel] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_data] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_data_ts] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_errors] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_freq2] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_freq] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_major] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_chunk_null] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_multi_chunk_async] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_multi_chunk_data_ts] duration = 0.000 seconds
+ - PASS - [mipi_stp_decoder_test.test_sync_loss] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

@@ -1,0 +1,73 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function `ubx_frame_encode` is now implemented. Here's what it does:
+
+1. **Bounds check** — returns `-ENOSPC` if `buf_len` is insufficient for the complete frame (header + payload + checksum)
+2. **Writes header** — sync chars (0xB5, 0x62), class, id, and payload size in little-endian
+3. **Copies payload** — `memcpy` into the buffer after the header (skipped if payload is empty)
+4. **Computes checksum** — uses the same Fletcher-8 algorithm as `ubx_calc_checksum` (CK_A/CK_B over class through payload bytes)
+5. **Writes checksum** — CK_A at `frame_sz-2`, CK_B at `frame_sz-1`
+6. **Returns 0** on success
+
+Also added `#include <string.h>` and `#include <errno.h>` for `memcpy` and `ENOSPC` respectively.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- include/zephyr/modem/ubx/protocol.h
++++ include/zephyr/modem/ubx/protocol.h
+@@ -9,6 +9,8 @@
+ #define ZEPHYR_MODEM_UBX_PROTOCOL_
+ 
+ #include <stdint.h>
++#include <string.h>
++#include <errno.h>
+ #include <zephyr/modem/ubx/checksum.h>
+ 
+ #define UBX_FRAME_HEADER_SZ			6
+@@ -435,7 +437,34 @@
+ 				    const uint8_t *payload, size_t payload_len,
+ 				    uint8_t *buf, size_t buf_len)
+ {
+-    /* MASKED - implement this function */
++	uint8_t ck_a = 0;
++	uint8_t ck_b = 0;
++	size_t frame_sz = UBX_FRAME_SZ(payload_len);
++
++	if (buf_len < frame_sz) {
++		return -ENOSPC;
++	}
++
++	buf[UBX_FRAME_PREAMBLE_SYNC_CHAR_1_IDX] = UBX_PREAMBLE_SYNC_CHAR_1;
++	buf[UBX_FRAME_PREAMBLE_SYNC_CHAR_2_IDX] = UBX_PREAMBLE_SYNC_CHAR_2;
++	buf[UBX_FRAME_MSG_CLASS_IDX] = class;
++	buf[3] = id;
++	buf[4] = payload_len & 0xFF;
++	buf[5] = (payload_len >> 8) & 0xFF;
++
++	if (payload_len > 0) {
++		memcpy(&buf[UBX_FRAME_HEADER_SZ], payload, payload_len);
++	}
++
++	for (size_t i = UBX_FRAME_MSG_CLASS_IDX; i < UBX_FRAME_HEADER_SZ + payload_len; i++) {
++		ck_a += buf[i];
++		ck_b += ck_a;
++	}
++
++	buf[frame_sz - 2] = ck_a;
++	buf[frame_sz - 1] = ck_b;
++
++	return 0;
+ }
+ 
+ #define UBX_FRAME_DEFINE(_name, _frame)								   \
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

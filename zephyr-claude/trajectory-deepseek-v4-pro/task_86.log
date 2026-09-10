@@ -1,0 +1,483 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `json_arr_parse` does:
+
+1. **`arr_init`** — initializes the lexer and validates the first token is `JSON_TOK_ARRAY_START` (i.e., the JSON string starts with `[`)
+2. **`field = (char *)val + descr->offset`** — computes the pointer to the array's output location within the user's struct
+3. **`arr_parse`** — iterates over each element in the JSON array, decoding each one using the element descriptor and storing results in the array field, returns `0` on success or a negative error code
+
+This follows the exact same pattern as `json_obj_parse` (line 1213) which wraps `obj_init` + `obj_parse`, and mirrors how `json_arr_encode` (line 1782) extracts the field pointer from the descriptor.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/utils/json.c
++++ lib/utils/json.c
+@@ -1230,7 +1230,19 @@
+ int json_arr_parse(char *payload, size_t len,
+ 		   const struct json_obj_descr *descr, void *val)
+ {
+-    /* MASKED - implement this function */
++	struct json_obj obj;
++	int ret;
++	void *field;
++
++	ret = arr_init(&obj, payload, len);
++	if (ret < 0) {
++		return ret;
++	}
++
++	field = (char *)val + descr->offset;
++
++	return arr_parse(&obj, descr->array.element_descr,
++			 descr->array.n_elements, field, val);
+ }
+ 
+ 
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/lib/json/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/lib/json
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/lib/json/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/lib/json/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/lib/json/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/lib/json/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/json/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/lib/json/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.8s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/lib/json/build
+-- west build: building application
+[1/110] Preparing syscall dependency handling
+
+[2/110] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/110] Generating misc/generated/syscalls_subdirs.trigger
+[4/110] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/110] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/110] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/110] Generating include/generated/zephyr/driver-validation.h
+[8/110] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/110] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/110] Generating ../../include/generated/zephyr/heap_constants.h
+[11/110] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/110] Generating include/generated/zephyr/offsets.h
+[13/110] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[20/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[21/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[22/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[23/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[24/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[25/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[26/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/110] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[35/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[36/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/110] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[41/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[42/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/110] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[44/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/110] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[50/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/110] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[55/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[56/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[57/110] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[58/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[59/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[60/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[61/110] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[62/110] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[63/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[64/110] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[65/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[66/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[67/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[68/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[69/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[70/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[71/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[72/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[73/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[74/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[75/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[76/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[77/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[78/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[79/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[80/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[81/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[82/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[83/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[84/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[85/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[86/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[87/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[88/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[89/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[90/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[92/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[93/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[94/110] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[95/110] Linking C static library app/libapp.a
+[96/110] Linking C static library zephyr/arch/common/libarch__common.a
+[97/110] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[98/110] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[99/110] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[100/110] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[101/110] Generating linker_zephyr_pre0.cmd
+[102/110] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[103/110] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[104/110] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[105/110] Linking C static library zephyr/kernel/libkernel.a
+[106/110] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/json.c.obj
+[107/110] Linking C static library zephyr/libzephyr.a
+[108/110] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/lib/json/build/zephyr/zephyr.elf for board: native_sim/native/64
+[109/110] Building native simulator runner, and linking final executable
+[110/110] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE lib_json_test
+===================================================================
+START - test_debug_string_types
+=== DEBUG TEST ===
+Input JSON: {"string_value":"test\nvalue","string_buf":"buffer\ttab"}
+Parse result: 3
+string_value: 'test
+value'
+string_buf: 'buffer	tab'
+=== END DEBUG ===
+ PASS - test_debug_string_types in 0.000 seconds
+===================================================================
+START - test_json_2dim_arr_extra_named_obj_encoding
+ PASS - test_json_2dim_arr_extra_named_obj_encoding in 0.000 seconds
+===================================================================
+START - test_json_2dim_arr_extra_obj_encoding
+ PASS - test_json_2dim_arr_extra_obj_encoding in 0.000 seconds
+===================================================================
+START - test_json_2dim_arr_obj_encoding
+ PASS - test_json_2dim_arr_obj_encoding in 0.000 seconds
+===================================================================
+START - test_json_2dim_obj_arr_decoding
+ PASS - test_json_2dim_obj_arr_decoding in 0.000 seconds
+===================================================================
+START - test_json_arr_obj_decoding
+ PASS - test_json_arr_obj_decoding in 0.000 seconds
+===================================================================
+START - test_json_arr_obj_encoding
+ PASS - test_json_arr_obj_encoding in 0.000 seconds
+===================================================================
+START - test_json_array_alignment
+ PASS - test_json_array_alignment in 0.000 seconds
+===================================================================
+START - test_json_array_alignment_bool
+ PASS - test_json_array_alignment_bool in 0.000 seconds
+===================================================================
+START - test_json_backslash_duplication
+ PASS - test_json_backslash_duplication in 0.000 seconds
+===================================================================
+START - test_json_decoding
+ PASS - test_json_decoding in 0.000 seconds
+===================================================================
+START - test_json_decoding_array_array
+ PASS - test_json_decoding_array_array in 0.000 seconds
+===================================================================
+START - test_json_double
+ PASS - test_json_double in 0.000 seconds
+===================================================================
+START - test_json_double_format
+ PASS - test_json_double_format in 0.000 seconds
+===================================================================
+START - test_json_double_infinity
+ PASS - test_json_double_infinity in 0.000 seconds
+===================================================================
+START - test_json_double_nan
+ PASS - test_json_double_nan in 0.000 seconds
+===================================================================
+START - test_json_doubles_limits
+ PASS - test_json_doubles_limits in 0.000 seconds
+===================================================================
+START - test_json_encode_bounds_check
+ PASS - test_json_encode_bounds_check in 0.000 seconds
+===================================================================
+START - test_json_encoded_object_tok_encoding
+ PASS - test_json_encoded_object_tok_encoding in 0.000 seconds
+===================================================================
+START - test_json_encoding
+ PASS - test_json_encoding in 0.000 seconds
+===================================================================
+START - test_json_encoding_array_array
+ PASS - test_json_encoding_array_array in 0.000 seconds
+===================================================================
+START - test_json_encoding_null
+ PASS - test_json_encoding_null in 0.000 seconds
+===================================================================
+START - test_json_enums
+ PASS - test_json_enums in 0.000 seconds
+===================================================================
+START - test_json_escape
+ PASS - test_json_escape in 0.000 seconds
+===================================================================
+START - test_json_escape_bounds_check
+ PASS - test_json_escape_bounds_check in 0.000 seconds
+===================================================================
+START - test_json_escape_empty
+ PASS - test_json_escape_empty in 0.000 seconds
+===================================================================
+START - test_json_escape_encoding_correctness
+ PASS - test_json_escape_encoding_correctness in 0.000 seconds
+===================================================================
+START - test_json_escape_no_op
+ PASS - test_json_escape_no_op in 0.000 seconds
+===================================================================
+START - test_json_escape_one
+ PASS - test_json_escape_one in 0.000 seconds
+===================================================================
+START - test_json_escape_sequence_regression
+ PASS - test_json_escape_sequence_regression in 0.000 seconds
+===================================================================
+START - test_json_escape_sequence_stability
+ PASS - test_json_escape_sequence_stability in 0.000 seconds
+===================================================================
+START - test_json_float
+ PASS - test_json_float in 0.000 seconds
+===================================================================
+START - test_json_float_format
+ PASS - test_json_float_format in 0.000 seconds
+===================================================================
+START - test_json_float_infinity
+ PASS - test_json_float_infinity in 0.000 seconds
+===================================================================
+START - test_json_float_limits
+ PASS - test_json_float_limits in 0.000 seconds
+===================================================================
+START - test_json_float_nan
+ PASS - test_json_float_nan in 0.000 seconds
+===================================================================
+START - test_json_invalid_bool
+ PASS - test_json_invalid_bool in 0.000 seconds
+===================================================================
+START - test_json_invalid_int
+ PASS - test_json_invalid_int in 0.000 seconds
+===================================================================
+START - test_json_invalid_null
+ PASS - test_json_invalid_null in 0.000 seconds
+===================================================================
+START - test_json_invalid_number
+ PASS - test_json_invalid_number in 0.000 seconds
+===================================================================
+START - test_json_invalid_string
+ PASS - test_json_invalid_string in 0.000 seconds
+===================================================================
+START - test_json_item_wrong_type
+ PASS - test_json_item_wrong_type in 0.000 seconds
+===================================================================
+START - test_json_key_not_in_descr
+ PASS - test_json_key_not_in_descr in 0.000 seconds
+===================================================================
+START - test_json_limits
+ PASS - test_json_limits in 0.000 seconds
+===================================================================
+START - test_json_missing_quote
+ PASS - test_json_missing_quote in 0.000 seconds
+===================================================================
+START - test_json_mixed_arr_calc_len
+ PASS - test_json_mixed_arr_calc_len in 0.000 seconds
+===================================================================
+START - test_json_mixed_arr_empty
+ PASS - test_json_mixed_arr_empty in 0.000 seconds
+===================================================================
+START - test_json_mixed_arr_encode
+ PASS - test_json_mixed_arr_encode in 0.000 seconds
+===================================================================
+START - test_json_mixed_arr_encode_null
+ PASS - test_json_mixed_arr_encode_null in 0.000 seconds
+===================================================================
+START - test_json_mixed_arr_parse
+ PASS - test_json_mixed_arr_parse in 0.000 seconds
+===================================================================
+START - test_json_mixed_escape_sequences_with_quotes
+ PASS - test_json_mixed_escape_sequences_with_quotes in 0.000 seconds
+===================================================================
+START - test_json_multiple_cycle_stability
+ PASS - test_json_multiple_cycle_stability in 0.000 seconds
+===================================================================
+START - test_json_obj_arr_decoding
+ PASS - test_json_obj_arr_decoding in 0.000 seconds
+===================================================================
+START - test_json_obj_arr_encoding
+ PASS - test_json_obj_arr_encoding in 0.000 seconds
+===================================================================
+START - test_json_quote_escaping_encoding
+ PASS - test_json_quote_escaping_encoding in 0.000 seconds
+===================================================================
+START - test_json_quote_multiple_cycle_stability
+ PASS - test_json_quote_multiple_cycle_stability in 0.000 seconds
+===================================================================
+START - test_json_quote_no_backslash_duplication
+ PASS - test_json_quote_no_backslash_duplication in 0.000 seconds
+===================================================================
+START - test_json_quote_round_trip
+ PASS - test_json_quote_round_trip in 0.000 seconds
+===================================================================
+START - test_json_quote_unescaping_decoding
+ PASS - test_json_quote_unescaping_decoding in 0.000 seconds
+===================================================================
+START - test_json_single_quote_string
+ PASS - test_json_single_quote_string in 0.000 seconds
+===================================================================
+START - test_json_specific_escape_sequences
+ PASS - test_json_specific_escape_sequences in 0.000 seconds
+===================================================================
+START - test_json_string_array_empty
+ PASS - test_json_string_array_empty in 0.000 seconds
+===================================================================
+START - test_json_string_array_max
+ PASS - test_json_string_array_max in 0.000 seconds
+===================================================================
+START - test_json_string_array_size
+ PASS - test_json_string_array_size in 0.000 seconds
+===================================================================
+START - test_json_string_nullptr
+ PASS - test_json_string_nullptr in 0.000 seconds
+===================================================================
+START - test_json_wrong_token
+ PASS - test_json_wrong_token in 0.000 seconds
+===================================================================
+START - test_large_descriptor
+ PASS - test_large_descriptor in 0.000 seconds
+===================================================================
+TESTSUITE lib_json_test succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [lib_json_test]: pass = 67, fail = 0, skip = 0, total = 67 duration = 0.000 seconds
+ - PASS - [lib_json_test.test_debug_string_types] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_2dim_arr_extra_named_obj_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_2dim_arr_extra_obj_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_2dim_arr_obj_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_2dim_obj_arr_decoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_arr_obj_decoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_arr_obj_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_array_alignment] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_array_alignment_bool] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_backslash_duplication] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_decoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_decoding_array_array] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_double] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_double_format] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_double_infinity] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_double_nan] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_doubles_limits] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_encode_bounds_check] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_encoded_object_tok_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_encoding_array_array] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_encoding_null] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_enums] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_bounds_check] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_empty] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_encoding_correctness] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_no_op] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_one] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_sequence_regression] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_escape_sequence_stability] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_float] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_float_format] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_float_infinity] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_float_limits] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_float_nan] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_invalid_bool] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_invalid_int] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_invalid_null] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_invalid_number] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_invalid_string] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_item_wrong_type] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_key_not_in_descr] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_limits] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_missing_quote] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_mixed_arr_calc_len] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_mixed_arr_empty] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_mixed_arr_encode] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_mixed_arr_encode_null] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_mixed_arr_parse] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_mixed_escape_sequences_with_quotes] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_multiple_cycle_stability] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_obj_arr_decoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_obj_arr_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_quote_escaping_encoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_quote_multiple_cycle_stability] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_quote_no_backslash_duplication] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_quote_round_trip] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_quote_unescaping_decoding] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_single_quote_string] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_specific_escape_sequences] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_string_array_empty] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_string_array_max] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_string_array_size] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_string_nullptr] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_json_wrong_token] duration = 0.000 seconds
+ - PASS - [lib_json_test.test_large_descriptor] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+
+
+

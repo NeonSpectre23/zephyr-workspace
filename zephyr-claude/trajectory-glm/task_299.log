@@ -1,0 +1,134 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is in place. Here's a summary of what was implemented:
+
+**`runtime_resume`** (static helper, lines 194–262) — mirrors `runtime_suspend` for the get/resume path:
+- Early return if runtime PM not enabled
+- Takes the semaphore lock (respects pre-kernel and ISR contexts, returns `-EBUSY` if lock unavailable)
+- Under `CONFIG_PM_DEVICE_RUNTIME_ASYNC`: waits for any pending async suspend to complete (same event-wait pattern used in `pm_device_runtime_disable`); returns `-EWOULDBLOCK` if called from ISR while device is suspending
+- When usage count is 0: claims the power domain if needed (recursive `pm_device_runtime_get` on domain), calls the RESUME action callback, transitions state to ACTIVE
+- Increments usage count
+- Releases lock on unlock
+
+**`pm_device_runtime_get`** (public API, lines 264–285) — mirrors `pm_device_runtime_put`:
+- Returns 0 if `pm_base` is NULL
+- Tracing enter/exit
+- ISR-safe devices: acquires spinlock, delegates to `get_sync_locked`, releases spinlock
+- Non-ISR-safe devices: delegates to `runtime_resume`
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/pm/device_runtime.c
++++ subsys/pm/device_runtime.c
+@@ -191,9 +191,99 @@
+ 	return ret;
+ }
+ 
++static int runtime_resume(const struct device *dev)
++{
++	int ret = 0;
++	struct pm_device *pm = dev->pm;
++
++	if (!atomic_test_bit(&pm->base.flags, PM_DEVICE_FLAG_RUNTIME_ENABLED)) {
++		return 0;
++	}
++
++	if (k_is_pre_kernel()) {
++		/* nothing */
++	} else {
++		ret = k_sem_take(&pm->lock, k_is_in_isr() ? K_NO_WAIT : K_FOREVER);
++		if (ret < 0) {
++			return -EBUSY;
++		}
++	}
++
++#ifdef CONFIG_PM_DEVICE_RUNTIME_ASYNC
++	if (!k_is_pre_kernel()) {
++		/* Wait until a pending async suspend is completed */
++		while (pm->base.state == PM_DEVICE_STATE_SUSPENDING) {
++			if (k_is_in_isr()) {
++				ret = -EWOULDBLOCK;
++				goto unlock;
++			}
++
++			k_event_clear(&pm->event, EVENT_MASK);
++			k_sem_give(&pm->lock);
++
++			k_event_wait(&pm->event, EVENT_MASK, false, K_FOREVER);
++
++			(void)k_sem_take(&pm->lock, K_FOREVER);
++		}
++	}
++#endif /* CONFIG_PM_DEVICE_RUNTIME_ASYNC */
++
++	if (pm->base.usage == 0U) {
++		if (!atomic_test_bit(&pm->base.flags, PM_DEVICE_FLAG_PD_CLAIMED)) {
++			const struct device *domain = PM_DOMAIN(&pm->base);
++
++			if (domain != NULL) {
++				ret = pm_device_runtime_get(domain);
++				if (ret < 0) {
++					goto unlock;
++				}
++				atomic_set_bit(&pm->base.flags, PM_DEVICE_FLAG_PD_CLAIMED);
++			}
++		}
++
++		ret = pm->base.action_cb(pm->dev, PM_DEVICE_ACTION_RESUME);
++		if (ret < 0) {
++			goto unlock;
++		}
++
++		pm->base.state = PM_DEVICE_STATE_ACTIVE;
++	} else {
++		ret = 0;
++	}
++
++	pm->base.usage++;
++
++unlock:
++	if (!k_is_pre_kernel()) {
++		k_sem_give(&pm->lock);
++	}
++
++	return ret;
++}
++
+ int pm_device_runtime_get(const struct device *dev)
+ {
+-    /* MASKED - implement this function */
++	int ret;
++
++	if (dev->pm_base == NULL) {
++		return 0;
++	}
++
++	SYS_PORT_TRACING_FUNC_ENTER(pm, device_runtime_get, dev);
++
++	if (atomic_test_bit(&dev->pm_base->flags, PM_DEVICE_FLAG_ISR_SAFE)) {
++		struct pm_device_isr *pm_sync = dev->pm_isr;
++		k_spinlock_key_t k = k_spin_lock(&pm_sync->lock);
++
++		ret = get_sync_locked(dev);
++
++		k_spin_unlock(&pm_sync->lock, k);
++	} else {
++		ret = runtime_resume(dev);
++	}
++	SYS_PORT_TRACING_FUNC_EXIT(pm, device_runtime_get, dev, ret);
++
++	return ret;
+ }
+ 
+ 
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

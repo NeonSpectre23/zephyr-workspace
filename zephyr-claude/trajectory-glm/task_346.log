@@ -1,0 +1,56 @@
+============================================================
+=== Claude Session ===
+============================================================
+Implementation is complete. Here's what I did:
+
+**Added `#include <zephyr/shell/shell_backend.h>`** at line 11 to bring in the `shell_backend_get()` and `shell_backend_count_get()` inline functions.
+
+**Implemented `shell_backend_get_by_name`** at lines 1538-1551:
+- Gets the total number of backends via `shell_backend_count_get()`
+- Iterates through each backend using `shell_backend_get(i)`
+- Compares each backend's `name` field against `backend_name` using `strcmp()`
+- Returns the matching `const struct shell *` if found, `NULL` otherwise
+
+This matches the header contract (`shell_backend.h:55`) and passes the test expectations in `shell_backend_test.c` (finds named backends, returns NULL for unknown names).
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/shell/shell.c
++++ subsys/shell/shell.c
+@@ -8,6 +8,7 @@
+ #include <stdlib.h>
+ #include <zephyr/sys/atomic.h>
+ #include <zephyr/shell/shell.h>
++#include <zephyr/shell/shell_backend.h>
+ #if defined(CONFIG_SHELL_BACKEND_DUMMY)
+ #include <zephyr/shell/shell_dummy.h>
+ #endif
+@@ -1536,7 +1537,17 @@
+ 
+ const struct shell *shell_backend_get_by_name(const char *backend_name)
+ {
+-    /* MASKED - implement this function */
++	int cnt = shell_backend_count_get();
++
++	for (int i = 0; i < cnt; i++) {
++		const struct shell *sh = shell_backend_get(i);
++
++		if (strcmp(sh->name, backend_name) == 0) {
++			return sh;
++		}
++	}
++
++	return NULL;
+ }
+ 
+ /* This function mustn't be used from shell context to avoid deadlock.
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

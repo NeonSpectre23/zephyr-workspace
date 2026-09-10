@@ -1,0 +1,27 @@
+{
+  "results": "results-glm/results.jsonl",
+  "whitebox": "results-glm/whitebox_report.json",
+  "n_results": 712,
+  "n_passed": 669,
+  "n_illegal(results)": 10,
+  "n_harness_ff": 6,
+  "n_real_pass_excluded": 0,
+  "n_whitebox": 27,
+  "L1": {
+    "test_failure": 16,
+    "crash": 7,
+    "compile_error": 4
+  },
+  "mechanism": {
+    "misunderstanding": 27
+  },
+  "checks": {
+    "illegal_and_whitebox_disjoint": true,
+    "whitebox_equals_classified_real": true,
+    "false_failures_removed_from_whitebox": true,
+    "mechanism_matches_L2_TO_MECH": true,
+    "L1_set_expected": true,
+    "no_placeholder_L2": true
+  },
+  "all_pass": true
+}

@@ -1,0 +1,460 @@
+============================================================
+=== Claude Session ===
+============================================================
+The function is now implemented. Here's what `zbus_sub_wait_msg` does:
+
+1. **Asserts** all preconditions (not in ISR, non-null params, correct observer type)
+2. **Gets a `net_buf`** from the subscriber's FIFO via `k_fifo_get()` — returns `-ENOMSG` if the timeout expires
+3. **Extracts the channel pointer** from the buffer's user data (stored there by the event dispatcher during publish)
+4. **Validates the channel pointer** — returns `-EILSEQ` if invalid
+5. **Copies the message** from the buffer to the caller's `msg` using `net_buf_remove_mem`
+6. **Releases the buffer** with `net_buf_unref`
+7. **Returns 0** on success
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/zbus/zbus.c
++++ subsys/zbus/zbus.c
+@@ -588,7 +588,31 @@
+ int zbus_sub_wait_msg(const struct zbus_observer *sub, const struct zbus_channel **chan, void *msg,
+ 		      k_timeout_t timeout)
+ {
+-    /* MASKED - implement this function */
++	_ZBUS_ASSERT(!k_is_in_isr(), "zbus_sub_wait_msg cannot be used inside ISRs");
++	_ZBUS_ASSERT(sub != NULL, "sub is required");
++	_ZBUS_ASSERT(sub->type == ZBUS_OBSERVER_MSG_SUBSCRIBER_TYPE, "sub must be a MSG_SUBSCRIBER");
++	_ZBUS_ASSERT(sub->message_fifo != NULL, "sub message_fifo is required");
++	_ZBUS_ASSERT(chan != NULL, "chan is required");
++	_ZBUS_ASSERT(msg != NULL, "msg is required");
++
++	struct net_buf *buf = k_fifo_get(sub->message_fifo, timeout);
++	if (buf == NULL) {
++		return -ENOMSG;
++	}
++
++	struct zbus_channel **chan_ptr = (struct zbus_channel **)net_buf_user_data(buf);
++	if (*chan_ptr == NULL) {
++		net_buf_unref(buf);
++		return -EILSEQ;
++	}
++
++	*chan = *chan_ptr;
++
++	memcpy(msg, net_buf_remove_mem(buf, (*chan)->message_size), (*chan)->message_size);
++
++	net_buf_unref(buf);
++
++	return 0;
+ }
+ 
+ #endif /* CONFIG_ZBUS_MSG_SUBSCRIBER */
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build
+-- west build: building application
+[1/117] Preparing syscall dependency handling
+
+[2/117] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/117] Generating misc/generated/syscalls_subdirs.trigger
+[4/117] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/117] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/117] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/117] Generating include/generated/zephyr/driver-validation.h
+[8/117] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/117] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/117] Generating ../../include/generated/zephyr/heap_constants.h
+[11/117] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/117] Generating include/generated/zephyr/offsets.h
+[13/117] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[17/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[18/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[19/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[20/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[22/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[23/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[24/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[25/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[26/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[27/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[28/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[33/117] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[34/117] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[35/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[36/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[37/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[38/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[39/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[40/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[41/117] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[42/117] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[43/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[44/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[45/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[47/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[48/117] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[49/117] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf.c.obj
+[50/117] Building C object zephyr/lib/net_buf/CMakeFiles/lib__net_buf.dir/buf_simple.c.obj
+[51/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/117] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[58/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[59/117] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[60/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[61/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[62/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus_runtime_observers.c.obj
+[64/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus_iterable_sections.c.obj
+[65/117] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[66/117] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[67/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[68/117] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[69/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[70/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[71/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[72/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[73/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[74/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[75/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[76/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[77/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[78/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[79/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[80/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[81/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[82/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[83/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[84/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[85/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[86/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[87/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[88/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[89/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[90/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[91/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[92/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[93/117] Linking C static library app/libapp.a
+[94/117] Generating linker_zephyr_pre0.cmd
+[95/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[96/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[97/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/irq_offload.c.obj
+[98/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[99/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[100/117] Linking C static library zephyr/arch/common/libarch__common.a
+[101/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[102/117] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[103/117] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[104/117] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[105/117] Linking C static library zephyr/lib/net_buf/liblib__net_buf.a
+[106/117] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[107/117] Linking C static library zephyr/libzephyr.a
+[108/117] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[109/117] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[110/117] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[111/117] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[112/117] Linking C static library zephyr/kernel/libkernel.a
+[113/117] Building C object zephyr/subsys/zbus/CMakeFiles/subsys__zbus.dir/zbus.c.obj
+[114/117] Linking C static library zephyr/subsys/zbus/libsubsys__zbus.a
+[115/117] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/zbus/unittests/build/zephyr/zephyr.elf for board: native_sim/native/64
+[116/117] Building native simulator runner, and linking final executable
+[117/117] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE basic
+===================================================================
+START - test_hard_channel
+[00:00:00.000,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing hard_chan's observers. Starting VDED:[0m
+ PASS - test_hard_channel in 0.000 seconds
+===================================================================
+START - test_iterators
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 0 - Channel aux1_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 1 - Channel aux2_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 2 - Channel aux3_on_change_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 3 - Channel go_busy_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 4 - Channel hard_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 5 - Channel msg_sub_fail_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 6 - Channel msg_sub_no_pool_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 7 - Channel stuck_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_chan_iterator: Idx 8 - Channel version_chan[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 0 - Observer busy_lis[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 1 - Observer fast_lis[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 2 - Observer foo2_msg_sub[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 3 - Observer foo_msg_sub[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 4 - Observer foo_sub[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 5 - Observer invalid_obs[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 6 - Observer invalid_sub[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 7 - Observer not_observing_sub[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 8 - Observer rt_fast_lis[0m
+[00:00:00.000,000] [0m<dbg> zbus: check_obs_iterator: Idx 9 - Observer sub1[0m
+[00:00:00.000,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 0[0m
+[00:00:00.110,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 1[0m
+[00:00:00.110,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 1[0m
+[00:00:00.220,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 2[0m
+[00:00:00.220,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 2[0m
+[00:00:00.220,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 2, oracle 2[0m
+[00:00:00.330,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 3[0m
+[00:00:00.330,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 3[0m
+[00:00:00.330,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 2, oracle 3[0m
+[00:00:00.330,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 3, oracle 3[0m
+[00:00:00.440,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 4[0m
+[00:00:00.440,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 4[0m
+[00:00:00.440,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 2, oracle 4[0m
+[00:00:00.440,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 3, oracle 4[0m
+[00:00:00.440,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 4, oracle 4[0m
+[00:00:00.550,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 5[0m
+[00:00:00.550,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 5[0m
+[00:00:00.550,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 2, oracle 5[0m
+[00:00:00.550,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 3, oracle 5[0m
+[00:00:00.550,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 4, oracle 5[0m
+[00:00:00.550,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 5, oracle 5[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 6[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 6[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 2, oracle 6[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 3, oracle 6[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 4, oracle 6[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 5, oracle 6[0m
+[00:00:00.660,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 6, oracle 6[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 0, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 1, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 2, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 3, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 4, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 5, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 6, oracle 7[0m
+[00:00:00.770,000] [0m<dbg> zbus: count_false_chan_iterator: chan_idx 7, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: basic_test_iterators: Counts obs 9, chan 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 0[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 1[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 1[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 2[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 2[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 2[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 3[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 3[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 3[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 3, oracle 3[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 4[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 4[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 4[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 3, oracle 4[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 4, oracle 4[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 5[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 5[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 5[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 3, oracle 5[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 4, oracle 5[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 5, oracle 5[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 3, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 4, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 5, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 6, oracle 6[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 3, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 4, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 5, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 6, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 7, oracle 7[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 0, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 1, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 2, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 3, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 4, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 5, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 6, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 7, oracle 8[0m
+[00:00:00.880,000] [0m<dbg> zbus: count_false_obs_iterator: obs_idx 8, oracle 8[0m
+ PASS - test_iterators in 0.880 seconds
+===================================================================
+START - test_specification_based__zbus_chan
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: msg is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: msg is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: obs is required
+[00:00:01.320,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux2_chan's observers. Starting VDED:[0m
+[00:00:01.320,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+[00:00:01.540,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux2_chan's observers. Starting VDED:[0m
+[00:00:01.540,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+ZBUS ASSERT: chan is required
+[00:00:01.650,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing msg_sub_fail_chan's observers. Starting VDED:[0m
+ZBUS ASSERT: Unreachable
+[00:00:01.650,000] [1;31m<err> zbus: could not deliver notification to observer invalid_obs. Error code -14[0m
+[00:00:01.650,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> invalid_obs[0m
+[00:00:01.650,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux3_on_change_chan's observers. Starting VDED:[0m
+[00:00:01.650,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+[00:00:01.760,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux3_on_change_chan's observers. Starting VDED:[0m
+[00:00:01.760,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+[00:00:01.870,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing go_busy_chan's observers. Starting VDED:[0m
+[00:00:01.870,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> busy_lis[0m
+[00:00:01.980,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing stuck_chan's observers. Starting VDED:[0m
+[00:00:01.980,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing stuck_chan's observers. Starting VDED:[0m
+[00:00:02.190,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux2_chan's observers. Starting VDED:[0m
+[00:00:02.190,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+ZBUS ASSERT: inside an ISR, the timeout must be K_NO_WAIT
+ZBUS ASSERT: inside an ISR, the timeout must be K_NO_WAIT
+[00:00:02.630,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux2_chan's observers. Starting VDED:[0m
+[00:00:02.630,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+ZBUS ASSERT: inside an ISR, the timeout must be K_NO_WAIT
+ZBUS ASSERT: inside an ISR, the timeout must be K_NO_WAIT
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: ISR blocked
+ZBUS ASSERT: ISR blocked
+ZBUS ASSERT: ISR blocked
+ZBUS ASSERT: ISR blocked
+[00:00:03.840,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing msg_sub_no_pool_chan's observers. Starting VDED:[0m
+[00:00:03.840,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> foo_msg_sub[0m
+[00:00:04.050,000] [1;31m<err> zbus: could not deliver notification to observer foo2_msg_sub. Error code -12[0m
+ PASS - test_specification_based__zbus_chan in 3.170 seconds
+===================================================================
+START - test_specification_based__zbus_obs_attach_detach
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: cannot attach to an ISR
+ZBUS ASSERT: cannot attach to an ISR
+ZBUS ASSERT: cannot attach to an ISR
+ZBUS ASSERT: cannot detach from an ISR
+ZBUS ASSERT: cannot detach from an ISR
+ZBUS ASSERT: cannot detach from an ISR
+ PASS - test_specification_based__zbus_obs_attach_detach in 0.000 seconds
+===================================================================
+START - test_specification_based__zbus_obs_set_chan_notification_mask
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: obs is required
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux1_chan's observers. Starting VDED:[0m
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux1_chan's observers. Starting VDED:[0m
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux1_chan's observers. Starting VDED:[0m
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux1_chan's observers. Starting VDED:[0m
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+ PASS - test_specification_based__zbus_obs_set_chan_notification_mask in 0.000 seconds
+===================================================================
+START - test_specification_based__zbus_obs_set_enable
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: obs is required
+ZBUS ASSERT: enable is required
+[00:00:04.050,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux1_chan's observers. Starting VDED:[0m
+[00:00:04.360,000] [0m<dbg> zbus: _zbus_vded_exec: Notifing aux1_chan's observers. Starting VDED:[0m
+[00:00:04.360,000] [0m<dbg> zbus: _zbus_vded_exec:  0 -> fast_lis[0m
+ PASS - test_specification_based__zbus_obs_set_enable in 0.620 seconds
+===================================================================
+START - test_specification_based__zbus_sub_wait
+ZBUS ASSERT: sub is required
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: sub must be a SUBSCRIBER
+ZBUS ASSERT: zbus_sub_wait cannot be used inside ISRs
+ZBUS ASSERT: zbus_sub_wait cannot be used inside ISRs
+ZBUS ASSERT: zbus_sub_wait cannot be used inside ISRs
+ZBUS ASSERT: zbus_sub_wait cannot be used inside ISRs
+ PASS - test_specification_based__zbus_sub_wait in 0.210 seconds
+===================================================================
+START - test_specification_based__zbus_sub_wait_msg
+ZBUS ASSERT: sub is required
+ZBUS ASSERT: sub must be a MSG_SUBSCRIBER
+ZBUS ASSERT: chan is required
+ZBUS ASSERT: msg is required
+ZBUS ASSERT: zbus_sub_wait_msg cannot be used inside ISRs
+ZBUS ASSERT: zbus_sub_wait_msg cannot be used inside ISRs
+ZBUS ASSERT: zbus_sub_wait cannot be used inside ISRs
+ZBUS ASSERT: zbus_sub_wait_msg cannot be used inside ISRs
+ PASS - test_specification_based__zbus_sub_wait_msg in 0.210 seconds
+===================================================================
+TESTSUITE basic succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [basic]: pass = 8, fail = 0, skip = 0, total = 8 duration = 5.090 seconds
+ - PASS - [basic.test_hard_channel] duration = 0.000 seconds
+ - PASS - [basic.test_iterators] duration = 0.880 seconds
+ - PASS - [basic.test_specification_based__zbus_chan] duration = 3.170 seconds
+ - PASS - [basic.test_specification_based__zbus_obs_attach_detach] duration = 0.000 seconds
+ - PASS - [basic.test_specification_based__zbus_obs_set_chan_notification_mask] duration = 0.000 seconds
+ - PASS - [basic.test_specification_based__zbus_obs_set_enable] duration = 0.620 seconds
+ - PASS - [basic.test_specification_based__zbus_sub_wait] duration = 0.210 seconds
+ - PASS - [basic.test_specification_based__zbus_sub_wait_msg] duration = 0.210 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/kernel/CMakeLists.txt:175 (message):
+  
+
+          CONFIG_HEAP_MEM_POOL_SIZE is less than requested minimum:
+            2048 < 3072
+          Setting the system heap size to 3072
+
+
+
+
+

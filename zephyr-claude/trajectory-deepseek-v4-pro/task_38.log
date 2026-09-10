@@ -1,0 +1,108 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `fcb_append` does:
+
+1. **Locks** the FCB mutex for thread safety
+2. **Encodes** the data length (1-2 bytes) via `fcb_put_len` — handles variable-length encoding compatible with non-0xFF erase values
+3. **Calculates** total space needed: aligned length prefix + aligned data + aligned CRC byte
+4. **If insufficient space** in the active sector:
+   - Tries `fcb_append_to_scratch()` to grab an unused scratch sector
+   - If no scratch is available, unlocks the mutex, calls `fcb_rotate()` to erase the oldest sector (must unlock first since `fcb_rotate` takes the same mutex), then re-locks
+5. **Populates** `append_loc` with sector, element offset, data offset, and data length so the caller knows where to write payload data
+6. **Pads** the length buffer to flash alignment with the erase value, then writes the length prefix to flash
+7. **Advances** `f_active.fe_elem_off` past the entire entry (including the not-yet-written CRC area), so the next append starts at the right position
+8. **Unlocks** the mutex and returns
+
+The caller then writes payload data at `append_loc->fe_data_off` and calls `fcb_append_finish()` to write the CRC/endmarker. On recovery after a crash between `fcb_append` and data write, `fcb_init`'s walk will skip the incomplete entry (CRC check fails, producing `-EBADMSG`, which `fcb_getnext_in_sector` advances past until it hits erased flash).
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/fs/fcb/fcb_append.c
++++ subsys/fs/fcb/fcb_append.c
+@@ -59,7 +59,72 @@
+ int
+ fcb_append(struct fcb *fcb, uint16_t len, struct fcb_entry *append_loc)
+ {
+-    /* MASKED - implement this function */
++	int rc;
++	uint8_t tmp_str[FCB_TMP_BUF_SZ];
++	int cnt;
++	uint16_t total_len;
++
++	rc = k_mutex_lock(&fcb->f_mtx, K_FOREVER);
++	if (rc) {
++		return -EINVAL;
++	}
++
++	cnt = fcb_put_len(fcb, tmp_str, len);
++	if (cnt < 0) {
++		rc = cnt;
++		goto out;
++	}
++
++	total_len = fcb_len_in_flash(fcb, cnt) +
++		    fcb_len_in_flash(fcb, len) +
++		    fcb_len_in_flash(fcb, FCB_CRC_SZ);
++
++	while (fcb->f_active.fe_elem_off + total_len >
++	       fcb->f_active.fe_sector->fs_size) {
++		rc = fcb_append_to_scratch(fcb);
++		if (rc == 0) {
++			continue;
++		}
++
++		/*
++		 * No scratch sectors available, rotate to free up space.
++		 * Must unlock first since fcb_rotate takes the mutex.
++		 */
++		k_mutex_unlock(&fcb->f_mtx);
++		rc = fcb_rotate(fcb);
++		if (rc) {
++			return rc;
++		}
++		rc = k_mutex_lock(&fcb->f_mtx, K_FOREVER);
++		if (rc) {
++			return -EINVAL;
++		}
++	}
++
++	append_loc->fe_sector = fcb->f_active.fe_sector;
++	append_loc->fe_elem_off = fcb->f_active.fe_elem_off;
++	append_loc->fe_data_off = append_loc->fe_elem_off +
++				  fcb_len_in_flash(fcb, cnt);
++	append_loc->fe_data_len = len;
++
++	/*
++	 * Pad length encoding buffer with erase value to meet alignment.
++	 */
++	(void)memset(tmp_str + cnt, fcb->f_erase_value,
++		     fcb_len_in_flash(fcb, cnt) - cnt);
++
++	rc = fcb_flash_write(fcb, append_loc->fe_sector,
++			     append_loc->fe_elem_off, tmp_str,
++			     fcb_len_in_flash(fcb, cnt));
++	if (rc) {
++		goto out;
++	}
++
++	fcb->f_active.fe_elem_off = append_loc->fe_elem_off + total_len;
++
++out:
++	k_mutex_unlock(&fcb->f_mtx);
++	return rc;
+ }
+ 
+ int
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+[TIMEOUT]
+
+

@@ -1,0 +1,258 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation mirrors `modem_cmux_connect` exactly:
+
+1. **Call the async version** — `modem_cmux_disconnect_async()` validates state (not already disconnected) and schedules the disconnect workqueue.
+2. **Wait for completion** — `wait_state()` blocks on the `MODEM_CMUX_STATE_DISCONNECTED` event with `MODEM_CMUX_T2_TIMEOUT` (the standard multiplexer response timeout).
+3. **Return -EAGAIN on timeout** — consistent with the connect path.
+
+This uses the same event-driven pattern already established in the file: the disconnect handler (`modem_cmux_disconnect_handler`) eventually calls `disconnect()` → `set_state(cmux, MODEM_CMUX_STATE_DISCONNECTED)` → `k_event_set(&cmux->event, BIT(state))`, which wakes `wait_state()`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/modem/modem_cmux.c
++++ subsys/modem/modem_cmux.c
+@@ -2193,7 +2193,18 @@
+ 
+ int modem_cmux_disconnect(struct modem_cmux *cmux)
+ {
+-    /* MASKED - implement this function */
++	int ret;
++
++	ret = modem_cmux_disconnect_async(cmux);
++	if (ret < 0) {
++		return ret;
++	}
++
++	if (!wait_state(cmux, MODEM_CMUX_STATE_DISCONNECTED, MODEM_CMUX_T2_TIMEOUT)) {
++		return -EAGAIN;
++	}
++
++	return 0;
+ }
+ 
+ int modem_cmux_disconnect_async(struct modem_cmux *cmux)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (11.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build
+-- west build: building application
+[1/123] Preparing syscall dependency handling
+
+[2/123] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/123] Generating misc/generated/syscalls_subdirs.trigger
+[4/123] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/123] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/123] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/123] Generating include/generated/zephyr/driver-validation.h
+[8/123] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/123] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/123] Generating ../../include/generated/zephyr/heap_constants.h
+[11/123] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/123] Generating include/generated/zephyr/offsets.h
+[13/123] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/123] Building C object CMakeFiles/app.dir/home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/mock/modem_backend_mock.c.obj
+[15/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[16/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[17/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[18/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[19/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[20/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[21/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[22/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[23/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[24/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[25/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[26/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[27/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[28/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[29/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[30/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[31/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[32/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[33/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[34/123] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[35/123] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[36/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[37/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[38/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[39/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[40/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[41/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[42/123] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[43/123] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/123] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/123] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[46/123] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[47/123] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[48/123] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[49/123] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[50/123] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[51/123] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[52/123] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[53/123] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[54/123] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[55/123] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[56/123] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[57/123] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[58/123] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[59/123] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[60/123] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[61/123] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[62/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc4_sw.c.obj
+[63/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc8_sw.c.obj
+[64/123] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[65/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc16_sw.c.obj
+[66/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc7_sw.c.obj
+[67/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc24_sw.c.obj
+[68/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32c_sw.c.obj
+[69/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32k_4_2_sw.c.obj
+[70/123] Building C object zephyr/subsys/crc/CMakeFiles/subsys__crc.dir/crc32_sw.c.obj
+[71/123] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_cmux.c.obj
+[72/123] Building C object zephyr/subsys/modem/CMakeFiles/subsys__modem.dir/modem_pipe.c.obj
+[73/123] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[74/123] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[75/123] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[76/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[77/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[78/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[79/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[80/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[81/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[82/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[83/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[84/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[85/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[86/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[87/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[88/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[89/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[90/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[91/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[92/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[93/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[94/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[95/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[96/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[97/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[98/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[99/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[100/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[101/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[102/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[103/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[104/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[105/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/events.c.obj
+[106/123] Linking C static library app/libapp.a
+[107/123] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[108/123] Linking C static library zephyr/arch/common/libarch__common.a
+[109/123] Generating linker_zephyr_pre0.cmd
+[110/123] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[111/123] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[112/123] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[113/123] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[114/123] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[115/123] Linking C static library zephyr/subsys/modem/libsubsys__modem.a
+[116/123] Linking C static library zephyr/libzephyr.a
+[117/123] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[118/123] Linking C static library zephyr/subsys/crc/libsubsys__crc.a
+[119/123] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[120/123] Linking C static library zephyr/kernel/libkernel.a
+[121/123] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/modem/modem_cmux_pair/build/zephyr/zephyr.elf for board: native_sim/native/64
+[122/123] Building native simulator runner, and linking final executable
+[123/123] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE modem_cmux_pair
+===================================================================
+START - test_modem_cmux_dce_receive_dlci1_at
+ PASS - test_modem_cmux_dce_receive_dlci1_at in 0.110 seconds
+===================================================================
+START - test_modem_cmux_dce_receive_dlci2_at
+ PASS - test_modem_cmux_dce_receive_dlci2_at in 0.110 seconds
+===================================================================
+START - test_modem_cmux_dce_receive_dlci2_ppp
+ PASS - test_modem_cmux_dce_receive_dlci2_ppp in 0.110 seconds
+===================================================================
+START - test_modem_cmux_dce_transmit_dlci2_ppp
+ PASS - test_modem_cmux_dce_transmit_dlci2_ppp in 0.110 seconds
+===================================================================
+START - test_modem_cmux_disconnect_connect
+ PASS - test_modem_cmux_disconnect_connect in 0.550 seconds
+===================================================================
+START - test_modem_cmux_disconnect_connect_sync
+ PASS - test_modem_cmux_disconnect_connect_sync in 0.220 seconds
+===================================================================
+START - test_modem_cmux_dlci1_close_open
+ PASS - test_modem_cmux_dlci1_close_open in 0.220 seconds
+===================================================================
+START - test_modem_cmux_dlci_close_open_sync
+ PASS - test_modem_cmux_dlci_close_open_sync in 0.000 seconds
+===================================================================
+TESTSUITE modem_cmux_pair succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [modem_cmux_pair]: pass = 8, fail = 0, skip = 0, total = 8 duration = 1.430 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_dce_receive_dlci1_at] duration = 0.110 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_dce_receive_dlci2_at] duration = 0.110 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_dce_receive_dlci2_ppp] duration = 0.110 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_dce_transmit_dlci2_ppp] duration = 0.110 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_disconnect_connect] duration = 0.550 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_disconnect_connect_sync] duration = 0.220 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_dlci1_close_open] duration = 0.220 seconds
+ - PASS - [modem_cmux_pair.test_modem_cmux_dlci_close_open_sync] duration = 0.000 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/CMakeLists.txt:1081 (message):
+  No SOURCES given to Zephyr library: subsys__modem__backends
+
+  Excluding target from build.
+
+
+
+
+

@@ -1,0 +1,65 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what I did:
+
+**Added `cobs_decode_net_buf_cb`** — a static callback for the decoder that safely handles the NULL/0 frame-delimiter notification (the decoder calls the callback with `buf=NULL, len=0` when a trailing delimiter is encountered). The `len == 0U` early return avoids passing a NULL pointer to `net_buf_add_mem`/`memcpy`.
+
+**Implemented `cobs_decode`** — mirrors `cobs_encode` exactly but uses the streaming decoder API:
+1. `cobs_decoder_init` — initialize the decoder with the net_buf callback and destination buffer
+2. `cobs_decoder_write` — feed all source data through the decoder
+3. `cobs_decoder_close` — finalize and verify the stream ended properly
+
+
+============================================================
+=== Diff ===
+============================================================
+--- lib/utils/cobs.c
++++ lib/utils/cobs.c
+@@ -38,9 +38,37 @@
+ 	return cobs_encoder_close(&enc);
+ }
+ 
++static int cobs_decode_net_buf_cb(const uint8_t *buf, size_t len, void *user_data)
++{
++	struct net_buf *dst = user_data;
++
++	if (len == 0U) {
++		return 0;
++	}
++
++	if (net_buf_tailroom(dst) < len) {
++		return -ENOMEM;
++	}
++
++	(void)net_buf_add_mem(dst, buf, len);
++
++	return 0;
++}
++
+ int cobs_decode(struct net_buf *src, struct net_buf *dst, uint32_t flags)
+ {
+-    /* MASKED - implement this function */
++	struct cobs_decoder dec;
++	size_t len = src->len;
++	int ret;
++
++	(void)cobs_decoder_init(&dec, cobs_decode_net_buf_cb, dst, flags);
++
++	ret = cobs_decoder_write(&dec, net_buf_pull_mem(src, len), len);
++	if (ret < 0) {
++		return ret;
++	}
++
++	return cobs_decoder_close(&dec);
+ }
+ 
+ static inline void cobs_encoder_reset(struct cobs_encoder *enc)
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+

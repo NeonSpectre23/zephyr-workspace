@@ -1,0 +1,806 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's a summary of `pbuf_write`:
+
+**Structure** — mirrors `pbuf_read` from the writer's perspective:
+1. **Validate** `pb`, `data`, `len` (null/zero → `-EINVAL`)
+2. **Invalidate** the shared `rd_idx` cache, then read the reader's position
+3. **Check alignment** of both indexes (`_PBUF_IDX_SIZE` = 4 bytes)
+4. **Space check** — calculates needed space (4-byte big-endian length header + data, rounded up to 4) and verifies it fits in `blen - _PBUF_IDX_SIZE - occupied`; returns `-ENOMEM` if not
+5. **Write length header** via `sys_put_be16`, flush cache
+6. **Write data** handling ring-buffer wrap via two-part `memcpy`
+7. **Flush** both data segments from cache so the reader sees them
+8. **Advance `wr_idx`** (rounded to 4-byte alignment), update local copy + shared memory + barrier + cache flush
+9. **Return** bytes written
+
+The implementation uses only Zephyr APIs already included in the file (`sys_put_be16`, `sys_cache_data_flush_range`, `barrier_sync_synchronize`, `ROUND_UP`, `MIN`, etc.) and the same helper functions (`idx_wrap`, `idx_occupied`) used by the existing `pbuf_read`.
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/ipc/ipc_service/lib/pbuf.c
++++ subsys/ipc/ipc_service/lib/pbuf.c
+@@ -116,7 +116,63 @@
+ 
+ int pbuf_write(struct pbuf *pb, const char *data, uint16_t len)
+ {
+-    /* MASKED - implement this function */
++	if (pb == NULL || data == NULL || len == 0) {
++		return -EINVAL;
++	}
++
++	/* Invalidate rd_idx only, local wr_idx is used to increase buffer security. */
++	sys_cache_data_invd_range((void *)(pb->cfg->rd_idx_loc), sizeof(*(pb->cfg->rd_idx_loc)));
++	barrier_sync_synchronize();
++
++	uint8_t *const data_loc = pb->cfg->data_loc;
++	const uint32_t blen = pb->cfg->len;
++	uint32_t rd_idx = *(pb->cfg->rd_idx_loc);
++	uint32_t wr_idx = pb->data.wr_idx;
++
++	/* wr_idx must always be aligned. */
++	__ASSERT_NO_MSG(IS_PTR_ALIGNED_BYTES(wr_idx, _PBUF_IDX_SIZE));
++	/* rd_idx shall always be aligned, but its value is received from the
++	 * reader. Can not assert.
++	 */
++	if (!IS_PTR_ALIGNED_BYTES(rd_idx, _PBUF_IDX_SIZE)) {
++		return -EINVAL;
++	}
++
++	uint32_t total_needed = ROUND_UP(PBUF_PACKET_LEN_SZ + len, _PBUF_IDX_SIZE);
++	uint32_t occupied = idx_occupied(blen, wr_idx, rd_idx);
++
++	if (occupied + total_needed > blen - _PBUF_IDX_SIZE) {
++		return -ENOMEM;
++	}
++
++	/* Write packet length. */
++	sys_put_be16((uint16_t)len, &data_loc[wr_idx]);
++	sys_cache_data_flush_range(&data_loc[wr_idx], PBUF_PACKET_LEN_SZ);
++
++	wr_idx = idx_wrap(blen, wr_idx + PBUF_PACKET_LEN_SZ);
++
++	/* Write data until end of the buffer, if data are wrapped. */
++	uint32_t tail = MIN(blen - wr_idx, (uint32_t)len);
++
++	memcpy(&data_loc[wr_idx], data, tail);
++	if (len > tail) {
++		memcpy(&data_loc[0], &data[tail], len - tail);
++	}
++
++	sys_cache_data_flush_range(&data_loc[wr_idx], tail);
++	if (len > tail) {
++		sys_cache_data_flush_range(&data_loc[0], len - tail);
++	}
++
++	/* Update wr_idx. */
++	wr_idx = idx_wrap(blen, ROUND_UP(wr_idx + len, _PBUF_IDX_SIZE));
++
++	pb->data.wr_idx = wr_idx;
++	*(pb->cfg->wr_idx_loc) = wr_idx;
++	barrier_sync_synchronize();
++	sys_cache_data_flush_range((void *)pb->cfg->wr_idx_loc, sizeof(*(pb->cfg->wr_idx_loc)));
++
++	return (int)len;
+ }
+ 
+ int pbuf_get_initial_buf(struct pbuf *pb, volatile char **buf, uint16_t *len)
+
+
+
+
+============================================================
+=== Harness Verify ===
+============================================================
+-- west build: making build dir /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build pristine
+-- west build: generating a build system
+-- Application: /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf
+-- CMake version: 3.28.3
+-- Found Python3: /home/huyj/miniconda3/envs/zephyr/bin/python3.12 (found suitable version "3.12.13", minimum required is "3.12") found components: Interpreter 
+-- Cache files will be written to: /home/huyj/.cache/zephyr
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native/64
+-- Found host-tools: zephyr 1.0.1 (/home/huyj/zephyr-sdk-1.0.1)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: /home/huyj/zephyr-sdk-1.0.1/hosttools/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: /home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64.dts
+-- Generated zephyr.dts: /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build/zephyr/zephyr.dts
+-- Generated pickled edt: /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing /home/huyj/zephyr-workspace/zephyr/Kconfig
+Loaded configuration '/home/huyj/zephyr-workspace/zephyr/boards/native/native_sim/native_sim_64_defconfig'
+Merged configuration '/home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/prj.conf'
+Configuration saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build/zephyr/.config'
+Kconfig header saved to '/home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Found gen_kobject_list: /home/huyj/zephyr-workspace/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (9.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build
+-- west build: building application
+[1/118] Preparing syscall dependency handling
+
+[2/118] Generating include/generated/zephyr/version.h
+-- Zephyr version: 4.4.0 (/home/huyj/zephyr-workspace/zephyr), build: v4.4.0
+[3/118] Generating misc/generated/syscalls_subdirs.trigger
+[4/118] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+[5/118] Generating include/generated/device-api-sections.ld, include/generated/device-api-sections.cmake
+[6/118] Generating include/generated/zephyr/syscall_dispatch.c, include/generated/zephyr/syscall_exports_llext.c, syscall_weakdefs_llext.c, include/generated/zephyr/syscall_list.h
+[7/118] Generating include/generated/zephyr/driver-validation.h
+[8/118] Generating include/generated/zephyr/kobj-types-enum.h, include/generated/zephyr/otype-to-str.h, include/generated/zephyr/otype-to-size.h
+[9/118] Building C object zephyr/lib/heap/CMakeFiles/heap_constants.dir/heap_constants.c.obj
+[10/118] Generating ../../include/generated/zephyr/heap_constants.h
+[11/118] Building C object zephyr/CMakeFiles/offsets.dir/arch/posix/core/offsets/offsets.c.obj
+[12/118] Generating include/generated/zephyr/offsets.h
+[13/118] Building C object CMakeFiles/app.dir/src/main.c.obj
+[14/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/libc/validate_libc.c.obj
+[15/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/heap/heap.c.obj
+[16/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/clock.c.obj
+[17/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+[18/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+[19/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_complete.c.obj
+[20/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf.c.obj
+[21/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/assert.c.obj
+[22/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/dec.c.obj
+[23/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/set.c.obj
+[24/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+[25/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+[26/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/hex.c.obj
+[27/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/rb.c.obj
+[28/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/timeutil.c.obj
+[29/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitarray.c.obj
+[30/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/bitmask.c.obj
+[31/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt.c.obj
+[32/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/getopt/getopt_common.c.obj
+[33/118] Building C object zephyr/CMakeFiles/zephyr.dir/lib/utils/ring_buffer.c.obj
+[34/118] Building C object zephyr/CMakeFiles/zephyr.dir/misc/generated/configs.c.obj
+[35/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/ipc/ipc_service/ipc_service.c.obj
+[36/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/ipc/ipc_service/lib/icmsg.c.obj
+[37/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_core.c.obj
+[38/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_mgmt.c.obj
+[39/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_cache.c.obj
+[40/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_msg.c.obj
+[41/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/log_output.c.obj
+[42/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/logging/backends/log_backend_native_posix.c.obj
+[43/118] Building C object zephyr/arch/common/CMakeFiles/arch__common.dir/init.c.obj
+[44/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/cpuhalt.c.obj
+[45/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/tracing/tracing_none.c.obj
+[46/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/fatal.c.obj
+[47/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/irq.c.obj
+[48/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/swap.c.obj
+[49/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/thread.c.obj
+[50/118] Building C object zephyr/arch/arch/posix/core/CMakeFiles/arch__posix__core.dir/posix_core_nsi.c.obj
+[51/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/soc.c.obj
+[52/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_tasks.c.obj
+[53/118] Building C object zephyr/soc/soc/native/CMakeFiles/soc__native__inf_clock.dir/native_remap.c.obj
+[54/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cmdline.c.obj
+[55/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/cpu_wait.c.obj
+[56/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/nsi_if.c.obj
+[57/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/irq_handler.c.obj
+[58/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/misc.c.obj
+[59/118] Building C object zephyr/boards/native/native_sim/CMakeFiles/boards__native__native_sim.dir/posix_arch_if.c.obj
+[60/118] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_timer.c.obj
+[61/118] Building C object zephyr/subsys/random/CMakeFiles/subsys__random.dir/random_test_csprng.c.obj
+[62/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_rules.c.obj
+[63/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_posix.c.obj
+[64/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest.c.obj
+[65/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztest_error_hook.c.obj
+[66/118] Building C object zephyr/subsys/testsuite/ztest/CMakeFiles/subsys__testsuite__ztest.dir/src/ztress.c.obj
+[67/118] Building C object zephyr/drivers/console/CMakeFiles/drivers__console.dir/posix_arch_console.c.obj
+[68/118] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/sys_clock_init.c.obj
+[69/118] Building C object zephyr/drivers/timer/CMakeFiles/drivers__timer.dir/native_sim_timer.c.obj
+[70/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/main_weak.c.obj
+[71/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/banner.c.obj
+[72/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/errno.c.obj
+[73/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/busy_wait.c.obj
+[74/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/device.c.obj
+[75/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/fatal.c.obj
+[76/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/init.c.obj
+[77/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/kheap.c.obj
+[78/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mem_slab.c.obj
+[79/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/version.c.obj
+[80/118] Linking C static library app/libapp.a
+[81/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/float.c.obj
+[82/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/idle.c.obj
+[83/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mailbox.c.obj
+[84/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/msg_q.c.obj
+[85/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mutex.c.obj
+[86/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/queue.c.obj
+[87/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sem.c.obj
+[88/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/stack.c.obj
+[89/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/system_work_q.c.obj
+[90/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/work.c.obj
+[91/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/condvar.c.obj
+[92/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread.c.obj
+[93/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/sched.c.obj
+[94/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/pipe.c.obj
+[95/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeslicing.c.obj
+[96/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/thread_monitor.c.obj
+[97/118] Linking C static library zephyr/arch/common/libarch__common.a
+[98/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/spinlock_validate.c.obj
+[99/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timeout.c.obj
+[100/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/timer.c.obj
+[101/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/usage.c.obj
+[102/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/mempool.c.obj
+[103/118] Building C object zephyr/kernel/CMakeFiles/kernel.dir/dynamic_disabled.c.obj
+[104/118] Generating linker_zephyr_pre0.cmd
+[105/118] Building C object zephyr/CMakeFiles/zephyr_pre0.dir/misc/empty_file.c.obj
+[106/118] Linking C static library zephyr/arch/arch/posix/core/libarch__posix__core.a
+[107/118] Linking C static library zephyr/soc/soc/native/libsoc__native__inf_clock.a
+[108/118] Linking C static library zephyr/boards/native/native_sim/libboards__native__native_sim.a
+[109/118] Linking C static library zephyr/subsys/testsuite/ztest/libsubsys__testsuite__ztest.a
+[110/118] Linking C static library zephyr/subsys/random/libsubsys__random.a
+[111/118] Linking C static library zephyr/drivers/console/libdrivers__console.a
+[112/118] Linking C static library zephyr/drivers/timer/libdrivers__timer.a
+[113/118] Linking C static library zephyr/kernel/libkernel.a
+[114/118] Building C object zephyr/CMakeFiles/zephyr.dir/subsys/ipc/ipc_service/lib/pbuf.c.obj
+[115/118] Linking C static library zephyr/libzephyr.a
+[116/118] Linking C executable zephyr/zephyr.elf
+Generating files from /home/huyj/zephyr-workspace/zephyr/tests/subsys/ipc/pbuf/build/zephyr/zephyr.elf for board: native_sim/native/64
+[117/118] Building native simulator runner, and linking final executable
+[118/118] Running utility command for native_runner_executable
+*** Booting Zephyr OS build v4.4.0 ***
+Running TESTSUITE test_pbuf
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:44 unsuccessful: 0
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:100 unsuccessful: 0
+ PASS - test_stress in 3.180 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:48 unsuccessful: 0
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:104 unsuccessful: 1
+ PASS - test_stress in 3.180 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:43 unsuccessful: 1
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:99 unsuccessful: 1
+ PASS - test_stress in 3.180 seconds
+===================================================================
+TESTSUITE test_pbuf succeeded
+Running TESTSUITE test_pbuf
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:45 unsuccessful: 1
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:101 unsuccessful: 1
+ PASS - test_stress in 3.180 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:44 unsuccessful: 1
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:103 unsuccessful: 2
+ PASS - test_stress in 3.180 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:47 unsuccessful: 2
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:98 unsuccessful: 2
+ PASS - test_stress in 3.180 seconds
+===================================================================
+TESTSUITE test_pbuf succeeded
+Running TESTSUITE test_pbuf
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:47 unsuccessful: 2
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:107 unsuccessful: 4
+ PASS - test_stress in 3.180 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:44 unsuccessful: 4
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:103 unsuccessful: 5
+ PASS - test_stress in 3.180 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_retcodes
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418dc0, val: 0
+cfg->data_loc:   0x418dc4
+cfg->len:              220
+cfg->dcache_alignment: 32
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              248
+cfg->dcache_alignment: 0
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+----------stats start-----------
+cfg->rd_idx_loc: 0x418da0, val: 0
+cfg->wr_idx_loc: 0x418da4, val: 0
+cfg->data_loc:   0x418da8
+cfg->len:              12
+cfg->dcache_alignment: 4
+data.rd_idx: 0
+data.wr_idx: 0
+-----------stats end------------
+ PASS - test_retcodes in 0.000 seconds
+===================================================================
+START - test_rw
+ PASS - test_rw in 0.000 seconds
+===================================================================
+START - test_stress
+Reading from an interrupt, writing from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:48 unsuccessful: 5
+Writing from an interrupt, reading from a thread
+100% remaining:500 ms
+Ztress execution report:
+	 context 0:
+		 - executed:39, preempted:0
+		 - ticks initial:4, optimized:4
+	 context 1:
+		 - executed:31, preempted:0
+		 - ticks initial:4, optimized:4
+	Average CPU load:0%, measurements:15
+Writes:103 unsuccessful: 6
+ PASS - test_stress in 3.180 seconds
+===================================================================
+TESTSUITE test_pbuf succeeded
+
+------ TESTSUITE SUMMARY START ------
+
+SUITE PASS - 100.00% [test_pbuf]: pass = 3, fail = 0, skip = 0, total = 3 duration = 3.180 seconds
+ - PASS - [test_pbuf.test_retcodes] duration = 0.000 seconds
+ - PASS - [test_pbuf.test_rw] duration = 0.000 seconds
+ - PASS - [test_pbuf.test_stress] duration = 3.180 seconds
+
+------ TESTSUITE SUMMARY END ------
+
+===================================================================
+PROJECT EXECUTION SUCCESSFUL
+
+--- stderr ---
+Loading Zephyr default modules (Zephyr base).
+CMake Warning at /home/huyj/zephyr-workspace/zephyr/subsys/random/CMakeLists.txt:12 (message):
+  
+
+      Warning: CONFIG_TIMER_RANDOM_GENERATOR and CONFIG_TEST_CSPRNG_GENERATOR are
+      not truly random generators. This capability is not secure and it is
+      provided for testing purposes only. Use it carefully.
+
+
+
+
+

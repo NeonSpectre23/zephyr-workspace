@@ -1,0 +1,69 @@
+============================================================
+=== Claude Session ===
+============================================================
+The implementation is complete. Here's what `log_cache_init` does:
+
+1. **Validates config** — returns `-EINVAL` if `buf` is NULL, `buf_len` is 0, `item_size` is 0, or the buffer isn't evenly divisible by the aligned entry size
+2. **Sets cache fields** — stores `item_size`, `cmp`, and zeroes `hit`/`miss` counters
+3. **Initializes both lists** — `active` starts empty, `idle` is populated with all entries from the buffer
+4. **Populates idle list** — walks the buffer at `ROUND_UP(sizeof(struct log_cache_entry) + item_size, sizeof(uintptr_t))` intervals (matching the `ENTRY_SIZE` macro from the tests), casting each slot to a `log_cache_entry` and appending it to `idle`
+
+
+============================================================
+=== Diff ===
+============================================================
+--- subsys/logging/log_cache.c
++++ subsys/logging/log_cache.c
+@@ -5,6 +5,7 @@
+  */
+ 
+ #include <errno.h>
++#include <zephyr/sys/util.h>
+ 
+ #include "log_cache.h"
+ 
+@@ -23,7 +24,35 @@
+ 
+ int log_cache_init(struct log_cache *cache, const struct log_cache_config *config)
+ {
+-    /* MASKED - implement this function */
++	size_t entry_size;
++
++	if (config->buf == NULL || config->buf_len == 0 || config->item_size == 0) {
++		return -EINVAL;
++	}
++
++	entry_size = ROUND_UP(sizeof(struct log_cache_entry) + config->item_size,
++			      sizeof(uintptr_t));
++
++	if (config->buf_len % entry_size != 0) {
++		return -EINVAL;
++	}
++
++	cache->item_size = config->item_size;
++	cache->cmp = config->cmp;
++	cache->hit = 0;
++	cache->miss = 0;
++
++	sys_slist_init(&cache->active);
++	sys_slist_init(&cache->idle);
++
++	for (size_t i = 0; i < config->buf_len; i += entry_size) {
++		struct log_cache_entry *entry = (struct log_cache_entry *)&((uint8_t *)config->buf)[i];
++
++		entry->id = 0;
++		sys_slist_append(&cache->idle, &entry->node);
++	}
++
++	return 0;
+ }
+ 
+ bool log_cache_get(struct log_cache *cache, uintptr_t id, uint8_t **data)
+
+
+============================================================
+=== ILLEGAL ===
+============================================================
+integrity violation
+
+
